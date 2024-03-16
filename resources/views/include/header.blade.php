@@ -2,7 +2,7 @@
     <div class="shadow-sm">
         <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-slate-900">
             <div class="horizontal-logo flex items-center justify-between lg:hidden">
-                <a href="" class="main-logo flex shrink-0 items-center">
+                <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
                     <img class="inline w-10 ltr:-ml-1 rtl:-mr-1 rounded-full" src="{{ asset('frontend/images/RICT/fav.jpg') }}" alt="image" />
                 </a>
                 <a

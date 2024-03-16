@@ -4,7 +4,7 @@
                 >
                     <div class="h-full bg-white dark:bg-slate-900">
                         <div class="flex items-center justify-between px-4 py-3">
-                            <a href="" class="main-logo flex shrink-0 items-center">
+                            <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
                                 <img class="ml-[5px] flex-none" width="150" src="{{ asset('frontend/images/RICT/logo.png') }}" alt="image" />
                             </a>
                             <a
@@ -30,7 +30,7 @@
                             x-data="{ activeDropdown: 'dashboard' }"
                         >
                             <li class="nav-item">
-                                <a href="" class="group sidebargroup">
+                                <a href="{{ route('admission') }}" class="group sidebargroup">
                                     <div class="flex items-center">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-cards"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304z" /><path d="M15 4h1a1 1 0 0 1 1 1v3.5" /><path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" /></svg>
                                         <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Admission</span>
