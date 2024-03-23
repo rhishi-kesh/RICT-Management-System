@@ -1,8 +1,6 @@
 (function () {
     const $themeConfig = {
-        locale: 'en', // en, da, de, el, es, fr, hu, it, ja, pl, pt, ru, sv, tr, zh
         theme: 'light', // light, dark, system
-        menu: 'vertical', // vertical, collapsible-vertical, horizontal
         layout: 'full', // full, boxed-layout
         rtlClass: 'ltr', // rtl, ltr
         animation: '', // animate__fadeIn, animate__fadeInDown, animate__fadeInUp, animate__fadeInLeft, animate__fadeInRight, animate__slideInDown, animate__slideInLeft, animate__slideInRight, animate__zoomIn
@@ -204,21 +202,6 @@
                 }
 
                 this.semidark = val;
-            },
-
-            // multi language
-            locale: Alpine.$persist($themeConfig.locale),
-            toggleLocale(val) {
-                if (!val) {
-                    val = this.locale || $themeConfig.locale;
-                }
-
-                this.locale = val;
-                if (this.locale?.toLowerCase() === 'ae') {
-                    this.toggleRTL('rtl');
-                } else {
-                    this.toggleRTL('ltr');
-                }
             },
 
             // sidebar

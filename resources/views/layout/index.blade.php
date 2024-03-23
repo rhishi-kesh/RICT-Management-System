@@ -18,7 +18,7 @@
     </head>
     <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
         <!-- sidebar menu overlay -->
-        <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
+        <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"@click="$store.app.toggleSidebar()"></div>
 
         <!-- scroll to top button -->
         <div class="fixed bottom-8 rignt-8 z-50 ltr:right-6" x-data="scrollToTop">
@@ -40,16 +40,14 @@
             </div>
             <!-- end sidebar section -->
 
-            <div class="main-content flex min-h-screen flex-col">
+            <div class="main-content flex min-h-screen flex-col bg-gray-200 dark:bg-gray-950">
                 <!-- start header section -->
                 @include('include/header')
                 <!-- end header section -->
 
-                <div class="animate__animated p-6 bg-gray-200 dark:bg-gray-950" :class="[$store.app.animation]">
-                    <!-- start main content section -->
-                    @yield('content')
-                    <!-- end main content section -->
-                </div>
+                <!-- start main content section -->
+                @yield('content')
+                <!-- end main content section -->
 
                 <!-- start footer section -->
                 @include('include/footer')
@@ -57,18 +55,24 @@
             </div>
         </div>
 
-        {{-- @livewireScripts --}}
+        @livewireScripts
         <script src="{{ asset('frontend/js/perfect-scrollbar.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/popper.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/tippy-bundle.umd.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/alpine-collaspe.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/alpine-persist.min.js') }}"></script>
-        <script defer src="{{ asset('frontend/js/alpine-ui.min.js') }}"></script>
-        <script defer src="{{ asset('frontend/js/alpine-focus.min.js') }}"></script>
-        <script defer src="{{ asset('frontend/js/alpine.min.js') }}"></script>
         <script src="{{ asset('frontend/js/custom.js') }}"></script>
         <script src="{{ asset('frontend/js/rhishi.js') }}"></script>
+        <script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("modal", (initialOpenState = false) => ({
+                    open: initialOpenState,
+
+                    toggle() {
+                        this.open = !this.open;
+                    },
+                }));
+            });
+        </script>
         @stack('js')
     </body>
 </html>

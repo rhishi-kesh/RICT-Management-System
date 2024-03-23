@@ -51,17 +51,33 @@
                                 </svg>
                                 <span>Home</span>
                             </h2>
-                            {{-- <li class="nav-item">
-                                <a href="" class="group sidebargroup" target="_blank">
+                            <li class="menu nav-item group">
+                                <button
+                                    type="button"
+                                    class="nav-link group"
+                                    :class="{'active' : activeDropdown === 'course'}"
+                                    @click="activeDropdown === 'course' ? activeDropdown = null : activeDropdown = 'course'"
+                                >
                                     <div class="flex items-center">
-                                        <svg class=" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path class="group-hover:text-blue-500" d="M18.3408 8.40579L15.5942 5.65917C13.7012 3.76619 12.7547 2.8197 11.721 3.02845C10.6873 3.23719 10.1823 4.4768 9.17226 6.95602L8.22498 9.28115C7.9464 9.96495 7.80711 10.3068 7.56701 10.5678C7.48527 10.6567 7.39552 10.7378 7.2989 10.8102C7.01509 11.0228 6.66091 11.1269 5.95255 11.3353C4.2781 11.8278 3.44088 12.074 3.15416 12.65C3.06084 12.8374 3.00852 13.0426 3.00068 13.2519C2.97659 13.8948 3.59367 14.5119 4.82783 15.7461L8.25394 19.1722C9.4881 20.4063 10.1052 21.0234 10.7481 20.9993C10.9574 20.9915 11.1626 20.9392 11.35 20.8458C11.926 20.5591 12.1722 19.7219 12.6647 18.0475C12.8731 17.3391 12.9772 16.9849 13.1898 16.7011C13.2622 16.6045 13.3433 16.5147 13.4322 16.433C13.6932 16.1929 14.0351 16.0536 14.7188 15.775L17.044 14.8277C19.5232 13.8177 20.7628 13.3127 20.9716 12.279C21.1803 11.2453 20.2338 10.2988 18.3408 8.40579Z" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path class="group-hover:text-blue-500"  opacity="0.5" d="M3.00008 20.9336L6.55908 17.3721" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </svg>
-                                        <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Admission</span>
+                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-carousel-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 8v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1z" /><path d="M7 22v-1a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1v1" /><path d="M17 2v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1" /></svg>
+                                        <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Courses</span>
                                     </div>
-                                </a>
-                            </li> --}}
+                                    <div class="rtl:rotate-180" :class="{'!rotate-90' : activeDropdown === 'course'}">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                    </div>
+                                </button>
+                                <ul x-cloak x-show="activeDropdown === 'course'" x-collapse class="sub-menu text-gray-500">
+                                    <li>
+                                        <a href="{{ route('addCourse') }}">Add Course</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('viewCourse') }}">View Courses</a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="menu nav-item group">
                                 <button
                                     type="button"
