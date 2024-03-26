@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function addCourse(){
+    public function course(){
         return view('application.course.course');
-    }
-    public function viewCourse(){
-        return view('application.course.viewCourse');
     }
 }

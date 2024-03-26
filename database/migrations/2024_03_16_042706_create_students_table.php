@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('student_id', '20');
             $table->string('name');
+            $table->string('slug');
             $table->string('fName');
             $table->string('mName');
             $table->string('email')->nullable()->unique();
@@ -26,10 +27,10 @@ return new class extends Migration
             $table->string('guardianMobileNo');
             $table->string('courseName');
             $table->string('paymentType','5')->default('c')->comment('c = Cash, b = Bkash, n = Nagad');
-            $table->string('pay');
+            $table->string('pay')->nullable();
             $table->string('due')->nullable();
-            $table->string('total');
-            $table->string('bkashNo')->nullable();
+            $table->string('total')->nullable();
+            $table->string('paymentNumber')->nullable();
             $table->string('admissionFee','5')->nullable()->default('n')->comment('n = No, y = Yes');
             $table->string('discount')->nullable();
             $table->timestamps();
