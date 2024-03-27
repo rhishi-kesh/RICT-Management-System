@@ -1,5 +1,5 @@
-composer install
-php artisan key:generate
-npm install
-npm run dev
-php artisan ser
+composer install <br>
+php artisan key:generate <br>
+npm install <br>
+npm run dev <br>
+php artisan ser <br>
