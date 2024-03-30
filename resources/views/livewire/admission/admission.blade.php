@@ -79,7 +79,7 @@
                 @endif
             </div>
             <div class="mb-1">
-                <label for="Discount" class="my-label">Discount</label>
+                <label for="Discount" class="my-label">Discount Coupon</label>
                 <input type="text" wire:model.live="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('discount'))
                     <div class="text-red-500">{{ $errors->first('discount') }}</div>

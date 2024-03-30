@@ -21,6 +21,7 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
 // Route::group(['middleware' => 'student'], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
+    Route::get('/studentsList', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/course', [CourseController::class, 'course'])->name('course');
 // });
 

@@ -36,4 +36,12 @@ class Student extends Authenticatable
         'password',
         'remember_token',
     ];
+    // Searching
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%")
+        ->orwhere('email', 'like', "%{$value}%")
+        ->orwhere('mobile', 'like', "%{$value}%");
+    }
 }
