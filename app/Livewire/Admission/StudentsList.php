@@ -10,12 +10,37 @@ class StudentsList extends Component
 {
     use WithPagination;
 
-    public $prepage = 5;
+    public $perpage = 5;
     public $search = '';
+                //  data short ascending
+    public $sortDirection = 'ASC';
+    public $sortColumn = 'name';
+
+    public function doSort($colum)
+    {
+        if($this->sortDirection === $colum){
+            $this->sortDirection = ($this->sortDirection == 'ASC')? 'DEC':'ASC';
+            return;
+        }
+        $this->sortColumn = $colum;
+        $this->sortDirection = 'ASC';
+    }       
+            // end ascending
+            // Life cycle hooks
+    public function updatePerPage()       
+    {
+        $this->resetPage();
+    }
+    public function updateSearch()       
+    {
+        $this->resetPage();
+    }
     
     public function render()
     {
-        $students = Student::search($this->search)->paginate($this->prepage);
+        $students = Student::search($this->search)
+        ->orderBy($this->sortColumn, $this->sortDirection)
+        ->paginate($this->perpage);
         return view('livewire.admission.students-list',compact('students'));
     }
 }
