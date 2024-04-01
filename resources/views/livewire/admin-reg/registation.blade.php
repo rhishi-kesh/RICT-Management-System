@@ -7,11 +7,11 @@
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Add Course
+            Add User
         </button>
     </div>
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Courses</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white">Users</h2>
         <hr>
         <div>
             {{-- Show Data --}}
@@ -20,18 +20,26 @@
                     <thead>
                         <tr>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">SL</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Photo</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Fee</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Email</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($courses as $key => $data)
-                            <tr>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $courses->firstItem() + $key }}</td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $data->name }}</td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $data->fee }}</td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                        @foreach ($users as $key => $data)
+                            <tr class="border-b border-[#ebedf2] dark:border-[#191e3a]">
+                                <td class="p-3 text-center">{{ $users->firstItem() + $key }}</td>
+                                <td class="p-3 flex justify-center">
+                                    @if(empty($data->profile))
+                                        <div class="profile">{{ mb_substr($data->name, 0, 1) }}</div>
+                                    @else
+                                        <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="" alt="image">
+                                    @endif
+                                </td>
+                                <td class="p-3 text-center">{{ $data->name }}</td>
+                                <td class="p-3 text-center">{{ $data->email }}</td>
+                                <td class="p-3  text-center">
 
 
                                     {{-- Edit Button --}}
@@ -50,7 +58,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="livewire-pagination mt-5">{{ $courses->links() }}</div>
+            <div class="livewire-pagination mt-5">{{ $users->links() }}</div>
         </div>
     </div>
 
@@ -64,7 +72,7 @@
                     @if(!empty($update_id))
                         <h5 class="font-bold text-lg">Update</h5>
                     @else
-                        <h5 class="font-bold text-lg">Add Course</h5>
+                        <h5 class="font-bold text-lg">Add User</h5>
                     @endif
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
@@ -77,19 +85,35 @@
                         @endif
                     >
                         <div class="mb-1">
-                            <label for="Name" class="my-label">Course Name</label>
-                            <input type="text" wire:model="name" placeholder="Course Name" id="Name" class="my-input focus:outline-none focus:shadow-outline">
+                            <label for="Name" class="my-label">Name</label>
+                            <input type="text" wire:model="name" placeholder="Name" id="Name" class="my-input focus:outline-none focus:shadow-outline">
                             @if ($errors->has('name'))
                                 <div class="text-red-500">{{ $errors->first('name') }}</div>
                             @endif
                         </div>
                         <div class="mb-1">
-                            <label for="courseFee" class="my-label">Course Fee</label>
-                            <input type="number" wire:model="courseFee" placeholder="Course Fee" id="courseFee" class="my-input focus:outline-none focus:shadow-outline appearance-none">
-                            @if ($errors->has('courseFee'))
-                                <div class="text-red-500">{{ $errors->first('courseFee') }}</div>
+                            <label for="email" class="my-label">Email</label>
+                            <input type="email" wire:model="email" placeholder="Email" id="email" class="my-input focus:outline-none focus:shadow-outline appearance-none">
+                            @if ($errors->has('email'))
+                                <div class="text-red-500">{{ $errors->first('email') }}</div>
                             @endif
                         </div>
+                        @if(empty($update_id))
+                            <div class="mb-1">
+                                <label for="password" class="my-label">Password</label>
+                                <input type="password" wire:model="password" placeholder="Password" id="password" class="my-input focus:outline-none focus:shadow-outline appearance-none">
+                                @if ($errors->has('password'))
+                                    <div class="text-red-500">{{ $errors->first('password') }}</div>
+                                @endif
+                            </div>
+                            <div class="mb-1">
+                                <label for="Cpassword" class="my-label">Confirm Password</label>
+                                <input type="password" wire:model="Cpassword" placeholder="Confirm Password" id="Cpassword" class="my-input focus:outline-none focus:shadow-outline appearance-none">
+                                @if ($errors->has('Cpassword'))
+                                    <div class="text-red-500">{{ $errors->first('Cpassword') }}</div>
+                                @endif
+                            </div>
+                        @endif
                         <div class="flex justify-end items-center mt-8">
                             <button wire:click="removeModal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
                             <button type="submit" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
