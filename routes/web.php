@@ -6,6 +6,7 @@ use App\Http\Controllers\auth\StudentController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
+use App\Http\Controllers\PayRoll;
 use Illuminate\Support\Facades\Route;
 
 //Student Auth
@@ -23,6 +24,12 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
     Route::get('/studentsList', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/course', [CourseController::class, 'course'])->name('course');
+    // pay roll
+    Route::get('/due', [PayRoll::class, 'due'])->name('due');
+    Route::get('/last-month', [PayRoll::class, 'lastMonth'])->name('lastMonth');
+    Route::get('/last-three-m', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
+    Route::get('/last-six-m', [PayRoll::class, 'lastSixM'])->name('lastSixM');
+
 // });
 
 

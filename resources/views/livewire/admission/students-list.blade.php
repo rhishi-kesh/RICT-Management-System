@@ -100,6 +100,7 @@
                                 {{ $student['due'] }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $student['paymentNumber'] }} </td>
+                            </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $student['admissionFee'] }} </td>
                             </td>
