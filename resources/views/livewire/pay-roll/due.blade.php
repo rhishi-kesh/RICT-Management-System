@@ -106,8 +106,7 @@
             <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
                     <form
-                    
-                    wire:submit="submitDue"   
+                        wire:submit="addDue"   
                     >
                         <div class="mb-1">
                             <label for="Name" class="my-label">Total Amount</label>

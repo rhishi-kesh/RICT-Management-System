@@ -4,29 +4,13 @@ namespace App\Livewire\PayRoll;
 
 use Livewire\Component;
 use App\Models\Student;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 
 class Due extends Component
 {
-    public $discount, $total,$pay, $due,$paydue, $isModal = false;
+    public $total,$pay, $due, $newPay, $paydue, $isUpdate, $isModal = false;
     public $totalAmount;
-
-    public function updated()
-    {
-        $CourseDue = Student::where('id')->first(['fee']);
-        $this->totalAmount = $CourseDue->fee ?? 0;
-        $discountValue = $this->discount ?? 0;
-
-        // Ensure both $totalAmount and $discountValue are interpreted as numeric values
-        $this->totalAmount = (float) $this->totalAmount - (float) $discountValue;
-
-        $totalAmount = $this->totalAmount ?? 0;
-        $totalPay = $this->totalPay ?? 0;
-        $this->totalDue = (float) $totalAmount - (float) $totalPay;
-    }
-
 
     public function render()
     {
@@ -40,8 +24,9 @@ class Due extends Component
         $this->total = $student->total;
         $this->pay = $student->pay;
         $this->due = $student->due;
+        $this->isUpdate = $student->id;
     }
-    public function submitDue()
+    public function addDue()
     {
         $validated = $this->validate([
             'total' => 'required|numeric',
@@ -49,12 +34,14 @@ class Due extends Component
             'due' => 'required|numeric',
             'paydue' => 'required|numeric',
         ]);
+
+        $this->pay = $this->pay + $this->paydue;
+        $this->due = $this->due - $this->paydue;
     
-        $done = Student::where('id')->submitDue([
+        $done = Student::where('id', $this->isUpdate)->update([
             'total' => $this->total,
             'pay' => $this->pay,
             'due' => $this->due,
-            'paydue' => $this->paydue,
             'updated_at' => Carbon::now(),
         ]);
         if($done){
@@ -74,6 +61,7 @@ class Due extends Component
         $this->reset(['total']);
         $this->reset(['pay']);
         $this->reset(['due']);
+        $this->reset(['paydue']);
     }
 
 }
