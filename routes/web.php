@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\batch\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
+use App\Http\Controllers\paymentMode\paymentModeController;
 use Illuminate\Support\Facades\Route;
 
 //Student Auth
@@ -29,6 +30,7 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
     Route::get('/registation', [AdminRegController::class, 'registation'])->name('registation');
     Route::get('/admission-booth', [AdmissionBoothController::class, 'admissionBooth'])->name('admissionBooth');
     Route::get('/batch', [BatchController::class, 'batch'])->name('batch');
+    Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
 // });
 
 

@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class Admission extends Component
 {
     use Utils;
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee;
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [];
     public $courseFee;
 
     public function updated($discount)
@@ -42,7 +42,6 @@ class Admission extends Component
     }
     public function submit()
     {
-
         //slug Generate
         $searchName = Student::where('name', $this->name)->first('name');
         if($searchName){
@@ -51,9 +50,18 @@ class Admission extends Component
             $slug = Str::slug($this->name);
         }
 
-        //user id and slug generate
-        $user_id = $this->generateCode('Student', '202');
-        $password = Str::random(8);
+         //user id and slug generate
+         $user_id = $this->generateCode('Student', '202');
+         $password = Str::random(8);
+         $password_hash = bcrypt($password);
+
+         $previousClassday = $this->classday;
+         //Multiful ClassDay Upload
+         if (is_array($this->classday)) {
+             $this->classday = implode(',', $this->classday);
+         } else {
+             $this->classday = $previousClassday;
+         }
 
         //validation
         $validated = $this->validate([
@@ -69,8 +77,9 @@ class Admission extends Component
             'courseId' => 'required',
             'paymentType' => 'required',
             'totalAmount' => 'required',
-            'totalDue' => 'required',
         ]);
+
+        // dd($this->classday);
 
         //insert
         $done = Student::insert([
@@ -80,13 +89,13 @@ class Admission extends Component
             'fName' => $this->fatherName,
             'mName' => $this->motherName,
             'email' => $this->email,
-            'password' => $password,
+            'password' => $password_hash,
             'address' => $this->address,
             'mobile' => $this->mobileNumber,
             'qualification' => $this->qualification,
             'profession' => $this->profession,
             'guardianMobileNo' => $this->gMobile,
-            'courseName' => $this->courseId,
+            'course_id' => $this->courseId,
             'paymentType' => $this->paymentType,
             'pay' => $this->totalPay,
             'due' => $this->totalDue,
@@ -94,6 +103,7 @@ class Admission extends Component
             'paymentNumber' => $this->paymentNumber,
             'admissionFee' => $this->admissionFee,
             'discount' => $this->discount,
+            'class_days' => $this->classday,
             'created_at' => Carbon::now(),
         ]);
         if($done){
@@ -122,5 +132,6 @@ class Admission extends Component
         $this->reset(['totalDue']);
         $this->reset(['paymentNumber']);
         $this->reset(['admissionFee']);
+        $this->reset(['classday']);
     }
 }

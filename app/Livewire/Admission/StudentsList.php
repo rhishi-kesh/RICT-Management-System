@@ -10,12 +10,11 @@ class StudentsList extends Component
 {
     use WithPagination;
 
-    public $prepage = 5;
-    public $search = '';
-    
+    public $prepage = 5, $search = '';
+
     public function render()
     {
-        $students = Student::search($this->search)->paginate($this->prepage);
+        $students = Student::with('course')->search($this->search)->paginate($this->prepage);
         return view('livewire.admission.students-list',compact('students'));
     }
 }

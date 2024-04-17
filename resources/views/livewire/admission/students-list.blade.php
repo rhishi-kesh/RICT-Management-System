@@ -48,11 +48,19 @@
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['guardianMobileNo']}} </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['qualification']}} </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['profession']}} </td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['courseName']}} </td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['discount']}} </td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['paymentType']}} </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student->course->name }} </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student->discount ?? "00" }} </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    @if($student->paymentType == 'n')
+                                        {{ "Nagad" }}
+                                    @elseif ($student->paymentType == 'b')
+                                        {{ "Bkash" }}
+                                    @else
+                                        {{ "Cash" }}
+                                    @endif
+                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['total']}} </td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['pay']}} </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student->pay ?? "00" }} </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['due']}} </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['paymentNumber']}} </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $student['admissionFee']}} </td>

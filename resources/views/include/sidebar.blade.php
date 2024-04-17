@@ -142,6 +142,9 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('paymentMode') }}">Payment Type</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="menu nav-item group">
