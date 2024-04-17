@@ -44,7 +44,7 @@ class StudentsList extends Component
     
     public function render()
     {
-        $students = Student::search($this->search)
+        $students = Student::with('course')->search($this->search)
         ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate($this->perpage);
         
@@ -72,7 +72,7 @@ class StudentsList extends Component
         $this->totalDue = $data->due;
         $this->paymentNumber = $data->paymentNumber;
         $this->admissionFee = $data->admissionFee;
-        $this->courseId = $data->courseName;
+        $this->courseId = $data->course_id;
         $this->course = Course::get();
     }
 

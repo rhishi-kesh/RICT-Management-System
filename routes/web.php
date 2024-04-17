@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\PayRoll;
+use App\Http\Controllers\MentorsController;
 use Illuminate\Support\Facades\Route;
 
 //Student Auth
@@ -29,6 +30,10 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
     Route::get('/last-month', [PayRoll::class, 'lastMonth'])->name('lastMonth');
     Route::get('/last-three-m', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
     Route::get('/last-six-m', [PayRoll::class, 'lastSixM'])->name('lastSixM');
+
+    Route::get('/studentsList', [AdmissionController::class, 'studentsList'])->name('studentsList');
+    
+    Route::get('/mentorslist', [MentorsController::class, 'mentorsList'])->name('mentorsList');
 
 // });
 

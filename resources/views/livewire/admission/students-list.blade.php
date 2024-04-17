@@ -4,8 +4,8 @@
         <hr>
         <div class="flex item-center justify-between d p-6">
             <div class="grid grid-cols-12 gap-2">
-                <div class="col-start-2 col-span-2">
-                        <div class="flex space-x-4 item-center mb-3">
+                <div class="col-start-2 col-span-2 ">
+                        <div class="flex space-x-4 item-center mb-3 py-2">
                            <h1>show</h1>
                             <select wire:model.live="perpage">
                                 <option value="10">10</option>
@@ -17,9 +17,9 @@
                 </div>
                 <div class="col-end-12 col-span-2">
                     <div class="flex space-x-4 item-center mb-3">
-                        <h1 class="" style="font-size: 15px;">search</h1>
+                        <h1 class="py-2" style="font-size: 15px;">search</h1>
                         <input wire:model.live.debounch.300ms="search" type="text"
-                            class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border"
+                            class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-5 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border"
                             placeholder="Search..." />
                         <button type="button"
                             class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 ltr:right-auto rtl:left-auto">
@@ -66,54 +66,53 @@
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{$student['id']}} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['student_id'] }} </td>
+                                {{$student->id}} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['name'] }} </td>
+                                {{ $student->student_id }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['fName'] }} </td>
+                                {{ $student->name }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['mName'] }} </td>
+                                {{ $student->fName }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['mobile'] }} </td>
+                                {{ $student->mName }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['address'] }} </td>
+                                {{ $student->mobile }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['email'] }} </td>
+                                {{ $student->address }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['guardianMobileNo'] }} </td>
+                                {{ $student->email }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['qualification'] }} </td>
+                                {{ $student->guardianMobileNo }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['profession'] }} </td>
+                                {{ $student->qualification }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['courseName'] }} </td>
+                                {{ $student->profession }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['discount'] }} </td>
+                                {{ $student->course->name }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['paymentType'] }} </td>
+                                {{ $student->discount ?? "00" }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['total'] }} </td>
+                                {{ $student->paymentType }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['pay'] }} </td>
+                                {{ $student->total }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['due'] }} </td>
+                                {{ $student->pay ?? "00" }} </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['paymentNumber'] }} </td>
+                                {{ $student->due }} </td>
+                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                {{ $student->paymentNumber }} </td>
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $student['admissionFee'] }} </td>
+                                {{ $student->admissionFee }} </td>
                             
 
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center" >
-
 
                                 {{-- Edit Button --}}
                                 <button  type="button" x-tooltip="Edit" wire:click="ShowUpdateModel({{ $student->id }})">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500"><path class="text-green-500" stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
                                 </button>
-
 
                                 {{-- Delete Button --}}
 
