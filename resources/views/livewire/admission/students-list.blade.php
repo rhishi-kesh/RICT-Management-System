@@ -124,10 +124,20 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        {{ $students->links() }}
-    </div>
 
+            <div class="py-4 px-3">
+                <div class="flex">
+                    <div class="flex space-x-4 item-center mb-3">
+                        <label for="">Previous Page</label>
+                        <select wire:model.live="prepage">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                </div>
+                {{ $students->links() }}
+            </div>
     {{-- Edit/Update --}}
 
     <div class="fixed inset-0 bg-[black]/60 z-[999] @if($isModal)  @else hidden @endif overflow-y-auto">
@@ -281,5 +291,4 @@
                 </div>
             </div>
         </form>
-
 </div>

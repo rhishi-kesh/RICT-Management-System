@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('student_id', '20');
+            $table->foreignId('batch_id')->nullable();
             $table->string('name');
+            $table->string('profile');
             $table->string('slug');
             $table->string('fName');
             $table->string('mName');
@@ -25,7 +27,7 @@ return new class extends Migration
             $table->string('qualification');
             $table->string('profession')->nullable();
             $table->string('guardianMobileNo');
-            $table->string('courseName');
+            $table->string('course_id');
             $table->string('paymentType','5')->default('c')->comment('c = Cash, b = Bkash, n = Nagad');
             $table->string('pay')->nullable();
             $table->string('due')->nullable();
@@ -33,6 +35,7 @@ return new class extends Migration
             $table->string('paymentNumber')->nullable();
             $table->string('admissionFee','5')->nullable()->default('n')->comment('n = No, y = Yes');
             $table->string('discount')->nullable();
+            $table->string('class_days')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
