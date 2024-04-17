@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Course;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -47,7 +53,7 @@ class Student extends Authenticatable
         ->orwhere('email', 'like', "%{$value}%")
         ->orwhere('mobile', 'like', "%{$value}%");
     }
-
+  
     public function course(): HasOne
     {
         return $this->hasOne(Course::class,'id','course_id');
