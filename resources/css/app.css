@@ -12,6 +12,9 @@
     .my-color-blue {
         color: #2B337C;
     }
+    .my-bg-blue {
+        background-color: #2B337C;
+    }
     .my-color-orange {
         color: #DA5E20;
     }
@@ -64,6 +67,9 @@
     .sidebargroup:hover svg path{
         --tw-text-opacity: 1;
         color: rgb(59 130 246 / var(--tw-text-opacity));
+    }
+    .profile{
+        @apply w-10 h-10 rounded-full flex justify-center items-center my-bg-blue text-white text-base;
     }
 }
 @variants hover, focus, active{

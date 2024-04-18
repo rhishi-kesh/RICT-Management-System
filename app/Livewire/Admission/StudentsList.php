@@ -33,14 +33,6 @@ class StudentsList extends Component
     }       
             // end ascending
             // Life cycle hooks
-    public function updatePerPage()       
-    {
-        $this->resetPage();
-    }
-    public function updateSearch()       
-    {
-        $this->resetPage();
-    }
     
     public function render()
     {
