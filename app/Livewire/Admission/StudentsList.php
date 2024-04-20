@@ -18,7 +18,8 @@ class StudentsList extends Component
     public $search = '';
     public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $discount, $paymentType, $totalAmount, $totalPay, $totalDue, $paymentNumber, $admissionFee, $courseId;
     public $course = [];
-                //  data short ascending
+  
+    //  data short ascending
     public $sortDirection = 'ASC';
     public $sortColumn = 'name';
 
@@ -31,15 +32,31 @@ class StudentsList extends Component
         $this->sortColumn = $column;
         $this->sortDirection = 'ASC';
     }       
+<<<<<<< HEAD
             // end ascending
             // Life cycle hooks
+=======
+    // end ascending
+  
+    // Life cycle hooks
+    public function updatePerPage()       
+    {
+        $this->resetPage();
+    }
+    public function updateSearch()       
+    {
+        $this->resetPage();
+    }
+>>>>>>> 6d574b97732018e8b9de45c36093bf6543515475
     
     public function render()
     {
         $students = Student::with('course')->search($this->search)
         ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate($this->perpage);
-        
+       
+        public $prepage = 5, $search = '';
+      
         return view('livewire.admission.students-list',compact('students'));
     }
 

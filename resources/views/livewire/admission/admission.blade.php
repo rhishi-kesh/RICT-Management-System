@@ -1,4 +1,25 @@
 <div class="pt-5">
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('frontend/css/nice-select2.css') }}">
+        <style>
+            .nice-select{
+                width: 99%;
+            }
+            .nice-select-dropdown{
+                width: 100%;
+            }
+            .nice-select .list li{
+                color: #000;
+            }
+            .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+                background-color: transparent;
+            }
+            .nice-select .option.selected {
+                font-weight: bold;
+                background-color: #ececec !important;
+            }
+        </style>
+    @endpush
     <form wire:submit="submit" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Admission Form</h2>
         <hr>
@@ -85,16 +106,19 @@
                     <div class="text-red-500">{{ $errors->first('discount') }}</div>
                 @endif
             </div>
-            <div class="mb-1">
-                <label for="paymentType" class="my-label">Payment Type</label>
-                <select name="paymentType" wire:model="paymentType" id="paymentType" class="my-input focus:outline-none focus:shadow-outline">
-                    <option value="">Select Payment Type</option>
-                    <option value="c">Cash</option>
-                    <option value="b">Bkash</option>
-                    <option value="n">Nagad</option>
+            <div class="mb-1" wire:ignore>
+                <label for="classday" class="my-label">Class Day</label>
+                <select id="classday" wire:model="classday" class="my-input focus:outline-none focus:shadow-outline p-0" name="classday[]" multiple>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
                 </select>
-                @if ($errors->has('paymentType'))
-                    <div class="text-red-500">{{ $errors->first('paymentType') }}</div>
+                @if ($errors->has('classday'))
+                    <div class="text-red-500">{{ $errors->first('classday') }}</div>
                 @endif
             </div>
             <div class="mb-1">
@@ -119,6 +143,18 @@
                 @endif
             </div>
             <div class="mb-1">
+                <label for="paymentType" class="my-label">Payment Type</label>
+                <select name="paymentType" wire:model="paymentType" id="paymentType" class="my-input focus:outline-none focus:shadow-outline">
+                    <option value="">Select Payment Type</option>
+                    <option value="c">Cash</option>
+                    <option value="b">Bkash</option>
+                    <option value="n">Nagad</option>
+                </select>
+                @if ($errors->has('paymentType'))
+                    <div class="text-red-500">{{ $errors->first('paymentType') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
                 <label for="paymentNumber" class="my-label">Payment Number <small class="text-green-500 font-thin">(When Paid With BKash/Nagad)</small></label>
                 <input type="text" wire:model="paymentNumber" placeholder="Payment Number" id="paymentNumber" name="paymentNumber" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('paymentNumber'))
@@ -134,10 +170,21 @@
                     <div class="text-red-500">{{ $errors->first('admissionFee') }}</div>
                 @endif
             </div>
-            <div></div>
             <div>
                 <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
             </div>
         </div>
     </form>
+    @push('js')
+    <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(e) {
+            // seachable
+            var options = {
+                searchable: true
+            };
+            NiceSelect.bind(document.getElementById("classday"), options);
+        });
+    </script>
+    @endpush
 </div>
