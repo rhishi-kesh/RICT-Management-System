@@ -9,15 +9,13 @@ use Carbon\Carbon;
 
 class Due extends Component
 {
-    public $total,$pay, $due, $newPay, $paydue, $isUpdate, $isModal = false;
-    public $totalAmount;
+    public $total, $pay, $due, $newPay, $paydue, $isUpdate, $totalAmount, $isModal = false;
 
     public function render()
     {
-        $students = Student::all();
+        $students = Student::with('course:id,name')->where('due', '>', 0)->paginate(15);
         return view('livewire.pay-roll.due', compact('students'));
     }
-      // Update
     public function ShowUpdateModel($id){
         $this->isModal = true;
         $student = Student::findOrFail($id);
@@ -37,7 +35,7 @@ class Due extends Component
 
         $this->pay = $this->pay + $this->paydue;
         $this->due = $this->due - $this->paydue;
-    
+
         $done = Student::where('id', $this->isUpdate)->update([
             'total' => $this->total,
             'pay' => $this->pay,

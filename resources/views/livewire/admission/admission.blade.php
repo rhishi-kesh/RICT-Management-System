@@ -68,7 +68,7 @@
             </div>
             <div class="mb-1">
                 <label for="gMobile" class="my-label">Guardian Mobile No.</label>
-                <input type="text" wire:model="gMobile" placeholder="Guardian Mobile No." id="gMobile" name="gMobile" class="my-input focus:outline-none focus:shadow-outline">
+                <input type="number" wire:model="gMobile" placeholder="Guardian Mobile No." id="gMobile" name="gMobile" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('gMobile'))
                     <div class="text-red-500">{{ $errors->first('gMobile') }}</div>
                 @endif
@@ -89,7 +89,7 @@
             </div>
             <div class="mb-1">
                 <label for="courseId" class="my-label">Course Name</label>
-                <select name="courseId" wire:model.live="courseId" id="courseId" class="my-input focus:outline-none focus:shadow-outline">
+                <select name="courseId" wire:model.live.debounce.1000ms="courseId" id="courseId" class="my-input focus:outline-none focus:shadow-outline">
                     <option value="">Select Course</option>
                     @foreach ($course as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -101,7 +101,7 @@
             </div>
             <div class="mb-1">
                 <label for="Discount" class="my-label">Discount Coupon</label>
-                <input type="text" wire:model.live="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
+                <input type="text" wire:model.live.debounce.1000ms="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('discount'))
                     <div class="text-red-500">{{ $errors->first('discount') }}</div>
                 @endif
@@ -130,7 +130,7 @@
             </div>
             <div class="mb-1">
                 <label for="totalPay" class="my-label">Total Pay</label>
-                <input type="text" wire:model.live="totalPay" placeholder="Total Pay" id="totalPay" name="totalPay" class="my-input focus:outline-none focus:shadow-outline">
+                <input type="text" wire:model.live.debounce.1000ms="totalPay" placeholder="Total Pay" id="totalPay" name="totalPay" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('totalPay'))
                     <div class="text-red-500">{{ $errors->first('totalPay') }}</div>
                 @endif
@@ -146,9 +146,10 @@
                 <label for="paymentType" class="my-label">Payment Type</label>
                 <select name="paymentType" wire:model="paymentType" id="paymentType" class="my-input focus:outline-none focus:shadow-outline">
                     <option value="">Select Payment Type</option>
-                    <option value="c">Cash</option>
-                    <option value="b">Bkash</option>
-                    <option value="n">Nagad</option>
+                    @foreach ($paymentTypes as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+
                 </select>
                 @if ($errors->has('paymentType'))
                     <div class="text-red-500">{{ $errors->first('paymentType') }}</div>

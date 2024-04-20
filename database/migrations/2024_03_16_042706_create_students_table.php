@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('student_id', '20');
             $table->foreignId('batch_id')->nullable();
             $table->string('name');
-            $table->string('profile');
+            $table->string('profile')->nullable();
             $table->string('slug');
             $table->string('fName');
             $table->string('mName');
@@ -24,11 +24,11 @@ return new class extends Migration
             $table->string('password')->nullable()->unique();
             $table->string('address');
             $table->string('mobile');
-            $table->string('qualification');
+            $table->string('qualification')->nullable();
             $table->string('profession')->nullable();
-            $table->string('guardianMobileNo');
+            $table->string('guardianMobileNo')->nullable();
             $table->string('course_id');
-            $table->string('paymentType','5')->default('c')->comment('c = Cash, b = Bkash, n = Nagad');
+            $table->string('paymentType','5');
             $table->string('pay')->nullable();
             $table->string('due')->nullable();
             $table->string('total')->nullable();

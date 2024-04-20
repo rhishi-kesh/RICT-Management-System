@@ -4,6 +4,7 @@ namespace App\Livewire\Admission;
 
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\PaymentMode;
 use Livewire\Component;
 use App\Utils;
 use Illuminate\Support\Str;
@@ -38,7 +39,8 @@ class Admission extends Component
     public function render()
     {
         $course = Course::get();
-        return view('livewire.admission.admission', compact('course'));
+        $paymentTypes = PaymentMode::get();
+        return view('livewire.admission.admission', compact('course','paymentTypes'));
     }
     public function submit()
     {
