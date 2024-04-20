@@ -19,7 +19,8 @@ class StudentsList extends Component
 
     public function render()
     {
-        $students = Student::with(['course:id,name','pament_mode:id,name','batch:id,name'])->search($this->search)
+        $students = Student::with(['course:id,name','pament_mode:id,name','batch:id,name'])
+        ->search($this->search)
         ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate($this->perpage);
         $paymentTypes = PaymentMode::get();

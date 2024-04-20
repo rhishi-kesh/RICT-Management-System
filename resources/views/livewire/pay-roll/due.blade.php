@@ -1,7 +1,8 @@
 <div class="pt-5">
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Due List</h2>
-        <hr>
+        <div class="flex justify-between mb-4">
+            <h2 class="mb-2 font-bold text-3xl dark:text-white">Due List</h2>
+        </div>
         <div class="mb-4 overflow-auto">
             <table class="w-full">
                 <thead>
@@ -97,15 +98,15 @@
                             @endif
                         </div>
                         <div class="mb-1">
-                            <label for="paydue" class="my-label">Payment</label>
-                            <input type="text" wire:model="paydue" placeholder="Pay due" id="paydue" class="my-input focus:outline-none focus:shadow-outline">
-                            @if ($errors->has('paydue'))
-                                <div class="text-red-500">{{ $errors->first('paydue') }}</div>
+                            <label for="payment" class="my-label">Payment</label>
+                            <input type="text" wire:model.live.debounce.1000ms="payment" placeholder="Payment" id="payment" class="my-input focus:outline-none focus:shadow-outline">
+                            @if ($errors->has('payment'))
+                                <div class="text-red-500">{{ $errors->first('payment') }}</div>
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
                             <button wire:click="removeModal" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submitDue" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
+                            <button type="submitDue" class="bg-gray-900 text-white btn ml-4">Save</button>
                         </div>
                     </form>
                 </div>
