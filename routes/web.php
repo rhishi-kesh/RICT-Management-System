@@ -12,6 +12,7 @@ use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\paymentMode\paymentModeController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
 //Student Auth
@@ -36,11 +37,18 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
     Route::get('/last-three-m', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
     Route::get('/last-six-m', [PayRoll::class, 'lastSixM'])->name('lastSixM');
     Route::get('/studentsList', [AdmissionController::class, 'studentsList'])->name('studentsList');
+    // mentors 
     Route::get('/mentorslist', [MentorsController::class, 'mentorsList'])->name('mentorsList');
     Route::get('/registation', [AdminRegController::class, 'registation'])->name('registation');
     Route::get('/admission-booth', [AdmissionBoothController::class, 'admissionBooth'])->name('admissionBooth');
     Route::get('/batch', [BatchController::class, 'batch'])->name('batch');
     Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
+
+    // visitors
+    Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
+    Route::get('/visitor-form', [VisitorController::class, 'visitorForm'])->name('visitorForm');
+    Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
+
 // });
 
 
