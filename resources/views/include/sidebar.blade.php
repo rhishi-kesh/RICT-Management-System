@@ -1,4 +1,4 @@
-<nav x-data="sidebar"
+{{-- <nav x-data="sidebar"
     class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
     <div class="h-full bg-white dark:bg-slate-900">
         <div class="flex items-center justify-between px-4 py-3">
@@ -459,4 +459,4 @@
             </li>
         </ul>
     </div>
-</nav>
+</nav> --}}

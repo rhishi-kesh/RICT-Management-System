@@ -13,8 +13,7 @@ use Carbon\Carbon;
 class Admission extends Component
 {
     use Utils;
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [];
-    public $courseFee;
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [], $date, $courseFee;
 
     public function updated($discount)
     {
@@ -57,8 +56,8 @@ class Admission extends Component
          $password = Str::random(8);
          $password_hash = bcrypt($password);
 
-         $previousClassday = $this->classday;
          //Multiful ClassDay Upload
+         $previousClassday = $this->classday;
          if (is_array($this->classday)) {
              $this->classday = implode(',', $this->classday);
          } else {
@@ -79,9 +78,8 @@ class Admission extends Component
             'courseId' => 'required',
             'paymentType' => 'required',
             'totalAmount' => 'required',
+            'date' => 'required',
         ]);
-
-        // dd($this->classday);
 
         //insert
         $done = Student::insert([
@@ -91,6 +89,7 @@ class Admission extends Component
             'fName' => $this->fatherName,
             'mName' => $this->motherName,
             'email' => $this->email,
+            'dateofbirth' => $this->date,
             'password' => $password_hash,
             'address' => $this->address,
             'mobile' => $this->mobileNumber,
@@ -135,5 +134,6 @@ class Admission extends Component
         $this->reset(['paymentNumber']);
         $this->reset(['admissionFee']);
         $this->reset(['classday']);
+        $this->reset(['date']);
     }
 }

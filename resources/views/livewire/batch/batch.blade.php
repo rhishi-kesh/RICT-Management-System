@@ -236,7 +236,8 @@
                                 @empty
                                     <tr>
                                         <td colspan="30" class="text-red-500 uppercase text-center">No Student In
-                                            This Batch</td>
+                                            This Batch
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -329,7 +330,30 @@
                     searchable: true,
                     placeholder: 'Select Students'
                 };
-                NiceSelect.bind(document.getElementById("addToBatch"), options);
+                var instance = NiceSelect.bind(document.getElementById("addToBatch"), options);
+                window.addEventListener('clearInput', event => {
+                    let selectedDiv = document.querySelector('.multiple-options');
+                    let selected = document.querySelectorAll('.nice-select-dropdown .list .selected');
+                    selected.forEach(item => {
+                        item.remove();
+                    });
+                    selectedDiv.innerHTML = 'Select Students';
+
+                    let select = document.getElementById('addToBatch');
+                    let options = select.getElementsByTagName('option');
+                    var selectedOptions = [];
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].selected) {
+                            selectedOptions.push(options[i]);
+                        }
+                    }
+                    selectedOptions.forEach(item => {
+                        item.remove();
+                    });
+
+                    instance.clear();
+                    instance.update();
+                });
             });
         </script>
     @endpush

@@ -124,7 +124,7 @@ class Batch extends Component
                 $student->save();
             }
 
-            $this->resetAddStudentForm();
+            $this->dispatch('clearInput');
             $this->mount();
 
             DB::commit();
@@ -166,8 +166,5 @@ class Batch extends Component
     }
     public function resetForm(){
         $this->reset(['name']);
-    }
-    public function resetAddStudentForm(){
-        $this->reset(['addToBatch']);
     }
 }

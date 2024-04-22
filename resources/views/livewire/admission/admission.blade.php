@@ -1,6 +1,7 @@
 <div class="pt-5">
     @push('css')
         <link rel="stylesheet" href="{{ asset('frontend/css/nice-select2.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
             .nice-select{
                 width: 99%;
@@ -17,6 +18,9 @@
             .nice-select .option.selected {
                 font-weight: bold;
                 background-color: #ececec !important;
+            }
+            .nice-select .list {
+                max-height: 155px;
             }
         </style>
     @endpush
@@ -88,6 +92,13 @@
                 @endif
             </div>
             <div class="mb-1">
+                <label for="date" class="my-label">Date Of Birth</label>
+                <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
+                @if ($errors->has('date'))
+                    <div class="text-red-500">{{ $errors->first('date') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
                 <label for="courseId" class="my-label">Course Name</label>
                 <select name="courseId" wire:model.live.debounce.1000ms="courseId" id="courseId" class="my-input focus:outline-none focus:shadow-outline">
                     <option value="">Select Course</option>
@@ -104,21 +115,6 @@
                 <input type="text" wire:model.live.debounce.1000ms="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('discount'))
                     <div class="text-red-500">{{ $errors->first('discount') }}</div>
-                @endif
-            </div>
-            <div class="mb-1" wire:ignore>
-                <label for="classday" class="my-label">Class Day</label>
-                <select id="classday" wire:model="classday" class="my-input focus:outline-none focus:shadow-outline p-0" name="classday[]" multiple>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                </select>
-                @if ($errors->has('classday'))
-                    <div class="text-red-500">{{ $errors->first('classday') }}</div>
                 @endif
             </div>
             <div class="mb-1">
@@ -162,8 +158,23 @@
                     <div class="text-red-500">{{ $errors->first('paymentNumber') }}</div>
                 @endif
             </div>
-            <div class="mb-1 ">
-                <label for="admissionFee" class="cursor-pointer w-full block group text-gray-700 font-bold mt-0 md:mt-9">
+            <div class="mb-1" wire:ignore>
+                <label for="classday" class="my-label">Class Day</label>
+                <select id="classday" wire:model="classday" class="my-input focus:outline-none focus:shadow-outline p-0" name="classday[]" multiple>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                @if ($errors->has('classday'))
+                    <div class="text-red-500">{{ $errors->first('classday') }}</div>
+                @endif
+            </div>
+            <div class="mb-3 ms-2">
+                <label for="admissionFee" class="cursor-pointer w-full block group text-gray-700 font-bold">
                 <input type="checkbox" wire:model="admissionFee" value="y" name="admissionFee" id="admissionFee" class="cursor-pointer mr-2 leading-tight">
                 <span class="text-gray-700 dark:text-white group-checked:text-green-600 text-sm font-bold mb-2">Admission Fee 100 TK</span>
                 </label>
@@ -171,13 +182,14 @@
                     <div class="text-red-500">{{ $errors->first('admissionFee') }}</div>
                 @endif
             </div>
-            <div>
-                <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
-            </div>
+        </div>
+        <div>
+            <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
         </div>
     </form>
     @push('js')
     <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function(e) {
             // seachable
@@ -185,6 +197,11 @@
                 searchable: true
             };
             NiceSelect.bind(document.getElementById("classday"), options);
+        });
+    </script>
+    <script>
+        flatpickr("#date", {
+            maxDate: "today"
         });
     </script>
     @endpush
