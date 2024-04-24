@@ -8,7 +8,7 @@
                 <label for="counseling" class="my-label">Counseling</label>
                 <select id="counseling" wire:model="counseling"
                 class="my-input focus:outline-none focus:shadow-outline" name="counseling">
-                $@foreach ($counciling as $item)
+                @foreach ($counciling as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
                 </select>
@@ -133,11 +133,9 @@
                 <select name="admission_booth_name" wire:model.live="admission_booth_name" id="admission_booth_name"
                     class="my-input focus:outline-none focus:shadow-outline">
                     <option value="">Select Course</option>
-
-                    {{-- @foreach ($visitor as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach --}}
-
+                    @foreach ($admissionBooth as $booth)
+                        <option value="{{ $booth->id }}">{{ $booth->name }}</option>
+                    @endforeach
                 </select>
                 @if ($errors->has('admission_booth_name'))
                     <div class="text-red-500">{{ $errors->first('admission_booth_name') }}</div>

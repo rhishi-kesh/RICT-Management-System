@@ -6,12 +6,13 @@ use Livewire\Component;
 use App\Models\Councilings;
 use App\Models\Visitors;
 use App\Models\Course;
+use App\Models\AdmissionBooth;
 use Carbon\Carbon;
 
 
 class VisitorForm extends Component
 {
-    public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $call_count, $courseId = null, $counseling, $status;
+    public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $course_id;
     public $selectedOption;
 
 
@@ -19,7 +20,8 @@ class VisitorForm extends Component
     {
         $counciling = Councilings::get();
         $courses = Course::get();
-        return view('livewire.visitor.visitor-form', compact('counciling', 'courses'));
+        $admissionBooth = AdmissionBooth::get();
+        return view('livewire.visitor.visitor-form', compact('counciling', 'courses', 'admissionBooth'));
     }
   
     public function submit()
@@ -40,7 +42,6 @@ class VisitorForm extends Component
             'admission_booth_number' => 'nullable',
             'calling_person' => 'required',
             'comments' => 'nullable',
-            'call_count' => 'nullable',
         ]);
 
         $done = Visitors::insert([
@@ -49,8 +50,7 @@ class VisitorForm extends Component
             'name' => $this->name,
             'mobile' => $this->mobile,
             'email' => $this->email,
-            'course_name' => $this->course_name,
-            // 'course_id' => $this->courseId,
+            'course_id' => $this->course_name,
             'address' => $this->address,
             'amount' => $this->amount,
             'visitor_comment' => $this->visitor_comment,
@@ -60,7 +60,6 @@ class VisitorForm extends Component
             'admission_booth_number' => $this->admission_booth_number,
             'calling_person' => $this->calling_person,
             'comments' => $this->comments,
-            'call_count' => $this->call_count,
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
@@ -88,6 +87,5 @@ class VisitorForm extends Component
         $this->reset(['admission_booth_number']);
         $this->reset(['calling_person']);
         $this->reset(['comments']);
-        $this->reset(['call_count']);
     }
 }

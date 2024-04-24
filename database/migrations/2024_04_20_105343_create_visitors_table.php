@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->string('counseling')->nullable();
+            $table->foreignId('counseling_id')->nullable();
             $table->string('status')->nullable();
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->unique();
-            $table->string('course_name')->nullable();
-            $table->string('course_id');
+            $table->foreignId('course_id');
             $table->string('address')->nullable();
             $table->string('amount')->nullable();
             $table->string('visitor_comment')->nullable();

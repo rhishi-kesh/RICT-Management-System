@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\ApiController;
+use App\Models\PaymentMode;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::controller(ApiController::class)->group(function () {
+//     Route::post('/admission', 'admission')->name('admission');
+// });

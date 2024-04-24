@@ -21,8 +21,7 @@ class PaymentMode extends Component
     }
     public function insert(){
         $validated = $this->validate([
-            'name' => 'required|unique:payment_modes',
-            'number' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'name' => 'required|unique:payment_modes'
         ]);
         $done = PaymentModes::insert([
             'name' => $this->name,
@@ -47,8 +46,7 @@ class PaymentMode extends Component
     }
     public function update(){
         $validated = $this->validate([
-            'name' => 'required',
-            'number' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'name' => 'required'
         ]);
         $done = PaymentModes::where('id',$this->update_id)->update([
             'name' => $this->name,

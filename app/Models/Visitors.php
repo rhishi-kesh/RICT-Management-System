@@ -19,8 +19,21 @@ class Visitors extends Model
         'email',
         'mobile',
     ];
+    
     public function councile(): HasOne
     {
-        return $this->hasOne(Councilings::class,'id','course_id');
+        return $this->hasOne(Councilings::class,'id','counseling');
+    }
+    public function callingperson(): HasOne
+    {
+        return $this->hasOne(Councilings::class,'id','calling_person');
+    }
+    public function course(): HasOne
+    {
+        return $this->hasOne(Course::class,'id','course_id');
+    }
+    public function admissionBooth(): HasOne
+    {
+        return $this->hasOne(AdmissionBooth::class,'id','admission_booth_name');
     }
 }

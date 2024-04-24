@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class MentorsController extends Controller
 {
-    public function mentorsList()
+    public function mentors()
     {
         return view('application.mentors.mentors');
     }

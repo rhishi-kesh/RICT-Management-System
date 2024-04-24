@@ -28,25 +28,19 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
 // Route::group(['middleware' => 'student'], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
-    Route::get('/studentsList', [AdmissionController::class, 'studentsList'])->name('studentsList');
+    Route::get('/students', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/course', [CourseController::class, 'course'])->name('course');
-
-    // pay roll
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
-    Route::get('/last-month', [PayRoll::class, 'lastMonth'])->name('lastMonth');
-    Route::get('/last-three-m', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
-    Route::get('/last-six-m', [PayRoll::class, 'lastSixM'])->name('lastSixM');
-    Route::get('/studentsList', [AdmissionController::class, 'studentsList'])->name('studentsList');
-    // mentors 
-    Route::get('/mentorslist', [MentorsController::class, 'mentorsList'])->name('mentorsList');
+    Route::get('/last-month-due', [PayRoll::class, 'lastMonth'])->name('lastMonth');
+    Route::get('/last-three-month-due', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
+    Route::get('/last-six-month-due', [PayRoll::class, 'lastSixM'])->name('lastSixM');
+    Route::get('/mentors', [MentorsController::class, 'mentors'])->name('mentors');
     Route::get('/registation', [AdminRegController::class, 'registation'])->name('registation');
     Route::get('/admission-booth', [AdmissionBoothController::class, 'admissionBooth'])->name('admissionBooth');
     Route::get('/batch', [BatchController::class, 'batch'])->name('batch');
     Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
-
-    // visitors
     Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
-    Route::get('/visitor-form', [VisitorController::class, 'visitorForm'])->name('visitorForm');
+    Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
     Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
 
 // });

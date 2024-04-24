@@ -4,115 +4,96 @@ namespace App\Livewire\Visitor;
 
 use Livewire\Component;
 use App\Models\Visitors;
+use App\Models\Course;
+use App\Models\Councilings;
+use App\Models\AdmissionBooth;
 use Illuminate\Support\Carbon;
 use Livewire\WithPagination;
 
 
-
 class VisitorList extends Component
 {
-    public $name, $email, $mobile, $image = null, $isModal = false, $delete_id, $update_id, $oldImage;
-    protected $listeners = ['deleteConfirm' => 'deleteStudent'];
+    public  $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $isModal = false, $course = [], $councile = [], 
+    $callingperson = [], $admissionBooth = [];
+    protected $listeners = ['deleteConfirm' => 'deleteStudent'] ;
+
     use WithPagination;
-
-
 
     public function render()
     {
-        $visitor = Visitors::paginate(5);
+        $visitor = Visitors::with(['course:id,name', 'callingperson:id,name' ,'councile:id,name','admissionBooth:id,name,number'])->paginate(5);
         return view('livewire.visitor.visitor-list', compact('visitor'));
     }
-
-    public function insert()
-    {
-        $validated = $this->validate([
-            'counseling' => 'required',
-            'status' => 'required',
-            'name' => 'required',
-            'mobile' => 'required',
-            'email' => 'nullable',
-            'course_name' => 'required',
-            'address' => 'required',
-            'amount' => 'nullable',
-            'visitor_comment' => 'nullable',
-            'gender' => 'nullable',
-            'ref_name' => 'nullable',
-            'admission_booth_name' => 'nullable',
-            'admission_booth_number' => 'nullable',
-            'calling_person' => 'required',
-            'comments' => 'nullable',
-        ]);
-        $done = Visitors::insert([
-            'counseling' => $this->counseling,
-            'status' => $this->status,
-            'name' => $this->status,
-            'mobile' => $this->mobile,
-            'email' => $this->email,
-            'course_name' => $this->course_name,
-            'address' => $this->address,
-            'amount' => $this->amount,
-            'visitor_comment' => $this->visitor_comment,
-            'gender' => $this->gender,
-            'ref_name' => $this->ref_name,
-            'admission_booth_name' => $this->admission_booth_name,
-            'admission_booth_number' => $this->admission_booth_number,
-            'calling_person' => $this->calling_person,
-            'comments' => $this->comments,
-            'created_at' => Carbon::now(),
-        ]);
-        if ($done) {
-            $this->resetForm();
-            $this->removeModal();
-            $this->dispatch('swal', [
-                'title' => 'Data Insert Successfull',
-                'type' => "success",
-            ]);
-        }
-
-    }
-
     // Update
 
-    // public function ShowUpdateModel($id){
-    //     $this->isModal = true;
-    //     $data = Student::findOrFail($id);
-    //     $this->name = $data->name;
-    //     $this->fatherName = $data->fName;
-    //     $this->motherName = $data->mName;
-    //     $this->mobileNumber = $data->mobile;
-    //     $this->address = $data->address;
-    //     $this->email = $data->email;
-    //     $this->gMobile = $data->guardianMobileNo;
-    //     $this->qualification = $data->qualification;
-    //     $this->profession = $data->profession;
-    //     $this->discount = $data->discount;
-    //     $this->paymentType = $data->paymentType;
-    //     $this->totalAmount = $data->total;
-    //     $this->totalPay = $data->pay;
-    //     $this->totalDue = $data->due;
-    //     $this->paymentNumber = $data->paymentNumber;
-    //     $this->admissionFee = $data->admissionFee;
-    //     $this->courseId = $data->course_id;         //relationship
-    //     $this->course = Course::get();
-    // }
-
-
+    public function ShowUpdateModel($id){
+        $this->isModal = true;
+        $data = Visitors::findOrFail($id);
+        $this->counseling = $data->counseling;
+        $this->status = $data->status;
+        $this->name = $data->name;
+        $this->mobile = $data->mobile;
+        $this->email = $data->email;
+        $this->course_name = $data->course_id;
+        $this->address = $data->address;
+        $this->amount = $data->amount;
+        $this->visitor_comment = $data->visitor_comment;
+        $this->gender = $data->selectedOption;
+        $this->ref_name = $data->ref_name;
+        $this->admission_booth_name = $data->admission_booth_name;
+        $this->admission_booth_number = $data->admission_booth_number;
+        $this->calling_person = $data->calling_person;
+        $this->comments = $data->comments;
+        $this->course = Course::get();
+        $this->councile = Councilings::get();
+        $this->callingperson = Councilings::get();
+        $this->admissionBooth = AdmissionBooth::get();
+    }
     public function showModal()
     {
         $this->resetForm();
         $this->isModal = true;
+
     }
-    public function removeModal()
-    {
-        $this->update_id = '';
+
+    public function submit(){
+
+        $done = Visitors::where('id')->update([
+            'name' => $this->name,
+            'fName' => $this->fatherName,
+            'updated_at' => Carbon::now(),
+        ]);
+        if($done){
+            $this->resetForm();
+            $this->removeModal();
+            $this->dispatch('swal', [
+                'title' => 'Data Update Successfull',
+                'type' => "success",
+            ]);
+        }
+    }
+    public function removeModal(){
         $this->isModal = false;
         $this->resetForm();
     }
     public function resetForm()
     {
+        $this->reset(['counseling']);
+        $this->reset(['status']);
         $this->reset(['name']);
-        $this->reset(['email']);
         $this->reset(['mobile']);
+        $this->reset(['email']);
+        $this->reset(['course_name']);
+        $this->reset(['address']);
+        $this->reset(['amount']);
+        $this->reset(['visitor_comment']);
+        // $this->reset(['selectedOption']);
+        $this->reset(['ref_name']);
+        $this->reset(['admission_booth_name']);
+        $this->reset(['admission_booth_number']);
+        $this->reset(['calling_person']);
+        $this->reset(['comments']);
     }
+
 
 }

@@ -1,6 +1,7 @@
 <div class="pt-5">
     @push('css')
         <link rel="stylesheet" href="{{ asset('frontend/css/nice-select2.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
             .nice-select{
                 width: 99%;
@@ -17,6 +18,9 @@
             .nice-select .option.selected {
                 font-weight: bold;
                 background-color: #ececec !important;
+            }
+            .nice-select .list {
+                max-height: 155px;
             }
         </style>
     @endpush
@@ -68,7 +72,7 @@
             </div>
             <div class="mb-1">
                 <label for="gMobile" class="my-label">Guardian Mobile No.</label>
-                <input type="text" wire:model="gMobile" placeholder="Guardian Mobile No." id="gMobile" name="gMobile" class="my-input focus:outline-none focus:shadow-outline">
+                <input type="number" wire:model="gMobile" placeholder="Guardian Mobile No." id="gMobile" name="gMobile" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('gMobile'))
                     <div class="text-red-500">{{ $errors->first('gMobile') }}</div>
                 @endif
@@ -88,8 +92,15 @@
                 @endif
             </div>
             <div class="mb-1">
+                <label for="date" class="my-label">Date Of Birth</label>
+                <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
+                @if ($errors->has('date'))
+                    <div class="text-red-500">{{ $errors->first('date') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
                 <label for="courseId" class="my-label">Course Name</label>
-                <select name="courseId" wire:model.live="courseId" id="courseId" class="my-input focus:outline-none focus:shadow-outline">
+                <select name="courseId" wire:model.live.debounce.1000ms="courseId" id="courseId" class="my-input focus:outline-none focus:shadow-outline">
                     <option value="">Select Course</option>
                     @foreach ($course as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -101,9 +112,50 @@
             </div>
             <div class="mb-1">
                 <label for="Discount" class="my-label">Discount Coupon</label>
-                <input type="text" wire:model.live="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
+                <input type="text" wire:model.live.debounce.1000ms="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('discount'))
                     <div class="text-red-500">{{ $errors->first('discount') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
+                <label for="TotalAmount" class="my-label">Total Amount</label>
+                <input type="text" wire:model="totalAmount" placeholder="Total Amount" id="TotalAmount" name="totalAmount" class="my-input focus:outline-none focus:shadow-outline">
+                @if ($errors->has('totalAmount'))
+                    <div class="text-red-500">{{ $errors->first('totalAmount') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
+                <label for="totalPay" class="my-label">Total Pay</label>
+                <input type="text" wire:model.live.debounce.1000ms="totalPay" placeholder="Total Pay" id="totalPay" name="totalPay" class="my-input focus:outline-none focus:shadow-outline">
+                @if ($errors->has('totalPay'))
+                    <div class="text-red-500">{{ $errors->first('totalPay') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
+                <label for="totalDue" class="my-label">Total Due</label>
+                <input type="text" wire:model="totalDue" placeholder="Total Due" id="totalDue" name="totalDue" class="my-input focus:outline-none focus:shadow-outline">
+                @if ($errors->has('totalDue'))
+                    <div class="text-red-500">{{ $errors->first('totalDue') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
+                <label for="paymentType" class="my-label">Payment Type</label>
+                <select name="paymentType" wire:model="paymentType" id="paymentType" class="my-input focus:outline-none focus:shadow-outline">
+                    <option value="">Select Payment Type</option>
+                    @foreach ($paymentTypes as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+
+                </select>
+                @if ($errors->has('paymentType'))
+                    <div class="text-red-500">{{ $errors->first('paymentType') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
+                <label for="paymentNumber" class="my-label">Payment Number <small class="text-green-500 font-thin">(When Paid With BKash/Nagad)</small></label>
+                <input type="text" wire:model="paymentNumber" placeholder="Payment Number" id="paymentNumber" name="paymentNumber" class="my-input focus:outline-none focus:shadow-outline">
+                @if ($errors->has('paymentNumber'))
+                    <div class="text-red-500">{{ $errors->first('paymentNumber') }}</div>
                 @endif
             </div>
             <div class="mb-1" wire:ignore>
@@ -121,48 +173,8 @@
                     <div class="text-red-500">{{ $errors->first('classday') }}</div>
                 @endif
             </div>
-            <div class="mb-1">
-                <label for="TotalAmount" class="my-label">Total Amount</label>
-                <input type="text" wire:model="totalAmount" placeholder="Total Amount" id="TotalAmount" name="totalAmount" class="my-input focus:outline-none focus:shadow-outline">
-                @if ($errors->has('totalAmount'))
-                    <div class="text-red-500">{{ $errors->first('totalAmount') }}</div>
-                @endif
-            </div>
-            <div class="mb-1">
-                <label for="totalPay" class="my-label">Total Pay</label>
-                <input type="text" wire:model.live="totalPay" placeholder="Total Pay" id="totalPay" name="totalPay" class="my-input focus:outline-none focus:shadow-outline">
-                @if ($errors->has('totalPay'))
-                    <div class="text-red-500">{{ $errors->first('totalPay') }}</div>
-                @endif
-            </div>
-            <div class="mb-1">
-                <label for="totalDue" class="my-label">Total Due</label>
-                <input type="text" wire:model="totalDue" placeholder="Total Due" id="totalDue" name="totalDue" class="my-input focus:outline-none focus:shadow-outline">
-                @if ($errors->has('totalDue'))
-                    <div class="text-red-500">{{ $errors->first('totalDue') }}</div>
-                @endif
-            </div>
-            <div class="mb-1">
-                <label for="paymentType" class="my-label">Payment Type</label>
-                <select name="paymentType" wire:model="paymentType" id="paymentType" class="my-input focus:outline-none focus:shadow-outline">
-                    <option value="">Select Payment Type</option>
-                    <option value="c">Cash</option>
-                    <option value="b">Bkash</option>
-                    <option value="n">Nagad</option>
-                </select>
-                @if ($errors->has('paymentType'))
-                    <div class="text-red-500">{{ $errors->first('paymentType') }}</div>
-                @endif
-            </div>
-            <div class="mb-1">
-                <label for="paymentNumber" class="my-label">Payment Number <small class="text-green-500 font-thin">(When Paid With BKash/Nagad)</small></label>
-                <input type="text" wire:model="paymentNumber" placeholder="Payment Number" id="paymentNumber" name="paymentNumber" class="my-input focus:outline-none focus:shadow-outline">
-                @if ($errors->has('paymentNumber'))
-                    <div class="text-red-500">{{ $errors->first('paymentNumber') }}</div>
-                @endif
-            </div>
-            <div class="mb-1 ">
-                <label for="admissionFee" class="cursor-pointer w-full block group text-gray-700 font-bold mt-0 md:mt-9">
+            <div class="mb-3 ms-2">
+                <label for="admissionFee" class="cursor-pointer w-full block group text-gray-700 font-bold">
                 <input type="checkbox" wire:model="admissionFee" value="y" name="admissionFee" id="admissionFee" class="cursor-pointer mr-2 leading-tight">
                 <span class="text-gray-700 dark:text-white group-checked:text-green-600 text-sm font-bold mb-2">Admission Fee 100 TK</span>
                 </label>
@@ -170,13 +182,14 @@
                     <div class="text-red-500">{{ $errors->first('admissionFee') }}</div>
                 @endif
             </div>
-            <div>
-                <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
-            </div>
+        </div>
+        <div>
+            <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
         </div>
     </form>
     @push('js')
     <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function(e) {
             // seachable
@@ -184,6 +197,11 @@
                 searchable: true
             };
             NiceSelect.bind(document.getElementById("classday"), options);
+        });
+    </script>
+    <script>
+        flatpickr("#date", {
+            maxDate: "today"
         });
     </script>
     @endpush

@@ -5,19 +5,31 @@ namespace App\Livewire\PayRoll;
 use Livewire\Component;
 use App\Models\Student;
 use Carbon\Carbon;
-
-
+use Livewire\WithPagination;
 class Due extends Component
 {
-    public $total,$pay, $due, $newPay, $paydue, $isUpdate, $isModal = false;
-    public $totalAmount;
+    use WithPagination;
+    public $total, $pay, $due, $payment, $isUpdate, $search = '', $totalAmount, $isModal = false;
 
+    public function updated($payment)
+    {
+        $npayment = $this->payment ?? 0;
+
+        $student = Student::findOrFail($this->isUpdate);
+        $npay = $student->pay ?? 0;
+        $ndue = $student->due ?? 0;
+
+        $this->pay = (float) $npay + (float) $npayment;
+        $this->due = (float) $ndue - (float) $npayment;
+    }
     public function render()
     {
-        $students = Student::all();
+        $students = Student::with('course:id,name')
+        ->search($this->search)
+        ->where('due', '>', 0)
+        ->paginate(15);
         return view('livewire.pay-roll.due', compact('students'));
     }
-      // Update
     public function ShowUpdateModel($id){
         $this->isModal = true;
         $student = Student::findOrFail($id);
@@ -32,14 +44,10 @@ class Due extends Component
             'total' => 'required|numeric',
             'pay' => 'required|numeric',
             'due' => 'required|numeric',
-            'paydue' => 'required|numeric',
+            'payment' => 'required|numeric',
         ]);
 
-        $this->pay = $this->pay + $this->paydue;
-        $this->due = $this->due - $this->paydue;
-    
         $done = Student::where('id', $this->isUpdate)->update([
-            'total' => $this->total,
             'pay' => $this->pay,
             'due' => $this->due,
             'updated_at' => Carbon::now(),
@@ -61,7 +69,6 @@ class Due extends Component
         $this->reset(['total']);
         $this->reset(['pay']);
         $this->reset(['due']);
-        $this->reset(['paydue']);
+        $this->reset(['payment']);
     }
-
 }

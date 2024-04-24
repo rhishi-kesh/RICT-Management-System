@@ -1,6 +1,6 @@
 @extends('layout/index')
 @section('content')
-<div x-data="sales">
+<div>
     <ul class="flex space-x-2 rtl:space-x-reverse">
         <li>
             <span>Dashboard</span>

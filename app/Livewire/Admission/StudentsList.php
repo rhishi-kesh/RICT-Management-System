@@ -5,6 +5,7 @@ namespace App\Livewire\Admission;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Student;
+use App\Models\PaymentMode;
 use App\Models\Course;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -14,36 +15,41 @@ class StudentsList extends Component
 {
     use WithPagination;
 
-    public $perpage = 5, $isModal = false;
-    public $search = '';
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $discount, $paymentType, $totalAmount, $totalPay, $totalDue, $paymentNumber, $admissionFee, $courseId;
-    public $course = [];
-  
-    //  data short ascending
-    public $sortDirection = 'ASC';
-    public $sortColumn = 'name';
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $discount, $paymentType, $totalAmount, $totalPay, $totalDue, $paymentNumber, $admissionFee, $courseId, $sortDirection = 'DESC', $sortColumn = 'created_at', $perpage = 30, $search = '', $isModal = false, $course = [];
 
+    public function render()
+    {
+        $students = Student::with(['course:id,name','pament_mode:id,name','batch:id,name'])
+        ->search($this->search)
+        ->orderBy($this->sortColumn, $this->sortDirection)
+        ->paginate($this->perpage);
+        $paymentTypes = PaymentMode::get();
+
+        return view('livewire.admission.students-list',compact('students', 'paymentTypes'));
+    }
     public function doSort($column)
     {
-        if($this->sortDirection === $column){
-            $this->sortDirection = ($this->sortDirection == 'ASC')? 'DEC':'ASC';
+        if($this->sortColumn === $column){
+            $this->sortDirection = ($this->sortDirection == 'ASC')? 'DESC':'ASC';
             return;
         }
         $this->sortColumn = $column;
         $this->sortDirection = 'ASC';
-    }       
-    
-    public function render()
-    {
-        $students = Student::with('course')->search($this->search)
-        ->orderBy($this->sortColumn, $this->sortDirection)
-        ->paginate($this->perpage);
-    
-        return view('livewire.admission.students-list',compact('students'));
     }
-
-    // Update
-    
+    public function admissionfee($id){
+        $student = Student::where('id',$id)->first();
+        if($student->admissionFee == 0){
+            Student::where('id',$id)->update([
+                'admissionFee' => '1',
+                'updated_at' => Carbon::now()
+            ]);
+        }else{
+            Student::where('id',$id)->update([
+                'admissionFee' => '0',
+                'updated_at' => Carbon::now()
+            ]);
+        }
+    }
     public function ShowUpdateModel($id){
         $this->isModal = true;
         $data = Student::findOrFail($id);
@@ -66,7 +72,6 @@ class StudentsList extends Component
         $this->courseId = $data->course_id;
         $this->course = Course::get();
     }
-
     public function submit(){
         $slug = Str::slug($this->name);
         $validated = $this->validate([
@@ -88,7 +93,6 @@ class StudentsList extends Component
             ]);
         }
     }
-
     public function removeModal(){
         $this->isModal = false;
         $this->resetForm();
