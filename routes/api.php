@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(ApiController::class)->group(function () {
-    Route::post('/admission', 'admission')->name('admission');
+    Route::post('/admission-web', 'admissionWeb')->name('admissionWeb');
 });

@@ -81,7 +81,7 @@ class Admission extends Component
             'date' => 'required',
         ]);
 
-        //insert
+        // //insert
         $done = Student::insert([
             'student_id' => $user_id,
             'name' => $this->name,

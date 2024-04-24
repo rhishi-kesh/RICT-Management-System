@@ -3,7 +3,7 @@
     {{-- Insert Button --}}
 
     <div class="mb-3">
-        
+
         <button wire:click="showModal" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
@@ -30,13 +30,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mentors as $key => $data)
+                    @forelse ($mentors as $key => $data)
                     <tr>
                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $mentors->firstItem() + $key }} </td>
                          <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $data->name }} </td>
                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $data->email }} </td>
                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">  {{ $data->mobile }}</td>
-                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">  
+                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
                             {{ $data->image}}
                         </td>
 
@@ -56,9 +56,16 @@
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash text-red-500"><path class="text-red-500" stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path class="text-red-500" d="M10 11l0 6" /><path class="text-red-500" d="M14 11l0 6" /><path class="text-red-500" d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path class="text-red-500" d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                 </button>
                         </td>
-
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="20">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>
@@ -118,7 +125,7 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            
+
                             <button wire:click="removeModal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
                             <button type="submit" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
                         </div>

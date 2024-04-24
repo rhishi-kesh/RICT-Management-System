@@ -70,6 +70,29 @@
                     </button>
                 </div>
                 <div>
+                    <a href="http://test.interiorbangladesh.com/admin" target="_blank" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer px-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world inline mb-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                            <path d="M3.6 9h16.8"></path>
+                            <path d="M3.6 15h16.8"></path>
+                            <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+                            <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+                        </svg>
+                        <span>
+                            Manage Website
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <a href="http://apply.rayhansict.com/admin" target="_blank" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer px-3">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase inline mb-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /><path d="M12 12l0 .01" /><path d="M3 13a20 20 0 0 0 18 0" /></svg>
+                        <span>
+                            Manage Job
+                        </span>
+                    </a>
+                </div>
+                <div>
                     <a
                         href="javascript:;"
                         x-cloak
@@ -169,14 +192,13 @@
                                 <div class="flex-none">
                                     <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image" />
                                 </div>
-                                <div class="truncate ltr:pl-4 rtl:pr-4">
-                                    <h4 class="text-base">
-                                        John Doe
+                                <div class="truncate pl-4">
+                                    <h4>
+                                        {{ auth()->user()->name }}
                                     </h4>
                                     <a
-                                        class="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
                                         href="javascript:;"
-                                        >johndoe@gmail.com</a
+                                        >{{ auth()->user()->email }}</a
                                     >
                                 </div>
                             </div>
@@ -203,7 +225,7 @@
                             >
                         </li>
                         <li class="border-t border-white-light dark:border-white-light/10">
-                            <a href="auth-boxed-signin.html" class="!py-3 text-danger" @click="toggle">
+                            <a href="{{ route('logout') }}" class="!py-3 text-danger" @click="toggle">
                                 <svg
                                     class="h-4.5 w-4.5 shrink-0 rotate-90 ltr:mr-2 rtl:ml-2"
                                     width="18"
