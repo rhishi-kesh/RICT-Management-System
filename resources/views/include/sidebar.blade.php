@@ -1,4 +1,4 @@
-{{-- <nav x-data="sidebar"
+<nav x-data="sidebar"
     class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
     <div class="h-full bg-white dark:bg-slate-900">
         <div class="flex items-center justify-between px-4 py-3">
@@ -34,6 +34,23 @@
                         </svg>
                         <span
                             class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Admission</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('visitorForm') }}" class="group sidebargroup">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cards">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304z" />
+                            <path d="M15 4h1a1 1 0 0 1 1 1v3.5" />
+                            <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />
+                        </svg>
+                        <span
+                            class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Add Visitor </span>
                     </div>
                 </a>
             </li>
@@ -88,6 +105,23 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admissionBooth') }}" class="group sidebargroup">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-carousel-vertical">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M19 8v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1z" />
+                            <path d="M7 22v-1a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1v1" />
+                            <path d="M17 2v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1" />
+                        </svg>
+                        <span
+                            class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Admission Booth</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('mentors') }}" class="group sidebargroup">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -105,7 +139,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admissionBooth') }}" class="group sidebargroup">
+                <a href="{{ route('visitor') }}" class="group sidebargroup">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -117,10 +151,29 @@
                             <path d="M17 2v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1" />
                         </svg>
                         <span
-                            class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Admission Booth</span>
+                            class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Visitors</span>
                     </div>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('counciling') }}" class="group sidebargroup">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-carousel-vertical">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M19 8v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1z" />
+                            <path d="M7 22v-1a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1v1" />
+                            <path d="M17 2v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1" />
+                        </svg>
+                        <span
+                            class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Counseling</span>
+                    </div>
+                </a>
+            </li>
+            {{-- pay roll --}}
+
             <li class="menu nav-item group">
                 <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'payroll' }"
                     @click="activeDropdown === 'payroll' ? activeDropdown = null : activeDropdown = 'payroll'">
@@ -453,4 +506,4 @@
             </li>
         </ul>
     </div>
-</nav> --}}
+</nav>

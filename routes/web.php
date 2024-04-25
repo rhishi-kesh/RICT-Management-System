@@ -12,6 +12,7 @@ use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\paymentMode\paymentModeController;
+use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admission-booth', [AdmissionBoothController::class, 'admissionBooth'])->name('admissionBooth');
     Route::get('/batch', [BatchController::class, 'batch'])->name('batch');
     Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
+    Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
+    Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
+    Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
     Route::get('/role', [RoleController::class, 'role'])->name('role');
+  });
 });

@@ -378,7 +378,7 @@
             </div>
         </div>
     </div>
-    @push('js')
+    @push('js') 
     <script>
         function onWheel(event) {
             const delta = Math.sign(event.deltaY || event.wheelDelta);
