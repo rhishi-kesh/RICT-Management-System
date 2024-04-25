@@ -13,7 +13,7 @@ use App\Utils;
 class ApiController extends Controller
 {
     use Utils;
-    public function admission(Request $request){
+    public function admissionWeb(Request $request){
 
         //slug Generate
         $searchName = Student::where('name', $request->name)->first('name');
@@ -24,7 +24,7 @@ class ApiController extends Controller
             $slug = Str::slug($request->name);
         }
 
-        //user id and slug generate
+        //user id and Password generate
         $user_id = $this->generateCode('Student', '202');
         $password = Str::random(8);
         $password_hash = bcrypt($password);
@@ -40,7 +40,7 @@ class ApiController extends Controller
             'gMobile' => 'required',
             'qualification' => 'required',
             'profession' => 'required',
-            'courseId' => 'required',
+            'course' => 'required',
             'date' => 'required',
         ]);
         if ($validator->fails()) {
@@ -49,6 +49,7 @@ class ApiController extends Controller
             //insert
             $done = Student::insert([
                 'student_id' => $user_id,
+                'is_fromSite' => 1,
                 'name' => $request->name,
                 'slug' => $slug,
                 'fName' => $request->fatherName,
@@ -61,7 +62,7 @@ class ApiController extends Controller
                 'qualification' => $request->qualification,
                 'profession' => $request->profession,
                 'guardianMobileNo' => $request->gMobile,
-                'course_id' => $request->courseId,
+                'course_id' => $request->course,
                 'created_at' => Carbon::now(),
             ]);
 

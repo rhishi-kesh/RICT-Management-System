@@ -51,7 +51,6 @@
                                     </div>
                                 @endif
                             </td>
-
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
 
                                 {{-- Edit Button --}}
@@ -81,9 +80,17 @@
                                         <path class="text-red-500" d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                     </svg>
                                 </button>
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="20">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>

@@ -13,20 +13,24 @@ use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\paymentMode\paymentModeController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\Role\RoleController;
 use Illuminate\Support\Facades\Route;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
 
 //Admin Auth
-Route::get('/admin-login', [AdminController::class, 'adminLogin'])->name('adminLogin');
+Route::get('/admin', [AdminController::class, 'login'])->name('login');
+Route::post('/admin-post', [AdminController::class, 'loginPost'])->name('loginPost');
+Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
 // Error Redirect
 Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('notFound');
-
 //Dashboard
-// Route::group(['middleware' => 'student'], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
     Route::get('/students', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/course', [CourseController::class, 'course'])->name('course');
@@ -35,14 +39,13 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
     Route::get('/last-three-month-due', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
     Route::get('/last-six-month-due', [PayRoll::class, 'lastSixM'])->name('lastSixM');
     Route::get('/mentors', [MentorsController::class, 'mentors'])->name('mentors');
-    Route::get('/registation', [AdminRegController::class, 'registation'])->name('registation');
     Route::get('/admission-booth', [AdmissionBoothController::class, 'admissionBooth'])->name('admissionBooth');
     Route::get('/batch', [BatchController::class, 'batch'])->name('batch');
     Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
     Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
     Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
     Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
-
-// });
-
-
+    Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
+    Route::get('/role', [RoleController::class, 'role'])->name('role');
+  });
+});
