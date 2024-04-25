@@ -1,15 +1,17 @@
 <div class="pt-5">
 
     {{-- Insert Button --}}
-    <div class="mb-3">
-        <button wire:click="showModal" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            Add Course
-        </button>
-    </div>
+    @can('create')
+        <div class="mb-3">
+            <button wire:click="showModal" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Course
+            </button>
+        </div>
+    @endcan
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Courses</h2>
         <hr>
