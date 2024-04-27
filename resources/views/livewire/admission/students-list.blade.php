@@ -122,7 +122,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($students as $key => $student)
+                        @forelse ($students as $key => $student)
                             <tr>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     {{ $students->firstItem() + $key }}
@@ -216,7 +216,15 @@
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="20">
+                                    <div class="flex justify-center items-center">
+                                        <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -378,7 +386,7 @@
             </div>
         </div>
     </div>
-    @push('js') 
+    @push('js')
     <script>
         function onWheel(event) {
             const delta = Math.sign(event.deltaY || event.wheelDelta);

@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($students as $key => $item)
+                    @forelse ($students as $key => $item)
                         <tr>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $students->firstItem() + $key }}
@@ -63,7 +63,15 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="20">
+                                <div class="flex justify-center items-center">
+                                    <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

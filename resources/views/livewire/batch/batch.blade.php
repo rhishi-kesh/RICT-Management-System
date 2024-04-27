@@ -37,7 +37,7 @@
         <div class="w-full">
             {{-- Show Data --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                @foreach ($batch as $key => $data)
+                @forelse ($batch as $key => $data)
                     <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                         <div class="flex justify-between mb-5 gap-2">
                             @if($showUpdateInput === $key)
@@ -115,7 +115,14 @@
                             <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ $data->students_count }})Total</span>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div></div>
+                    <div class="w-full">
+                        <div class="flex justify-center items-center">
+                            <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                        </div>
+                    </div>
+                @endforelse
             </div>
             <div class="livewire-pagination mt-5">{{ $batch->links() }}</div>
         </div>
@@ -156,9 +163,9 @@
         class="fixed inset-0 bg-[black]/60 z-[999] @if ($isBatch) @else hidden @endif overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div x-transition x-transition.duration.300
-                class="panel border-0 p-0 rounded-lg w-full max-w-4xl my-8">
+                class="panel border-0 p-0 rounded-lg w-full md:max-w-4xl my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    <h5 class="font-bold text-lg">{{ $singlebatch->name ?? '' }}</h5>
+                    <h5 class="font-bold text-lg">{{ $singlebatch->name ?? '-' }}</h5>
                     <div class="flex justify-end items-center">
                         <button wire:click="removebatch()" type="button"
                             class="shadow btn bg-gray-50 dark:bg-gray-800">Back</button>
@@ -224,7 +231,7 @@
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                             {{ $data->name }}</td>
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                            {{ $data->course->name }}</td>
+                                            {{ $data->course->name ?? '-' }}</td>
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                             {{-- Edit Button --}}
                                             <button wire:click="removeStudentAlert({{ $data->id }})"
@@ -235,11 +242,13 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="30" class="text-red-500 uppercase text-center">No Student In
-                                            This Batch
+                                        <td colspan="20">
+                                            <div class="flex justify-center items-center">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                            </div>
                                         </td>
                                     </tr>
-                                @endforelse
+                                 @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($counciling as $key => $data)
+                        @forelse ($counciling as $key => $data)
                             <tr>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $counciling->firstItem() + $key }}</td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $data->name }}</td>
@@ -42,7 +42,15 @@
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="20">
+                                    <div class="flex justify-center items-center">
+                                        <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

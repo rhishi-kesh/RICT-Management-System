@@ -172,8 +172,6 @@
                     </div>
                 </a>
             </li>
-            {{-- pay roll --}}
-
             <li class="menu nav-item group">
                 <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'payroll' }"
                     @click="activeDropdown === 'payroll' ? activeDropdown = null : activeDropdown = 'payroll'">

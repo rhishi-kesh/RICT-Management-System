@@ -3,26 +3,27 @@
  <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Student Login</title>
+        <title>Student Sign in</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/RICT/fav.jpg') }}" />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         @vite('resources/css/app.css')
     </head>
-    <body class="font-nunito">
+    <body class="font-nunito bg-[#F85606]">
         <div class="flex items-center justify-center px-2 sm:px-16 mt-24">
             <div class="relative w-full md:w-2/4 rounded-md p-2 bg-gray-200 px-2 md:px-6 py-10">
                 <div class="px-4 md:px-10">
                     <div class="mb-10">
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl my-color-blue">Sign in</h1>
-                        <p class="text-base font-bold">Enter your User ID and Password to login</p>
+                        <p class="text-base font-bold">Enter your user id and password to sign in</p>
                     </div>
-                    <form class="space-y-5">
+                    <form class="space-y-5" method="POST" action="{{ route('StudentPost') }}">
+                        @csrf
                         <div>
-                            <label for="Email">User ID</label>
+                            <label for="userid">User ID</label>
                             <div class="relative">
-                                <input id="Email" type="text" placeholder="Enter User ID"  class="ps-10 login-form-input bg-white focus:border-blue-700" />
+                                <input id="userid" type="text" placeholder="Enter User ID"  class="ps-10 login-form-input bg-white focus:border-blue-700" name="student_id" />
                                 <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="text-white-dark">
                                         <path
@@ -41,7 +42,7 @@
                         <div>
                             <label for="Password">Password</label>
                             <div class="relative text-white-dark">
-                                <input id="Password" type="password" placeholder="Enter Password" class="login-form-input ps-10 placeholder:text-white-dark focus:border-blue-700" />
+                                <input id="Password" type="password" placeholder="Enter Password" class="login-form-input ps-10 placeholder:text-white-dark  focus:border-blue-700" name="password" />
                                 <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                         <path
@@ -69,7 +70,7 @@
                                 </span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow hover:submit-btn focus:submit-btn active:submit-btn">
+                        <button type="submit" name="submit" class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow hover:submit-btn focus:submit-btn active:submit-btn">
                             Sign in
                         </button>
                     </form>

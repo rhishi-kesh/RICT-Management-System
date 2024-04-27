@@ -34,16 +34,16 @@
             </template>
         </div>
 
-        <div class="main-container min-h-screen text-black dark:text-white-dark">
+        <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
             <!-- start sidebar section -->
             <div>
-                @include('include/sidebar')
+                @include('include/studentSidebar')
             </div>
             <!-- end sidebar section -->
 
             <div class="main-content flex min-h-screen flex-col bg-gray-200 dark:bg-gray-950">
                 <!-- start header section -->
-                @include('include/header')
+                @include('include/studentHeader')
                 <!-- end header section -->
 
                 <!-- start main content section -->
@@ -51,7 +51,7 @@
                 <!-- end main content section -->
 
                 <!-- start footer section -->
-                @include('include/footer')
+                @include('include/studentFooter')
                 <!-- end footer section -->
             </div>
         </div>

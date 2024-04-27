@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mentors as $key => $data)
+                    @forelse ($mentors as $key => $data)
                         <tr>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $mentors->firstItem() + $key }} </td>
@@ -45,9 +45,7 @@
                                     </div>
                                 @else
                                     <div class="text-center">
-                                        <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                            src="{{ asset('storage/' . $data->image) }}" alt="img" width="150"
-                                            height="100" />
+                                        <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $data->image) }}" alt="img" width="150" height="100" />
                                     </div>
                                 @endif
                             </td>
@@ -141,7 +139,7 @@
                                 <div class="text-red-500">{{ $errors->first('mobile') }}</div>
                             @endif
                         </div>
-                        
+
                         <div class="mb-1">
                             <label class="col-form-label pt-0" for="image">Image</label>
                             <input wire:model="image" class="form-control @error('image') is-invalid @enderror" id="image" type="file">

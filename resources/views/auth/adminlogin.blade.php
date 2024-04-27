@@ -3,7 +3,7 @@
  <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Admin Login</title>
+        <title>Admin Sign in</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/RICT/fav.jpg') }}" />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
@@ -16,7 +16,7 @@
                 <div class="px-4 md:px-10">
                     <div class="mb-10">
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl my-color-blue">Sign in</h1>
-                        <p class="text-base font-bold">Enter your Email and Password to login</p>
+                        <p class="text-base font-bold">Enter your email and password to sign in</p>
                     </div>
                     <form class="space-y-5" method="POST" action="{{ route('loginPost') }}">
                         @csrf
