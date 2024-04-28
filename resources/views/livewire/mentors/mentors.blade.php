@@ -30,28 +30,17 @@
                 </thead>
                 <tbody>
                     @foreach ($mentors as $key => $data)
-                        <tr>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $mentors->firstItem() + $key }} </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->name }} </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->email }} </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->mobile }}</td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
-                                @if (empty($data->image))
-                                    <div class="profile w-7 h-7 text-xs">{{ mb_substr($data->name, 0, 1) }}
-                                    </div>
-                                @else
-                                    <div class="text-center">
-                                        <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                            src="{{ asset('storage/' . $data->image) }}" alt="img" width="150"
-                                            height="100" />
-                                    </div>
-                                @endif
-                            </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                    <tr>
+                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $mentors->firstItem() + $key }} </td>
+                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $data->name }} </td>
+                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center"> {{ $data->email }} </td>
+                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">  {{ $data->mobile }}</td>
+                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">  
+                            {{ $data->image}}
+                        </td>
+
+
+                        <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
 
                                 {{-- Edit Button --}}
                                 <button wire:click="ShowUpdateModel({{ $data->id }})" type="button">
@@ -81,16 +70,9 @@
                                     </svg>
                                 </button>
                         </td>
+
                     </tr>
-                    @empty
-                    <tr>
-                        <td colspan="20">
-                            <div class="flex justify-center items-center">
-                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
-                            </div>
-                        </td>
-                    </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>

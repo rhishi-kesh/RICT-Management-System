@@ -27,6 +27,7 @@ Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
 // Error Redirect
 Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('notFound');
+
 //Dashboard
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

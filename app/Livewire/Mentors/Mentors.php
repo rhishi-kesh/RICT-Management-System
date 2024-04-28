@@ -7,31 +7,29 @@ use App\Models\Mentor;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
 
 class Mentors extends Component
 {
     use WithPagination;
     use WithFileUploads;
-    public $name, $email, $mobile, $image = null, $isModal = false, $delete_id, $update_id, $oldImage;
+    public $name, $email, $mobile, $image, $update_id, $isModal = false, $delete_id, $oldimage;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
     {
-        $mentors = Mentor::paginate(15);
+        $mentors = Mentor::paginate(7);
         return view('livewire.mentors.mentors', compact('mentors'));
     }
-
     public function insert()
     {
         $validated = $this->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:mentor',
-            'mobile' => 'required|numeric',
+            'email' => 'required|email',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
 
-        // image insert
         $fileName = "";
         if ($this->image) {
             $fileName = $this->image->store('mentors', 'public');
@@ -46,7 +44,6 @@ class Mentors extends Component
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
-            $this->image = null;
             $this->resetForm();
             $this->removeModal();
             $this->dispatch('swal', [
@@ -55,6 +52,45 @@ class Mentors extends Component
             ]);
         }
     }
+
+    public function update()
+    {
+        $validated = $this->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+        ]);
+
+        $fileName = "";
+        $image_path = public_path('storage\\' . $this->oldimage);
+        if (!empty($this->image)) {
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            $fileName = $this->image->store('mentors', 'public');
+        } else {
+            $fileName = $this->oldimage;
+        }
+
+        $done = Mentor::where('id', $this->update_id)->update([
+            'name' => $this->name,
+            'email' => $this->email,
+            'mobile' => $this->mobile,
+            'image' => $fileName
+        ]);
+
+        if ($done) {
+            $this->update_id = '';
+            $this->resetForm();
+            $this->removeModal();
+            $this->dispatch('swal', [
+                'title' => 'Data Update Successfull',
+                'type' => "success",
+            ]);
+        }
+    }
+
     public function ShowUpdateModel($id)
     {
         $this->isModal = true;
@@ -63,36 +99,25 @@ class Mentors extends Component
         $this->name = $data->name;
         $this->email = $data->email;
         $this->mobile = $data->mobile;
-        $this->oldImage = $data->image;
+        $this->oldimage = $data->image;
+
     }
-    public function update()
+    public function deleteAlert($id)
     {
-        $validated = $this->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'mobile' => 'required|numeric',
-            'image' => 'nullable',
-        ]);
-
-        $fileName2 = "";
-        $image_path = public_path('storage\\' . $this->oldImage);
-        if (!empty($this->image)) {
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
-            $fileName2 = $this->image->store('mentors', 'public');   
-        } else {
-            $fileName2 = $this->oldImage;
+        $this->delete_id = $id;
+        $this->dispatch('confirmDeleteAlert');
+    }
+    public function deleteStudent()
+    {
+        $done = Mentor::findOrFail($this->delete_id);
+        $this->oldimage = $done->image;
+        $image_path = public_path('storage\\'.$this->oldimage);
+        if(File::exists($image_path)){
+            File::delete($image_path);
         }
-        $done = Mentor::where('id', $this->update_id)->update([
-            'name' => $this->name,
-            'email' => $this->email,
-            'mobile' => $this->mobile,
-            'image' => $fileName2
-        ]);
-
+        $done->delete();
         if ($done) {
-            $this->image = null;
+            $this->update_id = '';
             $this->resetForm();
             $this->removeModal();
             $this->dispatch('swal', [
@@ -101,7 +126,7 @@ class Mentors extends Component
             ]);
         }
     }
-
+    
     public function showModal()
     {
         $this->resetForm();
@@ -118,28 +143,6 @@ class Mentors extends Component
         $this->reset(['name']);
         $this->reset(['email']);
         $this->reset(['mobile']);
-    }
-    // Delete
-    public function deleteAlert($id){
-        $this->delete_id = $id;
-        $data = Mentor::findOrFail($id);
-        $this->oldImage = $data->image;
-        $this->dispatch('confirmDeleteAlert');
-    }
-    public function deleteStudent(){
-        $done = Mentor::findOrFail($this->delete_id)->delete();
-        $image_path = public_path('storage\\' . $this->oldImage);
-        if (!empty($this->oldImage)) {
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }  
-        }
-        if($done){
-            $this->update_id = '';
-            $this->dispatch('deleteSuccessFull', [
-                'title' => 'Data Deleted Successfull',
-                'type' => "success",
-            ]);
-        }
+        $this->reset(['image']);
     }
 }
