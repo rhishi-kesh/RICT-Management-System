@@ -1,42 +1,33 @@
 <?php
 
-namespace App\Livewire\AdminReg;
+namespace App\Livewire\Permission;
 
-use App\Models\User;
+use App\Models\Course;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
-class Registation extends Component
+class Permission extends Component
 {
     use WithPagination;
-    public $name, $email, $password, $Cpassword, $update_id, $isModal = false, $delete_id, $roles = [], $allRoles = [], $userRoles;
+    public $name, $update_id, $isModal = false, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
-
     public function render()
     {
-        $users = User::where('role', 1)->paginate(20);
-        $this->allRoles = Role::pluck('name', 'name')->all();
-        return view('livewire.admin-reg.registation', compact('users'));
+        $permissions = ModelsPermission::paginate(10);
+        return view('livewire.permission.permission', compact('permissions'));
     }
     public function insert(){
+        $slug = Str::slug($this->name);
         $validated = $this->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|same:Cpassword',
-            'roles' => 'required',
+            'name' => 'required|unique:permissions',
         ]);
-        $done = User::create([
+        $done = ModelsPermission::create([
             'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
             'created_at' => Carbon::now(),
         ]);
-
-        $done->syncRoles($this->roles);
-
         if($done){
             $this->resetForm();
             $this->removeModal();
@@ -48,27 +39,18 @@ class Registation extends Component
     }
     public function ShowUpdateModel($id){
         $this->isModal = true;
-        $data = User::findOrFail($id);
+        $data = ModelsPermission::findOrFail($id);
         $this->update_id = $data->id;
         $this->name = $data->name;
-        $this->email = $data->email;
-        $this->userRoles = $data->roles->pluck('name', 'name')->all();
     }
     public function update(){
         $validated = $this->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'roles' => 'required',
+            'name' => 'required|unique:permissions,name,' . $this->update_id,
         ]);
-        $user = User::findOrFail($this->update_id);
-        $done = $user->update([
+        $done = ModelsPermission::where('id',$this->update_id)->update([
             'name' => $this->name,
-            'email' => $this->email,
             'updated_at' => Carbon::now(),
         ]);
-
-        $user->syncRoles($this->roles);
-
         if($done){
             $this->update_id = '';
             $this->resetForm();
@@ -84,7 +66,7 @@ class Registation extends Component
         $this->dispatch('confirmDeleteAlert');
     }
     public function deleteStudent(){
-        $done = User::findOrFail($this->delete_id)->delete();
+        $done = ModelsPermission::findOrFail($this->delete_id)->delete();
         if($done){
             $this->update_id = '';
             $this->dispatch('deleteSuccessFull', [
@@ -104,9 +86,5 @@ class Registation extends Component
     }
     public function resetForm(){
         $this->reset(['name']);
-        $this->reset(['email']);
-        $this->reset(['password']);
-        $this->reset(['Cpassword']);
-        $this->reset(['roles']);
     }
 }

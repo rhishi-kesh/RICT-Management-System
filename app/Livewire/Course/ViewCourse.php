@@ -7,36 +7,46 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class ViewCourse extends Component
 {
     use WithPagination;
     public $name, $courseFee, $update_id, $isModal = false, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
-
     public function render()
     {
         $courses = Course::paginate(10);
         return view('livewire.course.view-course', compact('courses'));
     }
     public function insert(){
-        $slug = Str::slug($this->name);
-        $validated = $this->validate([
-            'name' => 'required|unique:courses',
-            'courseFee' => 'required|numeric',
-        ]);
-        $done = Course::insert([
-            'name' => $this->name,
-            'slug' => $slug,
-            'fee' => $this->courseFee,
-            'created_at' => Carbon::now(),
-        ]);
-        if($done){
-            $this->resetForm();
-            $this->removeModal();
+        // Check if the user has permission to insert courses
+        if (Gate::allows('create')) {
+            $slug = Str::slug($this->name);
+            $validated = $this->validate([
+                'name' => 'required|unique:courses',
+                'courseFee' => 'required|numeric',
+            ]);
+            $done = Course::insert([
+                'name' => $this->name,
+                'slug' => $slug,
+                'fee' => $this->courseFee,
+                'created_at' => Carbon::now(),
+            ]);
+            if($done){
+                $this->resetForm();
+                $this->removeModal();
+                $this->dispatch('swal', [
+                    'title' => 'Data Insert Successfull',
+                    'type' => "success",
+                ]);
+            }
+        } else {
+            // Handle unauthorized access
             $this->dispatch('swal', [
-                'title' => 'Data Insert Successfull',
-                'type' => "success",
+                'title' => 'Unauthorized',
+                'type' => "error",
+                'text' => 'You do not have permission to insert courses.',
             ]);
         }
     }

@@ -251,16 +251,10 @@
                         </button>
                         <ul class="sub-menu text-gray-500 ltr:ml-2 rtl:mr-2" x-show="subActive === 'error'" x-collapse>
                             <li>
-                                <a href="">Permission Setup</a>
+                                <a href="{{ route('permission') }}">Permissions</a>
                             </li>
                             <li>
-                                <a href="">Add Role</a>
-                            </li>
-                            <li>
-                                <a href="">Role List</a>
-                            </li>
-                            <li>
-                                <a href="">User Access Role</a>
+                                <a href="{{ route('role') }}">Roles</a>
                             </li>
                         </ul>
                     </li>

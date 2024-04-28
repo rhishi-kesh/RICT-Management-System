@@ -23,6 +23,7 @@
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Photo</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Email</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Roles</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
                         </tr>
                     </thead>
@@ -39,6 +40,13 @@
                                 </td>
                                 <td class="p-3 text-center">{{ $data->name }}</td>
                                 <td class="p-3 text-center">{{ $data->email }}</td>
+                                <td class="p-3 text-center">
+                                    @if(!empty($data->getRoleNames()))
+                                        @foreach ($data->getRoleNames() as $item)
+                                            <small class="inline-block bg-green-500 text-white rounded-md px-2">{{ $item }}</small>
+                                        @endforeach
+                                    @endif
+                                </td>
                                 <td class="p-3  text-center">
 
 
@@ -93,7 +101,7 @@
                         </div>
                         <div class="mb-1">
                             <label for="email" class="my-label">Email</label>
-                            <input type="email" wire:model="email" placeholder="Email" id="email" class="my-input focus:outline-none focus:shadow-outline appearance-none">
+                            <input type="email" wire:model="email" @if($update_id) readonly @else @endif placeholder="Email" id="email" class="my-input focus:outline-none focus:shadow-outline appearance-none">
                             @if ($errors->has('email'))
                                 <div class="text-red-500">{{ $errors->first('email') }}</div>
                             @endif
@@ -114,13 +122,43 @@
                                 @endif
                             </div>
                         @endif
+                            <div class="mb-1">
+                                <label for="roles" class="my-label">Role</label>
+                                <select id="roles" wire:model="roles" class="my-input focus:outline-none focus:shadow-outline p-0" name="roles[]" multiple>
+                                    <option value="">Select Role</option>
+                                    @if($update_id)
+                                        @foreach ($allRoles as $item)
+                                            <option value="{{ $item }}" @if(in_array($item, $userRoles)) selected @endif>{{ $item }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach ($allRoles as $item)
+                                            <option value="{{ $item }}">{{ $item }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if ($errors->has('roles'))
+                                    <div class="text-red-500">{{ $errors->first('roles') }}</div>
+                                @endif
+                            </div>
                         <div class="flex justify-end items-center mt-8">
                             <button wire:click="removeModal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
+                            <button type="submit" class="bg-gray-900 text-white btn ml-4">Save</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @push('js')
+    <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(e) {
+            // seachable
+            var options = {
+                searchable: true
+            };
+            NiceSelect.bind(document.getElementById("roles"), options);
+        });
+    </script>
+    @endpush
 </div>
