@@ -42,6 +42,7 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
     Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
     Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
     Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
+    Route::get('/update-visitor/{id}', [VisitorController::class, 'updateVisitor'])->name('updateVisitor');
 
 // });
 

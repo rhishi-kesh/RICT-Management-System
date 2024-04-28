@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Visitors;
 use Illuminate\Http\Request;
 
 class VisitorController extends Controller
@@ -21,6 +22,12 @@ class VisitorController extends Controller
     public function visitorForm()
     {
         return view('application.visitor.visitor-form');
+    }
+
+    public function updateVisitor($id)
+    {
+        $id = $id;
+        return view('application.visitor.update-visitor',compact('id'));
     }
 
 }
