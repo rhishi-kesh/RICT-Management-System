@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
-    Route::get('/view-user', [AdminController::class, 'userView'])->name('userView');
+    Route::get('/view-usera', [AdminController::class, 'userView'])->name('userView');
     Route::get('/edit-user/{id}', [AdminController::class, 'userEdit'])->name('userEdit');
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
@@ -46,7 +46,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/student-edit/{slug}', [AdmissionController::class, 'studentsEdit'])->name('studentsEdit');
 
     //Add Course
-    Route::get('/course', [CourseController::class, 'course'])->name('course');
+    Route::get('/courses', [CourseController::class, 'course'])->name('course');
 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
@@ -57,16 +57,16 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     //Other CRUD
     Route::get('/mentors', [MentorsController::class, 'mentors'])->name('mentors');
     Route::get('/admission-booth', [AdmissionBoothController::class, 'admissionBooth'])->name('admissionBooth');
-    Route::get('/batch', [BatchController::class, 'batch'])->name('batch');
+    Route::get('/batchs', [BatchController::class, 'batch'])->name('batch');
     Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
-    Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
+    Route::get('/counciling-person', [VisitorController::class, 'counciling'])->name('counciling');
     Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
-    Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
+    Route::get('/visitors', [VisitorController::class, 'visitor'])->name('visitor');
     Route::get('/update-visitor/{id}', [VisitorController::class, 'updateVisitor'])->name('updateVisitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
-    Route::get('/role', [RoleController::class, 'role'])->name('role');
+    Route::get('/roles', [RoleController::class, 'role'])->name('role');
     Route::get('/role-have-permission/{id}', [RoleController::class, 'roleHavePermission'])->name('roleHavePermission');
-    Route::get('/recycle-student', [RecycleController::class, 'recycleStudent'])->name('recycleStudent');
+    Route::get('/recycle-students', [RecycleController::class, 'recycleStudent'])->name('recycleStudent');
 });
 
 

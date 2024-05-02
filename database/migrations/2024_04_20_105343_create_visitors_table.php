@@ -16,19 +16,19 @@ return new class extends Migration
             $table->foreignId('counseling_id')->nullable();
             $table->string('status')->nullable();
             $table->string('name')->nullable();
-            $table->string('mobile')->nullable();
+            $table->string('mobile',20)->nullable();
             $table->string('email')->unique();
             $table->foreignId('course_id');
             $table->string('address')->nullable();
             $table->string('amount')->nullable();
-            $table->string('visitor_comment')->nullable();
+            $table->text('visitor_comment')->nullable();
             $table->string('gender')->nullable();
             $table->string('ref_name')->nullable();
             $table->string('admission_booth_name')->nullable();
-            $table->string('admission_booth_number')->nullable();
             $table->string('calling_person')->nullable();
-            $table->string('comments')->nullable();
+            $table->text('comments')->nullable();
             $table->string('call_count')->nullable();
+            $table->text('calling_date')->nullable();
             $table->timestamps();
         });
     }

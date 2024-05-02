@@ -175,7 +175,6 @@
                         </button>
                         <div class="w-full flex justify-start gap-5 mb-5" x-show="show">
                             <div wire:ignore class="w-4/6 md:w-3/6">
-                                {{-- <label for="addToBatch" class="my-label">Add Student On This Batch</label> --}}
                                 <select id="addToBatch" wire:model="addToBatch" class="my-input focus:outline-none focus:shadow-outline p-0" name="addToBatch[]" multiple>
                                     @foreach ($this->studentWithoutBatch as $data)
                                         <option value="{{ $data->id }}">{{ $data->name }}({{ $data->student_id }})</option>

@@ -14,16 +14,14 @@ use Illuminate\Support\Str;
 class Batch extends Component
 {
     use WithPagination;
-    public $name, $update_id, $isModal = false, $isBatch = false, $delete_id, $removeBatch_id, $singlebatch, $showUpdateInput = null, $studentWithoutBatch = [], $addToBatch = [];
+    public $name, $update_id, $isModal = false, $isBatch = false, $delete_id, $removeBatch_id, $singlebatch, $showUpdateInput, $studentWithoutBatch = [], $addToBatch = [];
     protected $listeners = [
         'deleteConfirm' => 'DeleteBatch',
         'removeConfirm' => 'removeStudent'
     ];
-
     public function mount() {
         $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id','id')->get();
     }
-
     public function render()
     {
         $batch = Batchs::select('id', 'name')
@@ -51,7 +49,6 @@ class Batch extends Component
     }
     public function editBatch($key, $id){
         $this->showUpdateInput = $key;
-        $this->reset();
         $data = Batchs::findOrFail($id);
         $this->name = $data->name;
         $this->update_id = $data->id;
@@ -65,7 +62,7 @@ class Batch extends Component
             'updated_at' => Carbon::now(),
         ]);
         if($done){
-            $this->showUpdateInput = null;
+            $this->showUpdateInput = '';
             $this->update_id = '';
             $this->reset();
             $this->dispatch('swal', [

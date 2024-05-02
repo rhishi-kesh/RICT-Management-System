@@ -1,4 +1,11 @@
 <div class="pt-5">
+    @push('css')
+    <style>
+        div:where(.swal2-container) h2:where(.swal2-title) {
+            line-height: 30px;
+        }
+    </style>
+    @endpush
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Visitor List</h2>
         <hr>
@@ -21,11 +28,9 @@
                 <h1 class="flex justify-center items-center ml-[5px] font-bold">entries</h1>
             </div>
             <div class="flex items-center" x-data="{ search: false }" @click.outside="search = false">
-                <form
-                    class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0"
-                    :class="{ '!block': search }">
+                <form class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" :class="{ '!block': search }">
                     <div class="relative">
-                        <input 
+                        <input
                             wire:model.live.debounce.300ms="search" type="text"
                             class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border"
                             placeholder="Search..." />
@@ -72,7 +77,7 @@
                 <thead>
                     <tr>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">SL</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Counseling</th>
+                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">CounselPerson</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Status</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Number</th>
@@ -88,6 +93,7 @@
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Calling Person</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Comments</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Call Count</th>
+                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Calling Date</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
                     </tr>
                 </thead>
@@ -100,40 +106,40 @@
                                 {{ $data->councile->name ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->status }}
+                                {{ $data->status ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->name }}
+                                {{ $data->name ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->mobile }}
+                                {{ $data->mobile ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->email }}
+                                {{ $data->email ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->course->name }}
+                                {{ $data->course->name ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->address }}
+                                {{ $data->address ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->amount }}
+                                {{ $data->amount ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->visitor_comment }}
+                                {{ $data->visitor_comment ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->gender }}
+                                {{ $data->gender ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->ref_name }}
+                                {{ $data->ref_name ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->admissionBooth->name }}
+                                {{ $data->admissionBooth->name ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->admissionBooth->number }}
+                                {{ $data->admissionBooth->number ?? '-' }}
                             </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $data->callingperson->name ?? '-' }}
@@ -155,37 +161,46 @@
                                 </div>
                             </td>
 
-                            <td
-                                class=" p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center flex justify-center items-center">
-                                {{-- Edit Button --}}
+                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                <ul>
+                                    @php $arrayCallingDate = explode(",",$data->calling_date) @endphp
+                                    @foreach ($arrayCallingDate as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
 
-                                <a href="{{ route('updateVisitor', $data->id) }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500">
-                                        <path class="text-green-500" stroke="none" d="M0 0h24v24H0z"
-                                            fill="none" />
-                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                        <path d="M13.5 6.5l4 4" />
-                                    </svg>
-                                </a>
+                            <td class=" p-3 border-b border-[#ebedf2] dark:border-[#191e3a]">
+                                <div class="text-center flex justify-center items-center">
+                                    {{-- Edit Button --}}
+                                    <a href="{{ route('updateVisitor', $data->id) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500">
+                                            <path class="text-green-500" stroke="none" d="M0 0h24v24H0z"
+                                                fill="none" />
+                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                            <path d="M13.5 6.5l4 4" />
+                                        </svg>
+                                    </a>
 
-                                {{-- Delete Button --}}
-                                <button wire:click="deleteAlert({{ $data->id }})" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash text-red-500">
-                                        <path class="text-red-500" stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 7l16 0" />
-                                        <path class="text-red-500" d="M10 11l0 6" />
-                                        <path class="text-red-500" d="M14 11l0 6" />
-                                        <path class="text-red-500"
-                                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                        <path class="text-red-500" d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                    </svg>
-                                </button>
+                                    {{-- Delete Button --}}
+                                    <button wire:click="deleteAlert({{ $data->id }})" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-trash text-red-500">
+                                            <path class="text-red-500" stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 7l16 0" />
+                                            <path class="text-red-500" d="M10 11l0 6" />
+                                            <path class="text-red-500" d="M14 11l0 6" />
+                                            <path class="text-red-500"
+                                                d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                            <path class="text-red-500" d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -229,7 +244,7 @@
         <script>
             window.addEventListener('confirmaddAlert', event => {
                 Swal.fire({
-                    title: "Are you sure to Add Call Count?",
+                    title: "Are you sure to add this call in count?",
                     text: "You won't be able to revert this!",
                     icon: "warning",
                     showCancelButton: true,
