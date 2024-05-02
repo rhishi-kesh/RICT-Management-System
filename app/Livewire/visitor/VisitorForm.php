@@ -12,8 +12,8 @@ use Carbon\Carbon;
 
 class VisitorForm extends Component
 {
-    public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $course_id;
-    public $selectedOption;
+    public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $course_id, $call_count ;
+    // public $selectedOption;
 
 
     public function render()
@@ -39,8 +39,6 @@ class VisitorForm extends Component
             'gender' => 'nullable',
             'ref_name' => 'nullable',
             'admission_booth_name' => 'nullable',
-            'admission_booth_number' => 'nullable',
-            'calling_person' => 'required',
             'comments' => 'nullable',
         ]);
 
@@ -54,11 +52,9 @@ class VisitorForm extends Component
             'address' => $this->address,
             'amount' => $this->amount,
             'visitor_comment' => $this->visitor_comment,
-            'gender' => $this->selectedOption,
+            'gender' => $this->gender,
             'ref_name' => $this->ref_name,
             'admission_booth_name' => $this->admission_booth_name,
-            'admission_booth_number' => $this->admission_booth_number,
-            'calling_person' => $this->calling_person,
             'comments' => $this->comments,
             'created_at' => Carbon::now(),
         ]);
@@ -70,7 +66,6 @@ class VisitorForm extends Component
             ]);
         }
     }
-    
     public function resetForm(){
         $this->reset(['counseling']);
         $this->reset(['status']);
@@ -81,11 +76,9 @@ class VisitorForm extends Component
         $this->reset(['address']);
         $this->reset(['amount']);
         $this->reset(['visitor_comment']);
-        $this->reset(['selectedOption']);
+        $this->reset(['gender']);
         $this->reset(['ref_name']);
         $this->reset(['admission_booth_name']);
-        $this->reset(['admission_booth_number']);
-        $this->reset(['calling_person']);
         $this->reset(['comments']);
     }
 }

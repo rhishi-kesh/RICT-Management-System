@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
     Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
     Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
+    Route::get('/update-visitor/{id}', [VisitorController::class, 'updateVisitor'])->name('updateVisitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
     Route::get('/role', [RoleController::class, 'role'])->name('role');
-  });
 });
