@@ -32,19 +32,14 @@ class StudentsList extends Component
         $this->sortColumn = $column;
         $this->sortDirection = 'ASC';
     }
+    
     public function admissionfee($id){
         $student = Student::where('id',$id)->first();
-        if($student->admissionFee == 0){
-            Student::where('id',$id)->update([
-                'admissionFee' => '1',
-                'updated_at' => Carbon::now()
-            ]);
-        }else{
-            Student::where('id',$id)->update([
-                'admissionFee' => '0',
-                'updated_at' => Carbon::now()
-            ]);
-        }
+        $newCall = $student->admissionFee += 1;
+        Student::where('id',$id)->update([
+            'admissionFee' => $newCall,
+            'updated_at' => Carbon::now()
+        ]);
     }
     public function deleteAlert($id){
         $this->delete_id = $id;

@@ -62,6 +62,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/counciling', [VisitorController::class, 'counciling'])->name('counciling');
     Route::get('/add-visitor', [VisitorController::class, 'visitorForm'])->name('visitorForm');
     Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
+    Route::get('/update-visitor/{id}', [VisitorController::class, 'updateVisitor'])->name('updateVisitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
     Route::get('/role', [RoleController::class, 'role'])->name('role');
     Route::get('/role-have-permission/{id}', [RoleController::class, 'roleHavePermission'])->name('roleHavePermission');
@@ -71,6 +72,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
 //Student Middlewere
 Route::group(['prefix' => 'student','middleware' => ['student']], function () {
+
     //Student Dashboard
     Route::get('/dashboard', [DashboardController::class, 'studentDashboard'])->name('studentDashboard');
 

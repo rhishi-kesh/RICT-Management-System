@@ -19,14 +19,21 @@ class Visitors extends Model
         'email',
         'mobile',
     ];
-    
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('counseling', 'like', "%{$value}%")
+        ->orwhere('status', 'like', "%{$value}%")
+        ->orwhere('name', 'like', "%{$value}%")
+        ->orwhere('mobile', 'like', "%{$value}%")
+        ->orwhere('email', 'like', "%{$value}%")
+        ->orwhere('address', 'like', "%{$value}%")
+        ->orwhere('email', 'like', "%{$value}%");
+    }
+
     public function councile(): HasOne
     {
         return $this->hasOne(Councilings::class,'id','counseling');
-    }
-    public function callingperson(): HasOne
-    {
-        return $this->hasOne(Councilings::class,'id','calling_person');
     }
     public function course(): HasOne
     {
