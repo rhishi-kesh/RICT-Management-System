@@ -1,8 +1,8 @@
-<div class="pt-5">
+<div class="pt-5" x-data="modal">
 
     {{-- Insert Button --}}
     <div class="mb-3">
-        <button wire:click="showModal" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
+        <button @click="toggle; $wire.call('showModal')" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -11,7 +11,7 @@
         </button>
     </div>
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Counciling person list</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white">Counciling persons</h2>
         <hr>
         <div>
             {{-- Show Data --}}
@@ -32,7 +32,7 @@
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
 
                                     {{-- Edit Button --}}
-                                    <button  type="button" x-tooltip="Edit" wire:click="ShowUpdateModel({{ $data->id }})">
+                                    <button  type="button" x-tooltip="Edit" @click="open = true; $wire.call('ShowUpdateModel','{{ $data->id }}')" >
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500"><path class="text-green-500" stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
                                     </button>
 
@@ -59,9 +59,9 @@
     </div>
 
     {{-- Update & Instert Form --}}
-    <div class="fixed inset-0 bg-[black]/60 z-[999] @if($isModal)  @else hidden @endif overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
+    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
+        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
+            <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     @if(!empty($update_id))
                         <h5 class="font-bold text-lg">Update</h5>
@@ -86,8 +86,9 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button wire:click="removeModal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
+                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
+                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>

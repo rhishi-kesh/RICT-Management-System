@@ -23,14 +23,14 @@ class VisitorForm extends Component
         $admissionBooth = AdmissionBooth::get();
         return view('livewire.visitor.visitor-form', compact('counciling', 'courses', 'admissionBooth'));
     }
-  
+
     public function submit()
     {
         $validated = $this->validate([
             'counseling' => 'required',
             'status' => 'required',
             'name' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'email' => 'nullable',
             'course_name' => 'required',
             'address' => 'required',
@@ -70,7 +70,7 @@ class VisitorForm extends Component
             ]);
         }
     }
-    
+
     public function resetForm(){
         $this->reset(['counseling']);
         $this->reset(['status']);

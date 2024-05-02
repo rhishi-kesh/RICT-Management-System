@@ -41,7 +41,7 @@ class Batch extends Component
             'created_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
+            $this->reset();
             $this->removeModal();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
@@ -51,7 +51,7 @@ class Batch extends Component
     }
     public function editBatch($key, $id){
         $this->showUpdateInput = $key;
-        $this->resetForm();
+        $this->reset();
         $data = Batchs::findOrFail($id);
         $this->name = $data->name;
         $this->update_id = $data->id;
@@ -67,7 +67,7 @@ class Batch extends Component
         if($done){
             $this->showUpdateInput = null;
             $this->update_id = '';
-            $this->resetForm();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -124,7 +124,11 @@ class Batch extends Component
                 $student->save();
             }
 
-            $this->dispatch('clearInput');
+            $this->dispatch('clearInput', [
+                'title' => 'Student Add Successfull',
+                'type' => "success",
+            ]);
+
             $this->mount();
 
             DB::commit();
@@ -156,15 +160,12 @@ class Batch extends Component
         $this->isBatch = false;
     }
     public function showModal(){
-        $this->resetForm();
+        $this->reset();
         $this->isModal = true;
     }
     public function removeModal(){
         $this->update_id = '';
         $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['name']);
+        $this->reset();
     }
 }

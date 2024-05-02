@@ -21,12 +21,6 @@
         Alpine.store('app').setRTLLayout();
     });
 
-    // set current year in footer
-    const yearEle = document.querySelector('#footer-year');
-    if (yearEle) {
-        yearEle.innerHTML = new Date().getFullYear();
-    }
-
     // perfect scrollbar
     const initPerfectScrollbar = () => {
         const container = document.querySelectorAll('.perfect-scrollbar');

@@ -1,4 +1,4 @@
-<div class="pt-5">
+<div class="pt-5" x-data="modal">
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-8 mb-4 w-full">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Due List</h2>
         <hr>
@@ -52,7 +52,7 @@
 
                                 {{-- Edit Button --}}
                                 <div class="flex justify-center">
-                                    <button type="button" x-tooltip="Add Payment" wire:click="ShowUpdateModel({{ $item->id }})" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
+                                    <button type="button" x-tooltip="Add Payment" class="bg-blue-500 btn text-white border-0 flex items-center justify-between" @click="open = true; $wire.call('ShowUpdateModel','{{ $item->id }}')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -78,9 +78,9 @@
     </div>
 
     {{-- Update Form --}}
-    <div class="fixed inset-0 bg-[black]/60 z-[999] @if($isModal)  @else hidden @endif overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
+    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
+        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
+            <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
                     <form wire:submit="addDue" >
                         <div class="mb-1">
@@ -112,8 +112,8 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button wire:click="removeModal" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submitDue" class="bg-gray-900 text-white btn ml-4">Save</button>
+                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>

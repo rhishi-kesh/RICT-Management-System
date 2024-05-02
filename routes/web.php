@@ -11,6 +11,7 @@ use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\paymentMode\paymentModeController;
+use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
@@ -35,11 +36,14 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
+    Route::get('/view-user', [AdminController::class, 'userView'])->name('userView');
+    Route::get('/edit-user/{id}', [AdminController::class, 'userEdit'])->name('userEdit');
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
     //Sudent Admission
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
     Route::get('/students', [AdmissionController::class, 'studentsList'])->name('studentsList');
+    Route::get('/student-edit/{slug}', [AdmissionController::class, 'studentsEdit'])->name('studentsEdit');
 
     //Add Course
     Route::get('/course', [CourseController::class, 'course'])->name('course');
@@ -60,6 +64,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/visitor', [VisitorController::class, 'visitor'])->name('visitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
     Route::get('/role', [RoleController::class, 'role'])->name('role');
+    Route::get('/role-have-permission/{id}', [RoleController::class, 'roleHavePermission'])->name('roleHavePermission');
+    Route::get('/recycle-student', [RecycleController::class, 'recycleStudent'])->name('recycleStudent');
 });
 
 

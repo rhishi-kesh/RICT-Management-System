@@ -10,10 +10,9 @@ use App\Models\AdmissionBooth;
 use Illuminate\Support\Carbon;
 use Livewire\WithPagination;
 
-
 class VisitorList extends Component
 {
-    public  $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $isModal = false, $course = [], $councile = [], 
+    public  $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $isModal = false, $course = [], $councile = [],
     $callingperson = [], $admissionBooth = [];
     protected $listeners = ['deleteConfirm' => 'deleteStudent'] ;
 
@@ -24,8 +23,6 @@ class VisitorList extends Component
         $visitor = Visitors::with(['course:id,name', 'callingperson:id,name' ,'councile:id,name','admissionBooth:id,name,number'])->paginate(5);
         return view('livewire.visitor.visitor-list', compact('visitor'));
     }
-    // Update
-
     public function ShowUpdateModel($id){
         $this->isModal = true;
         $data = Visitors::findOrFail($id);
@@ -53,9 +50,7 @@ class VisitorList extends Component
     {
         $this->resetForm();
         $this->isModal = true;
-
     }
-
     public function submit(){
 
         $done = Visitors::where('id')->update([
