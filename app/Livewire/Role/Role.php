@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Role;
 
-use App\Models\Course;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -14,7 +13,7 @@ use Spatie\Permission\Models\Role as ModelsRole;
 class Role extends Component
 {
     use WithPagination;
-    public $name, $update_id, $isModal = false, $isRolePermission = false, $delete_id, $role, $permissions = [], $roleID, $permission= [], $roleWithPermission = [];
+    public $name, $update_id, $isRolePermission = false, $delete_id, $role, $permissions = [], $roleID, $permission= [], $roleWithPermission = [];
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
@@ -32,8 +31,7 @@ class Role extends Component
             'created_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -41,7 +39,6 @@ class Role extends Component
         }
     }
     public function ShowUpdateModel($id){
-        $this->isModal = true;
         $data = ModelsRole::findOrFail($id);
         $this->update_id = $data->id;
         $this->name = $data->name;
@@ -56,8 +53,7 @@ class Role extends Component
         ]);
         if($done){
             $this->update_id = '';
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -93,17 +89,6 @@ class Role extends Component
         $role->syncPermissions($this->permission);
     }
     public function showModal(){
-        $this->resetForm();
-        $this->isModal = true;
-    }
-    public function removeModal(){
-        $this->update_id = '';
-        $this->roleID = '';
-        $this->isModal = false;
-        $this->isRolePermission = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['name']);
+        $this->reset();
     }
 }

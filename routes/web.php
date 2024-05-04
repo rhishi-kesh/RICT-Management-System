@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
-    Route::get('/view-usera', [AdminController::class, 'userView'])->name('userView');
+    Route::get('/view-users', [AdminController::class, 'userView'])->name('userView');
     Route::get('/edit-user/{id}', [AdminController::class, 'userEdit'])->name('userEdit');
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
@@ -64,11 +64,13 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/visitors', [VisitorController::class, 'visitor'])->name('visitor');
     Route::get('/update-visitor/{id}', [VisitorController::class, 'updateVisitor'])->name('updateVisitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
+
     Route::get('/roles', [RoleController::class, 'role'])->name('role');
     Route::get('/role-have-permission/{id}', [RoleController::class, 'roleHavePermission'])->name('roleHavePermission');
+    Route::post('/permission-on-role-post', [RoleController::class, 'permissionOnRolePost'])->name('permissionOnRolePost');
+
     Route::get('/recycle-students', [RecycleController::class, 'recycleStudent'])->name('recycleStudent');
 });
-
 
 //Student Middlewere
 Route::group(['prefix' => 'student','middleware' => ['student']], function () {

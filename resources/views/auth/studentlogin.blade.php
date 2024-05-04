@@ -18,12 +18,15 @@
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl my-color-blue">Sign in</h1>
                         <p class="text-base font-bold">Enter your user id and password to sign in</p>
                     </div>
+                    @error('email')
+                        <div class="p-2 rounded bg-red-500 text-white">{{ ($message) }}</div>
+                    @enderror
                     <form class="space-y-5" method="POST" action="{{ route('StudentPost') }}">
                         @csrf
                         <div>
-                            <label for="userid">User ID</label>
+                            <label for="student_id">User ID</label>
                             <div class="relative">
-                                <input id="userid" type="text" placeholder="Enter User ID"  class="ps-10 login-form-input bg-white focus:border-blue-700" name="student_id" />
+                                <input id="student_id" type="text" placeholder="Enter User ID"  class="ps-10 login-form-input bg-white focus:border-blue-700" name="student_id" value="{{ old('student_id') }}" />
                                 <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="text-white-dark">
                                         <path
