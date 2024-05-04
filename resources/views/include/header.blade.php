@@ -175,8 +175,8 @@
                     <a href="javascript:;" class="group relative" @click="toggle()">
                         <span
                             ><img
-                                class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                src="{{ asset('frontend/images/user-profile.jpeg') }}"
+                                class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" 
+                                src="{{ empty(Auth::user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::user()->profile) }}" width="100px" height="100px"
                                 alt="image"
                         /></span>
                     </a>
@@ -190,11 +190,15 @@
                         <li>
                             <div class="flex items-center px-4 py-4">
                                 <div class="flex-none">
-                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image" />
+                                    {{-- <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image" /> --}}
+
+                                    <img class="h-10 w-10 rounded-md object-cover" 
+                                    src="{{ empty(Auth::user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::user()->profile) }}" width="100px" height="100px" alt="image" />
+
                                 </div>
                                 <div class="truncate pl-4">
                                     <h4>
-                                        {{ auth()->user()->name }}
+                                        {{ auth()->user()->name}}
                                     </h4>
                                     <a
                                         href="javascript:;"
@@ -204,7 +208,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="" class="dark:hover:text-white" @click="toggle">
+                            <a href="{{ route('adminProfile') }}" class="dark:hover:text-white" @click="toggle">
                                 <svg
                                     class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2"
                                     width="18"

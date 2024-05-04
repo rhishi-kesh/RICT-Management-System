@@ -59,7 +59,7 @@ class Mentors extends Component
             'name' => 'required',
             'email' => 'required',
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
-            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:500',
         ]);
 
         $fileName = "";
@@ -100,7 +100,6 @@ class Mentors extends Component
         $this->email = $data->email;
         $this->mobile = $data->mobile;
         $this->oldimage = $data->image;
-
     }
     public function deleteAlert($id)
     {

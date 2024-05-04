@@ -13,6 +13,11 @@
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/animate.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/sweetalert2.min.css') }}" />
+       
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/perfect-scrollbar.min.css')}}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/style.css')}}" />
+        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/animate.css')}}" />
+
         @vite('resources/css/app.css')
         @livewireStyles
         @stack('css')
@@ -63,6 +68,12 @@
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('frontend/js/custom.js') }}"></script>
         <script src="{{ asset('frontend/js/rhishi.js') }}"></script>
+
+        <script src="{{ asset('backend/js/perfect-scrollbar.min.js')}}"></script>
+        <script defer src="{{ asset('backend//popper.min.js')}}"></script>
+        <script defer src="{{ asset('backend/js/tippy-bundle.umd.min.js')}}"></script>
+        <script defer src="{{ asset('backend/js/sweetalert.min.js')}}"></script>
+
         <script>
             window.addEventListener('swal', event => {
                 const eventData = event.detail[0]; // Accessing the first element of the array

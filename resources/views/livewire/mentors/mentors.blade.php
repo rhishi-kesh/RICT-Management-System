@@ -127,10 +127,10 @@
                         <div class="mb-1">
                             <label class="col-form-label pt-0" for="image">Image</label>
                             <input wire:model="image" class="form-control @error('image') is-invalid @enderror" id="image" type="file">
-                            @if ($image && !$oldImage)
+                            @if ($image && !$oldimage)
                                 <img width="80" class="mt-1" src="{{ $image->temporaryUrl() }}" alt="Preview">
                             @else
-                                <img width="150" class="mt-1" src="{{ asset('storage/' . $oldImage) }}" alt="Preview">
+                                <img width="150" class="mt-1" src="{{ asset('storage/' . $oldimage) }}" alt="Preview">
                             @endif
                             @if ($errors->has('image'))
                                 <div class="invalid-feedback">{{ $errors->first('image') }}</div>

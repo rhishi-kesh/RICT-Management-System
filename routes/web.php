@@ -11,6 +11,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\paymentMode\paymentModeController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
@@ -49,4 +50,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/update-visitor/{id}', [VisitorController::class, 'updateVisitor'])->name('updateVisitor');
     Route::get('/permission', [PermissionController::class, 'permission'])->name('permission');
     Route::get('/role', [RoleController::class, 'role'])->name('role');
+    Route::get('/admin-profile', [AdminProfileController::class, 'adminProfile'])->name('adminProfile');
+    Route::get('/edit-profile', [AdminProfileController::class, 'editProfile'])->name('editProfile');
 });
