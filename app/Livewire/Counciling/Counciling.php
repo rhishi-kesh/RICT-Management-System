@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class Counciling extends Component
 {
     use WithPagination;
-    public $name, $courseFee, $update_id, $isModal = false, $delete_id;
+    public $name, $courseFee, $update_id, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
@@ -17,7 +17,7 @@ class Counciling extends Component
         $counciling = Councilings::paginate(10);
         return view('livewire.counciling.counciling', compact('counciling'));
     }
- 
+
     public function insert(){
         $validated = $this->validate([
             'name' => 'required',
@@ -27,8 +27,7 @@ class Counciling extends Component
             'created_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -36,7 +35,6 @@ class Counciling extends Component
         }
     }
     public function ShowUpdateModel($id){
-        $this->isModal = true;
         $data = Councilings::findOrFail($id);
         $this->update_id = $data->id;
         $this->name = $data->name;
@@ -51,8 +49,7 @@ class Counciling extends Component
         ]);
         if($done){
             $this->update_id = '';
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -74,15 +71,6 @@ class Counciling extends Component
         }
     }
     public function showModal(){
-        $this->resetForm();
-        $this->isModal = true;
-    }
-    public function removeModal(){
-        $this->update_id = '';
-        $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['name']);
+        $this->reset();
     }
 }

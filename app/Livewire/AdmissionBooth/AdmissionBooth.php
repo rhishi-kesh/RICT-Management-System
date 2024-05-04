@@ -6,12 +6,10 @@ use App\Models\AdmissionBooth as AdmissionBooths;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Str;
-
 class AdmissionBooth extends Component
 {
     use WithPagination;
-    public $name, $number, $email, $shopName, $update_id, $isModal = false, $delete_id;
+    public $name, $number, $email, $shopName, $update_id, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
@@ -34,8 +32,7 @@ class AdmissionBooth extends Component
             'created_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -43,7 +40,6 @@ class AdmissionBooth extends Component
         }
     }
     public function ShowUpdateModel($id){
-        $this->isModal = true;
         $data = AdmissionBooths::findOrFail($id);
         $this->update_id = $data->id;
         $this->name = $data->name;
@@ -67,8 +63,7 @@ class AdmissionBooth extends Component
         ]);
         if($done){
             $this->update_id = '';
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -90,18 +85,6 @@ class AdmissionBooth extends Component
         }
     }
     public function showModal(){
-        $this->resetForm();
-        $this->isModal = true;
-    }
-    public function removeModal(){
-        $this->update_id = '';
-        $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['name']);
-        $this->reset(['number']);
-        $this->reset(['email']);
-        $this->reset(['shopName']);
+        $this->reset();
     }
 }

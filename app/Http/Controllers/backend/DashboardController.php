@@ -10,4 +10,7 @@ class DashboardController extends Controller
     public function dashboard(){
         return view('application/index');
     }
+    public function studentDashboard(){
+        return view('application/student_index');
+    }
 }

@@ -14,16 +14,14 @@ use Illuminate\Support\Str;
 class Batch extends Component
 {
     use WithPagination;
-    public $name, $update_id, $isModal = false, $isBatch = false, $delete_id, $removeBatch_id, $singlebatch, $showUpdateInput = null, $studentWithoutBatch = [], $addToBatch = [];
+    public $name, $update_id, $isModal = false, $isBatch = false, $delete_id, $removeBatch_id, $singlebatch, $showUpdateInput, $studentWithoutBatch = [], $addToBatch = [];
     protected $listeners = [
         'deleteConfirm' => 'DeleteBatch',
         'removeConfirm' => 'removeStudent'
     ];
-
     public function mount() {
         $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id','id')->get();
     }
-
     public function render()
     {
         $batch = Batchs::select('id', 'name')
@@ -41,7 +39,7 @@ class Batch extends Component
             'created_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
+            $this->reset();
             $this->removeModal();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
@@ -51,7 +49,6 @@ class Batch extends Component
     }
     public function editBatch($key, $id){
         $this->showUpdateInput = $key;
-        $this->resetForm();
         $data = Batchs::findOrFail($id);
         $this->name = $data->name;
         $this->update_id = $data->id;
@@ -65,9 +62,9 @@ class Batch extends Component
             'updated_at' => Carbon::now(),
         ]);
         if($done){
-            $this->showUpdateInput = null;
+            $this->showUpdateInput = '';
             $this->update_id = '';
-            $this->resetForm();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -124,7 +121,11 @@ class Batch extends Component
                 $student->save();
             }
 
-            $this->dispatch('clearInput');
+            $this->dispatch('clearInput', [
+                'title' => 'Student Add Successfull',
+                'type' => "success",
+            ]);
+
             $this->mount();
 
             DB::commit();
@@ -156,15 +157,12 @@ class Batch extends Component
         $this->isBatch = false;
     }
     public function showModal(){
-        $this->resetForm();
+        $this->reset();
         $this->isModal = true;
     }
     public function removeModal(){
         $this->update_id = '';
         $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['name']);
+        $this->reset();
     }
 }

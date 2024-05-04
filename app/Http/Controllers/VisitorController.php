@@ -6,9 +6,7 @@ use App\Models\Visitors;
 use Illuminate\Http\Request;
 
 class VisitorController extends Controller
-{       
-    // those are Views/application
-
+{
     public function counciling()
     {
         return view('application.counciling.counciling');
@@ -26,7 +24,6 @@ class VisitorController extends Controller
 
     public function updateVisitor($id)
     {
-        $id = $id;
         return view('application.visitor.update-visitor',compact('id'));
     }
 

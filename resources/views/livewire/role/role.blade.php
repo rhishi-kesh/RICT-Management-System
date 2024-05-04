@@ -1,8 +1,8 @@
-<div class="pt-5">
+<div class="pt-5" x-data="modal">
 
     {{-- Insert Button --}}
     <div class="mb-3">
-        <button wire:click="showModal" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
+        <button @click="toggle; $wire.call('showModal')" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($roles as $key => $data)
+                        @forelse ($roles as $key => $data)
                             <tr>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $roles->firstItem() + $key }}</td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $data->name ?? '-' }}</td>
@@ -33,7 +33,7 @@
 
 
                                     {{-- Edit Button --}}
-                                    <button  type="button" x-tooltip="Edit" wire:click="ShowUpdateModel({{ $data->id }})">
+                                    <button  type="button" x-tooltip="Edit" @click="open = true; $wire.call('ShowUpdateModel','{{ $data->id }}')">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500"><path class="text-green-500" stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
                                     </button>
 
@@ -45,12 +45,20 @@
 
 
                                     {{-- Add or Edit Role Permission Button --}}
-                                    <button type="button" x-tooltip="Role Permissions" wire:click="rolePermission({{ $data->id }})" class="uppercase btn bg-cyan-500 border-none text-white cursor-pointer px-2 py-1 rounded-none">
+                                    <a href="{{ route('roleHavePermission', $data->id) }}" type="button" x-tooltip="Role Permissions" class="uppercase btn bg-cyan-500 border-none text-white cursor-pointer px-2 py-1 rounded-none">
                                         <small>Role Permissions</small>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="20">
+                                    <div class="flex justify-center items-center">
+                                        <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -60,9 +68,9 @@
 
 
     {{-- Update & Instert Form --}}
-    <div class="fixed inset-0 bg-[black]/60 z-[999] @if($isModal)  @else hidden @endif overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
+    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
+        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
+            <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     @if(!empty($update_id))
                         <h5 class="font-bold text-lg">Update</h5>
@@ -87,43 +95,9 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button wire:click="removeModal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Role Permissions Form --}}
-    <div class="fixed inset-0 bg-[black]/60 z-[999] @if($isRolePermission)  @else hidden @endif overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-4xl my-8">
-                <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    <h5 class="font-bold text-lg">{{ $role->name ?? '-' }}</h5>
-                </div>
-                <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
-                    <form
-                        method="post"
-                        wire:submit="addRolePermission"
-                    >
-                        <label class="my-label">Permissions</label>
-                        @foreach ($permissions as $permission)
-                            <label for="permission{{ $permission->id }}" class="inline-block m-2 p-2 cursor-pointer select-none">
-                                <input
-                                type="checkbox"
-                                wire:model="permission"
-                                value="{{ $permission->name }}"
-                                id="permission{{ $permission->id }}"
-                                {{ in_array($permission->id, $roleWithPermission) ? 'checked' : '' }}
-                                />
-                                {{ $permission->name }}
-                            </label>
-                        @endforeach
-                        <div class="flex justify-end items-center mt-8">
-                            <button wire:click="removeModal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4">Save</button>
+                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
+                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>

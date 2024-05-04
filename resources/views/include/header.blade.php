@@ -70,8 +70,8 @@
                     </button>
                 </div>
                 <div>
-                    <a href="http://test.interiorbangladesh.com/admin" target="_blank" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer px-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world inline mb-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <a href="http://test.interiorbangladesh.com/admin" target="_blank" class="uppercase btn md:bg-blue-500 bg-transparent border-none dark:text-[#b0b2b6] text-[#5a5b5e] md:text-white dark:md:text-white cursor-pointer px-3 pr-1 md:pr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world inline mb-0 md:mb-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                             <path d="M3.6 9h16.8"></path>
@@ -79,15 +79,15 @@
                             <path d="M11.5 3a17 17 0 0 0 0 18"></path>
                             <path d="M12.5 3a17 17 0 0 1 0 18"></path>
                         </svg>
-                        <span>
+                        <span class="hidden md:inline-block">
                             Manage Website
                         </span>
                     </a>
                 </div>
                 <div>
-                    <a href="http://apply.rayhansict.com/admin" target="_blank" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer px-3">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase inline mb-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /><path d="M12 12l0 .01" /><path d="M3 13a20 20 0 0 0 18 0" /></svg>
-                        <span>
+                    <a href="http://apply.rayhansict.com/admin" target="_blank" class="uppercase btn md:bg-blue-500 bg-transparent border-none dark:text-[#b0b2b6] text-[#5a5b5e] md:text-white dark:md:text-white cursor-pointer px-3">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase inline mb-0 md:mb-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /><path d="M12 12l0 .01" /><path d="M3 13a20 20 0 0 0 18 0" /></svg>
+                        <span class="hidden md:inline-block">
                             Manage Job
                         </span>
                     </a>
@@ -97,7 +97,6 @@
                         href="javascript:;"
                         x-cloak
                         x-show="$store.app.theme === 'light'"
-                        href="javascript:;"
                         class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                         @click="$store.app.toggleTheme('dark')"
                     >
@@ -141,7 +140,6 @@
                         href="javascript:;"
                         x-cloak
                         x-show="$store.app.theme === 'dark'"
-                        href="javascript:;"
                         class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                         @click="$store.app.toggleTheme('system')"
                     >
@@ -156,7 +154,6 @@
                         href="javascript:;"
                         x-cloak
                         x-show="$store.app.theme === 'system'"
-                        href="javascript:;"
                         class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                         @click="$store.app.toggleTheme('light')"
                     >

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class LastMonth extends Component
 {
-    public $total, $pay, $due, $payment, $isUpdate, $totalAmount, $isModal = false;
+    public $total, $pay, $due, $payment, $isUpdate, $totalAmount;
 
     public function updated($payment)
     {
@@ -23,13 +23,16 @@ class LastMonth extends Component
     }
     public function render()
     {
-        $students = Student::with('course:id,name')->where('due', '>', 0)->where(
-            'created_at', '>=', Carbon::now()->startOfMonth()->subMonth()->toDateString()
-        )->paginate(15);
+        $students = Student::with('course:id,name')
+                    ->where('due', '>', 0)
+                    ->where('created_at', '>=', Carbon::now()
+                    ->startOfMonth()
+                    ->subMonth()
+                    ->toDateString())
+                    ->paginate(15);
         return view('livewire.pay-roll.last-month', compact('students'));
     }
     public function ShowUpdateModel($id){
-        $this->isModal = true;
         $student = Student::findOrFail($id);
         $this->total = $student->total;
         $this->pay = $student->pay;
@@ -51,22 +54,11 @@ class LastMonth extends Component
             'updated_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
             ]);
         }
-    }
-    public function removeModal(){
-        $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['total']);
-        $this->reset(['pay']);
-        $this->reset(['due']);
-        $this->reset(['payment']);
     }
 }
