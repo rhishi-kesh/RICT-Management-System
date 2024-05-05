@@ -66,60 +66,8 @@
         <script defer src="{{ asset('frontend/js/popper.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/tippy-bundle.umd.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/custom.js') }}"></script>
-        <script src="{{ asset('frontend/js/rhishi.js') }}"></script>
-
-        <script src="{{ asset('backend/js/perfect-scrollbar.min.js')}}"></script>
-        <script defer src="{{ asset('backend//popper.min.js')}}"></script>
-        <script defer src="{{ asset('backend/js/tippy-bundle.umd.min.js')}}"></script>
-        <script defer src="{{ asset('backend/js/sweetalert.min.js')}}"></script>
-
-        <script>
-            window.addEventListener('swal', event => {
-                const eventData = event.detail[0]; // Accessing the first element of the array
-                if (eventData && eventData.title && eventData.type) {
-                    Swal.fire({
-                        icon: eventData.type,
-                        title: eventData.title,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                } else {
-                    console.error('Invalid event data format:', eventData);
-                }
-            });
-        </script>
-        <script>
-            window.addEventListener('confirmDeleteAlert', event => {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, Delete"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Livewire.dispatch('deleteConfirm');
-                    }
-                });
-            });
-
-            window.addEventListener('deleteSuccessFull', event => {
-                const eventData = event.detail[0]; // Accessing the first element of the array
-                if (eventData && eventData.title && eventData.type) {
-                    Swal.fire({
-                        icon: eventData.type,
-                        title: eventData.title,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                } else {
-                    console.error('Invalid event data format:', eventData);
-                }
-            });
-        </script>
+        <script src="{{ asset('frontend/js/main.js') }}"></script>
+        <script src="{{ asset('frontend/js/cuntom.js') }}"></script>
         @stack('js')
     </body>
 </html>

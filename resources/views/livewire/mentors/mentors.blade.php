@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mentors as $key => $data)
+                    @forelse ($mentors as $key => $data)
                         <tr>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $mentors->firstItem() + $key }} </td>
@@ -83,7 +83,15 @@
                                 </button>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="20">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>
@@ -138,12 +146,10 @@
 
                         <div class="mb-1">
                             <label class="col-form-label pt-0" for="image">Image</label>
-                            <input wire:model="image" class="form-control @error('image') is-invalid @enderror" id="image" type="file">
-                            @if ($image && !$oldImage)
-                                <img width="80" class="mt-1" src="{{ $image->temporaryUrl() }}" alt="Preview">
-                            @else
-                                <img width="150" class="mt-1" src="{{ asset('storage/' . $oldImage) }}" alt="Preview">
-                            @endif
+                            <input wire:model="image" class="block form-control @error('image') is-invalid @enderror" id="image" type="file">
+                            <div wire:loading="" wire:target="image" class="text-green-500">
+                                Uploading Image...
+                            </div>
                             @if ($errors->has('image'))
                                 <div class="invalid-feedback">{{ $errors->first('image') }}</div>
                             @endif
