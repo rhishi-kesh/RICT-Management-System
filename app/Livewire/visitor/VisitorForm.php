@@ -8,32 +8,24 @@ use App\Models\Visitors;
 use App\Models\Course;
 use App\Models\AdmissionBooth;
 use Carbon\Carbon;
-
-
 class VisitorForm extends Component
 {
-    public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $course_id, $call_count ;
-    // public $selectedOption;
-
-
-    public function render()
-    {
+    public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name, $calling_person, $comments, $counseling, $status, $course_id;
+    public function render() {
         $counciling = Councilings::get();
         $courses = Course::get();
         $admissionBooth = AdmissionBooth::get();
         return view('livewire.visitor.visitor-form', compact('counciling', 'courses', 'admissionBooth'));
     }
-  
-    public function submit()
-    {
+    public function submit() {
         $validated = $this->validate([
             'counseling' => 'required',
-            'status' => 'required',
+            'status' => 'nullable',
             'name' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'email' => 'nullable',
             'course_name' => 'required',
-            'address' => 'required',
+            'address' => 'nullable',
             'amount' => 'nullable',
             'visitor_comment' => 'nullable',
             'gender' => 'nullable',
@@ -43,7 +35,7 @@ class VisitorForm extends Component
         ]);
 
         $done = Visitors::insert([
-            'counseling' => $this->counseling,
+            'counseling_id' => $this->counseling,
             'status' => $this->status,
             'name' => $this->name,
             'mobile' => $this->mobile,
@@ -59,26 +51,11 @@ class VisitorForm extends Component
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
-            $this->resetForm();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
             ]);
         }
-    }
-    public function resetForm(){
-        $this->reset(['counseling']);
-        $this->reset(['status']);
-        $this->reset(['name']);
-        $this->reset(['mobile']);
-        $this->reset(['email']);
-        $this->reset(['course_name']);
-        $this->reset(['address']);
-        $this->reset(['amount']);
-        $this->reset(['visitor_comment']);
-        $this->reset(['gender']);
-        $this->reset(['ref_name']);
-        $this->reset(['admission_booth_name']);
-        $this->reset(['comments']);
     }
 }

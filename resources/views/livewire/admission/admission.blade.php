@@ -22,6 +22,12 @@
             .nice-select .list {
                 max-height: 155px;
             }
+            input[type="date"]::-webkit-inner-spin-button,
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+                -webkit-appearance: none;
+                user-select: none;
+            }
         </style>
     @endpush
     <form wire:submit="submit" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
@@ -92,8 +98,10 @@
                 @endif
             </div>
             <div class="mb-1">
-                <label for="date" class="my-label">Date Of Birth</label>
-                <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
+                <div wire:ignore>
+                    <label for="date" class="my-label">Date Of Birth</label>
+                    <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
+                </div>
                 @if ($errors->has('date'))
                     <div class="text-red-500">{{ $errors->first('date') }}</div>
                 @endif
@@ -111,7 +119,7 @@
                 @endif
             </div>
             <div class="mb-1">
-                <label for="Discount" class="my-label">Discount Coupon</label>
+                <label for="Discount" class="my-label">Discount</label>
                 <input type="text" wire:model.live.debounce.1000ms="discount" placeholder="Discount" id="Discount" name="discount" class="my-input focus:outline-none focus:shadow-outline">
                 @if ($errors->has('discount'))
                     <div class="text-red-500">{{ $errors->first('discount') }}</div>
@@ -161,13 +169,9 @@
             <div class="mb-1" wire:ignore>
                 <label for="classday" class="my-label">Class Day</label>
                 <select id="classday" wire:model="classday" class="my-input focus:outline-none focus:shadow-outline p-0" name="classday[]" multiple>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
+                    @foreach ($allClassDays as $item)
+                        <option value="{{ $item }}">{{ $item }}</option>
+                    @endforeach
                 </select>
                 @if ($errors->has('classday'))
                     <div class="text-red-500">{{ $errors->first('classday') }}</div>
@@ -183,8 +187,10 @@
                 @endif
             </div>
         </div>
-        <div>
-            <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
+        <div class="flex justify-start items-center">
+            <button type="submit" class="bg-blue-500 text-white border-blue-500 btn mr-4" wire:loading.remove>Admit</button>
+            <button type="button" disabled class="bg-blue-500 text-white border-blue-500 btn mr-4" wire:loading>Loading</button>
+            <button type="reset" class="shadow btn text-black dark:text-white bg-gray-50 dark:bg-gray-800">Reset</button>
         </div>
     </form>
     @push('js')

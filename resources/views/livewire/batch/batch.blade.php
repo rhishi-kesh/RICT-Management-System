@@ -1,4 +1,4 @@
-<div class="pt-5">
+<div class="pt-5" x-data="modal">
     @push('css')
         <link rel="stylesheet" href="{{ asset('frontend/css/nice-select2.css') }}">
         <style>
@@ -23,7 +23,7 @@
 
     {{-- Insert Button --}}
     <div class="mb-3">
-        <button wire:click="showModal" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
+        <button @click="toggle" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -37,7 +37,7 @@
         <div class="w-full">
             {{-- Show Data --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                @foreach ($batch as $key => $data)
+                @forelse ($batch as $key => $data)
                     <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                         <div class="flex justify-between mb-5 gap-2">
                             @if($showUpdateInput === $key)
@@ -66,13 +66,19 @@
                                                 stroke-width="1.5"></circle>
                                         </svg>
                                     </button>
-                                    <ul x-cloak x-show="open" x-transition x-transition.duration.300ms
-                                    class="text-sm font-medium ltr:right-0 rtl:left-0">
+                                    <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="text-sm font-medium">
+                                        <li>
+                                            <button wire:click="singleBatch({{ $data->id }})" class="w-full">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 shrink-0 mr-2"> <path opacity="0.5" d="M3.27489 15.2957C2.42496 14.1915 2 13.6394 2 12C2 10.3606 2.42496 9.80853 3.27489 8.70433C4.97196 6.49956 7.81811 4 12 4C16.1819 4 19.028 6.49956 20.7251 8.70433C21.575 9.80853 22 10.3606 22 12C22 13.6394 21.575 14.1915 20.7251 15.2957C19.028 17.5004 16.1819 20 12 20C7.81811 20 4.97196 17.5004 3.27489 15.2957Z" stroke="currentColor" stroke-width="1.5" /> <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="1.5" />
+                                                </svg>
+                                                View
+                                            </button>
+                                        </li>
                                         <li>
                                             <button class="w-full" wire:click="editBatch({{ $key }}, {{ $data->id }})">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-4 w-4 shrink-0 ltr:mr-3 rtl:ml-3">
+                                                    class="h-4 w-4 shrink-0 mr-2">
                                                     <path
                                                         d="M15.2869 3.15178L14.3601 4.07866L5.83882 12.5999L5.83881 12.5999C5.26166 13.1771 4.97308 13.4656 4.7249 13.7838C4.43213 14.1592 4.18114 14.5653 3.97634 14.995C3.80273 15.3593 3.67368 15.7465 3.41556 16.5208L2.32181 19.8021L2.05445 20.6042C1.92743 20.9852 2.0266 21.4053 2.31063 21.6894C2.59466 21.9734 3.01478 22.0726 3.39584 21.9456L4.19792 21.6782L7.47918 20.5844L7.47919 20.5844C8.25353 20.3263 8.6407 20.1973 9.00498 20.0237C9.43469 19.8189 9.84082 19.5679 10.2162 19.2751C10.5344 19.0269 10.8229 18.7383 11.4001 18.1612L11.4001 18.1612L19.9213 9.63993L20.8482 8.71306C22.3839 7.17735 22.3839 4.68748 20.8482 3.15178C19.3125 1.61607 16.8226 1.61607 15.2869 3.15178Z"
                                                         stroke="currentColor" stroke-width="1.5" />
@@ -85,18 +91,11 @@
                                         </li>
                                         <li>
                                             <button class="w-full" wire:click="deleteAlert({{ $data->id }})">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                <svg width="24" height="24" class="mr-2" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg" <path d="M20.5001 6H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18.8334 8.5L18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                                                     </path> <path opacity="0.5" d="M9.5 11L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M14.5 11L14 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6" stroke="currentColor" stroke-width="1.5"></path>
                                                 </svg>
                                                 Delete
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button wire:click="singleBatch({{ $data->id }})" class="w-full">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 shrink-0 ltr:mr-3 rtl:ml-3"> <path opacity="0.5" d="M3.27489 15.2957C2.42496 14.1915 2 13.6394 2 12C2 10.3606 2.42496 9.80853 3.27489 8.70433C4.97196 6.49956 7.81811 4 12 4C16.1819 4 19.028 6.49956 20.7251 8.70433C21.575 9.80853 22 10.3606 22 12C22 13.6394 21.575 14.1915 20.7251 15.2957C19.028 17.5004 16.1819 20 12 20C7.81811 20 4.97196 17.5004 3.27489 15.2957Z" stroke="currentColor" stroke-width="1.5" /> <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="1.5" />
-                                                </svg>
-                                                View
                                             </button>
                                         </li>
                                     </ul>
@@ -115,18 +114,23 @@
                             <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ $data->students_count }})Total</span>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div></div>
+                    <div class="w-full">
+                        <div class="flex justify-center items-center">
+                            <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                        </div>
+                    </div>
+                @endforelse
             </div>
             <div class="livewire-pagination mt-5">{{ $batch->links() }}</div>
         </div>
     </div>
 
     {{-- Instert Form --}}
-    <div
-        class="fixed inset-0 bg-[black]/60 z-[999] @if ($isModal) @else hidden @endif overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div x-transition x-transition.duration.300
-                class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
+    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
+        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
+            <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     <h5 class="font-bold text-lg">Add Batch</h5>
                 </div>
@@ -141,9 +145,9 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button wire:click="removeModal()" type="button"
-                                class="shadow btn bg-gray-50 dark:bg-gray-800">Discard</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
+                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
+                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>
@@ -156,9 +160,9 @@
         class="fixed inset-0 bg-[black]/60 z-[999] @if ($isBatch) @else hidden @endif overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4">
             <div x-transition x-transition.duration.300
-                class="panel border-0 p-0 rounded-lg w-full max-w-4xl my-8">
+                class="panel border-0 p-0 rounded-lg w-full md:max-w-4xl my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    <h5 class="font-bold text-lg">{{ $singlebatch->name ?? '' }}</h5>
+                    <h5 class="font-bold text-lg">{{ $singlebatch->name ?? '-' }}</h5>
                     <div class="flex justify-end items-center">
                         <button wire:click="removebatch()" type="button"
                             class="shadow btn bg-gray-50 dark:bg-gray-800">Back</button>
@@ -171,7 +175,6 @@
                         </button>
                         <div class="w-full flex justify-start gap-5 mb-5" x-show="show">
                             <div wire:ignore class="w-4/6 md:w-3/6">
-                                {{-- <label for="addToBatch" class="my-label">Add Student On This Batch</label> --}}
                                 <select id="addToBatch" wire:model="addToBatch" class="my-input focus:outline-none focus:shadow-outline p-0" name="addToBatch[]" multiple>
                                     @foreach ($this->studentWithoutBatch as $data)
                                         <option value="{{ $data->id }}">{{ $data->name }}({{ $data->student_id }})</option>
@@ -224,7 +227,7 @@
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                             {{ $data->name }}</td>
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                            {{ $data->course->name }}</td>
+                                            {{ $data->course->name ?? '-' }}</td>
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                             {{-- Edit Button --}}
                                             <button wire:click="removeStudentAlert({{ $data->id }})"
@@ -235,11 +238,13 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="30" class="text-red-500 uppercase text-center">No Student In
-                                            This Batch
+                                        <td colspan="20">
+                                            <div class="flex justify-center items-center">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                            </div>
                                         </td>
                                     </tr>
-                                @endforelse
+                                 @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -353,6 +358,18 @@
 
                     instance.clear();
                     instance.update();
+
+                    const eventData = event.detail[0]; // Accessing the first element of the array
+                    if (eventData && eventData.title && eventData.type) {
+                        Swal.fire({
+                            icon: eventData.type,
+                            title: eventData.title,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        console.error('Invalid event data format:', eventData);
+                    }
                 });
             });
         </script>

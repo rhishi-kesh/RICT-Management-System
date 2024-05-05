@@ -41,4 +41,10 @@ class AdminController extends Controller
 
         return redirect()->route('login');
     }
+    public function userView(){
+        return view('auth/viewUser');
+    }
+    public function userEdit($id){
+        return view('auth/editUser', compact('id'));
+    }
 }

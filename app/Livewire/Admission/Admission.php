@@ -13,10 +13,9 @@ use Carbon\Carbon;
 class Admission extends Component
 {
     use Utils;
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [], $date, $courseFee;
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [], $date, $courseFee, $paymentTypes = [], $course = [], $allClassDays = [];
 
-    public function updated($discount)
-    {
+    public function updated($discount) {
         $singleCourse = Course::where('id', $this->courseId)->first(['fee']);
         $this->courseFee = $singleCourse->fee ?? 0;
         $discountValue = $this->discount ?? 0;
@@ -28,21 +27,21 @@ class Admission extends Component
         $totalPay = $this->totalPay ?? 0;
         $this->totalDue = (float) $totalAmount - (float) $totalPay;
     }
-    public function updatedCourseId()
-    {
+    public function updatedCourseId() {
         $this->discount = null;
         $this->totalPay = null;
         $this->totalAmount = $this->courseFee;
         $this->totalDue = $this->courseFee;
     }
-    public function render()
-    {
-        $course = Course::get();
-        $paymentTypes = PaymentMode::get();
-        return view('livewire.admission.admission', compact('course','paymentTypes'));
+    public function mount() {
+        $this->paymentTypes = PaymentMode::get();
+        $this->course = Course::get();
+        $this->allClassDays = ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday'];
     }
-    public function submit()
-    {
+    public function render() {
+        return view('livewire.admission.admission');
+    }
+    public function submit() {
         //slug Generate
         $searchName = Student::where('name', $this->name)->first('name');
         if($searchName){
@@ -69,10 +68,11 @@ class Admission extends Component
             'name' => 'required',
             'fatherName' => 'required',
             'motherName' => 'required',
-            'mobileNumber' => 'required',
+            'mobileNumber' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'address' => 'required',
             'email' => 'nullable|unique:students',
-            'gMobile' => 'required',
+            'gMobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'paymentNumber' => 'nullable|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'qualification' => 'required',
             'profession' => 'required',
             'courseId' => 'required',
@@ -108,32 +108,11 @@ class Admission extends Component
             'created_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Instert Successfull',
                 'type' => "success",
             ]);
         }
-    }
-    public function resetForm(){
-        $this->reset(['name']);
-        $this->reset(['fatherName']);
-        $this->reset(['motherName']);
-        $this->reset(['mobileNumber']);
-        $this->reset(['address']);
-        $this->reset(['email']);
-        $this->reset(['gMobile']);
-        $this->reset(['qualification']);
-        $this->reset(['profession']);
-        $this->reset(['courseId']);
-        $this->reset(['discount']);
-        $this->reset(['paymentType']);
-        $this->reset(['totalAmount']);
-        $this->reset(['totalPay']);
-        $this->reset(['totalDue']);
-        $this->reset(['paymentNumber']);
-        $this->reset(['admissionFee']);
-        $this->reset(['classday']);
-        $this->reset(['date']);
     }
 }

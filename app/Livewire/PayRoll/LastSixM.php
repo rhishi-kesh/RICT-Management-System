@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class LastSixM extends Component
 {
-    public $total, $pay, $due, $payment, $isUpdate, $totalAmount, $isModal = false;
+    public $total, $pay, $due, $payment, $isUpdate, $totalAmount;
 
     public function updated($payment)
     {
@@ -29,7 +29,6 @@ class LastSixM extends Component
         return view('livewire.pay-roll.last-six-m', compact('students'));
     }
     public function ShowUpdateModel($id){
-        $this->isModal = true;
         $student = Student::findOrFail($id);
         $this->total = $student->total;
         $this->pay = $student->pay;
@@ -51,22 +50,11 @@ class LastSixM extends Component
             'updated_at' => Carbon::now(),
         ]);
         if($done){
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
             ]);
         }
-    }
-    public function removeModal(){
-        $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm(){
-        $this->reset(['total']);
-        $this->reset(['pay']);
-        $this->reset(['due']);
-        $this->reset(['payment']);
     }
 }

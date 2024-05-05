@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Management System</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/RICT/fav.jpg') }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -24,7 +25,7 @@
     </head>
     <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
         <!-- sidebar menu overlay -->
-        <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"@click="$store.app.toggleSidebar()"></div>
+        <div class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
 
         <!-- scroll to top button -->
         <div class="fixed bottom-8 rignt-8 z-50 ltr:right-6" x-data="scrollToTop">
@@ -39,9 +40,9 @@
             </template>
         </div>
 
-        <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
+        <div class="main-container min-h-screen text-black dark:text-white-dark">
             <!-- start sidebar section -->
-            <div :class="{'dark text-white-dark' : $store.app.semidark}">
+            <div>
                 @include('include/sidebar')
             </div>
             <!-- end sidebar section -->
@@ -61,65 +62,14 @@
             </div>
         </div>
 
+
         @livewireScripts
         <script src="{{ asset('frontend/js/perfect-scrollbar.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/popper.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/tippy-bundle.umd.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/custom.js') }}"></script>
-        <script src="{{ asset('frontend/js/rhishi.js') }}"></script>
-
-        <script src="{{ asset('backend/js/perfect-scrollbar.min.js')}}"></script>
-        <script defer src="{{ asset('backend//popper.min.js')}}"></script>
-        <script defer src="{{ asset('backend/js/tippy-bundle.umd.min.js')}}"></script>
-        <script defer src="{{ asset('backend/js/sweetalert.min.js')}}"></script>
-
-        <script>
-            window.addEventListener('swal', event => {
-                const eventData = event.detail[0]; // Accessing the first element of the array
-                if (eventData && eventData.title && eventData.type) {
-                    Swal.fire({
-                        icon: eventData.type,
-                        title: eventData.title,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                } else {
-                    console.error('Invalid event data format:', eventData);
-                }
-            });
-        </script>
-        <script>
-            window.addEventListener('confirmDeleteAlert', event => {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, Delete"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Livewire.dispatch('deleteConfirm');
-                    }
-                });
-            });
-
-            window.addEventListener('deleteSuccessFull', event => {
-                const eventData = event.detail[0]; // Accessing the first element of the array
-                if (eventData && eventData.title && eventData.type) {
-                    Swal.fire({
-                        icon: eventData.type,
-                        title: eventData.title,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                } else {
-                    console.error('Invalid event data format:', eventData);
-                }
-            });
-        </script>
+        <script src="{{ asset('frontend/js/main.js') }}"></script>
+        <script src="{{ asset('frontend/js/cuntom.js') }}"></script>
         @stack('js')
     </body>
 </html>

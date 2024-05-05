@@ -13,7 +13,8 @@ class Mentors extends Component
 {
     use WithPagination;
     use WithFileUploads;
-    public $name, $email, $mobile, $image, $update_id, $isModal = false, $delete_id, $oldimage;
+    public $name, $email, $mobile, $image, $delete_id, $update_id, $oldImage;
+
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
@@ -25,7 +26,7 @@ class Mentors extends Component
     {
         $validated = $this->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:mentor',
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
@@ -44,22 +45,30 @@ class Mentors extends Component
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
             ]);
         }
     }
-
+    public function ShowUpdateModel($id)
+    {
+        $this->reset();
+        $data = Mentor::findOrFail($id);
+        $this->update_id = $data->id;
+        $this->name = $data->name;
+        $this->email = $data->email;
+        $this->mobile = $data->mobile;
+        $this->oldImage = $data->image;
+    }
     public function update()
     {
         $validated = $this->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
-            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:500',
+            'image' => 'nullable',
         ]);
 
         $fileName = "";
@@ -81,25 +90,12 @@ class Mentors extends Component
         ]);
 
         if ($done) {
-            $this->update_id = '';
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
             ]);
         }
-    }
-
-    public function ShowUpdateModel($id)
-    {
-        $this->isModal = true;
-        $data = Mentor::findOrFail($id);
-        $this->update_id = $data->id;
-        $this->name = $data->name;
-        $this->email = $data->email;
-        $this->mobile = $data->mobile;
-        $this->oldimage = $data->image;
     }
     public function deleteAlert($id)
     {
@@ -125,23 +121,9 @@ class Mentors extends Component
             ]);
         }
     }
-    
     public function showModal()
     {
         $this->resetForm();
         $this->isModal = true;
-    }
-    public function removeModal()
-    {
-        $this->update_id = '';
-        $this->isModal = false;
-        $this->resetForm();
-    }
-    public function resetForm()
-    {
-        $this->reset(['name']);
-        $this->reset(['email']);
-        $this->reset(['mobile']);
-        $this->reset(['image']);
     }
 }

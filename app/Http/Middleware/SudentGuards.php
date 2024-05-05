@@ -19,7 +19,7 @@ class SudentGuards
         if(Auth::guard('student')->check()){
             return $next($request);
         }else{
-            return redirect()->route('notFound');
+            return redirect('/');
         }
     }
 }

@@ -10,9 +10,8 @@ use App\Models\AdmissionBooth;
 use Illuminate\Support\Carbon;
 
 class UpdateVisitor extends Component
-
 {
-    public  $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name,$admission_booth_number, $calling_person, $comments, $counseling, $status, $increment, $isModal = false, $courses = [], $counciling = [], $admissionBooth = [];
+    public $name, $visitor_id, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name, $calling_person, $comments, $counseling, $status, $isModal = false, $courses = [], $councilings = [], $admissionBooth = [];
 
     public function render()
     {
@@ -20,7 +19,8 @@ class UpdateVisitor extends Component
     }
     public function mount($id) {
         $visitors = Visitors::findOrFail($id);
-        $this->counseling = $visitors->counseling;
+        $this->visitor_id = $visitors->id;
+        $this->counseling = $visitors->counseling_id;
         $this->status = $visitors->status;
         $this->name = $visitors->name;
         $this->mobile = $visitors->mobile;
@@ -31,12 +31,11 @@ class UpdateVisitor extends Component
         $this->visitor_comment = $visitors->visitor_comment;
         $this->gender = $visitors->gender;
         $this->ref_name = $visitors->ref_name;
-        $this->admission_booth_name = $visitors->admission_booth_name;
-        $this->admission_booth_number = $visitors->admission_booth_number;
         $this->calling_person = $visitors->calling_person;
+        $this->admission_booth_name = $visitors->admission_booth_name;
         $this->comments = $visitors->comments;
         $this->courses = Course::get();
-        $this->counciling = Councilings::get();
+        $this->councilings = Councilings::get();
         $this->admissionBooth = AdmissionBooth::get();
     }
     public function submit(){
@@ -54,10 +53,9 @@ class UpdateVisitor extends Component
             'ref_name' => 'nullable',
             'admission_booth_name' => 'nullable',
             'comments' => 'nullable',
-            'increment' => 'nullable',
         ]);
-        $done = Visitors::where('id')->update([
-            'counseling' => $this->counseling,
+        $done = Visitors::findOrFail($this->visitor_id)->update([
+            'counseling_id' => $this->counseling,
             'status' => $this->status,
             'name' => $this->name,
             'mobile' => $this->mobile,
@@ -69,10 +67,8 @@ class UpdateVisitor extends Component
             'gender' => $this->gender,
             'ref_name' => $this->ref_name,
             'admission_booth_name' => $this->admission_booth_name,
-            'admission_booth_number' => $this->admission_booth_number,
             'calling_person' => $this->calling_person,
             'comments' => $this->comments,
-            'call_count' => $this->increment,
             'updated_at' => Carbon::now(),
         ]);
         if($done){
