@@ -10,6 +10,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\paymentMode\paymentModeController;
 use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\VisitorController;
@@ -28,10 +29,10 @@ Route::post('/admin-post', [AdminController::class, 'loginPost'])->name('loginPo
 // Error Redirect
 Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('notFound');
 
+
 //admin Middlewere
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
-    //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     //Admin Auth
