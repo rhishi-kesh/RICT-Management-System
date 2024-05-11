@@ -78,10 +78,22 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 //Student Middlewere
 Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
-    //Student Dashboard
+    // Student Dashboard
     Route::get('/dashboard', [DashboardController::class, 'studentDashboard'])->name('studentDashboard');
 
-    //Student Logout
+    // Student Logout
     Route::get('/logout', [StudentController::class, 'studentLogout'])->name('studentLogout');
     Route::get('/profile', [ProfileController::class, 'userProfile'])->name('userProfile');
+    
+   
+
 });
+ // Forget password
+ Route::get('/forget-passwordlogin', [StudentController::class, 'forgetPasswordLoad'])->name('forgetPasswordLoad');
+ Route::post('/verification/{id}', [StudentController::class, 'verification'])->name('verification');
+ Route::post('/verificationList', [StudentController::class, 'verificationList'])->name('verificationList');
+ Route::get('/reset-passwordload', [StudentController::class, 'resetPasswordLoad'])->name('resetPasswordLoad');
+
+Route::post('/verified',[StudentController::class,'verifiedOtp'])->name('verifiedOtp');
+Route::get('/resendOtp',[StudentController::class,'resendOtp'])->name('resendOtp');
+

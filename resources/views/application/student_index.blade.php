@@ -57,7 +57,7 @@
                                                 d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908L18 8"
                                                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                         </svg><!----><!----><!----><span class="truncate text-primary ng-tns-c265-3">
-                                            {{ Auth::Guard('student')->user()->email }} </span></a></li>
+                                            {{ Auth::Guard('student')->user()->email ?? "--" }} </span></a></li>
 
                                 <li class="ng-tns-c265-3"><a href="javascript:;"
                                         class="flex items-center gap-2 ng-tns-c265-3"><svg width="18" height="18"

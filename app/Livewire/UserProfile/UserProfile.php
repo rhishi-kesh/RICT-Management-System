@@ -14,11 +14,11 @@ class UserProfile extends Component
 {
 
     use WithFileUploads;
-    public $name, $email, $id, $password_confirmation, $password, $current_password, $photo, $oldImage , $student;
+    public $mobile, $email, $id, $password_confirmation, $password, $current_password, $photo, $oldImage , $student;
 
     public function mount()
     {
-        $this->name = Auth::Guard('student')->user()->name;
+        $this->mobile = Auth::Guard('student')->user()->mobile;
         $this->email = Auth::Guard('student')->user()->email;
         $this->id = Auth::Guard('student')->user()->id;
     }
@@ -32,11 +32,11 @@ class UserProfile extends Component
     public function profileUpdate()
     {
         $validated = $this->validate([
-            'name' => 'required',
+            'mobile' => 'required',
             'email' => 'required|email',
         ]);
         $done = Student::findOrFail(Auth::Guard('student')->user()->id)->update([
-            'name' => $this->name,
+            'mobile' => $this->mobile,
             'email' => $this->email,
             'updated_at' => Carbon::now(),
         ]);
@@ -90,7 +90,7 @@ class UserProfile extends Component
             'password' => ['required', 'min:8', 'same:password_confirmation']
         ]);
 
-        if(Hash::check($this->current_password, Auth::user()->password)){
+        if(Hash::check($this->current_password, Auth::Guard('student')->user()->password)){
             $user_update = Auth::Guard('student')->user();
             $user_update->password = Hash::make($this->password);
             $user_update->update();

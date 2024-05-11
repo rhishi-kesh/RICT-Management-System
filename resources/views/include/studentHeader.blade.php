@@ -175,7 +175,7 @@
                                     </h4>
                                     <a
                                         href="javascript:;"
-                                        >{{ auth()->guard('student')->user()->email }}</a
+                                        >{{ auth()->guard('student')->user()->email ?? "--"  }}</a
                                     >
                                 </div>
                             </div>

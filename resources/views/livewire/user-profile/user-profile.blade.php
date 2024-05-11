@@ -61,11 +61,11 @@
                                 <div class=" grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
                                     <input type="hidden" wire:model='id' name="id">
                                     <div>
-                                        <label for="Name" class="my-label">Name</label>
-                                        <input type="text" wire:model="name" name="name" placeholder="Name"
-                                            id="Name" class="my-input focus:outline-none ">
+                                        <label for="mobile" class="my-label">Mobile</label>
+                                        <input type="number" wire:model="mobile" name="mobile" placeholder="Mobile"
+                                            id="Mobile" class="my-input focus:outline-none ">
                                         @if ($errors->has('name'))
-                                            <div class="text-red-500">{{ $errors->first('name') }}</div>
+                                            <div class="text-red-500">{{ $errors->first('mobile') }}</div>
                                         @endif
                                     </div>
                                     <div>

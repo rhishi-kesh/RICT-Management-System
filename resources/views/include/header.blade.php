@@ -198,7 +198,7 @@
                                     </h4>
                                     <a
                                         href="javascript:;"
-                                        >{{ auth()->user()->email }}</a
+                                        >{{ auth()->user()->email ?? "--" }}</a
                                     >
                                 </div>
                             </div>
