@@ -109,6 +109,7 @@ class Admission extends Component
         ]);
         if($done){
             $this->reset();
+            $this->mount();
             $this->dispatch('swal', [
                 'title' => 'Data Instert Successfull',
                 'type' => "success",

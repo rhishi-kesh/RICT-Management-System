@@ -1,7 +1,7 @@
 <div class="pt-5" x-data="modal">
 
     {{-- Insert Button --}}
-    @can('create')
+    {{-- @can('create') --}}
         <div class="mb-3">
             <button @click="toggle; $wire.call('showModal')" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
@@ -11,7 +11,7 @@
                 Add Course
             </button>
         </div>
-    @endcan
+    {{-- @endcan --}}
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Courses</h2>
         <hr>

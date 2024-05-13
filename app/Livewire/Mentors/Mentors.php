@@ -7,6 +7,7 @@ use App\Models\Mentor;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 class Mentors extends Component
 {
@@ -37,11 +38,17 @@ class Mentors extends Component
         } else {
             $fileName = null;
         }
+
+        $password = Str::random(8);
+        $password_hash = bcrypt($password);
+
+
         $done = Mentor::insert([
             'name' => $this->name,
             'email' => $this->email,
             'mobile' => $this->mobile,
             'image' => $fileName,
+            'password' => $password_hash,
             'created_at' => Carbon::now(),
         ]);
         if ($done) {

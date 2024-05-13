@@ -10,8 +10,8 @@ class StudentController extends Controller
 {
     public function studentLogin(){
         if (!Auth::guard('student')->check()) {
-            return view('auth/studentlogin');
-        }else{
+            return view('auth/student/login');
+        }else {
             return redirect()->route('studentDashboard');
         }
     }

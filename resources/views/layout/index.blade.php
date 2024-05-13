@@ -38,13 +38,13 @@
         <div class="main-container min-h-screen text-black dark:text-white-dark">
             <!-- start sidebar section -->
             <div>
-                @include('include/sidebar')
+                @include('include/admin/sidebar')
             </div>
             <!-- end sidebar section -->
 
             <div class="main-content flex min-h-screen flex-col bg-gray-200 dark:bg-gray-950">
                 <!-- start header section -->
-                @include('include/header')
+                @include('include/admin/header')
                 <!-- end header section -->
 
                 <!-- start main content section -->
@@ -52,7 +52,7 @@
                 <!-- end main content section -->
 
                 <!-- start footer section -->
-                @include('include/footer')
+                @include('include/admin/footer')
                 <!-- end footer section -->
             </div>
         </div>

@@ -1,4 +1,4 @@
-<nav x-data="sidebar"
+{{-- <nav x-data="sidebar"
     class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
     <div class="h-full bg-white dark:bg-slate-900">
         <div class="flex items-center justify-between px-4 py-3">
@@ -21,7 +21,7 @@
         <ul class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold"
             x-data="{ activeDropdown: 'dashboard' }">
             <li class="nav-item">
-                <a href="" class="group sidebargroup">
+                <a href="{{ route('myMNotice') }}" class="group sidebargroup">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -32,11 +32,37 @@
                             <path d="M15 4h1a1 1 0 0 1 1 1v3.5" />
                             <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />
                         </svg>
-                        <span
-                            class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Sidebar1</span>
+                        <span class="text-black pl-3 dark:text-[#506690] dark:group-hover:text-white-dark">My Notice</span>
                     </div>
                 </a>
             </li>
+            <li class="menu nav-item group">
+                <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'payroll' }"
+                    @click="activeDropdown === 'payroll' ? activeDropdown = null : activeDropdown = 'payroll'">
+                    <div class="flex items-center">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-wallet"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" /><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" /></svg>
+                        <span class="text-black pl-3 dark:text-[#506690] dark:group-hover:text-white-dark">Homework</span>
+                    </div>
+                    <div class="rtl:rotate-180" :class="{ '!rotate-90': activeDropdown === 'payroll' }">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </button>
+                <ul x-cloak x-show="activeDropdown === 'payroll'" x-collapse class="sub-menu text-gray-500">
+                    <li>
+                        <a href="{{ route('homework') }}">Assaign Homework</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('homeworkView') }}">Homeworks</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('submitedHomework') }}">Submited Homeworks</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
-</nav>
+</nav> --}}

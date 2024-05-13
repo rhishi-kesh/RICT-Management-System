@@ -10,13 +10,13 @@ class AdminController extends Controller
 {
     public function login(){
         if (!Auth::check()) {
-            return view('auth/adminlogin');
+            return view('auth/admin/login');
         }else{
             return redirect()->route('dashboard');
         }
     }
     public function registation() {
-        return view('auth/adminRegister');
+        return view('auth/admin/register');
     }
     public function loginPost(Request $request){
         $credentials = $request->validate([
@@ -42,9 +42,9 @@ class AdminController extends Controller
         return redirect()->route('login');
     }
     public function userView(){
-        return view('auth/viewUser');
+        return view('auth/admin/viewUser');
     }
     public function userEdit($id){
-        return view('auth/editUser', compact('id'));
+        return view('auth/admin/editUser', compact('id'));
     }
 }

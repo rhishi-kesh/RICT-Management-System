@@ -23,7 +23,7 @@
                                     @if(empty($data->profile))
                                         <div class="profile">{{ mb_substr(strtoupper($data->name), 0, 1) }}</div>
                                     @else
-                                        <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="" alt="image">
+                                        <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="{{ asset('storage/' . $data->image) }}" alt="image">
                                     @endif
                                 </td>
                                 <td class="p-3 text-center">{{ $data->name }}</td>

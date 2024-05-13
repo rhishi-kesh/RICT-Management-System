@@ -41,7 +41,7 @@
                                 {{ $data->mobile }}</td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
                                 @if (empty($data->image))
-                                    <div class="profile w-9 h-9 text-xs">{{ mb_substr($data->name, 0, 1) }}
+                                    <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($data->name), 0, 1) }}
                                     </div>
                                 @else
                                     <div class="text-center">

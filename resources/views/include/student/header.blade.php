@@ -3,9 +3,9 @@
         <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-slate-900">
             <div class="horizontal-logo flex items-center justify-between lg:hidden">
                 <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
-                    <img class="inline w-10 ltr:-ml-1 rtl:-mr-1 rounded-full" src="{{ asset('frontend/images/RICT/fav.jpg') }}" alt="image" />
+                    <img class="inline w-10 -ml-1 rounded-full" src="{{ asset('frontend/images/RICT/fav.jpg') }}" alt="image" />
                 </a>
-                <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
+                <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ml-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 7L4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         <path opacity="0.5" d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
@@ -13,21 +13,19 @@
                     </svg>
                 </a>
             </div>
-            <div class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2" >
-                <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
+            <div class="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] sm:flex-1 sm:ml-0 lg:space-x-2" >
+                <div class="sm:mr-auto" x-data="{ search: false }" @click.outside="search = false">
                     <form
-                        class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0"
-                        :class="{'!block' : search}"
+                        class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" :class="{'!block' : search}"
                     >
                         <div class="relative">
                             <input
-                                type="text"
-                                class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border"
+                                type="text" class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border"
                                 placeholder="Search..."
                             />
                             <button
                                 type="button"
-                                class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 ltr:right-auto rtl:left-auto"
+                                class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 right-auto"
                             >
                                 <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
@@ -35,9 +33,7 @@
                                 </svg>
                             </button>
                             <button
-                                type="button"
-                                class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 ltr:right-2 rtl:left-2 sm:hidden"
-                                @click="search = false"
+                                type="button" class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 right-2 sm:hidden" @click="search = false"
                             >
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
@@ -162,7 +158,7 @@
                         x-show="open"
                         x-transition
                         x-transition.duration.300ms
-                        class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90"
+                        class="top-11 w-[230px] !py-0 font-semibold text-dark right-0 dark:text-white-dark dark:text-white-light/90"
                     >
                         <li>
                             <div class="flex items-center px-4 py-4">
@@ -183,7 +179,7 @@
                         <li>
                             <a href="" class="dark:hover:text-white" @click="toggle">
                                 <svg
-                                    class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2"
+                                    class="h-4.5 w-4.5 shrink-0 mr-2"
                                     width="18"
                                     height="18"
                                     viewBox="0 0 24 24"
@@ -204,7 +200,7 @@
                         <li class="border-t border-white-light dark:border-white-light/10">
                             <a href="{{ route('studentLogout') }}" class="!py-3 text-danger" @click="toggle">
                                 <svg
-                                    class="h-4.5 w-4.5 shrink-0 rotate-90 ltr:mr-2 rtl:ml-2"
+                                    class="h-4.5 w-4.5 shrink-0 rotate-90 mr-2"
                                     width="18"
                                     height="18"
                                     viewBox="0 0 24 24"

@@ -3,9 +3,9 @@
         <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-slate-900">
             <div class="horizontal-logo flex items-center justify-between lg:hidden">
                 <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
-                    <img class="inline w-10 ltr:-ml-1 rtl:-mr-1 rounded-full" src="{{ asset('frontend/images/RICT/fav.jpg') }}" alt="image" />
+                    <img class="inline w-10 -ml-1 rounded-full" src="{{ asset('frontend/images/RICT/fav.jpg') }}" alt="image" />
                 </a>
-                <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
+                <a href="javascript:;" class="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ml-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden" @click="$store.app.toggleSidebar()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 7L4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         <path opacity="0.5" d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
@@ -13,12 +13,9 @@
                     </svg>
                 </a>
             </div>
-            <div class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2" >
-                <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
-                    <form
-                        class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0"
-                        :class="{'!block' : search}"
-                    >
+            <div class="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] sm:flex-1 sm:ml-0 lg:space-x-2" >
+                <div class="sm:mr-auto" x-data="{ search: false }" @click.outside="search = false">
+                    <form class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" :class="{'!block' : search}" >
                         <div class="relative">
                             <input
                                 type="text"
@@ -27,18 +24,14 @@
                             />
                             <button
                                 type="button"
-                                class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 ltr:right-auto rtl:left-auto"
+                                class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 right-auto"
                             >
                                 <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
                                     <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                 </svg>
                             </button>
-                            <button
-                                type="button"
-                                class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 ltr:right-2 rtl:left-2 sm:hidden"
-                                @click="search = false"
-                            >
+                            <button type="button" class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 right-2  sm:hidden" @click="search = false" >
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
                                     <path
@@ -70,33 +63,11 @@
                     </button>
                 </div>
                 <div>
-                    <a href="http://test.interiorbangladesh.com/admin" target="_blank" class="uppercase btn md:bg-blue-500 bg-transparent border-none dark:text-[#b0b2b6] text-[#5a5b5e] md:text-white dark:md:text-white cursor-pointer px-3 pr-1 md:pr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world inline mb-0 md:mb-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
-                            <path d="M3.6 9h16.8"></path>
-                            <path d="M3.6 15h16.8"></path>
-                            <path d="M11.5 3a17 17 0 0 0 0 18"></path>
-                            <path d="M12.5 3a17 17 0 0 1 0 18"></path>
-                        </svg>
-                        <span class="hidden md:inline-block">
-                            Manage Website
-                        </span>
-                    </a>
-                </div>
-                <div>
-                    <a href="http://apply.rayhansict.com/admin" target="_blank" class="uppercase btn md:bg-blue-500 bg-transparent border-none dark:text-[#b0b2b6] text-[#5a5b5e] md:text-white dark:md:text-white cursor-pointer px-3">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase inline mb-0 md:mb-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /><path d="M12 12l0 .01" /><path d="M3 13a20 20 0 0 0 18 0" /></svg>
-                        <span class="hidden md:inline-block">
-                            Manage Job
-                        </span>
-                    </a>
-                </div>
-                <div>
                     <a
                         href="javascript:;"
                         x-cloak
                         x-show="$store.app.theme === 'light'"
+                        href="javascript:;"
                         class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                         @click="$store.app.toggleTheme('dark')"
                     >
@@ -140,6 +111,7 @@
                         href="javascript:;"
                         x-cloak
                         x-show="$store.app.theme === 'dark'"
+                        href="javascript:;"
                         class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                         @click="$store.app.toggleTheme('system')"
                     >
@@ -154,6 +126,7 @@
                         href="javascript:;"
                         x-cloak
                         x-show="$store.app.theme === 'system'"
+                        href="javascript:;"
                         class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                         @click="$store.app.toggleTheme('light')"
                     >
@@ -170,19 +143,16 @@
                 </div>
                 <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                     <a href="javascript:;" class="group relative" @click="toggle()">
-                        <span
-                            ><img
-                                class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                src="{{ asset('frontend/images/user-profile.jpeg') }}"
-                                alt="image"
-                        /></span>
+                        <span>
+                            <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image"/>
+                        </span>
                     </a>
                     <ul
                         x-cloak
                         x-show="open"
                         x-transition
                         x-transition.duration.300ms
-                        class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90"
+                        class="top-11 w-[230px] !py-0 font-semibold text-dark right-0 dark:text-white-dark dark:text-white-light/90"
                     >
                         <li>
                             <div class="flex items-center px-4 py-4">
@@ -191,19 +161,16 @@
                                 </div>
                                 <div class="truncate pl-4">
                                     <h4>
-                                        {{ auth()->user()->name }}
+                                        {{ auth()->guard('mentor')->user()->name }}
                                     </h4>
-                                    <a
-                                        href="javascript:;"
-                                        >{{ auth()->user()->email }}</a
-                                    >
+                                    <a href="javascript:;" >{{ auth()->guard('mentor')->user()->email }}</a>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <a href="" class="dark:hover:text-white" @click="toggle">
                                 <svg
-                                    class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2"
+                                    class="h-4.5 w-4.5 shrink-0 mr-2"
                                     width="18"
                                     height="18"
                                     viewBox="0 0 24 24"
@@ -222,9 +189,9 @@
                             >
                         </li>
                         <li class="border-t border-white-light dark:border-white-light/10">
-                            <a href="{{ route('logout') }}" class="!py-3 text-danger" @click="toggle">
+                            <a href="{{ route('mentorLogout') }}" class="!py-3 text-danger" @click="toggle">
                                 <svg
-                                    class="h-4.5 w-4.5 shrink-0 rotate-90 ltr:mr-2 rtl:ml-2"
+                                    class="h-4.5 w-4.5 shrink-0 rotate-90 mr-2"
                                     width="18"
                                     height="18"
                                     viewBox="0 0 24 24"

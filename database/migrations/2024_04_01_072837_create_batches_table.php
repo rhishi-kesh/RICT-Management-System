@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('mentor_id')->nullable();
             $table->string('name');
             $table->timestamps();
         });

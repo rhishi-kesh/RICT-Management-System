@@ -3,6 +3,7 @@
 namespace App\Livewire\Batch;
 
 use App\Models\Batch as Batchs;
+use App\Models\Mentor;
 use App\Models\Student;
 use Carbon\Carbon;
 use Exception;
@@ -14,23 +15,23 @@ use Illuminate\Support\Str;
 class Batch extends Component
 {
     use WithPagination;
-    public $name, $update_id, $isModal = false, $isBatch = false, $delete_id, $removeBatch_id, $singlebatch, $showUpdateInput, $studentWithoutBatch = [], $addToBatch = [];
+    public $name, $update_id, $isModal = false, $isBatch = false, $isMentorModal = false, $delete_id, $removeBatch_id, $singlebatch, $batchMentor, $showUpdateInput, $studentWithoutBatch = [], $addToBatch = [], $mentors = [], $mentor;
     protected $listeners = [
         'deleteConfirm' => 'DeleteBatch',
         'removeConfirm' => 'removeStudent'
     ];
     public function mount() {
         $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id','id')->get();
+        $this->mentors = Mentor::get();
     }
-    public function render()
-    {
+    public function render() {
         $batch = Batchs::select('id', 'name')
                 ->withCount('students')
                 ->latest()
-                ->paginate(10);
+                ->paginate(20);
         return view('livewire.batch.batch', compact('batch'));
     }
-    public function insert(){
+    public function insert() {
         $validated = $this->validate([
             'name' => 'required|unique:batches',
         ]);
@@ -47,13 +48,13 @@ class Batch extends Component
             ]);
         }
     }
-    public function editBatch($key, $id){
+    public function editBatch($key, $id) {
         $this->showUpdateInput = $key;
         $data = Batchs::findOrFail($id);
         $this->name = $data->name;
         $this->update_id = $data->id;
     }
-    public function updateBatch(){
+    public function updateBatch() {
         $validated = $this->validate([
             'name' => 'required|unique:batches,name,' . $this->update_id,
         ]);
@@ -71,7 +72,7 @@ class Batch extends Component
             ]);
         }
     }
-    public function deleteAlert($id){
+    public function deleteAlert($id) {
         $this->delete_id = $id;
         $studentCount = Student::where('batch_id', $id)->count();
         if($studentCount){
@@ -90,7 +91,7 @@ class Batch extends Component
             ]);
         }
     }
-    public function DeleteBatch(){
+    public function DeleteBatch() {
         $done = Batchs::findOrFail($this->delete_id)->delete();
         if($done){
             $this->update_id = '';
@@ -100,7 +101,7 @@ class Batch extends Component
             ]);
         }
     }
-    public function singleBatch($id){
+    public function singleBatch($id) {
         $this->isBatch = true;
         $this->singlebatch = Batchs::where('id',$id)
                 ->select('id', 'name')
@@ -133,14 +134,14 @@ class Batch extends Component
             DB::rollback();
         }
     }
-    public function refresh(){
+    public function refresh() {
         $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id', 'id')->get();
     }
-    public function removeStudentAlert($id){
+    public function removeStudentAlert($id) {
         $this->removeBatch_id = $id;
         $this->dispatch('removeStudentAlert');
     }
-    public function removeStudent(){
+    public function removeStudent() {
         $done = Student::where('id',$this->removeBatch_id)->update([
             'batch_id' => null,
             'updated_at' => Carbon::now(),
@@ -153,16 +154,42 @@ class Batch extends Component
             ]);
         }
     }
-    public function removebatch(){
+    public function removebatch() {
         $this->isBatch = false;
     }
-    public function showModal(){
+    public function asignMentor($id) {
+        $this->isMentorModal = true;
+        $this->batchMentor = Batchs::query()
+                ->with('mentors') 
+                ->select('id', 'name', 'mentor_id')
+                ->where('id', $id)
+                ->latest()
+                ->first();
+    }
+    public function addMentor($id) {
+        $done = Batchs::where('id', $id)->first();
+        $done->mentor_id = $this->mentor;
+        $done->update();
+        if($done){
+            $this->dispatch('clearInput', [
+                'title' => 'Mentor Asign Successfull',
+                'type' => "success",
+            ]);
+        }
+    }
+    public function removeMentorMOdal() {
+        $this->isMentorModal = false;
+    }
+    public function showModal() {
         $this->reset();
         $this->isModal = true;
     }
-    public function removeModal(){
+    public function removeModal() {
         $this->update_id = '';
         $this->isModal = false;
         $this->reset();
+    }
+    public function removeUpdate() {
+        $this->showUpdateInput = null;
     }
 }
