@@ -187,7 +187,6 @@
                         <li>
                             <div class="flex items-center px-4 py-4">
                                 <div class="flex-none">
-                                    {{-- <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image" /> --}}
 
                                     <img class="h-10 w-10 rounded-md object-cover" 
                                     src="{{ empty(Auth::user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::user()->profile) }}" width="100px" height="100px" alt="image" />
@@ -199,7 +198,7 @@
                                     </h4>
                                     <a
                                         href="javascript:;"
-                                        >{{ auth()->user()->email }}</a
+                                        >{{ auth()->user()->email ?? "--" }}</a
                                     >
                                 </div>
                             </div>

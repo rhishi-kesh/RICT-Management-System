@@ -41,14 +41,17 @@
                                 {{ $data->mobile }}</td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
                                 @if (empty($data->image))
-                                    <div class="profile w-9 h-9 text-xs">{{ mb_substr($data->name, 0, 1) }}
+                                    <div class="profile w-7 h-7 text-xs">{{ mb_substr($data->name, 0, 1) }}
                                     </div>
                                 @else
                                     <div class="text-center">
-                                        <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $data->image) }}" alt="img" width="150" height="100" />
+                                        <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
+                                            src="{{ asset('storage/' . $data->image) }}" alt="img" width="150"
+                                            height="100" />
                                     </div>
                                 @endif
                             </td>
+
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
 
                                 {{-- Edit Button --}}

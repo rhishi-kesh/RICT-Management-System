@@ -153,7 +153,7 @@
                         <span
                             ><img
                                 class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                src="{{ asset('frontend/images/user-profile.jpeg') }}"
+                                src="{{ empty(Auth::Guard('student')->user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::Guard('student')->user()->profile) }}" width="100px" height="100px" alt="image"
                                 alt="image"
                         /></span>
                     </a>
@@ -167,7 +167,7 @@
                         <li>
                             <div class="flex items-center px-4 py-4">
                                 <div class="flex-none">
-                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image" />
+                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ empty(Auth::Guard('student')->user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::Guard('student')->user()->profile) }}" width="100px" height="100px" alt="image" />
                                 </div>
                                 <div class="truncate pl-4">
                                     <h4>
@@ -175,7 +175,7 @@
                                     </h4>
                                     <a
                                         href="javascript:;"
-                                        >{{ auth()->guard('student')->user()->email }}</a
+                                        >{{ auth()->guard('student')->user()->email ?? "--"  }}</a
                                     >
                                 </div>
                             </div>

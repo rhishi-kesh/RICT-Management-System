@@ -4,7 +4,6 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Management System</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/RICT/fav.jpg') }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -25,7 +24,7 @@
     </head>
     <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
         <!-- sidebar menu overlay -->
-        <div class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
+        <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"@click="$store.app.toggleSidebar()"></div>
 
         <!-- scroll to top button -->
         <div class="fixed bottom-8 rignt-8 z-50 ltr:right-6" x-data="scrollToTop">
@@ -40,9 +39,9 @@
             </template>
         </div>
 
-        <div class="main-container min-h-screen text-black dark:text-white-dark">
+        <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
             <!-- start sidebar section -->
-            <div>
+            <div :class="{'dark text-white-dark' : $store.app.semidark}">
                 @include('include/sidebar')
             </div>
             <!-- end sidebar section -->
@@ -61,7 +60,6 @@
                 <!-- end footer section -->
             </div>
         </div>
-
 
         @livewireScripts
         <script src="{{ asset('frontend/js/perfect-scrollbar.min.js') }}"></script>

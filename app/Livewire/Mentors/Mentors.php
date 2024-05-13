@@ -113,8 +113,7 @@ class Mentors extends Component
         $done->delete();
         if ($done) {
             $this->update_id = '';
-            $this->resetForm();
-            $this->removeModal();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -123,7 +122,6 @@ class Mentors extends Component
     }
     public function showModal()
     {
-        $this->resetForm();
-        $this->isModal = true;
+        $this->reset();
     }
 }
