@@ -28,6 +28,9 @@ class StudentHomeworkView extends Component
     }
 
     public function changeStatus($id) {
+        $data = HomeworkSubmit::where('homework_id', $id)->first();
+        $this->url = $data->url ?? '';
+        $this->description = $data->description ?? '';
 
         if($this->status == 'inReview') {
 
@@ -48,7 +51,6 @@ class StudentHomeworkView extends Component
                     'type' => "success",
                 ]);
             }
-
         }
     }
 
@@ -67,12 +69,17 @@ class StudentHomeworkView extends Component
                 'updated_at' => Carbon::now()
             ]);
 
-            HomeworkSubmit::insert([
-                'homework_id' => $this->homeworkId,
-                'url' => $this->url,
-                'description' => $this->description,
-                'created_at' => Carbon::now()
-            ]);
+            HomeworkSubmit::updateOrCreate(
+                [
+                    'homework_id' => $this->homeworkId
+                ],
+                [
+                    'homework_id' => $this->homeworkId,
+                    'url' => $this->url,
+                    'description' => $this->description,
+                    'created_at' => Carbon::now()
+                ]
+            );
 
             DB::commit();
             $this->dispatch('swal', [

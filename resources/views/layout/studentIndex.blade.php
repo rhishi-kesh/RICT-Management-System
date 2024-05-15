@@ -13,13 +13,19 @@
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/animate.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/sweetalert2.min.css') }}" />
+
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/perfect-scrollbar.min.css')}}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/style.css')}}" />
+        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/animate.css')}}" />
+
+
         @vite('resources/css/app.css')
         @livewireStyles
         @stack('css')
     </head>
     <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
         <!-- sidebar menu overlay -->
-        <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"@click="$store.app.toggleSidebar()"></div>
+        <div class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"@click="$store.app.toggleSidebar()"></div>
 
         <!-- scroll to top button -->
         <div class="fixed bottom-8 rignt-8 z-50 ltr:right-6" x-data="scrollToTop">

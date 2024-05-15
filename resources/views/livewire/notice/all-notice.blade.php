@@ -62,8 +62,8 @@
                     </button>
                 </div>
                 <div x-show="activeTab == 'mentor'" class="p-7 pt-0 w-full">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                        @foreach ($mentorNotice as $item)
+                    <div class="grid grid-cols-1 gap-4 mt-3 @if(!empty($mentorNotice) && $mentorNotice->count() > 0) sm:grid-cols-3 @else sm:grid-cols-1 @endif">
+                        @forelse ($mentorNotice as $item)
                             <div class="mb-1 rounded-xl shadow shadow-slate-400 dark:shadow-blue-200 max-h-[176px]">
                                 <div class="flex justify-start gap-2 p-4">
                                     @if(empty($item->mentor->image))
@@ -97,19 +97,23 @@
                                     <a href="{{ route('singleANotice', $item->id) }}" class="cursor-pointer absolute inset-0 bg-gradient-to-b from-[#ffffff6c] to-white dark:to-[#080c16] dark:from-[#0f172a60] rounded-xl"></a>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[250px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 <div x-show="activeTab == 'systemUser'" class="p-7 pt-0 w-full">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                        @foreach ($systemUserNotice as $item)
+                    <div class="grid grid-cols-1 @if(!empty($systemUserNotice) && $systemUserNotice->count() > 0) sm:grid-cols-3 @else sm:grid-cols-1 @endif gap-4 mt-3">
+                        @forelse ($systemUserNotice as $item)
                             <div class="mb-1 rounded-xl shadow shadow-slate-400 dark:shadow-blue-200 max-h-[176px]">
                                 <div class="flex justify-start gap-2 p-4">
-                                    @if(empty($item->user->image))
+                                    @if(empty($item->user->profile))
                                         <div class="profile">{{ mb_substr(strtoupper($item->user->name), 0, 1) }}</div>
                                     @else
                                         <div>
-                                            <img class="h-9 w-9 rounded-full object-cover saturate-50  group-hover:saturate-100" src="{{ asset('storage/' . $item->user->image) }}" alt="image">
+                                            <img class="h-9 w-9 rounded-full object-cover saturate-50  group-hover:saturate-100" src="{{ asset('storage/' . $item->user->profile) }}" alt="image">
                                         </div>
                                     @endif
                                     <div>
@@ -136,12 +140,16 @@
                                     <a href="{{ route('singleANotice', $item->id) }}"  class="cursor-pointer absolute inset-0 bg-gradient-to-b from-[#ffffff6c] to-white dark:to-[#080c16] dark:from-[#0f172a60] rounded-xl"></a>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[250px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 <div x-show="activeTab == 'admissionBooth'" class="p-7 pt-0 w-full">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                        @foreach ($admissionBoothNotice as $item)
+                    <div class="grid grid-cols-1 @if(!empty($admissionBoothNotice) && $admissionBoothNotice->count() > 0) sm:grid-cols-3 @else sm:grid-cols-1 @endif gap-4 mt-3">
+                        @forelse ($admissionBoothNotice as $item)
                             <div class="mb-1 rounded-xl shadow shadow-slate-400 dark:shadow-blue-200 max-h-[176px]">
                                 <div class="flex justify-start gap-2 p-4">
                                     <div class="profile">{{ mb_substr(strtoupper ($item->admissionBooth->name), 0, 1) }}</div>
@@ -164,19 +172,23 @@
                                     <a href="{{ route('singleANotice', $item->id) }}"  class="cursor-pointer absolute inset-0 bg-gradient-to-b from-[#ffffff6c] to-white dark:to-[#080c16] dark:from-[#0f172a60] rounded-xl"></a>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[250px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 <div x-show="activeTab == 'studentWithoutBatch'" class="p-7 pt-0 w-full">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                        @foreach ($students as $item)
+                    <div class="grid grid-cols-1 @if(!empty($students) && $students->count() > 0) sm:grid-cols-3 @else sm:grid-cols-1 @endif gap-4 mt-3">
+                        @forelse ($students as $item)
                             <div class="mb-1 rounded-xl shadow shadow-slate-400 dark:shadow-blue-200 max-h-[176px]">
                                 <div class="flex justify-start gap-2 p-4">
-                                    @if(empty($item->student->image))
+                                    @if(empty($item->student->profile))
                                         <div class="profile">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}</div>
                                     @else
                                         <div>
-                                            <img class="h-9 w-9 rounded-full object-cover saturate-50  group-hover:saturate-100" src="{{ asset('storage/' . $item->student->image) }}" alt="image">
+                                            <img class="h-9 w-9 rounded-full object-cover saturate-50  group-hover:saturate-100" src="{{ asset('storage/' . $item->student->profile) }}" alt="image">
                                         </div>
                                     @endif
                                     <div>
@@ -201,20 +213,24 @@
                                     <a href="{{ route('singleANotice', $item->id) }}"  class="cursor-pointer absolute inset-0 bg-gradient-to-b from-[#ffffff6c] to-white dark:to-[#080c16] dark:from-[#0f172a60] rounded-xl"></a>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('empty.png') }}" alt="" class="w-[250px] opacity-40 dark:opacity-15 mt-10 select-none">
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 @foreach ($batch as $item)
                     <div x-show="activeTab == '{{ $item->name }}'" class="p-7 pt-0 w-full">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
-                            @foreach ($batchdata as $data)
+                        <div class="grid grid-cols-1 @if(!empty($batchdata) && $batchdata->count() > 0) sm:grid-cols-3 @else sm:grid-cols-1 @endif gap-4 mt-3">
+                            @forelse ($batchdata as $data)
                                 <div class="mb-1 rounded-xl shadow shadow-slate-400 dark:shadow-blue-200 max-h-[176px]">
                                     <div class="flex justify-start gap-2 p-4">
-                                        @if(empty($data->student->image))
+                                        @if(empty($data->student->profile))
                                             <div class="profile">{{ mb_substr(strtoupper($data->student->name), 0, 1) }}</div>
                                         @else
                                             <div>
-                                                <img class="h-9 w-9 rounded-full object-cover saturate-50  group-hover:saturate-100" src="{{ asset('storage/' . $data->student->image) }}" alt="image">
+                                                <img class="h-9 w-9 rounded-full object-cover saturate-50  group-hover:saturate-100" src="{{ asset('storage/' . $data->student->profile) }}" alt="image">
                                             </div>
                                         @endif
                                         <div>
@@ -239,7 +255,11 @@
                                         <a href="{{ route('singleANotice', $data->id) }}"  class="cursor-pointer absolute inset-0 bg-gradient-to-b from-[#ffffff6c] to-white dark:to-[#080c16] dark:from-[#0f172a60] rounded-xl"></a>
                                     </div>
                                 </div>
-                            @endforeach
+                                @empty
+                                <div class="flex justify-center items-center">
+                                    <img src="{{ asset('empty.png') }}" alt="" class="w-[250px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 @endforeach

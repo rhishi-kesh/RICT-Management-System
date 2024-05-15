@@ -32,6 +32,7 @@
             Add Batch
         </button>
     </div>
+
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Batchs</h2>
         <div class="w-full">
@@ -121,7 +122,7 @@
                                     <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data2->name), 0, 1) }}</div>
                                 @else
                                     <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                        src="{{ asset('storage/' . $data2->image) }}" alt="image" />
+                                        src="{{ asset('storage/' . $data2->profile) }}" alt="image" />
                                 @endif
                             @endforeach
                             <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ $data->students_count }})Total</span>
@@ -225,12 +226,12 @@
                                         </td>
                                         <td class="p-3 mt-2 border-b border-[#ebedf2] dark:border-[#191e3a] d-flex justify-center" style="display: flex">
                                             @if (empty($data->profile))
-                                                <div class="profile w-7 h-7 text-xs">{{ mb_substr($data->name, 0, 1) }}
+                                                <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data->name), 0, 1) }}
                                                 </div>
                                             @else
                                                 <div class="text-center">
                                                     <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                                        src="{{ asset('IMG_4406.JPG') }}" alt="image" />
+                                                        src="{{ asset('storage/' . $data->profile) }}" alt="image" />
                                                 </div>
                                             @endif
                                         </td>
@@ -308,33 +309,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                        1
-                                    </td>
-                                    <td class="p-3 mt-2 border-b border-[#ebedf2] dark:border-[#191e3a] d-flex justify-center" style="display: flex">
-                                        @if (empty($batchMentor->mentors->profile))
-                                            <div class="profile w-7 h-7 text-xs">{{ mb_substr($batchMentor->mentors->name ?? '-', 0, 1) }}
+                                @if(!empty($batchMentor->mentors) && $batchMentor->mentors->count() > 0)
+                                    @foreach($batchMentor->mentors as $item)
+                                        <tr>
+                                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                                1
+                                            </td>
+                                            <td class="p-3 mt-2 border-b border-[#ebedf2] dark:border-[#191e3a] d-flex justify-center" style="display: flex">
+                                                @if (empty($item->image))
+                                                    <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($item->name), 0, 1) }}
+                                                    </div>
+                                                @else
+                                                    <div class="text-center">
+                                                        <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $item->image) }}" alt="image" />
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center" >
+                                                {{ $item->name ?? '-' }}
+                                            </td>
+                                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                                <button class="bg-red-500 btn text-white border-0" wire:click="removeMentorAlert({{ $batchMentor->id }})">
+                                                    Remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="20">
+                                            <div class="flex justify-center items-center">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
-                                        @else
-                                            <div class="text-center">
-                                                <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                                    src="{{ asset('IMG_4406.JPG') }}" alt="image" />
-                                            </div>
-                                        @endif
-                                    </td>
-                                    <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                        {{ $batchMentor->mentors->name ?? '-' }}</td>
-                                    <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-
-                                        <button
-                                            wire:click="removeStudentAlert({{ $batchMentor->mentors->id ?? null }})"
-                                            class="bg-red-500 btn text-white border-0"
-                                        >
-                                            Remove
-                                        </button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -402,6 +411,39 @@
             });
 
             window.addEventListener('deleteSuccessFull', event => {
+                const eventData = event.detail[0]; // Accessing the first element of the array
+                if (eventData && eventData.title && eventData.type) {
+                    Swal.fire({
+                        icon: eventData.type,
+                        title: eventData.title,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    console.error('Invalid event data format:', eventData);
+                }
+            });
+        </script>
+
+        {{-- remove Mentor Alert --}}
+        <script>
+            window.addEventListener('removeMentorAlert', event => {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Mentor Will Removed Form This Batch",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Remove"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('removeMentorConfirm');
+                    }
+                });
+            });
+
+            window.addEventListener('deleteMentorSuccessFull', event => {
                 const eventData = event.detail[0]; // Accessing the first element of the array
                 if (eventData && eventData.title && eventData.type) {
                     Swal.fire({

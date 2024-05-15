@@ -10,6 +10,8 @@ class HomeworkSubmit extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['homework_id','url','description','feedback'];
+
     public function homework(): HasOne
     {
         return $this->hasOne(Homework::class,'id','homework_id');

@@ -23,18 +23,13 @@
                                 type="text" class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border"
                                 placeholder="Search..."
                             />
-                            <button
-                                type="button"
-                                class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 right-auto"
-                            >
+                            <button type="button" class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 right-auto" >
                                 <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
                                     <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                 </svg>
                             </button>
-                            <button
-                                type="button" class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 right-2 sm:hidden" @click="search = false"
-                            >
+                            <button type="button" class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 right-2 sm:hidden" @click="search = false" >
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
                                     <path
@@ -146,12 +141,9 @@
                 </div>
                 <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                     <a href="javascript:;" class="group relative" @click="toggle()">
-                        <span
-                            ><img
-                                class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                src="{{ asset('frontend/images/user-profile.jpeg') }}"
-                                alt="image"
-                        /></span>
+                        <span >
+                            <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="{{ empty(Auth::Guard('student')->user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::Guard('student')->user()->profile) }}" width="100px" height="100px" alt="image" alt="image" />
+                        </span>
                     </a>
                     <ul
                         x-cloak
@@ -163,21 +155,18 @@
                         <li>
                             <div class="flex items-center px-4 py-4">
                                 <div class="flex-none">
-                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('frontend/images/user-profile.jpeg') }}" alt="image" />
+                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ empty(Auth::Guard('student')->user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::Guard('student')->user()->profile) }}" width="100px" height="100px" alt="image" />
                                 </div>
                                 <div class="truncate pl-4">
                                     <h4>
                                         {{ auth()->guard('student')->user()->name }}
                                     </h4>
-                                    <a
-                                        href="javascript:;"
-                                        >{{ auth()->guard('student')->user()->email }}</a
-                                    >
+                                    <a href="javascript:;">{{ auth()->guard('student')->user()->email ?? "-"  }}</a>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="" class="dark:hover:text-white" @click="toggle">
+                            <a href="{{ route('studentProfile') }}" class="dark:hover:text-white" @click="toggle">
                                 <svg
                                     class="h-4.5 w-4.5 shrink-0 mr-2"
                                     width="18"

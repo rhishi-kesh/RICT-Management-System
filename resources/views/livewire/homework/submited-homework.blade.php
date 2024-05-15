@@ -1,7 +1,7 @@
 <div class="animate__animated p-6" :class="[$store.app.animation]">
     <div x-data="todolist">
         <div class="relative flex h-full gap-5 sm:h-[calc(100vh_-_150px)]">
-            <div class="panel absolute z-10 hidden h-full w-[240px] max-w-full flex-none space-y-4 p-4 rounded-r-none xl:relative xl:block xl:h-auto xl:rounded-r-md" :class=" {'!block':isShowTaskMenu}">
+            <div class="panel absolute z-10 hidden h-full w-[240px] max-w-full flex-none space-y-4 p-4 rounded-r-none xl:relative xl:block xl:h-auto xl:rounded-r-md" :class="{'!block':isShowTaskMenu}">
                 <div class="flex h-full flex-col pb-16">
                     <div class="pb-2">
                         <div class="flex items-center text-center">
@@ -88,9 +88,8 @@
                                                 </div>
                                             @else
                                                 <div class="text-center">
-                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="" alt="img" width="150" height="100" />
+                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $item->student->profile) }}" alt="img" width="150" height="100" />
                                                 </div>
-                                                {{ asset('storage/' . $item->student->profile) }}
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
@@ -154,9 +153,8 @@
                                                 </div>
                                             @else
                                                 <div class="text-center">
-                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="" alt="img" width="150" height="100" />
+                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $item->student->profile) }}" alt="img" width="150" height="100" />
                                                 </div>
-                                                {{ asset('storage/' . $item->student->profile) }}
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
@@ -220,9 +218,8 @@
                                                 </div>
                                             @else
                                                 <div class="text-center">
-                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="" alt="img" width="150" height="100" />
+                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $item->student->profile) }}" alt="img" width="150" height="100" />
                                                 </div>
-                                                {{ asset('storage/' . $item->student->profile) }}
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
@@ -286,9 +283,8 @@
                                                 </div>
                                             @else
                                                 <div class="text-center">
-                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="" alt="img" width="150" height="100" />
+                                                    <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $item->student->profile) }}" alt="img" width="150" height="100" />
                                                 </div>
-                                                {{ asset('storage/' . $item->student->profile) }}
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">

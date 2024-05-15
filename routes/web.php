@@ -12,6 +12,7 @@ use App\Http\Controllers\Homework\HomeworkController;
 use App\Http\Controllers\notice\NoticController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\paymentMode\paymentModeController;
 use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\VisitorController;
@@ -23,13 +24,46 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
 Route::post('/student-post', [StudentController::class, 'StudentPost'])->name('StudentPost');
 
+// Student Forget password
+Route::group(['prefix'=>'student', 'as'=>'student.'], function(){
+    Route::get('/forgot-password', [StudentController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::post('/forgot-password-post', [StudentController::class, 'forgotPasswordPost'])->name('forgotPasswordPost');
+    Route::get('/verify/{id}', [StudentController::class, 'verify'])->name('verify');
+    Route::post('/verify-post', [StudentController::class, 'verifyPost'])->name('verifyPost');
+    Route::get('/resend-otp',[StudentController::class,'resendOtp'])->name('resendOtp');
+    Route::get('/change-password/{id}', [StudentController::class, 'changePassword'])->name('changePassword');
+    Route::post('/change-password-post', [StudentController::class, 'changePasswordPost'])->name('changePasswordPost');
+});
+
 //Admin Auth
 Route::get('/admin', [AdminController::class, 'login'])->name('login');
 Route::post('/admin-post', [AdminController::class, 'loginPost'])->name('loginPost');
 
+// Admin Forget password
+Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
+    Route::get('/forgot-password', [AdminController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::post('/forgot-password-post', [AdminController::class, 'forgotPasswordPost'])->name('forgotPasswordPost');
+    Route::get('/verify/{id}', [AdminController::class, 'verify'])->name('verify');
+    Route::post('/verify-post', [AdminController::class, 'verifyPost'])->name('verifyPost');
+    Route::get('/resend-otp',[AdminController::class,'resendOtp'])->name('resendOtp');
+    Route::get('/change-password/{id}', [AdminController::class, 'changePassword'])->name('changePassword');
+    Route::post('/change-password-post', [AdminController::class, 'changePasswordPost'])->name('changePasswordPost');
+});
+
 //Mentor Auth
 Route::get('/mentor', [App\Http\Controllers\Auth\MentorController::class, 'mentorLogin'])->name('mentorLogin');
 Route::post('/mentor-post', [App\Http\Controllers\Auth\MentorController::class, 'mentorPost'])->name('mentorPost');
+
+// Mentor Forget password
+Route::group(['prefix'=>'mentor', 'as'=>'mentor.'], function(){
+    Route::get('/forgot-password', [App\Http\Controllers\Auth\MentorController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::post('/forgot-password-post', [App\Http\Controllers\Auth\MentorController::class, 'forgotPasswordPost'])->name('forgotPasswordPost');
+    Route::get('/verify/{id}', [App\Http\Controllers\Auth\MentorController::class, 'verify'])->name('verify');
+    Route::post('/verify-post', [App\Http\Controllers\Auth\MentorController::class, 'verifyPost'])->name('verifyPost');
+    Route::get('/resend-otp',[App\Http\Controllers\Auth\MentorController::class,'resendOtp'])->name('resendOtp');
+    Route::get('/change-password/{id}', [App\Http\Controllers\Auth\MentorController::class, 'changePassword'])->name('changePassword');
+    Route::post('/change-password-post', [App\Http\Controllers\Auth\MentorController::class, 'changePasswordPost'])->name('changePasswordPost');
+});
 
 // Error Redirect
 Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('notFound');
@@ -37,7 +71,6 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
 //admin Middlewere
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
-    //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     //Admin Auth
@@ -103,17 +136,20 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Recycle Bin
     Route::get('/recycle-students', [RecycleController::class, 'recycleStudent'])->name('recycleStudent');
+
+    //Profile
+    Route::get('/profile', [ProfileController::class, 'adminProfile'])->name('adminProfile');
 });
+
 
 //Student Middlewere
 Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
-    //Student Dashboard
+    // Student Dashboard
     Route::get('/dashboard', [DashboardController::class, 'studentDashboard'])->name('studentDashboard');
 
-    //Student Logout
+    // Student Logout
     Route::get('/logout', [StudentController::class, 'studentLogout'])->name('studentLogout');
-
 
     //Notice
     Route::get('/s/my-notice', [NoticController::class, 'mySNotice'])->name('mySNotice');
@@ -121,6 +157,9 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     //HomeWork
     Route::get('/my-homework', [HomeworkController::class, 'studentHomeworkView'])->name('studentHomeworkView');
+
+    //Profile
+    Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
 });
 
 
@@ -143,4 +182,7 @@ Route::group(['prefix' => 'mentor','middleware' => ['mentor']], function () {
     Route::post('/homework/assign-post', [HomeworkController::class, 'homeworkAssignPost'])->name('homeworkAssignPost');
     Route::get('/homework', [HomeworkController::class, 'homeworkView'])->name('homeworkView');
     Route::get('/submited-homework', [HomeworkController::class, 'submitedHomework'])->name('submitedHomework');
+
+    //Profile
+    Route::get('/profile', [ProfileController::class, 'mentorProfile'])->name('mentorProfile');
 });

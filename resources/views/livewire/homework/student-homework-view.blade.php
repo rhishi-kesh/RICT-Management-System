@@ -6,16 +6,15 @@
                     <tbody>
                         @forelse ($homeworks as $item)
                             <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                <td class="p-5 pr-3">
+                                <td class="p-5 pr-2">
                                     @if (empty($item->student->profile))
                                         <div class="profile w-9 h-9 text-xs">
                                             {{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                         </div>
                                     @else
                                         <div class="text-center">
-                                            <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="" alt="img" width="150" height="100" />
+                                            <img class="w-9 h-9 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none" src="{{ asset('storage/' . $item->student->profile) }}" alt="img" width="150" height="100" />
                                         </div>
-                                        {{ asset('storage/' . $item->student->profile) }}
                                     @endif
                                 </td>
                                 <td class="p-5 pl-0">
@@ -30,12 +29,12 @@
                                 </td>
                                 <td class="p-5 text-center">
                                     <div>
-                                        <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
+                                        <button @hover="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                             {{ $item->status }}
                                             <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
                                         </button>
                                     </div>
-                                    <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $item->id }}">
+                                    <div class="mt-2 flex gap-2 justify-between items-center" x-cloak x-show="editStatus == {{ $item->id }}">
                                         <select wire:model="status" class="my-input w-[100px] md:w-full focus:outline-none focus:shadow-outline @if($item->status == 'inReview') dark:bg-green-500 bg-green-500 text-white @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 text-white @endif" @if($item->status == 'inReview') disabled @else  @endif>
                                             <option value="">Select Status</option>
                                             <option value="pending">Pending</option>

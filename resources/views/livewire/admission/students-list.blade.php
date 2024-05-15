@@ -77,7 +77,7 @@
                 <table class="w-full">
                     <thead>
                         <tr>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
                                 SL
                             </th>
                             <th wire:click="doSort('student_id')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
@@ -101,9 +101,7 @@
                             <th wire:click="doSort('email')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
                                 <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="email" />
                             </th>
-                            <th wire:click="doSort('dateofbirth')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
-                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="DateOfBirth" />
-                            </th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">DateOfBirth</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Guardian Mobile No.</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Qualification</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Profession</th>
@@ -234,18 +232,18 @@
         </div>
     </div>
     @push('js')
-    <script>
-        function onWheel(event) {
-            const delta = Math.sign(event.deltaY || event.wheelDelta);
-            const scrollContainer = event.currentTarget;
-            const scrollLeft = scrollContainer.scrollLeft;
+        <script>
+            function onWheel(event) {
+                const delta = Math.sign(event.deltaY || event.wheelDelta);
+                const scrollContainer = event.currentTarget;
+                const scrollLeft = scrollContainer.scrollLeft;
 
-            // Calculate the new scroll position
-            const newScrollLeft = scrollLeft + delta * 300;
+                // Calculate the new scroll position
+                const newScrollLeft = scrollLeft + delta * 300;
 
-            // Update the scroll position
-            scrollContainer.scrollLeft = newScrollLeft;
-        }
-    </script>
+                // Update the scroll position
+                scrollContainer.scrollLeft = newScrollLeft;
+            }
+        </script>
     @endpush
 </div>

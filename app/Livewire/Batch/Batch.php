@@ -10,16 +10,18 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Str;
 
 class Batch extends Component
 {
     use WithPagination;
-    public $name, $update_id, $isModal = false, $isBatch = false, $isMentorModal = false, $delete_id, $removeBatch_id, $singlebatch, $batchMentor, $showUpdateInput, $studentWithoutBatch = [], $addToBatch = [], $mentors = [], $mentor;
+    public $name, $update_id, $isModal = false, $isBatch = false, $isMentorModal = false, $delete_id, $removeBatch_id, $singlebatch, $batchMentor = [], $showUpdateInput, $studentWithoutBatch = [], $addToBatch = [], $mentors = [], $mentor, $removeMentor_id;
+
     protected $listeners = [
         'deleteConfirm' => 'DeleteBatch',
-        'removeConfirm' => 'removeStudent'
+        'removeConfirm' => 'removeStudent',
+        'removeMentorConfirm' => 'removeMentorConfirm'
     ];
+
     public function mount() {
         $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id','id')->get();
         $this->mentors = Mentor::get();
@@ -31,6 +33,13 @@ class Batch extends Component
                 ->paginate(20);
         return view('livewire.batch.batch', compact('batch'));
     }
+
+
+
+
+
+
+    //Batch CRUD
     public function insert() {
         $validated = $this->validate([
             'name' => 'required|unique:batches',
@@ -101,6 +110,26 @@ class Batch extends Component
             ]);
         }
     }
+    public function showModal() {
+        $this->reset();
+        $this->isModal = true;
+    }
+    public function removeModal() {
+        $this->update_id = '';
+        $this->isModal = false;
+        $this->reset();
+    }
+    public function removeUpdate() {
+        $this->showUpdateInput = null;
+    }
+
+
+
+
+
+
+
+    //Student CRUD In Batch
     public function singleBatch($id) {
         $this->isBatch = true;
         $this->singlebatch = Batchs::where('id',$id)
@@ -157,10 +186,29 @@ class Batch extends Component
     public function removebatch() {
         $this->isBatch = false;
     }
+
+
+
+
+
+
+
+
+
+
+    //Mentor CRUD In Batch
     public function asignMentor($id) {
         $this->isMentorModal = true;
         $this->batchMentor = Batchs::query()
-                ->with('mentors') 
+                ->with('mentors')
+                ->select('id', 'name', 'mentor_id')
+                ->where('id', $id)
+                ->latest()
+                ->first();
+    }
+    public function mentorData($id) {
+        $this->batchMentor = Batchs::query()
+                ->with('mentors')
                 ->select('id', 'name', 'mentor_id')
                 ->where('id', $id)
                 ->latest()
@@ -171,25 +219,32 @@ class Batch extends Component
         $done->mentor_id = $this->mentor;
         $done->update();
         if($done){
+            $this->mentorData($id);
             $this->dispatch('clearInput', [
                 'title' => 'Mentor Asign Successfull',
                 'type' => "success",
             ]);
         }
     }
+    public function removeMentorAlert($id) {
+        $this->removeMentor_id = $id;
+        $this->dispatch('removeMentorAlert');
+    }
+    public function removeMentorConfirm() {
+        $done = Batchs::where('id', $this->removeMentor_id)->update([
+            'mentor_id' => null,
+            'updated_at' => Carbon::now(),
+        ]);
+        if($done){
+            $this->mount();
+            $this->mentorData($this->removeMentor_id);
+            $this->dispatch('deleteMentorSuccessFull', [
+                'title' => 'Mentor Removed',
+                'type' => "success",
+            ]);
+        }
+    }
     public function removeMentorMOdal() {
         $this->isMentorModal = false;
-    }
-    public function showModal() {
-        $this->reset();
-        $this->isModal = true;
-    }
-    public function removeModal() {
-        $this->update_id = '';
-        $this->isModal = false;
-        $this->reset();
-    }
-    public function removeUpdate() {
-        $this->showUpdateInput = null;
     }
 }

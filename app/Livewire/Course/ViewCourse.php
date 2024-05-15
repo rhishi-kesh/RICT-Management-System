@@ -5,7 +5,7 @@ namespace App\Livewire\Course;
 use App\Models\Course;
 use Carbon\Carbon;
 use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\WithPagination;  
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
 

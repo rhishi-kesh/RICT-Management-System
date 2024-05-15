@@ -32,7 +32,7 @@
                                     @else
                                         <div class="text-center">
                                             <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                                src="{{ asset('IMG_4406.JPG') }}" alt="image" />
+                                                src="{{ asset('storage/' . $data->profile) }}" alt="image" />
                                         </div>
                                     @endif
                                 </td>

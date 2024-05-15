@@ -33,7 +33,7 @@
                                         <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data2->name), 0, 1) }}</div>
                                     @else
                                         <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                            src="{{ asset('storage/' . $data2->image) }}" alt="image" />
+                                            src="{{ asset('storage/' . $data2->profile) }}" alt="image" />
                                     @endif
                                 @endforeach
                                 <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ count($users) }})Total</span>
@@ -51,7 +51,7 @@
                                         <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data2->name), 0, 1) }}</div>
                                     @else
                                         <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                            src="{{ asset('storage/' . $data2->image) }}" alt="image" />
+                                            src="{{ asset('storage/' . $data2->profile) }}" alt="image" />
                                     @endif
                                 @endforeach
                                 <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ count($studentWithoutBatch) }})Total</span>
@@ -88,7 +88,7 @@
                                             <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data2->name), 0, 1) }}</div>
                                         @else
                                             <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                                src="{{ asset('storage/' . $data2->image) }}" alt="image" />
+                                                src="{{ asset('storage/' . $data2->profile) }}" alt="image" />
                                         @endif
                                     @endforeach
                                     <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ $data->students_count }})Total</span>

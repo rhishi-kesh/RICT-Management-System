@@ -77,6 +77,7 @@
                             Sign in
                         </button>
                     </form>
+                    <a href="{{ route('mentor.forgotPassword') }}" class="mt-1 inline-block hover:underline text-blue-500">Forgotten password?</a>
                 </div>
             </div>
         </div>
