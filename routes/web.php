@@ -16,6 +16,7 @@ use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\PDF\PDFController;
 use Illuminate\Support\Facades\Route;
 
 //Student Auth
@@ -85,7 +86,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     Route::get('/logout', [StudentController::class, 'studentLogout'])->name('studentLogout');
     Route::get('/profile', [ProfileController::class, 'userProfile'])->name('userProfile');
     
-   
+    Route::get('/generatePDF', [PDFController::class, 'generatePDF'])->name('generatePDF');
 
 });
  // Forget password
