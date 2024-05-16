@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Utils;
+use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
 {
@@ -27,7 +29,15 @@ class ApiController extends Controller
         //user id and Password generate
         $user_id = $this->generateCode('Student', '202');
         $password = Str::random(8);
-        $password_hash = bcrypt($password);
+        $password_hash = Hash::make($password);
+
+        //image
+        $fileName = "";
+        if ($request->image) {
+            $fileName = $request->image->store('profile', 'public');
+        } else {
+            $fileName = null;
+        }
 
         //validation
         $validator = Validator::make($request->all(), [
@@ -36,12 +46,13 @@ class ApiController extends Controller
             'motherName' => 'required',
             'mobileNumber' => 'required',
             'address' => 'required',
-            'email' => 'nullable|unique:students',
+            'email' => 'required|unique:students',
             'gMobile' => 'required',
             'qualification' => 'required',
             'profession' => 'required',
             'course' => 'required',
             'date' => 'required',
+            'image' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
@@ -63,6 +74,7 @@ class ApiController extends Controller
                 'profession' => $request->profession,
                 'guardianMobileNo' => $request->gMobile,
                 'course_id' => $request->course,
+                'profile' => $fileName,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -70,5 +82,10 @@ class ApiController extends Controller
                 return response()->json(['status' => 1, 'msg' => 'Admission Successfully Done']);
             }
         }
+    }
+
+    public function courses() {
+        $allCourses = Course::get();
+        return $allCourses;
     }
 }
