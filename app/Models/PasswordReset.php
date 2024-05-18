@@ -9,14 +9,12 @@ class PasswordReset extends Model
 {
     use HasFactory;
 
-    public $table = "password_resets";
-    public $timestamps = false; 
-    protected $primaryKey = "email";
+    public $table = "password_reset_tokens";
+    public $timestamps = false;
 
     protected $fillable = [
         'email',
         'otp',
         'created_at'
     ];
-
 }

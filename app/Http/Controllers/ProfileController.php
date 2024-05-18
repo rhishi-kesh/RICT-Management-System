@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function  adminProfile()
+    public function adminProfile()
     {
         return view('application.profile.adminProfile');
     }
-    public function userProfile()
+    public function studentProfile()
     {
-        return view('application.profile.userProfile');
+        return view('application.profile.studentProfile');
+    }
+    public function mentorProfile()
+    {
+        return view('application.profile.mentorProfile');
     }
 }

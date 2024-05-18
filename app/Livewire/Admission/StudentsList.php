@@ -21,7 +21,6 @@ class StudentsList extends Component
         ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate($this->perpage);
         $paymentTypes = PaymentMode::get();
-
         return view('livewire.admission.students-list',compact('students', 'paymentTypes'));
     }
     public function doSort($column){

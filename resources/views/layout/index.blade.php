@@ -13,18 +13,13 @@
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/animate.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/sweetalert2.min.css') }}" />
-       
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/perfect-scrollbar.min.css')}}" />
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/style.css')}}" />
-        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/animate.css')}}" />
-
         @vite('resources/css/app.css')
         @livewireStyles
         @stack('css')
     </head>
     <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
         <!-- sidebar menu overlay -->
-        <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"@click="$store.app.toggleSidebar()"></div>
+        <div class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
 
         <!-- scroll to top button -->
         <div class="fixed bottom-8 rignt-8 z-50 ltr:right-6" x-data="scrollToTop">
@@ -41,14 +36,14 @@
 
         <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
             <!-- start sidebar section -->
-            <div :class="{'dark text-white-dark' : $store.app.semidark}">
-                @include('include/sidebar')
+            <div>
+                @include('include/admin/sidebar')
             </div>
             <!-- end sidebar section -->
 
             <div class="main-content flex min-h-screen flex-col bg-gray-200 dark:bg-gray-950">
                 <!-- start header section -->
-                @include('include/header')
+                @include('include/admin/header')
                 <!-- end header section -->
 
                 <!-- start main content section -->
@@ -56,7 +51,7 @@
                 <!-- end main content section -->
 
                 <!-- start footer section -->
-                @include('include/footer')
+                @include('include/admin/footer')
                 <!-- end footer section -->
             </div>
         </div>

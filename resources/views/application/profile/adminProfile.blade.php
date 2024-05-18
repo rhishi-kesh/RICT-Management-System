@@ -2,7 +2,7 @@
 @section('content')
 <div class="animate__animated p-6 bg-gray-200 dark:bg-gray-950" :class="[$store.app.animation]">
     <div  >
-        <livewire:admin-profile.admin-profile />
+        <livewire:profile.admin-profile />
     </div>
 </div>
 @endsection

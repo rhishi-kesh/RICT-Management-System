@@ -24,7 +24,7 @@ class VisitorController extends Controller
 
     public function updateVisitor($id)
     {
-        return view('application.visitor.update-visitor',compact('id'));
+        return view('application.visitor.update-visitor', compact('id'));
     }
 
 }

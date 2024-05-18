@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Utils;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class Admission extends Component
 {
@@ -53,7 +54,7 @@ class Admission extends Component
          //user id and slug generate
          $user_id = $this->generateCode('Student', '202');
          $password = Str::random(8);
-         $password_hash = bcrypt($password);
+         $password_hash = Hash::make($password);
 
          //Multiful ClassDay Upload
          $previousClassday = $this->classday;
@@ -109,6 +110,7 @@ class Admission extends Component
         ]);
         if($done){
             $this->reset();
+            $this->mount();
             $this->dispatch('swal', [
                 'title' => 'Data Instert Successfull',
                 'type' => "success",

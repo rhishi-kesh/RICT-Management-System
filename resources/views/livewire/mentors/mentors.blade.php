@@ -41,7 +41,7 @@
                                 {{ $data->mobile }}</td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
                                 @if (empty($data->image))
-                                    <div class="profile w-7 h-7 text-xs">{{ mb_substr($data->name, 0, 1) }}
+                                    <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($data->name), 0, 1) }}
                                     </div>
                                 @else
                                     <div class="text-center">
@@ -65,7 +65,6 @@
                                         <path d="M13.5 6.5l4 4" />
                                     </svg>
                                 </button>
-
 
                                 {{-- Delete Button --}}
                                 <button wire:click="deleteAlert({{ $data->id }})" type="button" x-tooltip="Delete">
@@ -97,7 +96,6 @@
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>
         </div>
     </div>
-
 
     {{-- Update & Instert Form --}}
     <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
@@ -159,7 +157,7 @@
                                 </div>
                             @else
                                 <div>
-                                    <img width="80" class="mt-1" src="{{ asset('storage/' . $oldImage) }}"  alt="">
+                                    <img width="80" class="mt-1" src="{{ asset('storage/' . $oldimage) }}"  alt="">
                                 </div>
                             @endif
                         </div>

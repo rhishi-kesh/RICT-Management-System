@@ -18,7 +18,6 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/style.css')}}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/animate.css')}}" />
 
-
         @vite('resources/css/app.css')
         @livewireStyles
         @stack('css')
@@ -43,13 +42,13 @@
         <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
             <!-- start sidebar section -->
             <div>
-                @include('include/studentSidebar')
+                @include('include/student/sidebar')
             </div>
             <!-- end sidebar section -->
 
             <div class="main-content flex min-h-screen flex-col bg-gray-200 dark:bg-gray-950">
                 <!-- start header section -->
-                @include('include/studentHeader')
+                @include('include/student/header')
                 <!-- end header section -->
 
                 <!-- start main content section -->
@@ -57,7 +56,7 @@
                 <!-- end main content section -->
 
                 <!-- start footer section -->
-                @include('include/studentFooter')
+                @include('include/student/footer')
                 <!-- end footer section -->
             </div>
         </div>

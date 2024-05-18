@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
-use App\Models\PaymentMode;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ApiController::class)->group(function () {
     Route::post('/admission-web', 'admissionWeb')->name('admissionWeb');
+    Route::get('/courses', 'courses')->name('courses');
 });

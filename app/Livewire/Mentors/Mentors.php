@@ -7,14 +7,14 @@ use App\Models\Mentor;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 class Mentors extends Component
 {
     use WithPagination;
     use WithFileUploads;
-    public $name, $email, $mobile, $image, $delete_id, $update_id, $oldImage;
-
+    public $name, $email, $mobile, $image, $delete_id, $update_id, $oldimage;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
@@ -30,18 +30,20 @@ class Mentors extends Component
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
-
         $fileName = "";
         if ($this->image) {
             $fileName = $this->image->store('mentors', 'public');
         } else {
             $fileName = null;
         }
+        $password = Str::random(8);
+        $password_hash = bcrypt($password);
         $done = Mentor::insert([
             'name' => $this->name,
             'email' => $this->email,
             'mobile' => $this->mobile,
             'image' => $fileName,
+            'password' => $password_hash,
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
@@ -60,7 +62,7 @@ class Mentors extends Component
         $this->name = $data->name;
         $this->email = $data->email;
         $this->mobile = $data->mobile;
-        $this->oldImage = $data->image;
+        $this->oldimage = $data->image;
     }
     public function update()
     {
@@ -70,7 +72,6 @@ class Mentors extends Component
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable',
         ]);
-
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);
         if (!empty($this->image)) {
@@ -81,14 +82,12 @@ class Mentors extends Component
         } else {
             $fileName = $this->oldimage;
         }
-
         $done = Mentor::where('id', $this->update_id)->update([
             'name' => $this->name,
             'email' => $this->email,
             'mobile' => $this->mobile,
             'image' => $fileName
         ]);
-
         if ($done) {
             $this->reset();
             $this->dispatch('swal', [

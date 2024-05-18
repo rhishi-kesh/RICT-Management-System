@@ -20,7 +20,7 @@ class ViewCourse extends Component
         return view('livewire.course.view-course', compact('courses'));
     }
     public function insert(){
-        if (Gate::allows('create')) {
+        // if (Gate::allows('create')) {
             $slug = Str::slug($this->name);
             $validated = $this->validate([
                 'name' => 'required|unique:courses',
@@ -39,13 +39,13 @@ class ViewCourse extends Component
                     'type' => "success",
                 ]);
             }
-        } else {
-            $this->dispatch('swal', [
-                'title' => 'Unauthorized',
-                'type' => "error",
-                'text' => 'You do not have permission to insert courses.',
-            ]);
-        }
+        // } else {
+        //     $this->dispatch('swal', [
+        //         'title' => 'Unauthorized',
+        //         'type' => "error",
+        //         'text' => 'You do not have permission to insert courses.',
+        //     ]);
+        // }
     }
     public function ShowUpdateModel($id){
         $data = Course::findOrFail($id);
