@@ -1,10 +1,10 @@
 <div class="pt-5">
     @push('css')
-    <style>
-        div:where(.swal2-container) h2:where(.swal2-title) {
-            line-height: 30px;
-        }
-    </style>
+        <style>
+            div:where(.swal2-container) h2:where(.swal2-title) {
+                line-height: 30px;
+            }
+        </style>
     @endpush
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Visitor List</h2>
@@ -98,7 +98,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($visitor as $key => $data)
+                    @forelse ($visitor as $key => $data)
                         <tr>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                 {{ $visitor->firstItem() + $key }} </td>
@@ -203,7 +203,15 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="20">
+                                <div class="flex justify-center items-center">
+                                    <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

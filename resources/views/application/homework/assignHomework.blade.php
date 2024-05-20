@@ -53,7 +53,7 @@
                     @enderror
                 </div>
                 <div class="w-full md:w-[50%] mb-2">
-                    <input type="date" name="dueDate" id="date" placeholder="Set Dateline" value="{{ old('dueDate') }}"  class="my-input focus:outline-none focus:shadow-outline">
+                    <input type="date" name="dueDate" id="date" placeholder="Set Dateline" value="{{ old('dueDate') }}" class="my-input focus:outline-none focus:shadow-outline">
                     @error('dueDate')
                         <div class="p-3 bg-red-500 text-white my-1">{{ $message }}</div>
                     @enderror

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admissionBooth\AdmissionBoothController;
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\Attendance\AttendanceController;
 use App\Http\Controllers\auth\AdminController;
 use App\Http\Controllers\auth\StudentController;
 use App\Http\Controllers\backend\DashboardController;
@@ -13,12 +14,14 @@ use App\Http\Controllers\notice\NoticController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\paymentMode\paymentModeController;
+use App\Http\Controllers\paymentMode\PaymentModeController;
 use App\Http\Controllers\Recycle\RecycleController;
+use App\Http\Controllers\SystemInformationController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\auth\MentorController as MentorAuthController;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
@@ -51,18 +54,18 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
 });
 
 //Mentor Auth
-Route::get('/mentor', [App\Http\Controllers\Auth\MentorController::class, 'mentorLogin'])->name('mentorLogin');
-Route::post('/mentor-post', [App\Http\Controllers\Auth\MentorController::class, 'mentorPost'])->name('mentorPost');
+Route::get('/mentor', [MentorAuthController::class, 'mentorLogin'])->name('mentorLogin');
+Route::post('/mentor-post', [MentorAuthController::class, 'mentorPost'])->name('mentorPost');
 
 // Mentor Forget password
 Route::group(['prefix'=>'mentor', 'as'=>'mentor.'], function(){
-    Route::get('/forgot-password', [App\Http\Controllers\Auth\MentorController::class, 'forgotPassword'])->name('forgotPassword');
-    Route::post('/forgot-password-post', [App\Http\Controllers\Auth\MentorController::class, 'forgotPasswordPost'])->name('forgotPasswordPost');
-    Route::get('/verify/{id}', [App\Http\Controllers\Auth\MentorController::class, 'verify'])->name('verify');
-    Route::post('/verify-post', [App\Http\Controllers\Auth\MentorController::class, 'verifyPost'])->name('verifyPost');
-    Route::get('/resend-otp',[App\Http\Controllers\Auth\MentorController::class,'resendOtp'])->name('resendOtp');
-    Route::get('/change-password/{id}', [App\Http\Controllers\Auth\MentorController::class, 'changePassword'])->name('changePassword');
-    Route::post('/change-password-post', [App\Http\Controllers\Auth\MentorController::class, 'changePasswordPost'])->name('changePasswordPost');
+    Route::get('/forgot-password', [MentorAuthController::class, 'forgotPassword'])->name('forgotPassword');
+    Route::post('/forgot-password-post', [MentorAuthController::class, 'forgotPasswordPost'])->name('forgotPasswordPost');
+    Route::get('/verify/{id}', [MentorAuthController::class, 'verify'])->name('verify');
+    Route::post('/verify-post', [MentorAuthController::class, 'verifyPost'])->name('verifyPost');
+    Route::get('/resend-otp',[MentorAuthController::class,'resendOtp'])->name('resendOtp');
+    Route::get('/change-password/{id}', [MentorAuthController::class, 'changePassword'])->name('changePassword');
+    Route::post('/change-password-post', [MentorAuthController::class, 'changePasswordPost'])->name('changePasswordPost');
 });
 
 // Error Redirect
@@ -103,7 +106,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/batchs', [BatchController::class, 'batch'])->name('batch');
 
     //Payment Mode
-    Route::get('/payment-mode', [paymentModeController::class, 'paymentMode'])->name('paymentMode');
+    Route::get('/payment-mode', [PaymentModeController::class, 'paymentMode'])->name('paymentMode');
 
     //visitor Controller
     Route::get('/counciling-person', [VisitorController::class, 'counciling'])->name('counciling');
@@ -139,6 +142,15 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Profile
     Route::get('/profile', [ProfileController::class, 'adminProfile'])->name('adminProfile');
+
+    //Attendance system
+    Route::get('/attendance', [AttendanceController::class, 'adminAttendance'])->name('adminAttendance');
+    Route::get('/attendance/batch/{id}', [AttendanceController::class, 'adminAttendanceBatch'])->name('adminAttendanceBatch');
+    Route::get('/attendance/view/{date}/{id}', [AttendanceController::class, 'adminAttendanceView'])->name('adminAttendanceView');
+    Route::get('/attendance/report', [AttendanceController::class, 'attendancereport'])->name('attendancereport');
+
+    //System Information
+    Route::get('/system-information', [SystemInformationController::class, 'systemInformation'])->name('systemInformation');
 });
 
 
@@ -160,17 +172,20 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     //Profile
     Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
+
+    //Attendance system
+    Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('myAttendance');
 });
 
 
 //Mentor Middlewere
-Route::group(['prefix' => 'mentor','middleware' => ['mentor']], function () {
+Route::group(['prefix' => 'mentor', 'middleware' => ['mentor']], function () {
 
     //Student Dashboard
     Route::get('/dashboard', [DashboardController::class, 'mentorDashboard'])->name('mentorDashboard');
 
     //Student Logout
-    Route::get('/logout', [App\Http\Controllers\Auth\MentorController::class, 'mentorLogout'])->name('mentorLogout');
+    Route::get('/logout', [MentorAuthController::class, 'mentorLogout'])->name('mentorLogout');
 
     //Notice
     Route::get('/m/my-notice', [NoticController::class, 'myMNotice'])->name('myMNotice');
@@ -185,4 +200,13 @@ Route::group(['prefix' => 'mentor','middleware' => ['mentor']], function () {
 
     //Profile
     Route::get('/profile', [ProfileController::class, 'mentorProfile'])->name('mentorProfile');
+
+    //Attendance system
+    Route::get('/attendance', [AttendanceController::class, 'attendance'])->name('attendance');
+    Route::get('/attendance/batch/{id}', [AttendanceController::class, 'attendanceBatch'])->name('attendanceBatch');
+    Route::get('/attendance/take/{id}', [AttendanceController::class, 'attendanceTake'])->name('attendanceTake');
+    Route::post('/attendance/take/post/{id}', [AttendanceController::class, 'attendanceBatchPost'])->name('attendanceBatchPost');
+    Route::get('/attendance/edit/{date}/{id}', [AttendanceController::class, 'attendanceEdit'])->name('attendanceEdit');
+    Route::post('/attendance/update/{date}/{id}', [AttendanceController::class, 'attendanceUpdate'])->name('attendanceUpdate');
+    Route::get('/attendance/view/{date}/{id}', [AttendanceController::class, 'attendanceView'])->name('attendanceView');
 });

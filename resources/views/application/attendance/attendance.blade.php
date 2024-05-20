@@ -1,12 +1,12 @@
 @extends('layout/mentorIndex')
 @section('content')
 <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 m-5 w-full">
-    <h2 class="mb-2 font-bold text-3xl dark:text-white">Home Work</h2>
+    <h2 class="mb-2 font-bold text-3xl dark:text-white">Attendance</h2>
     <div class="w-full">
         {{-- Show Data --}}
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
             @forelse ($batch as $key => $data)
-                <a href="{{ route('homeworkAssign', $data->id) }}" class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
+                <a href="{{ route('attendanceBatch', $data->id) }}" class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                     <div class="flex justify-between mb-5 gap-2">
                         <h6 class="text-[#0e1726] dark:text-white text-xl">{{ $data->name }}</h6>
                     </div>

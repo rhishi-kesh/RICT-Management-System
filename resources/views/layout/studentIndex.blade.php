@@ -13,12 +13,6 @@
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/animate.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/sweetalert2.min.css') }}" />
-
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/perfect-scrollbar.min.css')}}" />
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/style.css')}}" />
-        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('backend/css/animate.css')}}" />
-
-
         @vite('resources/css/app.css')
         @livewireStyles
         @stack('css')
