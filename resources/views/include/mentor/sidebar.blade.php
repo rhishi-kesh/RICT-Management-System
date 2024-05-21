@@ -3,7 +3,7 @@
     <div class="h-full bg-white dark:bg-slate-900">
         <div class="flex items-center justify-between px-4 py-3">
             <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
-                <img class="ml-[5px] flex-none" width="150" src="{{ asset('frontend/images/RICT/logo.png') }}"
+                <img class="ml-[5px] flex-none" width="150" src="{{ asset('storage/' . $systemInformation->logo) }}"
                     alt="image" />
             </a>
             <a href="javascript:;"

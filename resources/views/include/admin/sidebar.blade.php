@@ -2,7 +2,7 @@
     <div class="h-full bg-white dark:bg-slate-900">
         <div class="flex items-center justify-between px-4 py-3">
             <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
-                <img class="ml-[5px] flex-none" width="150" src="{{ asset('frontend/images/RICT/logo.png') }}" alt="image" />
+                <img class="ml-[5px] flex-none" width="150" src="{{ asset('storage/' . $systemInformation->logo) }}" alt="image" />
             </a>
             <a href="javascript:;" class="collapse-icon flex h-8 w-8 items-center rounded-full transition duration-300 hover:bg-gray-500/10 rtl:rotate-180 dark:text-white-light dark:hover:bg-dark-light/10" @click="$store.app.toggleSidebar()">
                 <svg class="m-auto h-5 w-5" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-950 dark:text-white" /> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </svg>
@@ -309,7 +309,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('paymentMode') }}">
+                        <a href="{{ route('systemInformation') }}">
                             <span class="pl-2">System Information</span>
                         </a>
                     </li>

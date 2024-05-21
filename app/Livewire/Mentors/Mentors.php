@@ -93,7 +93,8 @@ class Mentors extends Component
             'name' => $this->name,
             'email' => $this->email,
             'mobile' => $this->mobile,
-            'image' => $fileName
+            'image' => $fileName,
+            'updated_at' => Carbon::now()
         ]);
 
         if ($done) {
