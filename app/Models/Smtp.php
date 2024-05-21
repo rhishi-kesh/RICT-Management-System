@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Smtp extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'driver',
+        'host',
+        'port',
+        'username',
+        'password',
+        'encryption',
+        'from_address',
+        'from_name',
+    ];
 }

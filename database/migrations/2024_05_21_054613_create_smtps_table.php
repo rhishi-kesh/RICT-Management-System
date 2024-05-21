@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('smtps', function (Blueprint $table) {
             $table->id();
+            $table->string('driver')->default('smtp');
+            $table->string('host');
+            $table->integer('port');
+            $table->string('username');
+            $table->string('password');
+            $table->string('encryption')->nullable();
+            $table->string('from_address');
+            $table->string('from_name');
             $table->timestamps();
         });
     }

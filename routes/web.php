@@ -20,6 +20,7 @@ use App\Http\Controllers\SystemInformationController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\Smtp\SmtpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\MentorController as MentorAuthController;
 
@@ -151,6 +152,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //System Information
     Route::get('/system-information', [SystemInformationController::class, 'systemInformation'])->name('systemInformation');
+
+    //SMTP Settings
+    Route::get('/smtp-settings', [SmtpController::class, 'smtpSettings'])->name('smtpSettings');
 });
 
 

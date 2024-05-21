@@ -5,16 +5,11 @@ namespace App\Livewire\SystemInformation;
 use App\Models\SystemInformation as ModelsSystemInformation;
 use Carbon\Carbon;
 use Livewire\Component;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\File;
 
 class SystemInformation extends Component
 {
-    use WithPagination;
-    use WithFileUploads;
-
     public $number, $email, $website, $logo, $favicon, $location, $oldLogo, $oldFav, $update_id;
     public function render() {
         $data = ModelsSystemInformation::first();

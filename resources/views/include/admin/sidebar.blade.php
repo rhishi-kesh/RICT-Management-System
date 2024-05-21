@@ -313,6 +313,11 @@
                             <span class="pl-2">System Information</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('smtpSettings') }}">
+                            <span class="pl-2">SMTP Settings</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="menu nav-item group">
