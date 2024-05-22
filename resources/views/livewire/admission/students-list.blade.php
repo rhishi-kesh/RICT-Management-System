@@ -1,5 +1,5 @@
 <div class="pt-5">
-    <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full">
+    <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full" x-data="student">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Students</h2>
         <hr>
         <div class="flex item-center justify-between d px-6 pb-2 pt-2">
@@ -77,46 +77,48 @@
                 <table class="w-full">
                     <thead>
                         <tr>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
                                 SL
                             </th>
-                            <th wire:click="doSort('student_id')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
-                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="StudentID" />
+                            <th wire:click="doSort('student_id')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
+                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="Student ID" />
                             </th>
-                            <th wire:click="doSort('name')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
+                            <th wire:click="doSort('name')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
                                 <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="Name" />
                             </th>
-                            <th wire:click="doSort('fName')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
-                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="FatherName" />
+                            <th wire:click="doSort('fName')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
+                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="Father Name" />
                             </th>
-                            <th wire:click="doSort('mName')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
-                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="MotherName" />
+                            <th wire:click="doSort('mName')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
+                                <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="Mother Name" />
                             </th>
-                            <th wire:click="doSort('mobile')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
+                            <th wire:click="doSort('mobile')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
                                 <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="mobile" />
                             </th>
-                            <th wire:click="doSort('address')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
+                            <th wire:click="doSort('address')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
                                 <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="Address" />
                             </th>
-                            <th wire:click="doSort('email')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer">
+                            <th wire:click="doSort('email')" class="p-3 bg-gray-100 dark:bg-gray-800 text-center cursor-pointer text-nowrap">
                                 <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnName="email" />
                             </th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">DateOfBirth</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Guardian Mobile No.</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Qualification</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Profession</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Course Name</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Discount</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Total Amount</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Total Pay</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Total Due</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Payment Type</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Payment Number</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Batch Name</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Class Day</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Admission Fee</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Admission Date</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Date Of Birth</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Guardian Mobile No.</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Qualification</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Profession</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Course Name</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Discount</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Total Amount</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Total Pay</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Total Due</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Payment Type</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Payment Number</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Batch Name</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Class Day</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Admission Fee</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Student Status</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Is_Certificate?</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Admission Date</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,11 +176,7 @@
                                     {{ $student->due ?? "-" }}
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                    @foreach ($paymentTypes as $item)
-                                        @if($item->id == $student->paymentType)
-                                            {{ $student->pament_mode->name ?? '-' }}
-                                        @endif
-                                    @endforeach
+                                    {{ $student->pament_mode->name ?? '-' }}
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     {{ $student->paymentNumber ?? "-" }}
@@ -194,6 +192,35 @@
                                     <div class="flex justify-center items-center">
                                         <label class="w-12 h-6 relative">
                                             <input type="checkbox" class="checkbox peer" id="custom_switch_checkbox6" @if($student->admissionFee == '1') checked @else {{ '' }} @endif wire:click="admissionfee({{ $student->id }})" />
+                                            <span for="custom_switch_checkbox6" class="checkboxSpan"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a]">
+                                    <div class="flex gap-3 items-center">
+                                        <button @click="editStatus = {{ $student->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border text-xs">
+                                            {{ $student->student_status }}
+                                            <svg :class="editStatus == {{ $student->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                        </button>
+                                        <button @click="editStatus = 0" x-show="editStatus == {{ $student->id }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" height="24" width="24"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l6 0"></path></svg>
+                                        </button>
+                                    </div>
+                                    <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $student->id }}">
+                                        <select wire:model="student_status" class="my-input w-[200px] focus:outline-none focus:shadow-outline text-white">
+                                            <option value="">Select Status</option>
+                                            <option value="running">Running</option>
+                                            <option value="cancel">Cancel</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="complete">Complete</option>
+                                        </select>
+                                        <button class="bg-blue-500 text-nowrap text-[12px] text-white border-blue-500 btn px-2 py-[.140rem]" wire:click="changeStatus({{ $student->id }})"> Done </button>
+                                    </div>
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a]">
+                                    <div class="flex justify-center items-center">
+                                        <label class="w-12 h-6 relative">
+                                            <input type="checkbox" class="checkbox peer" id="custom_switch_checkbox6" @if($student->is_certificate == 'yes') checked @else  @endif wire:click="is_certificate({{ $student->id }})" />
                                             <span for="custom_switch_checkbox6" class="checkboxSpan"></span>
                                         </label>
                                     </div>
@@ -244,6 +271,18 @@
                 // Update the scroll position
                 scrollContainer.scrollLeft = newScrollLeft;
             }
+        </script>
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('student', () => ({
+                    editStatus: 0,
+                    init() {
+                        this.$wire.on('swal', () => {
+                            this.editStatus = 0;
+                        });
+                    }
+                }));
+            });
         </script>
     @endpush
 </div>

@@ -38,6 +38,8 @@ return new class extends Migration
             $table->string('admissionFee','5')->nullable()->default('0')->comment('0 = No, 1 = Yes');
             $table->string('discount')->nullable();
             $table->string('class_days')->nullable();
+            $table->string('is_certificate')->default('no');
+            $table->string('student_status')->default('running');
             $table->timestamps();
             $table->softDeletes();
         });

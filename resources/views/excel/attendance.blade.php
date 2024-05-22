@@ -13,7 +13,7 @@
         <tr>
             <td>{{ $i++ }}</td>
             <td>{{ $item->students->name }}</td>
-            <td>{{ $item->attendance }}</td>
+            <td style="color: @if($item->attendance == 'absent') red @else green @endif">{{ $item->attendance }}</td>
             <td>{{ $item->date }}</td>
         </tr>
     @endforeach

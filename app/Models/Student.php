@@ -13,7 +13,7 @@ class Student extends Authenticatable
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'student_id', 'name', 'fName', 'mName', 'email', 'address', 'mobile', 'qualification', 'profession', 'guardianMobileNo', 'courseName', 'paymentType', 'pay', 'due', 'total', 'bkashNo', 'admissionFee', 'discount',
+        'student_id', 'name', 'fName', 'mName', 'email', 'address', 'mobile', 'qualification', 'profession', 'guardianMobileNo', 'courseName', 'paymentType', 'pay', 'due', 'total', 'bkashNo', 'admissionFee', 'discount','student_status', 'is_certificate',
     ];
     protected $hidden = [
         'password',
