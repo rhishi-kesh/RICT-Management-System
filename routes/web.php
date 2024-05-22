@@ -72,6 +72,11 @@ Route::group(['prefix'=>'mentor', 'as'=>'mentor.'], function(){
 // Error Redirect
 Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('notFound');
 
+
+//Download
+Route::get('/attendance/download/{date}/{id}', [AttendanceController::class, 'attendanceDownload'])->name('attendanceDownload');
+Route::get('/attendance/download/single/{batch_id}/{student_id}', [AttendanceController::class, 'attendancSingleeDownload'])->name('attendancSingleeDownload');
+
 //admin Middlewere
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 

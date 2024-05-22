@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Batch;
 use Carbon\Carbon;
 
+use App\Exports\SingleAttendanceExport;
+use App\Exports\AttendanceExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class AttendanceController extends Controller
 {
     public function attendance() {
@@ -144,4 +148,13 @@ class AttendanceController extends Controller
                     ->get();
         return view('application.attendance.studentAttendanceView', compact('attendance'));
     }
+
+    public function attendanceDownload($date, $batchId) {
+        return Excel::download(new AttendanceExport($date, $batchId), 'attendance.xlsx');
+    }
+
+    public function attendancSingleeDownload($batchId, $studentId) {
+        return Excel::download(new SingleAttendanceExport($batchId, $studentId), 'attendance.xlsx');
+    }
+
 }
