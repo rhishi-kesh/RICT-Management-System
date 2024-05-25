@@ -10,6 +10,7 @@ use App\Http\Controllers\batch\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\Homework\HomeworkController;
+use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\notice\NoticController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\paymentMode\PaymentModeController;
 use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\SystemInformationController;
+use App\Http\Controllers\Ticket\TicketController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
@@ -160,6 +162,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //SMTP Settings
     Route::get('/smtp-settings', [SmtpController::class, 'smtpSettings'])->name('smtpSettings');
+
+    //Ticket
+    Route::get('/tickets', [TicketController::class, 'adminTicketindex'])->name('adminTicketindex');
+    Route::get('/tickets/{id}/show', [TicketController::class, 'adminTicketshow'])->name('adminTicketshow');
 });
 
 
@@ -184,8 +190,11 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     //Attendance system
     Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('myAttendance');
-});
 
+    //Ticket
+    Route::get('/tickets', [TicketController::class, 'ticketindex'])->name('ticketindex');
+    Route::get('/tickets/{id}/show', [TicketController::class, 'ticketshow'])->name('ticketshow');
+});
 
 //Mentor Middlewere
 Route::group(['prefix' => 'mentor', 'middleware' => ['mentor']], function () {
