@@ -108,7 +108,11 @@ class Admission extends Component
             'class_days' => $this->classday,
             'created_at' => Carbon::now(),
         ]);
+
+        //SMS Message
+        $message = 'Rhishi Testing SMS';
         if($done){
+            $this->sendSMS($this->mobileNumber, $message);
             $this->reset();
             $this->mount();
             $this->dispatch('swal', [
