@@ -35,7 +35,7 @@ class AdminController extends Controller
             return redirect()->route('dashboard');
         }
         return back()->withErrors([
-            'email' => 'Email/Password is invalid',
+            'error' => 'Email/Password is invalid',
         ]);
     }
     public function logout(Request $request) {

@@ -23,17 +23,26 @@ class StudentController extends Controller
         }
     }
     public function StudentPost(Request $request){
-        $credentials = $request->validate([
-            'student_id' => ['required'],
+        $request->validate([
+            'email' => ['required'],
             'password' => ['required'],
         ]);
-        if (Auth::guard('student')->attempt($credentials)) {
+
+        $login_type = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL )
+        ? 'email'
+        : 'student_id';
+
+        $request->merge([
+            $login_type => $request->input('email')
+        ]);
+
+        if (Auth::guard('student')->attempt($request->only($login_type, 'password'))) {
             $request->session()->regenerate();
 
             return redirect()->route('studentDashboard');
         }
         return back()->withErrors([
-            'email' => 'Student ID/Password is invalid',
+            'errror' => 'Credentials do not match with our records',
         ]);
     }
     public function studentLogout(Request $request){

@@ -32,7 +32,7 @@ class MentorController extends Controller
             return redirect()->route('mentorDashboard');
         }
         return back()->withErrors([
-            'email' => 'Email/Password is invalid',
+            'error' => 'Email/Password is invalid',
         ]);
     }
     public function mentorLogout(Request $request){

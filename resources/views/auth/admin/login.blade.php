@@ -10,15 +10,15 @@
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         @vite('resources/css/app.css')
     </head>
-    <body class="font-nunito bg-[#2C347D]">
-        <div class="flex items-center justify-center px-2 sm:px-16 mt-24">
+    <body class="font-nunito bg-[#2C347D] w-screen h-screen flex items-center justify-center">
+        <div class="px-2 sm:px-16 w-full flex items-center justify-center">
             <div class="relative w-full md:w-2/4 rounded-md p-2 bg-gray-200 px-2 md:px-6 py-10">
                 <div class="px-4 md:px-10">
                     <div class="mb-10">
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl my-color-blue">Sign in</h1>
                         <p class="text-base font-bold">Enter your email and password to sign in</p>
                     </div>
-                    @error('email')
+                    @error('error')
                         <div class="p-2 rounded bg-red-500 text-white">{{ ($message) }}</div>
                     @enderror
                     <form class="space-y-5" method="POST" action="{{ route('loginPost') }}">
@@ -41,6 +41,9 @@
                                     </svg>
                                 </span>
                             </div>
+                            @error('email')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div>
                             <label for="Password">Password</label>
@@ -72,12 +75,15 @@
                                     </svg>
                                 </span>
                             </div>
+                            @error('password')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" name="submit" class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow hover:submit-btn focus:submit-btn active:submit-btn">
                             Sign in
                         </button>
                     </form>
-                    <a href="{{ route('admin.forgotPassword') }}" class="mt-1 inline-block hover:underline text-blue-500">Forgotten password?</a>
+                    <a href="{{ route('admin.forgotPassword') }}" class="mt-2 inline-block hover:underline text-black text-xl">Forgotten password?</a>
                 </div>
             </div>
         </div>
