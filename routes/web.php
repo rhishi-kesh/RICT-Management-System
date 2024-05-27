@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\admissionBooth\AdmissionBoothController;
-use App\Http\Controllers\AdmissionController;
-use App\Http\Controllers\auth\AdminController;
-use App\Http\Controllers\auth\StudentController;
-use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\batch\BatchController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\ErrorRedirectController;
-use App\Http\Controllers\Homework\HomeworkController;
-use App\Http\Controllers\notice\NoticController;
 use App\Http\Controllers\PayRoll;
-use App\Http\Controllers\MentorsController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\paymentMode\paymentModeController;
-use App\Http\Controllers\Recycle\RecycleController;
-use App\Http\Controllers\VisitorController;
-use App\Http\Controllers\Permission\PermissionController;
-use App\Http\Controllers\Role\RoleController;
-use App\Http\Controllers\PDF\PDFController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\MentorsController;
+use App\Http\Controllers\PDF\PDFController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\auth\AdminController;
+use App\Http\Controllers\batch\BatchController;
+use App\Http\Controllers\auth\StudentController;
+use App\Http\Controllers\notice\NoticController;
+use App\Http\Controllers\ErrorRedirectController;
+use App\Http\Controllers\Recycle\RecycleController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\Homework\HomeworkController;
+use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\certificate\CertificateController;
+use App\Http\Controllers\paymentMode\paymentModeController;
+use App\Http\Controllers\admissionBooth\AdmissionBoothController;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
@@ -151,7 +152,6 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     // Student Logout
     Route::get('/logout', [StudentController::class, 'studentLogout'])->name('studentLogout');
     Route::get('/profile', [ProfileController::class, 'userProfile'])->name('userProfile');
-    Route::get('/generatePDF', [PDFController::class, 'generatePDF'])->name('generatePDF');
 
     //Notice
     Route::get('/s/my-notice', [NoticController::class, 'mySNotice'])->name('mySNotice');
@@ -160,8 +160,11 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     //HomeWork
     Route::get('/my-homework', [HomeworkController::class, 'studentHomeworkView'])->name('studentHomeworkView');
 
-    //Profile
+    //Profile $ Certificate 
     Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
+    Route::get('/certificate-view', [CertificateController::class, 'generatePDF'])->name('generatePDF');
+    Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('Certificate');
+
 });
 
 //Mentor Middlewere
@@ -169,7 +172,7 @@ Route::group(['prefix' => 'mentor','middleware' => ['mentor']], function () {
 
     //Student Dashboard
     Route::get('/dashboard', [DashboardController::class, 'mentorDashboard'])->name('mentorDashboard');
-
+    
     //Student Logout
     Route::get('/logout', [App\Http\Controllers\Auth\MentorController::class, 'mentorLogout'])->name('mentorLogout');
 

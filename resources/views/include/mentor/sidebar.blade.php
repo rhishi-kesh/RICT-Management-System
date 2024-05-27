@@ -18,8 +18,7 @@
                 </svg>
             </a>
         </div>
-        <ul class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold"
-            x-data="{ activeDropdown: 'dashboard' }">
+        <ul class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold" x-data="{ activeDropdown: 'dashboard' }">
             <li class="nav-item">
                 <a href="{{ route('myMNotice') }}" class="group sidebargroup">
                     <div class="flex items-center">

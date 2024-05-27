@@ -113,6 +113,7 @@
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Payment Type</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Payment Number</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Batch Name</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Gender</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Class Day</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Admission Fee</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Admission Date</th>
@@ -186,6 +187,9 @@
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     {{ $student->batch->name ?? "-" }}
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    {{ $student->gender ?? "-" }}
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     @if(empty($student->class_days)) - @else {{ $student->class_days }} @endif

@@ -13,7 +13,7 @@ class StudentsList extends Component
 {
     use WithPagination;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $discount, $paymentType, $totalAmount, $totalPay, $totalDue, $paymentNumber, $admissionFee, $courseId, $sortDirection = 'DESC', $sortColumn = 'created_at', $perpage = 30, $search = '', $course = [], $delete_id;
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $discount, $paymentType, $totalAmount, $totalPay, $totalDue, $paymentNumber, $gender,$admissionFee, $courseId, $sortDirection = 'DESC', $sortColumn = 'created_at', $perpage = 30, $search = '', $course = [], $delete_id;
 
     public function render(){
         $students = Student::with(['course:id,name','pament_mode:id,name','batch:id,name'])

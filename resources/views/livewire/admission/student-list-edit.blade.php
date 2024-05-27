@@ -181,6 +181,17 @@
                     <div class="text-red-500">{{ $errors->first('classday') }}</div>
                 @endif
             </div>
+            <div class="mb-1">
+                <label for="gender" class="my-label">Gender</label>
+                <select id="gender" wire:model="gender" class="my-input focus:outline-none focus:shadow-outline" name="gender[]">
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                @if ($errors->has('gender'))
+                    <div class="text-red-500">{{ $errors->first('gender') }}</div>
+                @endif
+            </div>
         </div>
         <div class="mt-4">
             <button type="submit" class="bg-blue-500 text-white border-blue-500 btn mr-3" wire:loading.remove>Update</button>
