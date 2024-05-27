@@ -1,13 +1,10 @@
-<nav x-data="sidebar"
-    class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
+<nav x-data="sidebar" class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
     <div class="h-full bg-white dark:bg-slate-900">
         <div class="flex items-center justify-between px-4 py-3">
-            <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
-                <img class="ml-[5px] flex-none" width="150" src="{{ asset('storage/' . $systemInformation->logo) }}"
-                    alt="image" />
+            <a href="{{ route('mentorDashboard') }}" class="main-logo flex shrink-0 items-center">
+                <img class="ml-[5px] flex-none" width="150" src="{{ asset('storage/' . $systemInformation->logo) }}" alt="image" />
             </a>
-            <a href="javascript:;"
-                class="collapse-icon flex h-8 w-8 items-center rounded-full transition duration-300 hover:bg-gray-500/10 rtl:rotate-180 dark:text-white-light dark:hover:bg-dark-light/10"
+            <a href="javascript:;" class="collapse-icon flex h-8 w-8 items-center rounded-full transition duration-300 hover:bg-gray-500/10 rtl:rotate-180 dark:text-white-light dark:hover:bg-dark-light/10"
                 @click="$store.app.toggleSidebar()">
                 <svg class="m-auto h-5 w-5" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -18,8 +15,7 @@
                 </svg>
             </a>
         </div>
-        <ul class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold"
-            x-data="{ activeDropdown: 'dashboard' }">
+        <ul class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold" x-data="{ activeDropdown: 'dashboard' }">
             <li class="nav-item">
                 <a href="{{ route('myMNotice') }}" class="group sidebargroup">
                     <div class="flex items-center">
@@ -53,13 +49,13 @@
                 </button>
                 <ul x-cloak x-show="activeDropdown === 'payroll'" x-collapse class="sub-menu text-gray-500">
                     <li>
-                        <a href="{{ route('homework') }}">Assaign Homework</a>
+                        <a href="{{ route('homework') }}" class="text-nowrap">Assaign Homework</a>
                     </li>
                     <li>
                         <a href="{{ route('homeworkView') }}">Homeworks</a>
                     </li>
                     <li>
-                        <a href="{{ route('submitedHomework') }}">Submited Homeworks</a>
+                        <a href="{{ route('submitedHomework') }}" class="text-nowrap">Submited Homeworks</a>
                     </li>
                 </ul>
             </li>

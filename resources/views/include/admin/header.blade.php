@@ -1,6 +1,6 @@
 <header class="z-40" :class="{$store.app.menu === 'horizontal'}">
     <div class="shadow-sm">
-        <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-slate-900">
+        <div class="relative justify-between flex w-full items-center bg-white px-5 py-2.5 dark:bg-slate-900">
             <div class="horizontal-logo flex items-center justify-between lg:hidden">
                 <a href="{{ route('dashboard') }}" class="main-logo flex shrink-0 items-center">
                     <img class="inline w-10 -ml-1 rounded-full" src="{{ asset('storage/' . $systemInformation->min_logo) }}" alt="image" />

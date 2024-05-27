@@ -2,8 +2,8 @@
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full" x-data="student">
         <h2 class="mb-2 font-bold text-3xl dark:text-white">Students</h2>
         <hr>
-        <div class="flex item-center justify-between d px-6 pb-2 pt-2">
-            <div class="flex item-center py-2">
+        <div class="block md:flex item-center justify-between d px-0 md-px-6 pb-2 pt-2">
+            <div class="flex item-center justify-center md:justify-start py-2">
                 <h1 class="flex justify-center items-center font-bold">show</h1>
                 <div class="dataTable-dropdown ml-[5px]">
                     <label>
@@ -18,53 +18,16 @@
                 </div>
                 <h1 class="flex justify-center items-center ml-[5px] font-bold">entries</h1>
             </div>
-            <div class="flex items-center" x-data="{ search: false }" @click.outside="search = false">
-                <form
-                    class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0"
-                    :class="{'!block' : search}"
-                >
-                    <div class="relative">
-                        <input wire:model.live.debounce.1000ms="search" type="text" class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border" placeholder="Search..." />
-                        <button type="button" class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 ltr:right-auto rtl:left-auto">
-                            <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-                                <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </button>
-                        <button
-                            type="button"
-                            class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 ltr:right-2 rtl:left-2 sm:hidden"
-                            @click="search = false"
-                        >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-                                <path
-                                    d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
-                        </button>
+            <div class="flex items-center mr-0 md:mr-3">
+                <div class="group relative flex-1">
+                    <input type="text" class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-2 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border" placeholder="Search..." wire:model.live.debounce.300ms="search">
+                    <div class="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary right-[11px]">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4">
+                            <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5"></circle>
+                            <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                        </svg>
                     </div>
-                </form>
-                <button
-                    type="button"
-                    class="search_btn rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 dark:bg-dark/40 dark:hover:bg-dark/60 sm:hidden"
-                    @click="search = ! search"
-                >
-                    <svg
-                        class="mx-auto h-4.5 w-4.5 dark:text-[#d0d2d6]"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-                        <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                    </svg>
-                </button>
+                </div>
             </div>
         </div>
         <div
@@ -198,7 +161,7 @@
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a]">
                                     <div class="flex gap-3 items-center">
-                                        <button @click="editStatus = {{ $student->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border text-xs">
+                                        <button @click="editStatus = {{ $student->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize text-black dark:text-white border text-xs">
                                             {{ $student->student_status }}
                                             <svg :class="editStatus == {{ $student->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
                                         </button>
@@ -207,7 +170,7 @@
                                         </button>
                                     </div>
                                     <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $student->id }}">
-                                        <select wire:model="student_status" class="my-input w-[200px] focus:outline-none focus:shadow-outline text-white">
+                                        <select wire:model="student_status" class="my-input w-[200px] focus:outline-none focus:shadow-outline text-black dark:text-white">
                                             <option value="">Select Status</option>
                                             <option value="running">Running</option>
                                             <option value="cancel">Cancel</option>

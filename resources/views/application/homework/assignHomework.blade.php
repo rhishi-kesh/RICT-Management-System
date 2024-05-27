@@ -82,8 +82,8 @@
                     @foreach ($students as $item)
                         <tr>
                             <td class="border border-slate-600 px-5 py-2">
-                                <label for="{{ $item->name }}" class="mb-0 cursor-pointer select-none">
-                                    <input type="checkbox" id="{{ $item->name }}" value="{{ $item->id }}" name="person[]">
+                                <label for="id{{ $item->id }}" class="mb-0 cursor-pointer select-none">
+                                    <input type="checkbox" id="id{{ $item->id }}" value="{{ $item->id }}" name="person[]">
                                     <span>{{ $item->name }}({{ $item->student_id }})</span>
                                 </label>
                             </td>

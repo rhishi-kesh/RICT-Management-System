@@ -5,12 +5,10 @@ use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\Attendance\AttendanceController;
 use App\Http\Controllers\auth\AdminController;
 use App\Http\Controllers\auth\StudentController;
-use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\batch\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\Homework\HomeworkController;
-use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\notice\NoticController;
 use App\Http\Controllers\PayRoll;
 use App\Http\Controllers\MentorsController;
@@ -25,6 +23,9 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Smtp\SmtpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\MentorController as MentorAuthController;
+use App\Http\Controllers\Dashboard\AdminDashboardController;
+use App\Http\Controllers\Dashboard\MentorDashboardController;
+use App\Http\Controllers\Dashboard\StudentDashboardController;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
@@ -74,7 +75,6 @@ Route::group(['prefix'=>'mentor', 'as'=>'mentor.'], function(){
 // Error Redirect
 Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('notFound');
 
-
 //Download
 Route::get('/attendance/download/{date}/{id}', [AttendanceController::class, 'attendanceDownload'])->name('attendanceDownload');
 Route::get('/attendance/download/single/{batch_id}/{student_id}', [AttendanceController::class, 'attendancSingleeDownload'])->name('attendancSingleeDownload');
@@ -82,7 +82,7 @@ Route::get('/attendance/download/single/{batch_id}/{student_id}', [AttendanceCon
 //admin Middlewere
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
@@ -168,12 +168,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/tickets/{id}/show', [TicketController::class, 'adminTicketshow'])->name('adminTicketshow');
 });
 
-
 //Student Middlewere
 Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     // Student Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'studentDashboard'])->name('studentDashboard');
+    Route::get('/dashboard', [StudentDashboardController::class, 'studentDashboard'])->name('studentDashboard');
 
     // Student Logout
     Route::get('/logout', [StudentController::class, 'studentLogout'])->name('studentLogout');
@@ -200,7 +199,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 Route::group(['prefix' => 'mentor', 'middleware' => ['mentor']], function () {
 
     //Student Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'mentorDashboard'])->name('mentorDashboard');
+    Route::get('/dashboard', [MentorDashboardController::class, 'mentorDashboard'])->name('mentorDashboard');
 
     //Student Logout
     Route::get('/logout', [MentorAuthController::class, 'mentorLogout'])->name('mentorLogout');
