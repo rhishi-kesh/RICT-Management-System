@@ -6,7 +6,7 @@
             <div class="w-full mb-10">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                     <a href="{{ route('noticeMentor') }}">
-                        <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
+                        <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
                                 <h6 class="text-[#0e1726] dark:text-white text-xl">Mentors</h6>
                             </div>
@@ -23,7 +23,7 @@
                         </div>
                     </a>
                     <a href="{{ route('noticeSystemUser') }}">
-                        <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
+                        <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
                                 <h6 class="text-[#0e1726] dark:text-white text-xl">System Users</h6>
                             </div>
@@ -41,7 +41,7 @@
                         </div>
                     </a>
                     <a href="{{ route('noticeStudentWithoutBatch') }}">
-                        <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
+                        <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
                                 <h6 class="text-[#0e1726] dark:text-white text-xl">Student Without Batch</h6>
                             </div>
@@ -59,7 +59,7 @@
                         </div>
                     </a>
                     <a href="{{ route('noticeAdmissionBooth') }}">
-                        <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
+                        <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
                                 <h6 class="text-[#0e1726] dark:text-white text-xl">Admission Booth</h6>
                             </div>
@@ -78,7 +78,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                     @forelse ($batch as $key => $data)
                         <a href="{{ route('noticeBatch', $data->id) }}">
-                            <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0">
+                            <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0">
                                 <div class="flex justify-between mb-5 gap-2">
                                     <h6 class="text-[#0e1726] dark:text-white text-xl">{{ $data->name }}</h6>
                                 </div>

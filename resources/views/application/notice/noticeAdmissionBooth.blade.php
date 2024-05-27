@@ -1,31 +1,6 @@
 @extends('layout/index')
 @section('content')
     <div class="mx-auto my-10">
-        @push('css')
-            <style>
-                :is(.dark .ck-editor__editable, .ck-icon, .ck-button__label, .ck-toolbar) {
-                    --tw-border-opacity: 1;
-                    border-color: rgb(107 114 128 / var(--tw-border-opacity)) !important;
-                    --tw-bg-opacity: 1;
-                    background-color: rgb(30 41 59 / var(--tw-bg-opacity)) !important;
-                    --tw-text-opacity: 1;
-                    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-                }
-                #container {
-                    width: 1000px;
-                    margin: 20px auto;
-                }
-                .ck-editor__editable[role="textbox"] {
-                    /* Editing area */
-                    min-height: 200px;
-                }
-                .ck-content .image {
-                    /* Block images */
-                    max-width: 80%;
-                    margin: 20px auto;
-                }
-            </style>
-        @endpush
         @if (Session::has('success'))
             <div class="flex items-center p-4 mb-4 text-sm text-green-900 rounded-lg bg-green-300 dark:bg-gray-800 dark:text-green-400" role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -48,7 +23,7 @@
             <form action="{{ route('noticeAdmissionBoothPost') }}" method="POST">
                 @csrf
                 <div>
-                    <textarea name="message" id="editor" rows="10" placeholder="Enter Notice" class="@error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+                    <textarea name="message" id="editor" rows="10" placeholder="Enter Notice" class="my-input focus:outline-none focus:shadow-outline @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
                     @error('message')
                         <div class="p-3 bg-red-500 text-white my-1">{{ $message }}</div>
                     @enderror
@@ -70,8 +45,8 @@
                         @foreach ($admissionBooth as $item)
                             <tr>
                                 <td class="border border-slate-600 px-5 py-2">
-                                    <label for="{{ $item->shop_name }}" class="mb-0 cursor-pointer select-none">
-                                        <input type="checkbox" id="{{ $item->shop_name }}" value="{{ $item->id }}" name="person[]">
+                                    <label for="id{{ $item->id }}" class="mb-0 cursor-pointer select-none">
+                                        <input type="checkbox" id="id{{ $item->id }}" value="{{ $item->id }}" name="person[]">
                                         <span>{{ $item->shop_name }}</span>
                                     </label>
                                 </td>
@@ -85,15 +60,6 @@
             </form>
         </div>
         @push('js')
-        <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
-        <script>
-            ClassicEditor
-                .create( document.querySelector( '#editor' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
-        </script>
-
             <script>
                 let all = document.getElementById('all');
                 let allInput = document.querySelectorAll('table input[type="checkbox"]');

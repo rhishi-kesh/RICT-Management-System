@@ -9,12 +9,13 @@ use Spatie\Permission\Models\Role;
 
 class UserEdit extends Component
 {
-    public $name, $email, $password, $date, $Cpassword, $roles = [], $newRoles = [], $allRoles, $update_id;
+    public $name, $email, $password, $date, $mobile, $Cpassword, $roles = [], $newRoles = [], $allRoles, $update_id;
     public function mount($id){
         $data = User::where('role',1)->where('id', $id)->first();
         $this->update_id = $id;
         $this->name = $data->name;
         $this->email = $data->email;
+        $this->mobile = $data->mobile;
         $this->date = date("Y-m-d", strtotime($data->dateofbirth));
         $perviousRoles = $this->roles;
         if(is_array($this->roles)){
@@ -32,12 +33,14 @@ class UserEdit extends Component
         $validated = $this->validate([
             'name' => 'required',
             'date' => 'required',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'email' => 'required|email|unique:users,name,' . $this->update_id,
         ]);
         $user = User::findOrFail($this->update_id);
         $done = $user->update([
             'name' => $this->name,
             'email' => $this->email,
+            'mobile' => $this->mobile,
             'dateofbirth' => $this->date,
             'updated_at' => Carbon::now(),
         ]);

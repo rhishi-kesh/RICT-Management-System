@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('profile')->nullable();
             $table->timestamp('dateofbirth')->nullable();
+            $table->string('mobile', 20)->nullable();
             $table->string('role', 10)->default(1);
             $table->rememberToken();
             $table->timestamps();

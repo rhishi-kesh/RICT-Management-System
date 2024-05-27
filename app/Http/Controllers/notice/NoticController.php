@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\notice;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NoticeMail;
 use App\Models\AdmissionBooth;
 use App\Models\Mentor;
 use App\Models\Notice;
@@ -11,9 +12,12 @@ use App\Models\Batch;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Utils;
+use Illuminate\Support\Facades\Mail;
 
 class NoticController extends Controller
 {
+    use Utils;
     public function notice() {
 
         $batch = Batch::select('id', 'name')
@@ -52,14 +56,31 @@ class NoticController extends Controller
             'person' => 'required',
         ]);
 
+        // SMS Message
+        $message = $request->message;
+
         foreach($request->person as $person){
+
             $user = Mentor::where('id', $person)->first();
-            Notice::insert([
+
+            //Mail Data
+            $data = [
+                'message'=> $request->message,
+                'email'=> $user->email,
+            ];
+
+
+            $done = Notice::insert([
                 'user_id' => $user->id,
                 'person' => 'm',
                 'notice' => $request->message,
                 'created_at' => Carbon::now()
             ]);
+
+            if($done){
+                $this->sendSMS($user->mobile, $message);
+                Mail::to($user->email)->queue(new NoticeMail($data));
+            }
         }
 
         return back()->with('success','Notice Send Successful');
@@ -79,14 +100,30 @@ class NoticController extends Controller
             'person' => 'required',
         ]);
 
+        // SMS Message
+        $message = $request->message;
+
         foreach($request->person as $person){
+
             $user = User::where('id', $person)->first();
-            Notice::insert([
+
+            //Mail Data
+            $data = [
+                'message'=> $request->message,
+                'email'=> $user->email,
+            ];
+
+            $done = Notice::insert([
                 'user_id' => $user->id,
                 'person' => 'a',
                 'notice' => $request->message,
                 'created_at' => Carbon::now()
             ]);
+
+            if($done){
+                $this->sendSMS($user->mobile, $message);
+                Mail::to($user->email)->queue(new NoticeMail($data));
+            }
         }
 
         return back()->with('success','Notice Send Successful');
@@ -106,14 +143,30 @@ class NoticController extends Controller
             'person' => 'required',
         ]);
 
+        // SMS Message
+        $message = $request->message;
+
         foreach($request->person as $person){
+
             $user = Student::where('id', $person)->first();
-            Notice::insert([
+
+            //Mail Data
+            $data = [
+                'message'=> $request->message,
+                'email'=> $user->email,
+            ];
+
+            $done = Notice::insert([
                 'user_id' => $user->id,
                 'person' => 's',
                 'notice' => $request->message,
                 'created_at' => Carbon::now()
             ]);
+
+            if($done){
+                $this->sendSMS($user->mobile, $message);
+                Mail::to($user->email)->queue(new NoticeMail($data));
+            }
         }
 
         return back()->with('success','Notice Send Successful');
@@ -133,14 +186,30 @@ class NoticController extends Controller
             'person' => 'required',
         ]);
 
+        // SMS Message
+        $message = $request->message;
+
         foreach($request->person as $person){
+
             $user = AdmissionBooth::where('id', $person)->first();
-            Notice::insert([
+
+            //Mail Data
+            $data = [
+                'message'=> $request->message,
+                'email'=> $user->email,
+            ];
+
+            $done = Notice::insert([
                 'user_id' => $user->id,
                 'person' => 'b',
                 'notice' => $request->message,
                 'created_at' => Carbon::now()
             ]);
+
+            if($done){
+                $this->sendSMS($user->number, $message);
+                Mail::to($user->email)->queue(new NoticeMail($data));
+            }
         }
 
         return back()->with('success','Notice Send Successful');
@@ -160,14 +229,31 @@ class NoticController extends Controller
             'person' => 'required',
         ]);
 
+        // SMS Message
+        $message = $request->message;
+
         foreach($request->person as $person){
+
             $user = Student::where('id', $person)->first();
-            Notice::insert([
+
+            //Mail Data
+            $data = [
+                'message'=> $request->message,
+                'email'=> $user->email,
+            ];
+
+
+            $done = Notice::insert([
                 'user_id' => $user->id,
                 'person' => 's',
                 'notice' => $request->message,
                 'created_at' => Carbon::now()
             ]);
+
+            if($done){
+                $this->sendSMS($user->mobile, $message);
+                Mail::to($user->email)->queue(new NoticeMail($data));
+            }
         }
 
         return back()->with('success','Notice Send Successful');

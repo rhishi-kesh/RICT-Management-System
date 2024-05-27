@@ -49,6 +49,13 @@
                 @endif
             </div>
             <div class="mb-1">
+                <label for="mobile" class="my-label">Mobile Number</label>
+                <input type="number" wire:model="mobile" placeholder="Mobile Number" id="mobile" class="my-input focus:outline-none focus:shadow-outline appearance-none">
+                @if ($errors->has('mobile'))
+                    <div class="text-red-500">{{ $errors->first('mobile') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
                 <div wire:ignore>
                     <label for="date" class="my-label">Date Of Birth</label>
                     <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
@@ -58,7 +65,7 @@
                 @endif
             </div>
             <div class="mb-1">
-                <div>
+                <div wire:ignore>
                     <label for="roles" class="my-label">Role</label>
                     <select id="roles" wire:model="roles" class="my-input focus:outline-none focus:shadow-outline p-0" name="roles[]" multiple>
                         @foreach ($allRoles as $item)
