@@ -2,14 +2,18 @@
 
 namespace App\Livewire\Visitor;
 
+use App\Mail\VisitorMail;
 use Livewire\Component;
 use App\Models\Councilings;
 use App\Models\Visitors;
+use App\Utils;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Course;
 use App\Models\AdmissionBooth;
 use Carbon\Carbon;
 class VisitorForm extends Component
 {
+    use Utils;
     public $name, $course_name, $amount, $mobile, $address, $email, $visitor_comment, $gender, $ref_name, $admission_booth_name, $calling_person, $comments, $counseling, $status, $course_id;
     public function render() {
         $counciling = Councilings::get();
@@ -18,6 +22,7 @@ class VisitorForm extends Component
         return view('livewire.visitor.visitor-form', compact('counciling', 'courses', 'admissionBooth'));
     }
     public function submit() {
+
         $validated = $this->validate([
             'counseling' => 'required',
             'status' => 'nullable',
@@ -50,7 +55,19 @@ class VisitorForm extends Component
             'comments' => $this->comments,
             'created_at' => Carbon::now(),
         ]);
+
+        //Mail Data
+        $data = [
+            'name'=> $this->name,
+            'email'=> $this->email,
+        ];
+
+        //SMS Message
+        $message = 'Rhishi Testing SMS';
+
         if ($done) {
+            $this->sendSMS($this->mobile, $message);
+            Mail::to($this->email)->queue(new VisitorMail($data));
             $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
