@@ -17,6 +17,7 @@ use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\Homework\HomeworkController;
+use App\Http\Controllers\department\DepartmentController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\certificate\CertificateController;
 use App\Http\Controllers\paymentMode\paymentModeController;
@@ -74,6 +75,7 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/department', [DepartmentController::class, 'department'])->name('department');
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
@@ -88,7 +90,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Add Course
     Route::get('/courses', [CourseController::class, 'course'])->name('course');
-
+ 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
     Route::get('/last-month-due', [PayRoll::class, 'lastMonth'])->name('lastMonth');
