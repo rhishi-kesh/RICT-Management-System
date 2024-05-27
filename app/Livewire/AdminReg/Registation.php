@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Role;
 class Registation extends Component
 {
     use WithPagination;
-    public $name, $email, $password, $Cpassword, $roles = [];
+    public $name, $email, $password, $Cpassword, $date, $roles = [];
 
     public function render()
     {
@@ -25,11 +25,13 @@ class Registation extends Component
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|same:Cpassword',
+            'date' => 'required',
             'roles' => 'required',
         ]);
         $done = User::create([
             'name' => $this->name,
             'email' => $this->email,
+            'dateofbirth' => $this->date,
             'password' => Hash::make($this->password),
             'created_at' => Carbon::now(),
         ]);
@@ -37,18 +39,11 @@ class Registation extends Component
         $done->syncRoles($this->roles);
 
         if($done){
-            $this->resetForm();
+            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
             ]);
         }
-    }
-    public function resetForm(){
-        $this->reset(['name']);
-        $this->reset(['email']);
-        $this->reset(['password']);
-        $this->reset(['Cpassword']);
-        $this->reset(['roles']);
     }
 }

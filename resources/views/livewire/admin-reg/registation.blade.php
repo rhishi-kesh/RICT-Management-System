@@ -22,6 +22,12 @@
             .nice-select .list {
                 max-height: 125px;
             }
+            input[type="date"]::-webkit-inner-spin-button,
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+                -webkit-appearance: none;
+                user-select: none;
+            }
         </style>
     @endpush
     <form wire:submit="insert" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
@@ -58,6 +64,15 @@
             </div>
             <div class="mb-1">
                 <div wire:ignore>
+                    <label for="date" class="my-label">Date Of Birth</label>
+                    <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
+                </div>
+                @if ($errors->has('date'))
+                    <div class="text-red-500">{{ $errors->first('date') }}</div>
+                @endif
+            </div>
+            <div class="mb-1">
+                <div wire:ignore>
                     <label for="roles" class="my-label">Role</label>
                     <select id="roles" wire:model="roles" class="my-input focus:outline-none focus:shadow-outline p-0" name="roles[]" multiple>
                         @foreach ($allRoles as $item)
@@ -86,6 +101,9 @@
             };
             NiceSelect.bind(document.getElementById("roles"), options);
         });
+    </script>
+    <script>
+        flatpickr("#date");
     </script>
     @endpush
 </div>

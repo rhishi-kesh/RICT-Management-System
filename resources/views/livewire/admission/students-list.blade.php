@@ -149,7 +149,7 @@
                                     {{ $student->email ?? "-" }}
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                    {{ $student->dateofbirth ?? "-" }}
+                                    {{ date("d-M-Y", strtotime($student->dateofbirth ?? '-')) }}
                                 </td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     {{ $student->guardianMobileNo ?? "-" }}

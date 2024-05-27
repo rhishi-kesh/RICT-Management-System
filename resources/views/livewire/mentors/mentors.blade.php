@@ -1,5 +1,17 @@
 <div class="pt-5" x-data="modal">
 
+    @push('css')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <style>
+            input[type="date"]::-webkit-inner-spin-button,
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+                -webkit-appearance: none;
+                user-select: none;
+            }
+        </style>
+    @endpush
+
     {{-- Insert Button --}}
     <div class="mb-3">
         <button @click="toggle; $wire.call('showModal')" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
@@ -24,6 +36,7 @@
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Email</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Number</th>
+                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Date Of Birth</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Photo</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
                     </tr>
@@ -32,13 +45,20 @@
                     @forelse ($mentors as $key => $data)
                         <tr>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $mentors->firstItem() + $key }} </td>
+                                {{ $mentors->firstItem() + $key }}
+                            </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->name }} </td>
+                                {{ $data->name }}
+                            </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->email }} </td>
+                                {{ $data->email }}
+                            </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->mobile }}</td>
+                                {{ $data->mobile }}
+                            </td>
+                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                {{ date("d-M-Y", strtotime($data->dateofbirth ?? '-')) }}
+                            </td>
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
                                 @if (empty($data->image))
                                     <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($data->name), 0, 1) }}
@@ -143,7 +163,15 @@
                                 <div class="text-red-500">{{ $errors->first('mobile') }}</div>
                             @endif
                         </div>
-
+                        <div class="mb-1">
+                            <div wire:ignore>
+                                <label for="date" class="my-label">Date Of Birth</label>
+                                <input type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline" id="date">
+                            </div>
+                            @if ($errors->has('date'))
+                                <div class="text-red-500">{{ $errors->first('date') }}</div>
+                            @endif
+                        </div>
                         <div class="mb-1">
                             <label class="col-form-label pt-0" for="image">Image</label>
                             <input wire:model="image" class="block form-control @error('image') is-invalid @enderror" id="image" type="file">
@@ -173,4 +201,10 @@
             </div>
         </div>
     </div>
+    @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#date");
+    </script>
+    @endpush
 </div>

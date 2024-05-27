@@ -51,7 +51,7 @@ class StudentListEdit extends Component
         $this->totalDue = $data->due;
         $this->paymentNumber = $data->paymentNumber;
         $this->courseId = $data->course_id;
-        $this->date = $data->dateofbirth;
+        $this->date = date("Y-m-d", strtotime($data->dateofbirth));
         $this->classday = $data->class_days;
         $this->course = Course::get();
         $this->paymentTypes = PaymentMode::get();

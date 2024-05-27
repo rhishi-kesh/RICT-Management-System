@@ -11,6 +11,7 @@
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Photo</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Email</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Date Of Birth</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Roles</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
                         </tr>
@@ -28,6 +29,7 @@
                                 </td>
                                 <td class="p-3 text-center">{{ $data->name }}</td>
                                 <td class="p-3 text-center">{{ $data->email }}</td>
+                                <td class="p-3 text-center">{{ date("d-M-Y", strtotime($data->dateofbirth)) }}</td>
                                 <td class="p-3 text-center">
                                     @if(!empty($data->getRoleNames()))
                                         @foreach ($data->getRoleNames() as $item)
