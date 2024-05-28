@@ -46,7 +46,6 @@ class AdminProfile extends Component
             'current_password' => ['required'],
             'password' => ['required', 'min:8', 'same:password_confirmation']
         ]);
-
         if(Hash::check($this->current_password, Auth::user()->password)){
             $user_update = Auth::user();
             $user_update->password = Hash::make($this->password);
@@ -66,24 +65,20 @@ class AdminProfile extends Component
         ]);
         $user = User::findOrFail(Auth::user()->id);
         $oldImage = $user->profile;
-
         $fileName = "";
         $image_path = public_path('storage\\' . $oldImage);
         if(!empty($this->photo)){
             if(File::exists($image_path)) {
                 File::delete($image_path);
             }
-
             $fileName = $this->photo->store('profile', 'public');
         } else {
             $fileName = $oldImage;
         }
-
         $done = User::findOrFail(Auth::user()->id);
         $done->profile = $fileName;
         $done->updated_at = Carbon::now();
         $done->update();
-
         if ($done) {
             $this->dispatch('swal', [
                 'title' => 'Profile Picture Update Successfull',

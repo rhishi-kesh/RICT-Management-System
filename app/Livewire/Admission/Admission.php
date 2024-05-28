@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 class Admission extends Component
 {
     use Utils;
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [], $date, $courseFee, $paymentTypes = [], $course = [], $allClassDays = [];
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $admissionFee, $classday = [], $date, $courseFee, $gender , $paymentTypes = [], $course = [], $allClassDays = [];
 
     public function updated($discount) {
         $singleCourse = Course::where('id', $this->courseId)->first(['fee']);
@@ -81,6 +81,7 @@ class Admission extends Component
             'courseId' => 'required',
             'paymentType' => 'required',
             'totalAmount' => 'required',
+            'gender'   => 'required',
             'date' => 'required',
         ]);
 
@@ -104,6 +105,7 @@ class Admission extends Component
             'pay' => $this->totalPay,
             'due' => $this->totalDue,
             'total' => $this->totalAmount,
+            'gender' => $this->gender,
             'paymentNumber' => $this->paymentNumber,
             'admissionFee' => $this->admissionFee,
             'discount' => $this->discount,

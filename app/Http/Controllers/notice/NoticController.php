@@ -19,7 +19,6 @@ class NoticController extends Controller
 {
     use Utils;
     public function notice() {
-
         $batch = Batch::select('id', 'name')
         ->withCount('students')
         ->latest()
@@ -50,7 +49,6 @@ class NoticController extends Controller
     }
 
     public function noticeMentorPost(Request $request){
-
         $validated = $request->validate([
             'message' => 'required',
             'person' => 'required',
@@ -82,7 +80,6 @@ class NoticController extends Controller
                 Mail::to($user->email)->queue(new NoticeMail($data));
             }
         }
-
         return back()->with('success','Notice Send Successful');
     }
 
@@ -125,7 +122,6 @@ class NoticController extends Controller
                 Mail::to($user->email)->queue(new NoticeMail($data));
             }
         }
-
         return back()->with('success','Notice Send Successful');
     }
 
@@ -168,7 +164,6 @@ class NoticController extends Controller
                 Mail::to($user->email)->queue(new NoticeMail($data));
             }
         }
-
         return back()->with('success','Notice Send Successful');
     }
 
@@ -180,7 +175,6 @@ class NoticController extends Controller
     }
 
     public function noticeAdmissionBoothPost(Request $request){
-
         $validated = $request->validate([
             'message' => 'required',
             'person' => 'required',
@@ -211,7 +205,6 @@ class NoticController extends Controller
                 Mail::to($user->email)->queue(new NoticeMail($data));
             }
         }
-
         return back()->with('success','Notice Send Successful');
     }
 
@@ -255,7 +248,6 @@ class NoticController extends Controller
                 Mail::to($user->email)->queue(new NoticeMail($data));
             }
         }
-
         return back()->with('success','Notice Send Successful');
     }
 
@@ -265,7 +257,6 @@ class NoticController extends Controller
 
     public function singleANotice($id) {
         $singlenotice = Notice::findOrFail($id);
-
         return view('application.notice.adminSingleNotice', compact('singlenotice'));
     }
 
@@ -273,7 +264,6 @@ class NoticController extends Controller
         $singlenotice = Notice::findOrFail($id);
         $singlenotice->is_seen = 0;
         $singlenotice->update();
-
         return view('application.notice.adminSingleNotice', compact('singlenotice'));
     }
 
@@ -281,7 +271,6 @@ class NoticController extends Controller
         $singlenotice = Notice::findOrFail($id);
         $singlenotice->is_seen = 0;
         $singlenotice->update();
-
         return view('application.notice.studentSingleNotice', compact('singlenotice'));
     }
 
@@ -289,7 +278,6 @@ class NoticController extends Controller
         $singlenotice = Notice::findOrFail($id);
         $singlenotice->is_seen = 0;
         $singlenotice->update();
-
         return view('application.notice.mentorSingleNotice', compact('singlenotice'));
     }
 
@@ -299,7 +287,6 @@ class NoticController extends Controller
         ->where('person', 'a')
         ->latest()
         ->paginate(30);
-
         return view('application.notice.myAdminNotice', compact('usersNotice'));
     }
 
@@ -309,7 +296,6 @@ class NoticController extends Controller
         ->where('person', 'm')
         ->latest()
         ->paginate(30);
-
         return view('application.notice.myMentorNotice', compact('mentorNotice'));
     }
 
@@ -319,7 +305,6 @@ class NoticController extends Controller
         ->where('person', 's')
         ->latest()
         ->paginate(30);
-
         return view('application.notice.myStudentNotice', compact('studentNotice'));
     }
 }

@@ -17,5 +17,4 @@ class PasswordReset extends Model
         'otp',
         'created_at'
     ];
-
 }

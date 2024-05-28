@@ -177,7 +177,18 @@
                     <div class="text-red-500">{{ $errors->first('classday') }}</div>
                 @endif
             </div>
-            <div class="mb-3 ms-2">
+            <div class="mb-3">
+                <label for="gender" class="my-label">Gender</label>
+                <select id="gender" wire:model="gender" class="my-input focus:outline-none focus:shadow-outline" name="gender[]">
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                @if ($errors->has('gender'))
+                    <div class="text-red-500">{{ $errors->first('gender') }}</div>
+                @endif
+            </div>
+            <div class="mb-1 mt-9 ms-2">
                 <label for="admissionFee" class="cursor-pointer w-full block group text-gray-700 font-bold">
                 <input type="checkbox" wire:model="admissionFee" value="y" name="admissionFee" id="admissionFee" class="cursor-pointer mr-2 leading-tight">
                 <span class="text-gray-700 dark:text-white group-checked:text-green-600 text-sm font-bold mb-2">Admission Fee 100 TK</span>

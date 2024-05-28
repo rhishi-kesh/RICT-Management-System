@@ -23,6 +23,7 @@ class StudentsList extends Component
 
         return view('livewire.admission.students-list',compact('students'));
     }
+
     public function doSort($column){
         if($this->sortColumn === $column){
             $this->sortDirection = ($this->sortDirection == 'ASC')? 'DESC':'ASC';

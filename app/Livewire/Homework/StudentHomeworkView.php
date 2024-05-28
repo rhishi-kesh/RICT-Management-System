@@ -19,36 +19,32 @@ class StudentHomeworkView extends Component
     public function render()
     {
         $homeworks = Homework::query()
-        ->with(['student:id,name,profile'])
-        ->where('student_id', Auth::guard('student')->user()->id)
-        ->paginate(30);
-
+            ->with(['student:id,name,profile'])
+            ->where('student_id', Auth::guard('student')->user()->id)
+            ->paginate(30);
         return view('livewire.homework.student-homework-view', compact('homeworks'));
     }
 
-    public function viewData($id) {
-        $this->singleData = Homework::where('id',$id)->first();
+    public function viewData($id)
+    {
+        $this->singleData = Homework::where('id', $id)->first();
     }
 
-    public function changeStatus($id) {
+    public function changeStatus($id)
+    {
         $data = HomeworkSubmit::where('homework_id', $id)->first();
         $this->url = $data->url ?? '';
         $this->description = $data->description ?? '';
-
-        if($this->status == 'inReview') {
-
+        if ($this->status == 'inReview') {
             $this->homeworkId = $id;
             $this->inReviewStatus = $this->status;
             $this->dispatch('showForm');
-
-        }else{
-
-            $done = Homework::where('id',$id)->update([
+        } else {
+            $done = Homework::where('id', $id)->update([
                 'status' => $this->status,
                 'updated_at' => Carbon::now()
             ]);
-
-            if($done){
+            if ($done) {
                 $this->dispatch('swal', [
                     'title' => 'Status Updated Successfull',
                     'type' => "success",
@@ -57,13 +53,12 @@ class StudentHomeworkView extends Component
         }
     }
 
-    public function submitHomework() {
-
+    public function submitHomework()
+    {
         $validated = $this->validate([
             'url' => 'required|url',
             'description' => 'required',
         ]);
-
         DB::beginTransaction();
         try {
 
@@ -72,7 +67,6 @@ class StudentHomeworkView extends Component
                 'status' => $this->inReviewStatus,
                 'updated_at' => Carbon::now()
             ]);
-
             HomeworkSubmit::updateOrCreate(
                 [
                     'homework_id' => $this->homeworkId
@@ -103,7 +97,6 @@ class StudentHomeworkView extends Component
                 'title' => 'Homework Submit Successfull',
                 'type' => "success",
             ]);
-
         } catch (\Exception $e) {
             DB::rollback();
             $this->dispatch('swal', [
@@ -113,10 +106,11 @@ class StudentHomeworkView extends Component
         }
     }
 
-    public function viewHomeWork($id) {
+    public function viewHomeWork($id)
+    {
         $this->singleHomework = HomeworkSubmit::query()
-                            ->with(['homework:id,title'])
-                            ->where('homework_id',$id)
-                            ->first();
+            ->with(['homework:id,title'])
+            ->where('homework_id', $id)
+            ->first();
     }
 }

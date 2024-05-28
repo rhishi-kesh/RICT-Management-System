@@ -86,7 +86,6 @@
                                     </svg>
                                 </button>
 
-
                                 {{-- Delete Button --}}
                                 <button wire:click="deleteAlert({{ $data->id }})" type="button" x-tooltip="Delete">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -117,7 +116,6 @@
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>
         </div>
     </div>
-
 
     {{-- Update & Instert Form --}}
     <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">

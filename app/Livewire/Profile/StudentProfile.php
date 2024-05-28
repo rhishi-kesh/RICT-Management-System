@@ -56,12 +56,10 @@ class StudentProfile extends Component
         } else {
             $fileName = $oldImage;
         }
-
         $done = Student::findOrFail(Auth::Guard('student')->user()->id);
         $done->profile = $fileName;
         $done->updated_at = Carbon::now();
         $done->update();
-
         if ($done) {
             $this->dispatch('swal', [
                 'title' => 'Profile Picture Update Successfull',
@@ -74,7 +72,6 @@ class StudentProfile extends Component
             'current_password' => ['required'],
             'password' => ['required', 'min:8', 'same:password_confirmation']
         ]);
-
         if(Hash::check($this->current_password, Auth::Guard('student')->user()->password)){
             $user_update = Auth::Guard('student')->user();
             $user_update->password = Hash::make($this->password);

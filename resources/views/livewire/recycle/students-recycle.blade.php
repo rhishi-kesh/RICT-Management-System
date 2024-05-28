@@ -46,7 +46,6 @@
                                         class="bg-green-500 btn text-white border-0">
                                         Restore
                                     </button>
-
                                     {{-- Edit Button --}}
                                     <button wire:click="deleteStudentAlert({{ $data->id }})"
                                         class="bg-red-500 btn text-white border-0 mt-2 mt-md-0">

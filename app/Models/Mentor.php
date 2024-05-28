@@ -16,7 +16,7 @@ class Mentor extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
     protected $fillable = [
         'name',
         'email',

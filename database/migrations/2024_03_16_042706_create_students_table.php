@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('batch_id')->nullable();
             $table->string('name');
             $table->string('profile')->nullable();
+            $table->string('gender')->nullable()->default('male');
             $table->string('slug');
             $table->string('fName');
             $table->string('dateofbirth');
