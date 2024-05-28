@@ -62,10 +62,8 @@ class SubmitedHomework extends Component
     public function changeStatus($id) {
         $data = HomeworkSubmit::where('homework_id', $id)->first();
         $this->feedback = $data->feedback;
-
         $this->homeworkId = $id;
         $this->feedbackStatus = $this->status;
-
         $this->dispatch('showForm');
     }
 
@@ -74,26 +72,21 @@ class SubmitedHomework extends Component
         $validated = $this->validate([
             'feedback' => 'required'
         ]);
-
         DB::beginTransaction();
         try {
-
             Homework::where('id', $this->homeworkId)->update([
                 'status' => $this->feedbackStatus,
                 'updated_at' => Carbon::now()
             ]);
-
             HomeworkSubmit::where('homework_id', $this->homeworkId)->update([
                 'feedback' => $this->feedback,
                 'updated_at' => Carbon::now()
             ]);
-
             DB::commit();
             $this->dispatch('swal', [
                 'title' => 'Feedback Submit Successfull',
                 'type' => "success",
             ]);
-
         } catch (\Exception $e) {
             DB::rollback();
             $this->dispatch('swal', [

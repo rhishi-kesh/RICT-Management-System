@@ -23,9 +23,11 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Smtp\SmtpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\MentorController as MentorAuthController;
+use App\Http\Controllers\certificate\CertificateController;
 use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\MentorDashboardController;
 use App\Http\Controllers\Dashboard\StudentDashboardController;
+use App\Http\Controllers\department\DepartmentController;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
@@ -83,6 +85,9 @@ Route::get('/attendance/download/single/{batch_id}/{student_id}', [AttendanceCon
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+
+    //Department
+    Route::get('/department', [DepartmentController::class, 'department'])->name('department');
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
@@ -176,6 +181,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     // Student Logout
     Route::get('/logout', [StudentController::class, 'studentLogout'])->name('studentLogout');
+    Route::get('/profile', [ProfileController::class, 'userProfile'])->name('userProfile');
 
     //Notice
     Route::get('/s/my-notice', [NoticController::class, 'mySNotice'])->name('mySNotice');
@@ -184,8 +190,12 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     //HomeWork
     Route::get('/my-homework', [HomeworkController::class, 'studentHomeworkView'])->name('studentHomeworkView');
 
-    //Profile
+    //Profile $ Certificate
     Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
+
+    //Certificate
+    Route::get('/certificate-view', [CertificateController::class, 'generatePDF'])->name('generatePDF');
+    Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('downloadCertificate');
 
     //Attendance system
     Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('myAttendance');
@@ -193,6 +203,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     //Ticket
     Route::get('/tickets', [TicketController::class, 'ticketindex'])->name('ticketindex');
     Route::get('/tickets/{id}/show', [TicketController::class, 'ticketshow'])->name('ticketshow');
+
 });
 
 //Mentor Middlewere

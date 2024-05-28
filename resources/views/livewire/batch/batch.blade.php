@@ -442,7 +442,6 @@
                     }
                 });
             });
-
             window.addEventListener('deleteMentorSuccessFull', event => {
                 const eventData = event.detail[0]; // Accessing the first element of the array
                 if (eventData && eventData.title && eventData.type) {
@@ -487,10 +486,8 @@
                     selectedOptions.forEach(item => {
                         item.remove();
                     });
-
                     instance.clear();
                     instance.update();
-
                     const eventData = event.detail[0]; // Accessing the first element of the array
                     if (eventData && eventData.title && eventData.type) {
                         Swal.fire({

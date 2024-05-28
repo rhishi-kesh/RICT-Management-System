@@ -77,7 +77,6 @@ class ViewHomework extends Component
             'dueDate' => 'required',
             'text' => 'required',
         ]);
-
         $done = Homework::where('id',$this->update_id)->update([
             'title' => $this->title,
             'priority' => $this->priority,
@@ -103,7 +102,6 @@ class ViewHomework extends Component
     
     public function deleteStudent(){
         $done = Homework::findOrFail($this->delete_id)->delete();
-
         if($done){
             $this->dispatch('deleteSuccessFull', [
                 'title' => 'Data Deleted Successfull',

@@ -32,18 +32,14 @@ class Mentors extends Component
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
-
         $fileName = "";
         if ($this->image) {
             $fileName = $this->image->store('mentors', 'public');
         } else {
             $fileName = null;
         }
-
         $password = Str::random(8);
         $password_hash = bcrypt($password);
-
-
         $done = Mentor::insert([
             'name' => $this->name,
             'dateofbirth' => $this->date,
@@ -81,7 +77,6 @@ class Mentors extends Component
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable',
         ]);
-
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);
         if (!empty($this->image)) {
@@ -92,7 +87,6 @@ class Mentors extends Component
         } else {
             $fileName = $this->oldimage;
         }
-
         $done = Mentor::where('id', $this->update_id)->update([
             'name' => $this->name,
             'dateofbirth' => $this->date,
@@ -101,7 +95,6 @@ class Mentors extends Component
             'image' => $fileName,
             'updated_at' => Carbon::now()
         ]);
-
         if ($done) {
             $this->reset();
             $this->dispatch('swal', [

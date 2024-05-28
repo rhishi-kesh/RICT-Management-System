@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class StudentListEdit extends Component
 {
-    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $classday = [], $date, $courseFee, $course = [], $paymentTypes = [], $update_slug;
+    public $name, $fatherName, $motherName, $mobileNumber, $address, $email, $gMobile, $qualification, $gender, $profession, $courseId = null, $discount = null, $paymentType, $totalAmount, $totalPay = null, $totalDue, $paymentNumber, $classday = [], $date, $courseFee, $course = [], $paymentTypes = [], $update_slug;
     public function updated($discount)
     {
         $singleCourse = Course::where('id', $this->courseId)->first(['fee']);
@@ -53,6 +53,7 @@ class StudentListEdit extends Component
         $this->courseId = $data->course_id;
         $this->date = date("Y-m-d", strtotime($data->dateofbirth));
         $this->classday = $data->class_days;
+        $this->gender  = $data->gender;
         $this->course = Course::get();
         $this->paymentTypes = PaymentMode::get();
     }
@@ -91,6 +92,7 @@ class StudentListEdit extends Component
             'courseId' => 'required',
             'paymentType' => 'required',
             'totalAmount' => 'required',
+            'gender'    => 'required',
             'date' => 'required',
         ]);
 
@@ -115,6 +117,7 @@ class StudentListEdit extends Component
             'paymentNumber' => $this->paymentNumber,
             'discount' => $this->discount,
             'class_days' => $this->classday,
+            'gender' => $this->gender,
             'updated_at' => Carbon::now(),
         ]);
         if($done){

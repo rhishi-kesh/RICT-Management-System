@@ -12,11 +12,9 @@ class Due extends Component
     public $total, $pay, $due, $payment, $isUpdate, $search = '', $totalAmount;
     public function updated($payment) {
         $npayment = $this->payment ?? 0;
-
         $student = Student::findOrFail($this->isUpdate);
         $npay = $student->pay ?? 0;
         $ndue = $student->due ?? 0;
-
         $this->pay = (float) $npay + (float) $npayment;
         $this->due = (float) $ndue - (float) $npayment;
     }
@@ -42,7 +40,6 @@ class Due extends Component
             'due' => 'required|numeric',
             'payment' => 'required|numeric',
         ]);
-
         $done = Student::where('id', $this->isUpdate)->update([
             'pay' => $this->pay,
             'due' => $this->due,

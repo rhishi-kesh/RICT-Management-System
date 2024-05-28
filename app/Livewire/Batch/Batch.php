@@ -34,11 +34,6 @@ class Batch extends Component
         return view('livewire.batch.batch', compact('batch'));
     }
 
-
-
-
-
-
     //Batch CRUD
     public function insert() {
         $validated = $this->validate([
@@ -122,13 +117,6 @@ class Batch extends Component
     public function removeUpdate() {
         $this->showUpdateInput = null;
     }
-
-
-
-
-
-
-
     //Student CRUD In Batch
     public function singleBatch($id) {
         $this->isBatch = true;
@@ -141,8 +129,6 @@ class Batch extends Component
     public function addStudent($batchID) {
         $studentIDs = $this->addToBatch;
         $students = Student::whereIn('id', $studentIDs)->get();
-
-
         DB::beginTransaction();
         try {
             foreach ($students as $student) {
@@ -150,14 +136,11 @@ class Batch extends Component
                 $student->updated_at = Carbon::now();
                 $student->save();
             }
-
             $this->dispatch('clearInput', [
                 'title' => 'Student Add Successfull',
                 'type' => "success",
             ]);
-
             $this->mount();
-
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
@@ -186,15 +169,6 @@ class Batch extends Component
     public function removebatch() {
         $this->isBatch = false;
     }
-
-
-
-
-
-
-
-
-
 
     //Mentor CRUD In Batch
     public function asignMentor($id) {

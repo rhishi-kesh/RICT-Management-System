@@ -15,6 +15,7 @@ class MentorProfile extends Component
 {
     use WithFileUploads;
     public $name, $email, $id, $password_confirmation, $password, $current_password, $photo, $oldImage;
+
     public function mount() {
         $this->name = auth()->Guard('mentor')->user()->name;
         $this->email = auth()->Guard('mentor')->user()->email;
@@ -46,7 +47,6 @@ class MentorProfile extends Component
             'current_password' => ['required'],
             'password' => ['required', 'min:8', 'same:password_confirmation']
         ]);
-
         if(Hash::check($this->current_password, Auth::Guard('mentor')->user()->password)){
             $user_update = Auth::Guard('mentor')->user();
             $user_update->password = Hash::make($this->password);
@@ -66,7 +66,6 @@ class MentorProfile extends Component
         ]);
         $user = Mentor::findOrFail(Auth::Guard('mentor')->user()->id);
         $oldImage = $user->image;
-
         $fileName = "";
         $image_path = public_path('storage\\' . $oldImage);
         if(!empty($this->photo)){
@@ -77,12 +76,10 @@ class MentorProfile extends Component
         } else {
             $fileName = $oldImage;
         }
-
         $done = Mentor::findOrFail(Auth::Guard('mentor')->user()->id);
         $done->image = $fileName;
         $done->updated_at = Carbon::now();
         $done->update();
-
         if ($done) {
             $this->dispatch('swal', [
                 'title' => 'Profile Picture Update Successfull',

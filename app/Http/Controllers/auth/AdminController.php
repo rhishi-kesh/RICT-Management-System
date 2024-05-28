@@ -66,9 +66,7 @@ class AdminController extends Controller
         ]);
 
         try{
-
             $user = User::where('email', $request->email)->first();
-
             if($user){
                 $this->sendOtp($user);
                 Session::put('emailVerfy', 'Complete');

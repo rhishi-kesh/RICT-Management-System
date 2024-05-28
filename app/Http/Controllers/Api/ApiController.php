@@ -83,7 +83,6 @@ class ApiController extends Controller
             }
         }
     }
-
     public function courses() {
         $allCourses = Course::get();
         return $allCourses;
