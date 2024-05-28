@@ -2,16 +2,22 @@
 
 namespace App\Livewire\Ticket;
 
+use App\Mail\TicketMail;
+use App\Models\SystemInformation;
 use Livewire\Component;
 use App\Models\Ticket as ModelTicket;
 use Carbon\Carbon;
+use App\Utils;
+use Illuminate\Support\Facades\Mail;
 
 class Ticket extends Component
 {
+    use Utils;
     public $subject;
     public function render()
     {
-        $tickets = ModelTicket::paginate(20);
+
+        $tickets = ModelTicket::where('user_id', auth()->guard('student')->user()->id)->paginate(20);
         return view('livewire.ticket.ticket', compact('tickets'));
     }
 
@@ -29,7 +35,20 @@ class Ticket extends Component
             'created_at' => Carbon::now()
         ]);
 
+        // SMS Message
+        $message = "HomeWork";
+
+        //Mail Data
+        $data = [
+            'subject'=> $this->subject,
+        ];
+
+        $systemInformation = SystemInformation::first();
+
         if($done){
+
+            $this->sendSMS($systemInformation->number, $message);
+            Mail::to($systemInformation->email)->queue(new TicketMail($data));
 
             $this->reset();
 
