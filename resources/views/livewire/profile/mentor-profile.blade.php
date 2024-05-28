@@ -33,7 +33,7 @@
                             @endif
                         </div>
                         <button type="button"
-                            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md duration-150 mt-2 ml-3 uppercase"
+                            class="inline-flex items-center px-4 py-2 bg-white border whitespace-nowrap border-gray-300 rounded-md duration-150 mt-2 ml-3 uppercase"
                             x-on:click.prevent="$refs.photo.click()">
                             Select New Photo
                         </button>

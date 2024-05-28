@@ -10,6 +10,10 @@ class Homework extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status','title', 'priority', 'dueDate', 'text',
+    ];
+
     public function scopeSearch($query, $value)
     {
         $query->where('title', 'like', "%{$value}%");

@@ -35,7 +35,7 @@ class AdminController extends Controller
             return redirect()->route('dashboard');
         }
         return back()->withErrors([
-            'email' => 'Email/Password is invalid',
+            'error' => 'Email/Password is invalid',
         ]);
     }
     public function logout(Request $request) {
@@ -133,7 +133,8 @@ class AdminController extends Controller
         $data['title'] = 'Password Reset';
         $data['body'] = 'Your OTP is:- '.$otp;
 
-        Mail::send('mail.forgetPasswordMail', ['data'=>$data],function($message) use ($data){ $message->to($data['email'])->subject($data['title']);
+        Mail::send('mail.forgetPasswordMail', ['data' => $data], function($message) use ($data) { $message->to($data['email'])->subject($data['title']);
+
         });
     }
 

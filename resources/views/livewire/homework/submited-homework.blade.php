@@ -1,7 +1,7 @@
 <div class="animate__animated p-6" :class="[$store.app.animation]">
     <div x-data="todolist">
         <div class="relative flex h-full gap-5 sm:h-[calc(100vh_-_150px)]">
-            <div class="panel absolute z-10 hidden h-full w-[240px] max-w-full flex-none space-y-4 p-4 rounded-r-none xl:relative xl:block xl:h-auto xl:rounded-r-md" :class="{'!block':isShowTaskMenu}">
+            <div class="panel absolute z-10 hidden h-full w-[240px] max-w-full flex-none space-y-4 p-4 rounded-r-none xl:relative xl:block xl:h-auto xl:rounded-r-md bg-white" :class="{'!block':isShowTaskMenu}">
                 <div class="flex h-full flex-col pb-16">
                     <div class="pb-2">
                         <div class="flex items-center text-center">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="overlay absolute z-[5] hidden h-full w-full rounded-md bg-black/60" :class="{ '!block xl:!hidden': isShowTaskMenu }" @click="isShowTaskMenu = !isShowTaskMenu" ></div>
-            <div class="panel h-full flex-1 overflow-auto p-0">
+            <div class="panel h-full flex-1 overflow-auto p-0 bg-white">
                 <div class="flex h-full flex-col">
                     <div class="flex w-full flex-col gap-4 p-4 sm:flex-row sm:items-center">
                         <div class="flex items-center mr-3">
@@ -96,21 +96,24 @@
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
                                                 <span>
                                                     <span>{{ Str::limit($item->title, 35, '...') }}</span>
-                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
+                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
                                         <td class="p-5 text-center">
-                                            <div>
+                                            <div class="flex gap-3 items-center">
                                                 <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                                     {{ $item->status }}
-                                                    <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                    <svg :class="editStatus == {{ $item->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                </button>
+                                                <button @click="editStatus = 0" x-show="editStatus == {{ $item->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" height="24" width="24"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l6 0"></path></svg>
                                                 </button>
                                             </div>
                                             <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $item->id }}">
-                                                <select wire:model="status" class="my-input w-[100px] md:w-full focus:outline-none focus:shadow-outline text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
+                                                <select wire:model="status" class="my-input w-[200px] focus:outline-none focus:shadow-outline text-black dark:text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
                                                     <option value="">Select Status</option>
                                                     <option value="reject">Reject</option>
                                                     <option value="done">Done</option>
@@ -161,21 +164,24 @@
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
                                                 <span>
                                                     <span>{{ Str::limit($item->title, 35, '...') }}</span>
-                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
+                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
                                         <td class="p-5 text-center">
-                                            <div>
+                                            <div class="flex gap-3 items-center">
                                                 <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                                     {{ $item->status }}
-                                                    <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                    <svg :class="editStatus == {{ $item->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                </button>
+                                                <button @click="editStatus = 0" x-show="editStatus == {{ $item->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" height="24" width="24"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l6 0"></path></svg>
                                                 </button>
                                             </div>
                                             <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $item->id }}">
-                                                <select wire:model="status" class="my-input w-[100px] md:w-full focus:outline-none focus:shadow-outline text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
+                                                <select wire:model="status" class="my-input w-[200px] focus:outline-none focus:shadow-outline text-black dark:text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
                                                     <option value="">Select Status</option>
                                                     <option value="reject">Reject</option>
                                                     <option value="done">Done</option>
@@ -226,21 +232,24 @@
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
                                                 <span>
                                                     <span>{{ Str::limit($item->title, 35, '...') }}</span>
-                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
+                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
                                         <td class="p-5 text-center">
-                                            <div>
+                                            <div class="flex gap-3 items-center">
                                                 <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                                     {{ $item->status }}
-                                                    <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                    <svg :class="editStatus == {{ $item->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                </button>
+                                                <button @click="editStatus = 0" x-show="editStatus == {{ $item->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" height="24" width="24"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l6 0"></path></svg>
                                                 </button>
                                             </div>
                                             <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $item->id }}">
-                                                <select wire:model="status" class="my-input w-[100px] md:w-full focus:outline-none focus:shadow-outline text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
+                                                <select wire:model="status" class="my-input w-[200px] focus:outline-none focus:shadow-outline text-black dark:text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
                                                     <option value="">Select Status</option>
                                                     <option value="reject">Reject</option>
                                                     <option value="done">Done</option>
@@ -291,21 +300,24 @@
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
                                                 <span>
                                                     <span>{{ Str::limit($item->title, 35, '...') }}</span>
-                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
+                                                    <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
                                         <td class="p-5 text-center">
-                                            <div>
+                                            <div class="flex gap-3 items-center">
                                                 <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                                     {{ $item->status }}
-                                                    <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                    <svg :class="editStatus == {{ $item->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+                                                </button>
+                                                <button @click="editStatus = 0" x-show="editStatus == {{ $item->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" height="24" width="24"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l6 0"></path></svg>
                                                 </button>
                                             </div>
                                             <div class="mt-2 flex gap-2 justify-between items-center" x-show="editStatus == {{ $item->id }}">
-                                                <select wire:model="status" class="my-input w-[100px] md:w-full focus:outline-none focus:shadow-outline text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
+                                                <select wire:model="status" class="my-input w-[200px]focus:outline-none focus:shadow-outline text-black dark:text-white @if($item->status == 'done') dark:bg-green-500 bg-green-500 @elseif($item->status == 'reject') dark:bg-red-500 bg-red-500 @endif">
                                                     <option value="">Select Status</option>
                                                     <option value="reject">Reject</option>
                                                     <option value="done">Done</option>

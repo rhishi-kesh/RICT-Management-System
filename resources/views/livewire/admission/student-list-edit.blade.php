@@ -200,21 +200,21 @@
         </div>
     </form>
     @push('js')
-    <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function(e) {
-            // seachable
-            var options = {
-                searchable: true
-            };
-            NiceSelect.bind(document.getElementById("classday"), options);
-        });
-    </script>
-    <script>
-        flatpickr("#date", {
-            maxDate: "today"
-        });
-    </script>
+        <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(e) {
+                // seachable
+                var options = {
+                    searchable: true
+                };
+                NiceSelect.bind(document.getElementById("classday"), options);
+            });
+        </script>
+        <script>
+            flatpickr("#date", {
+                maxDate: "today"
+            });
+        </script>
     @endpush
 </div>

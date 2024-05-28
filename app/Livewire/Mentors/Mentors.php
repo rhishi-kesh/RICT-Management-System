@@ -14,7 +14,8 @@ class Mentors extends Component
 {
     use WithPagination;
     use WithFileUploads;
-    public $name, $email, $mobile, $image, $delete_id, $update_id, $oldimage;
+    public $name, $email, $mobile, $image, $delete_id, $date, $update_id, $oldimage;
+
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
@@ -26,6 +27,7 @@ class Mentors extends Component
     {
         $validated = $this->validate([
             'name' => 'required',
+            'date' => 'required',
             'email' => 'required|email|unique:mentor',
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
@@ -40,6 +42,7 @@ class Mentors extends Component
         $password_hash = bcrypt($password);
         $done = Mentor::insert([
             'name' => $this->name,
+            'dateofbirth' => $this->date,
             'email' => $this->email,
             'mobile' => $this->mobile,
             'image' => $fileName,
@@ -60,6 +63,7 @@ class Mentors extends Component
         $data = Mentor::findOrFail($id);
         $this->update_id = $data->id;
         $this->name = $data->name;
+        $this->date = date("Y-m-d", strtotime($data->dateofbirth));
         $this->email = $data->email;
         $this->mobile = $data->mobile;
         $this->oldimage = $data->image;
@@ -68,6 +72,7 @@ class Mentors extends Component
     {
         $validated = $this->validate([
             'name' => 'required',
+            'date' => 'required',
             'email' => 'required|email',
             'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
             'image' => 'nullable',
@@ -84,9 +89,11 @@ class Mentors extends Component
         }
         $done = Mentor::where('id', $this->update_id)->update([
             'name' => $this->name,
+            'dateofbirth' => $this->date,
             'email' => $this->email,
             'mobile' => $this->mobile,
-            'image' => $fileName
+            'image' => $fileName,
+            'updated_at' => Carbon::now()
         ]);
         if ($done) {
             $this->reset();
