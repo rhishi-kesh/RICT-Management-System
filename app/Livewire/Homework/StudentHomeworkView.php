@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Homework;
 
+use App\Mail\submitHomeworkMail;
 use App\Models\Homework;
 use App\Models\HomeworkSubmit;
+use App\Models\Mentor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Illuminate\Support\Facades\Mail;
 
 class StudentHomeworkView extends Component
 {
@@ -64,7 +67,8 @@ class StudentHomeworkView extends Component
         DB::beginTransaction();
         try {
 
-            Homework::where('id', $this->homeworkId)->update([
+            $homework = Homework::where('id', $this->homeworkId)->first();
+            $homework->update([
                 'status' => $this->inReviewStatus,
                 'updated_at' => Carbon::now()
             ]);
@@ -81,7 +85,20 @@ class StudentHomeworkView extends Component
                 ]
             );
 
+            $mentor = Mentor::where('id', $homework->mentor_id)->first();
+
+            // //Mail Data
+            $data = [
+                'name'=> auth()->guard('student')->user()->name,
+                'email'=> auth()->guard('student')->user()->email,
+            ];
+
+            // //Mail Send
+            Mail::to($mentor->email)->queue(new submitHomeworkMail($data));
+
+
             DB::commit();
+
             $this->dispatch('swal', [
                 'title' => 'Homework Submit Successfull',
                 'type' => "success",
@@ -90,7 +107,7 @@ class StudentHomeworkView extends Component
         } catch (\Exception $e) {
             DB::rollback();
             $this->dispatch('swal', [
-                'title' => 'Something went wrong',
+                'title' => $e->getMessage(),
                 'type' => "danger",
             ]);
         }
