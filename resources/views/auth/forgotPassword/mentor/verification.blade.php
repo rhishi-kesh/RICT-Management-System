@@ -10,8 +10,8 @@
     <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
     @vite('resources/css/app.css')
 </head>
-<body class="font-nunito bg-[#F85606]">
-    <div class="flex items-center justify-center px-2 sm:px-16 mt-24">
+<body class="font-nunito bg-[#F85606] w-screen h-screen flex items-center justify-center">
+    <div class="px-2 sm:px-16 w-full flex items-center justify-center">
         <div class="relative w-full md:w-2/4 rounded-md p-2 bg-gray-200 px-2 md:px-6 py-10">
             <div class="px-4 md:px-10">
                 <div class="mb-10">

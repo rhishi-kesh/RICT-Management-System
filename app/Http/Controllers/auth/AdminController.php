@@ -135,7 +135,8 @@ class AdminController extends Controller
         $data['title'] = 'Password Reset';
         $data['body'] = 'Your OTP is:- '.$otp;
 
-        Mail::send('mail.forgetPasswordMail', ['data'=>$data],function($message) use ($data){ $message->to($data['email'])->subject($data['title']);
+        Mail::send('mail.forgetPasswordMail', ['data' => $data], function($message) use ($data) { $message->to($data['email'])->subject($data['title']);
+
         });
     }
 

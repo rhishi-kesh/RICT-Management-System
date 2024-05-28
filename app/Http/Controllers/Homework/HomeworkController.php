@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Homework;
 
 use App\Http\Controllers\Controller;
+use App\Mail\assignHomeworkMail;
 use App\Models\Batch;
 use App\Models\Homework;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Utils;
+use Illuminate\Support\Facades\Mail;
 
 class HomeworkController extends Controller
 {
+    use Utils;
     public function homework() {
         $batch = Batch::select('id', 'name')->where('mentor_id', Auth::guard('mentor')->user()->id)->withCount('students')->with('students')->latest()->paginate(20);
         return view('application.homework.homework', compact('batch'));
@@ -31,9 +35,20 @@ class HomeworkController extends Controller
             'person' => 'required',
         ]);
 
+        // SMS Message
+        $message = "HomeWork";
+
         foreach($request->person as $person){
+
             $user = Student::where('id', $person)->first();
-            Homework::insert([
+
+            //Mail Data
+            $data = [
+                'name'=> $user->name,
+                'email'=> $user->email,
+            ];
+
+            $done = Homework::insert([
                 'student_id' => $user->id,
                 'mentor_id' => Auth::guard('mentor')->user()->id,
                 'title' => $request->title,
@@ -42,6 +57,12 @@ class HomeworkController extends Controller
                 'text' => $request->text,
                 'created_at' => Carbon::now()
             ]);
+
+            if($done){
+                $this->sendSMS($user->mobile, $message);
+                Mail::to($user->email)->queue(new assignHomeworkMail($data));
+            }
+
         }
 
         return back()->with('success','Homework Assaign Successful');
