@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class SendBirthdayEmails extends Command
 {
@@ -54,12 +55,12 @@ class SendBirthdayEmails extends Command
             $recipients = $model::whereRaw('DATE_FORMAT(dateofbirth, "%m-%d") = ?', [$today])->get();
 
             foreach ($recipients as $recipient) {
-                Mail::to($recipient->email)->queue(new BirthdayMail($recipient, $type));
+                Mail::to($recipient->email)->send(new BirthdayMail($recipient, $type));
                 $this->info("Queued birthday email to {$type}: " . $recipient->email);
             }
 
         } catch (\Exception $e) {
-            \Log::error('Failed to send birthday emails: ' . $e->getMessage());
+            Log::error('Failed to send birthday emails: ' . $e->getMessage());
         }
     }
 }

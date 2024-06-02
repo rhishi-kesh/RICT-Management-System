@@ -2,12 +2,11 @@
 
 namespace App\Livewire\Visitor;
 
-use App\Mail\VisitorMail;
+use App\Jobs\SendVisitorMail;
 use Livewire\Component;
 use App\Models\Councilings;
 use App\Models\Visitors;
 use App\Utils;
-use Illuminate\Support\Facades\Mail;
 use App\Models\Course;
 use App\Models\AdmissionBooth;
 use Carbon\Carbon;
@@ -66,8 +65,7 @@ class VisitorForm extends Component
         $message = 'Rhishi Testing SMS';
 
         if ($done) {
-            $this->sendSMS($this->mobile, $message);
-            Mail::to($this->email)->queue(new VisitorMail($data));
+            dispatch(new SendVisitorMail($data, $message, $this->mobile));
             $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',

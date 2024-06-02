@@ -42,9 +42,9 @@
                     <input type="submit" value="Verify OTP" class="btn btn-gradient w-full border-0 uppercase shadow hover:submit-btn focus:submit-btn active:submit-btn cursor-pointer">
                 </form>
                 <div class="flex justify-between mt-1">
-                    <p class="time select-none">01:30 sec</p>
+                    {{-- <p class="time select-none">01:30 sec</p> --}}
                     <p>
-                        <button id="resendOtpVerification" class="mt-1 inline-block hover:underline">Resend code</button>
+                        <button id="resendOtpVerification" class="mt-1 inline-block hover:underline">Resend Code</button>
                     </p>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 type:"GET",
                 data: {email:userMail },
                 success:function(res){
-                    $('#resendOtpVerification').text('Resend Verification OTP');
+                    $('#resendOtpVerification').text('Resend Code');
                     if(res.success == true){
                         $('.time').text('');
                         timer();
@@ -157,7 +157,7 @@
         }, 1000);
     }
 
-    timer();
+    // timer();
 </script>
 
 </html>

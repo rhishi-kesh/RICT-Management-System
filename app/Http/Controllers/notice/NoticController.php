@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\notice;
 
 use App\Http\Controllers\Controller;
-use App\Mail\NoticeMail;
+use App\Jobs\SendNoticeMail;
 use App\Models\AdmissionBooth;
 use App\Models\Mentor;
 use App\Models\Notice;
@@ -12,12 +12,9 @@ use App\Models\Batch;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Utils;
-use Illuminate\Support\Facades\Mail;
 
 class NoticController extends Controller
 {
-    use Utils;
     public function notice() {
         $batch = Batch::select('id', 'name')
         ->withCount('students')
@@ -76,8 +73,7 @@ class NoticController extends Controller
             ]);
 
             if($done){
-                $this->sendSMS($user->mobile, $message);
-                Mail::to($user->email)->queue(new NoticeMail($data));
+                dispatch(new SendNoticeMail($data, $message, $user));
             }
         }
         return back()->with('success','Notice Send Successful');
@@ -118,8 +114,7 @@ class NoticController extends Controller
             ]);
 
             if($done){
-                $this->sendSMS($user->mobile, $message);
-                Mail::to($user->email)->queue(new NoticeMail($data));
+                dispatch(new SendNoticeMail($data, $message, $user));
             }
         }
         return back()->with('success','Notice Send Successful');
@@ -160,8 +155,7 @@ class NoticController extends Controller
             ]);
 
             if($done){
-                $this->sendSMS($user->mobile, $message);
-                Mail::to($user->email)->queue(new NoticeMail($data));
+                dispatch(new SendNoticeMail($data, $message, $user));
             }
         }
         return back()->with('success','Notice Send Successful');
@@ -201,8 +195,7 @@ class NoticController extends Controller
             ]);
 
             if($done){
-                $this->sendSMS($user->number, $message);
-                Mail::to($user->email)->queue(new NoticeMail($data));
+                dispatch(new SendNoticeMail($data, $message, $user));
             }
         }
         return back()->with('success','Notice Send Successful');
@@ -244,8 +237,7 @@ class NoticController extends Controller
             ]);
 
             if($done){
-                $this->sendSMS($user->mobile, $message);
-                Mail::to($user->email)->queue(new NoticeMail($data));
+                dispatch(new SendNoticeMail($data, $message, $user));
             }
         }
         return back()->with('success','Notice Send Successful');
@@ -258,27 +250,6 @@ class NoticController extends Controller
     public function singleANotice($id) {
         $singlenotice = Notice::findOrFail($id);
         return view('application.notice.adminSingleNotice', compact('singlenotice'));
-    }
-
-    public function AsingleNotice($id) {
-        $singlenotice = Notice::findOrFail($id);
-        $singlenotice->is_seen = 0;
-        $singlenotice->update();
-        return view('application.notice.adminSingleNotice', compact('singlenotice'));
-    }
-
-    public function SsingleNotice($id) {
-        $singlenotice = Notice::findOrFail($id);
-        $singlenotice->is_seen = 0;
-        $singlenotice->update();
-        return view('application.notice.studentSingleNotice', compact('singlenotice'));
-    }
-
-    public function MsingleNotice($id) {
-        $singlenotice = Notice::findOrFail($id);
-        $singlenotice->is_seen = 0;
-        $singlenotice->update();
-        return view('application.notice.mentorSingleNotice', compact('singlenotice'));
     }
 
     public function myANotice() {
@@ -306,5 +277,26 @@ class NoticController extends Controller
         ->latest()
         ->paginate(30);
         return view('application.notice.myStudentNotice', compact('studentNotice'));
+    }
+
+    public function AsingleNotice($id) {
+        $singlenotice = Notice::findOrFail($id);
+        $singlenotice->is_seen = 0;
+        $singlenotice->update();
+        return view('application.notice.adminSingleNotice', compact('singlenotice'));
+    }
+
+    public function SsingleNotice($id) {
+        $singlenotice = Notice::findOrFail($id);
+        $singlenotice->is_seen = 0;
+        $singlenotice->update();
+        return view('application.notice.studentSingleNotice', compact('singlenotice'));
+    }
+
+    public function MsingleNotice($id) {
+        $singlenotice = Notice::findOrFail($id);
+        $singlenotice->is_seen = 0;
+        $singlenotice->update();
+        return view('application.notice.mentorSingleNotice', compact('singlenotice'));
     }
 }

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendForgotPassword;
+use App\Jobs\SendNoticeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\PasswordReset;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
-    public $email;
     public function studentLogin()
     {
         if (!Auth::guard('student')->check()) {
@@ -84,7 +84,14 @@ class StudentController extends Controller
     {
         if (Session::has('emailVerfy')) {
             $user = Student::where('id', $id)->first();
-            $this->sendOtp($user);
+            $otpData = PasswordReset::where('email', $user->email)->first();
+            $currentTime = time();
+            $time = $otpData->created_at;
+            if ($currentTime >= $time && $time >= $currentTime - (70 + 5)) {
+                // return response()->json(['success' => false, 'msg' => 'Please try after some time']);
+            } else {
+                $this->sendOtp($user);
+            }
             return view('auth.forgotPassword.student.verification', compact('user'));
         } else {
             return redirect()->route('notFound');
@@ -131,9 +138,7 @@ class StudentController extends Controller
         $data['title'] = 'Password Reset';
         $data['body'] = 'Your OTP is:- '.$otp;
 
-        Mail::send('mail.forgetPasswordMail', ['data' => $data], function($message) use ($data){ $message->to($data['email'])->subject($data['title']);
-
-        });
+        dispatch(new SendForgotPassword($data))->onQueue('high');
     }
 
     public function resendOtp(Request $request)
