@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Homework;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendHomeworkAssignMail;
 use App\Mail\assignHomeworkMail;
 use App\Models\Batch;
 use App\Models\Homework;
@@ -59,8 +60,7 @@ class HomeworkController extends Controller
             ]);
 
             if($done){
-                $this->sendSMS($user->mobile, $message);
-                Mail::to($user->email)->queue(new assignHomeworkMail($data));
+                dispatch(new SendHomeworkAssignMail($data, $message, $user));
             }
 
         }

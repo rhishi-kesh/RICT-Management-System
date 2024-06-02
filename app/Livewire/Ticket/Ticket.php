@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Ticket;
 
-use App\Mail\TicketMail;
+use App\Jobs\SendTicketMail;
 use App\Models\SystemInformation;
 use Livewire\Component;
 use App\Models\Ticket as ModelTicket;
 use Carbon\Carbon;
 use App\Utils;
-use Illuminate\Support\Facades\Mail;
 
 class Ticket extends Component
 {
@@ -47,8 +46,7 @@ class Ticket extends Component
 
         if($done){
 
-            $this->sendSMS($systemInformation->number, $message);
-            Mail::to($systemInformation->email)->queue(new TicketMail($data));
+            dispatch(new SendTicketMail($data, $message, $systemInformation));
 
             $this->reset();
 
