@@ -60,7 +60,7 @@
                 <select id="counseling" wire:model="counseling" class="my-input focus:outline-none focus:shadow-outline" name="counseling">
                     <option value="">Select Person</option>
                 @foreach ($counciling as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    <option val ue="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
                 </select>
                 @if ($errors->has('counseling'))

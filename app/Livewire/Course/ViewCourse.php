@@ -1,86 +1,101 @@
 <?php
-
 namespace App\Livewire\Course;
 
-use App\Models\Course;
 use Carbon\Carbon;
+use App\Models\Course;
+use App\Models\Mentor;
 use Livewire\Component;
-use Livewire\WithPagination;  
+use App\Models\Department;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Gate;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
 
 class ViewCourse extends Component
 {
     use WithPagination;
-    public $name, $courseFee, $update_id, $delete_id;
+    use WithFileUploads;
+
+    public $name, $courseFee, $description, $duration, $lecture, $mentor_id, $department_id, $project, $image, $video, $is_active, $is_footer, $best_selling, $date, $oldimage,$update_id, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
+
     public function render()
     {
+        $departments = Department::get();
         $courses = Course::paginate(10);
-        return view('livewire.course.view-course', compact('courses'));
+
+        return view('livewire.course.view-course', compact('courses', 'departments'));
     }
-    public function insert(){
-        // if (Gate::allows('create')) {
+    public function insert()
+    {
+        //slug Generate
+        $searchName = Course::where('name', $this->name)->first('name');
+        if($searchName){
+            $slug = Str::slug($this->name) . rand();
+        }else{
             $slug = Str::slug($this->name);
-            $validated = $this->validate([
-                'name' => 'required|unique:courses',
-                'courseFee' => 'required|numeric',
-            ]);
-            $done = Course::insert([
-                'name' => $this->name,
-                'slug' => $slug,
-                'fee' => $this->courseFee,
-                'created_at' => Carbon::now(),
-            ]);
-            if($done){
-                $this->reset();
-                $this->dispatch('swal', [
-                    'title' => 'Data Insert Successfull',
-                    'type' => "success",
-                ]);
-            }
-        // } else {
-        //     $this->dispatch('swal', [
-        //         'title' => 'Unauthorized',
-        //         'type' => "error",
-        //         'text' => 'You do not have permission to insert courses.',
-        //     ]);
-        // }
-    }
-    public function ShowUpdateModel($id){
-        $data = Course::findOrFail($id);
-        $this->update_id = $data->id;
-        $this->name = $data->name;
-        $this->courseFee = $data->fee;
-    }
-    public function update(){
-        $slug = Str::slug($this->name);
+        }
+
         $validated = $this->validate([
-            'name' => 'required',
-            'courseFee' => 'required|numeric',
+            'name'  => 'required|unique:courses',
+            'courseFee'   => 'required|numeric',
+            'description' => 'nullable',
+            'duration'  => 'required',
+            'lecture'   => 'nullable',
+            'project'   => 'nullable',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'video'     => 'nullable',
+            'department_id' => 'nullable',
+            'is_active'    => 'nullable',
+            'is_footer'    => 'nullable',
+            'best_selling' => 'nullable',
         ]);
-        $done = Course::where('id',$this->update_id)->update([
+
+        $fileName = "";
+        if ($this->image) {
+            $fileName = $this->image->store('courses', 'public');
+        } else {
+            $fileName = null;
+        }
+        $done = Course::insert([
             'name' => $this->name,
             'slug' => $slug,
             'fee' => $this->courseFee,
-            'updated_at' => Carbon::now(),
+            'description' => $this->description,
+            'duration' => $this->duration,
+            'lecture' => $this->lecture,
+            'project' => $this->project,
+            'thumbnail' => $fileName,
+            'video' => $this->video,
+            'department_id' => $this->department_id,
+            'is_active' => $this->is_active,
+            'is_footer' => $this->is_footer,
+            'best_selling' => $this->best_selling,
+            'created_at' => Carbon::now(),
         ]);
-        if($done){
-            $this->update_id = '';
+        if ($done) {
             $this->reset();
             $this->dispatch('swal', [
-                'title' => 'Data Update Successfull',
+                'title' => 'Data Insert Successfull',
                 'type' => "success",
             ]);
         }
     }
-    public function deleteAlert($id){
+    public function deleteAlert($id)
+    {
         $this->delete_id = $id;
         $this->dispatch('confirmDeleteAlert');
     }
-    public function deleteStudent(){
+    public function deleteStudent()
+    {
+        $done = Course::findOrFail($this->delete_id);
+        $this->oldimage = $done->thumbnail;
+        $image_path = public_path('storage\\'.$this->oldimage);
+        if(File::exists($image_path)){
+            File::delete($image_path);
+        }
         $done = Course::findOrFail($this->delete_id)->delete();
-        if($done){
+        if ($done) {
             $this->update_id = '';
             $this->dispatch('deleteSuccessFull', [
                 'title' => 'Data Deleted Successfull',
@@ -88,7 +103,8 @@ class ViewCourse extends Component
             ]);
         }
     }
-    public function showModal(){
+    public function showModal()
+    {
         $this->reset();
     }
 }

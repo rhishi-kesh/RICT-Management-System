@@ -4,6 +4,7 @@ namespace App\Livewire\Department;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
@@ -24,9 +25,16 @@ class Department extends Component
 
     public function insert()
     {
+         //slug Generate
+         $searchName = ModelsDepartment::where('name', $this->name)->first('name');
+         if($searchName){
+             $slug = Str::slug($this->name) . rand();
+         }else{
+             $slug = Str::slug($this->name);
+         }
+ 
         $validated = $this->validate([
             'name' => 'required',
-            'slug'  => 'required',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
@@ -37,7 +45,7 @@ class Department extends Component
         }
         $done = ModelsDepartment::insert([
             'name' => $this->name,
-            'slug' => $this->slug,
+            'slug' => $slug,
             'image' => $fileName,
             'created_at' => Carbon::now(),
         ]);
@@ -106,8 +114,8 @@ class Department extends Component
             $this->update_id = '';
             $this->reset();
             $this->dispatch('swal', [
-                'title' => 'Data Insert Successfull',
-                'type' => "success",
+                'title' => 'Data Delete Successfull',
+                'type' => "error",
             ]);
         }
     }

@@ -159,10 +159,10 @@
                                 <p class="purpose font-paragraph" style="text-transform: uppercase ; margin-top: 30px;">
                                     Certificate
                                 </p>
-                                <p id="peragraph" class="assignment" style="text-transform: uppercase;  margin-top: 50px;">
+                                <p id="peragraph" class="assignment font-paragraph" style="text-transform: uppercase;  margin-top: 50px;">
                                     of Participation
                                 </p>
-                                <p id="peragraph" class="assignment" style=" margin-top: 40px;">
+                                <p id="peragraph" class="assignment font-paragraph" style=" margin-top: 40px;">
                                     Presented to:
                                 </p>
                                 <p class="person font-paragraph" style="margin-top: 70px;"> {{ $student->name }} </p>

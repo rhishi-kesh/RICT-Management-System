@@ -19,10 +19,7 @@
                 <h1 class="flex justify-center items-center ml-[5px] font-bold">entries</h1>
             </div>
             <div class="flex items-center" x-data="{ search: false }" @click.outside="search = false">
-                <form
-                    class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0"
-                    :class="{'!block' : search}"
-                >
+                <form class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" :class="{'!block' : search}" >
                     <div class="relative">
                         <input wire:model.live.debounce.1000ms="search" type="text" class="peer w-full h-full bg-gray-100 dark:bg-slate-800 ps-10 py-2 rounded border dark:border-gray-700 focus:outline-none dark:focus:border-blue-500 focus:border" placeholder="Search..." />
                         <button type="button" class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-blue-500 ltr:right-auto rtl:left-auto">

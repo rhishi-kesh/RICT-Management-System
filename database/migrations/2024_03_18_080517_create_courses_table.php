@@ -13,9 +13,20 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('fee');
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('fee')->nullable();
+            $table->text('description')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('lecture')->nullable();
+            $table->string('project')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->string('video')->nullable();
+            $table->foreignId('mentor_id')->nullable();
+            $table->foreignId('department_id')->nullable();
+            $table->string('is_active')->nullable();
+            $table->string('is_footer')->nullable();
+            $table->string('best_selling')->nullable();
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ use App\Http\Controllers\ErrorRedirectController;
 use App\Http\Controllers\Recycle\RecycleController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\Homework\HomeworkController;
+use App\Http\Controllers\course\CourseFuntionController;
 use App\Http\Controllers\department\DepartmentController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\certificate\CertificateController;
@@ -75,7 +76,6 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/department', [DepartmentController::class, 'department'])->name('department');
 
     //Admin Auth
     Route::get('/registation', [AdminController::class, 'registation'])->name('registation');
@@ -90,6 +90,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Add Course
     Route::get('/courses', [CourseController::class, 'course'])->name('course');
+    Route::get('/department', [DepartmentController::class, 'department'])->name('department');
+    Route::get('/edit-courses/{id}', [CourseFuntionController::class, 'editCourse'])->name('editCourse');
+
  
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
@@ -166,7 +169,6 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
     Route::get('/certificate-view', [CertificateController::class, 'generatePDF'])->name('generatePDF');
     Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('Certificate');
-
 });
 
 //Mentor Middlewere
