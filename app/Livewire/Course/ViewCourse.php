@@ -81,6 +81,64 @@ class ViewCourse extends Component
             ]);
         }
     }
+    public function ShowUpdateModel($id)
+    {
+        $this->reset();
+        $data = Course::findOrFail($id);
+        $this->update_id = $data->id;
+        $this->name = $data->name;
+        $this->courseFee = $data->fee;
+        $this->description = $data->description;
+        $this->duration = $data->duration;
+        $this->lecture = $data->lecture;
+        $this->project = $data->project;
+        $this->department_id = $data->department_id;
+        $this->video = $data->video;
+        $this->oldimage = $data->thumbnail;
+    }
+    public function update()
+    {
+        $validated = $this->validate([
+            'name'  => 'required',
+            'courseFee'   => 'required|numeric',
+            'description' => 'nullable',
+            'duration'  => 'required',
+            'lecture'   => 'nullable',
+            'project'   => 'nullable',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'video'     => 'nullable',
+            'department_id' => 'nullable'
+        ]);
+        $fileName = "";
+        $image_path = public_path('storage\\' . $this->oldimage);
+        if (!empty($this->image)) {
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            $fileName = $this->image->store('courses', 'public');
+        } else {
+            $fileName = $this->oldimage;
+        }
+        $done = Course::where('id', $this->update_id)->update([
+            'name' => $this->name,
+            'fee' => $this->courseFee,
+            'description' => $this->description,
+            'duration' => $this->duration,
+            'lecture' => $this->lecture,
+            'project' => $this->project,
+            'thumbnail' => $fileName,
+            'video' => $this->video,
+            'department_id' => $this->department_id
+        ]);
+        if ($done) {
+            $this->update_id = '';
+            $this->reset();
+            $this->dispatch('swal', [
+                'title' => 'Data Update Successfull',
+                'type' => "success",
+            ]);
+        }
+    }
     public function deleteAlert($id)
     {
         $this->delete_id = $id;
@@ -89,7 +147,7 @@ class ViewCourse extends Component
     public function deleteStudent()
     {
         $done = Course::findOrFail($this->delete_id);
-        $this->oldimage = $done->thumbnail;
+        $this->oldimage = $done->image;
         $image_path = public_path('storage\\'.$this->oldimage);
         if(File::exists($image_path)){
             File::delete($image_path);

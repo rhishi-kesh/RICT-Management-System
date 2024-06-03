@@ -30,7 +30,7 @@
                                 <div class="text-red-500">{{ $errors->first('photo') }}</div>
                             @endif
                         </div>
-                        <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md duration-150 mt-2 ml-3 uppercase" x-on:click.prevent="$refs.photo.click()">
+                        <button type="button" class="inline-flex items-center whitespace-nowrap px-4 py-2 bg-white border border-gray-300 rounded-md duration-150 mt-2 ml-3 uppercase" x-on:click.prevent="$refs.photo.click()">
                             Select New Photo
                         </button>
                     </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="panel mt-6">
+            <div class="bg-white rounded dark:bg-[#0E1726] p-5 mt-6">
                 <div class="mb-5 ng-tns-c265-3">
                     <h5 class="mb-2 font-bold text-3xl dark:text-white">Change Password</h5>
                 </div>

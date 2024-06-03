@@ -13,12 +13,14 @@ class Student extends Authenticatable
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'student_id', 'name', 'fName', 'mName', 'email', 'address', 'mobile', 'qualification', 'profession', 'guardianMobileNo', 'courseName', 'paymentType', 'pay', 'due', 'total', 'bkashNo', 'admissionFee', 'discount',
+        'student_id', 'name', 'fName', 'mName', 'email', 'address', 'mobile', 'qualification', 'profession', 'guardianMobileNo', 'courseName', 'paymentType', 'pay', 'due', 'total', 'bkashNo', 'admissionFee', 'discount','student_status', 'is_certificate',
     ];
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%")
@@ -29,16 +31,29 @@ class Student extends Authenticatable
         ->orwhere('batch_id', 'like', "%{$value}%")
         ->orwhere('mobile', 'like', "%{$value}%");
     }
+
     public function course(): HasOne
     {
         return $this->hasOne(Course::class,'id','course_id');
     }
+
     public function pament_mode(): HasOne
     {
         return $this->hasOne(PaymentMode::class,'id','paymentType');
     }
+
     public function batch(): HasOne
     {
         return $this->hasOne(Batch::class,'id','batch_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(TicketMessage::class);
     }
 }

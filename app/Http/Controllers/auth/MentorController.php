@@ -32,7 +32,7 @@ class MentorController extends Controller
             return redirect()->route('mentorDashboard');
         }
         return back()->withErrors([
-            'email' => 'Email/Password is invalid',
+            'error' => 'Email/Password is invalid',
         ]);
     }
     public function mentorLogout(Request $request){
@@ -126,7 +126,7 @@ class MentorController extends Controller
         $data['title'] = 'Password Reset';
         $data['body'] = 'Your OTP is:- '.$otp;
 
-        Mail::send('mail.forgetPasswordMail', ['data'=>$data],function($message) use ($data){ $message->to($data['email'])->subject($data['title']);
+        Mail::send('mail.forgetPasswordMail', ['data' => $data], function($message) use ($data){ $message->to($data['email'])->subject($data['title']);
         });
     }
 

@@ -39,7 +39,7 @@
             {{-- Show Data --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                 @forelse ($batch as $key => $data)
-                    <div class="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
+                    <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                         <div class="flex justify-between mb-5 gap-2">
                             @if($showUpdateInput === $key)
                                 <div class="w-full">

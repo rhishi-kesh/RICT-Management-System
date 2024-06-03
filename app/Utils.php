@@ -16,4 +16,23 @@ trait Utils
         }
         return $prefix . $code;
     }
+    public function sendSMS($number, $message){
+        $smsNumber = '88' . $number;
+        $url = "https://880sms.com/smsapi";
+        $data = [
+            "api_key" => "C20070576581b892abb538.40220352",
+            "type" => "text",
+            "contacts" => "$smsNumber",
+            "senderid" => "RAYHANS ICT",
+            "msg" => "$message",
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+    }
 }
