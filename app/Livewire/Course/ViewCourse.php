@@ -39,13 +39,13 @@ class ViewCourse extends Component
         $validated = $this->validate([
             'name'  => 'required|unique:courses',
             'courseFee'   => 'required|numeric',
-            'description' => 'nullable',
+            'description' => 'required',
             'duration'  => 'required',
-            'lecture'   => 'nullable',
-            'project'   => 'nullable',
+            'lecture'   => 'required',
+            'project'   => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'video'     => 'nullable',
-            'department_id' => 'nullable',
+            'department_id' => 'required',
             'is_active'    => 'nullable',
             'is_footer'    => 'nullable',
             'best_selling' => 'nullable',
@@ -105,9 +105,9 @@ class ViewCourse extends Component
             'duration'  => 'required',
             'lecture'   => 'nullable',
             'project'   => 'nullable',
-            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'video'     => 'nullable',
-            'department_id' => 'nullable'
+            'department_id' => 'required'
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);

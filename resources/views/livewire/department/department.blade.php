@@ -118,7 +118,7 @@
                                 Uploading Image...
                             </div>
                             @if ($errors->has('image'))
-                                <div class="invalid-feedback">{{ $errors->first('image') }}</div>
+                                <div  class="text-red-500">{{ $errors->first('image') }}</div>
                             @endif
                             @if ($image)
                                 <div>

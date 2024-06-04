@@ -74,7 +74,8 @@
                                         </a>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0">
                                             <li>
-                                            <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('editCourse', $data->id) }}" data-bs-toggle="modal"><i class="fs-4 ti ti-edit"></i>Edit</a>
+                                            <a class=" dropdown-item d-flex align-items-center gap-3" href="{{ route('editCourse', $data->id) }}" data-bs-toggle="modal">
+                                                Edit</a>
                                             </li>
                                             <li>
                                                 {{-- {{ route('courseDelete') }} --}}

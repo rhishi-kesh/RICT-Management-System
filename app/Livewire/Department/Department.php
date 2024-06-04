@@ -35,7 +35,7 @@ class Department extends Component
  
         $validated = $this->validate([
             'name' => 'required',
-            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
         if ($this->image) {
@@ -71,7 +71,7 @@ class Department extends Component
         $validated = $this->validate([
             'name' => 'required',
             'slug' => 'required',
-            'image' => 'nullable',
+            'image' => 'required',
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);
