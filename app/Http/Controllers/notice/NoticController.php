@@ -12,6 +12,7 @@ use App\Models\Batch;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class NoticController extends Controller
 {
@@ -46,37 +47,40 @@ class NoticController extends Controller
     }
 
     public function noticeMentorPost(Request $request){
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'message' => 'required',
             'person' => 'required',
         ]);
 
         // SMS Message
         $message = $request->message;
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }else {
+            foreach($request->person as $person){
 
-        foreach($request->person as $person){
+                $user = Mentor::where('id', $person)->first();
 
-            $user = Mentor::where('id', $person)->first();
-
-            //Mail Data
-            $data = [
-                'message'=> $request->message,
-                'email'=> $user->email,
-            ];
+                //Mail Data
+                $data = [
+                    'message'=> $request->message,
+                    'email'=> $user->email,
+                ];
 
 
-            $done = Notice::insert([
-                'user_id' => $user->id,
-                'person' => 'm',
-                'notice' => $request->message,
-                'created_at' => Carbon::now()
-            ]);
+                $done = Notice::insert([
+                    'user_id' => $user->id,
+                    'person' => 'm',
+                    'notice' => $request->message,
+                    'created_at' => Carbon::now()
+                ]);
 
-            if($done){
-                dispatch(new SendNoticeMail($data, $message, $user));
+                if($done){
+                    dispatch(new SendNoticeMail($data, $message, $user));
+                }
             }
+            return response()->json(['status' => 1, 'msg' => 'Notice Send Successful']);
         }
-        return back()->with('success','Notice Send Successful');
     }
 
     public function noticeSystemUser() {

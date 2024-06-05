@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="{{ asset('frontend/images/RICT/fav.jpg') }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/perfect-scrollbar.min.css') }}" />
@@ -61,6 +62,7 @@
         <script defer src="{{ asset('frontend/js/popper.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/tippy-bundle.umd.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
+        <script defer src="{{ asset('frontend/js/apexcharts.js') }}"></script>
         <script src="{{ asset('frontend/js/main.js') }}"></script>
         <script src="{{ asset('frontend/js/cuntom.js') }}"></script>
         @stack('js')
