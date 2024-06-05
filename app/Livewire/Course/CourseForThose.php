@@ -1,51 +1,47 @@
 <?php
 
-namespace App\Livewire\Department;
+namespace App\Livewire\Course;
 
 use Carbon\Carbon;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
-use App\Models\Department as ModelsDepartment;
+use App\Models\CourseForThose as CourseForThoseStu;
 
-class Department extends Component
+class CourseForThose extends Component
 {
     use WithPagination;
     use WithFileUploads;
-    public $name, $slug, $image, $delete_id, $update_id, $oldimage;
+    public $learnings, $image, $delete_id, $update_id, $oldimage, $course_id;
+
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
+    public function mount($id)
+    {
+        $this->course_id = $id;
+        $this->delete_id = $id;
+    }
     public function render()
     {
-        $department = ModelsDepartment::paginate(15);
-        return view('livewire.department.department', compact('department'));
+        $CourseForThose = CourseForThoseStu::paginate(15);
+        return view('livewire.course.course-for-those', compact('CourseForThose'));
     }
-
     public function insert()
     {
-         //slug Generate
-         $searchName = ModelsDepartment::where('name', $this->name)->first('name');
-         if($searchName){
-             $slug = Str::slug($this->name) . rand();
-         }else{
-             $slug = Str::slug($this->name);
-         }
-
         $validated = $this->validate([
-            'name' => 'required',
+            'learnings' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
         if ($this->image) {
-            $fileName = $this->image->store('department', 'public');
+            $fileName = $this->image->store('courseThose', 'public');
         } else {
             $fileName = null;
         }
-        $done = ModelsDepartment::insert([
-            'name' => $this->name,
-            'slug' => $slug,
+        $done = CourseForThoseStu::insert([
+            'course_id' => $this->course_id,
+            'content' => $this->learnings,
             'image' => $fileName,
             'created_at' => Carbon::now(),
         ]);
@@ -60,18 +56,17 @@ class Department extends Component
     public function ShowUpdateModel($id)
     {
         $this->reset();
-        $data = ModelsDepartment::findOrFail($id);
+        $data = CourseForThoseStu::findOrFail($id);
         $this->update_id = $data->id;
-        $this->name = $data->name;
-        $this->slug = $data->slug;
+        $this->learnings = $data->content;
         $this->oldimage = $data->image;
     }
+
     public function update()
     {
         $validated = $this->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'image' => 'required',
+            'learnings' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);
@@ -79,14 +74,14 @@ class Department extends Component
             if (File::exists($image_path)) {
                 File::delete($image_path);
             }
-            $fileName = $this->image->store('department', 'public');
+            $fileName = $this->image->store('courseThose', 'public');
         } else {
             $fileName = $this->oldimage;
         }
-        $done = ModelsDepartment::where('id', $this->update_id)->update([
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'image' => $fileName
+        $done = CourseForThoseStu::where('id', $this->update_id)->update([
+            'content' => $this->learnings,
+            'image' => $fileName,
+            'updated_at' => Carbon::now()
         ]);
         if ($done) {
             $this->reset();
@@ -103,7 +98,7 @@ class Department extends Component
     }
     public function deleteStudent()
     {
-        $done = ModelsDepartment::findOrFail($this->delete_id);
+        $done = CourseForThoseStu::findOrFail($this->delete_id);
         $this->oldimage = $done->image;
         $image_path = public_path('storage\\'.$this->oldimage);
         if(File::exists($image_path)){
@@ -114,14 +109,17 @@ class Department extends Component
             $this->update_id = '';
             $this->reset();
             $this->dispatch('swal', [
-                'title' => 'Data Delete Successfull',
-                'type' => "error",
+                'title' => 'Data Insert Successfull',
+                'type' => "success",
             ]);
         }
     }
+
     public function showModal()
     {
-        $this->reset();
+        $this->reset('learnings');
+        $this->reset('image');
     }
+
 
 }

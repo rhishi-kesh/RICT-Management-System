@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Course extends Model
+class CourseLearnings extends Model
 {
     use HasFactory;
-    
-    public function department(): HasOne
-    {
-        return $this->hasOne(Department::class,'id','department_id');
-    }
 
+    public function course(): HasOne
+    {
+        return $this->hasOne(Course::class,'id','course_id');
+    }
 
 }
