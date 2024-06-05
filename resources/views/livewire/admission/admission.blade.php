@@ -198,7 +198,7 @@
                 @endif
             </div>
         </div>
-        <div class="flex justify-start items-center">
+        <div class="flex justify-start items-center mt-5">
             <button type="submit" class="bg-blue-500 text-white border-blue-500 btn mr-4" wire:loading.remove>Admit</button>
             <button type="button" disabled class="bg-blue-500 text-white border-blue-500 btn mr-4" wire:loading>Loading</button>
             <button type="reset" class="shadow btn text-black dark:text-white bg-gray-50 dark:bg-gray-800">Reset</button>

@@ -106,9 +106,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/department', [DepartmentController::class, 'department'])->name('department');
     Route::get('/edit-courses/{id}', [CourseFuntionController::class, 'editCourse'])->name('editCourse');
     Route::get('/course-learnings/{id}', [CourseFuntionController::class, 'courseLearnings'])->name('courseLearnings');
-    Route::get('course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
-    Route::get('benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
-
+    Route::get('/course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
+    Route::get('/benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
+    Route::get('/manage-website-course', [CourseController::class, 'manageWebsiteCourse'])->name('manageWebsiteCourse');
 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');

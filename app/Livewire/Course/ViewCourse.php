@@ -22,7 +22,7 @@ class ViewCourse extends Component
     public function render()
     {
         $departments = Department::get();
-        $courses = Course::paginate(10);
+        $courses = Course::paginate(15);
 
         return view('livewire.course.view-course', compact('courses', 'departments'));
     }

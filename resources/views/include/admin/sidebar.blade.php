@@ -339,6 +339,11 @@
                             <span class="pl-2">SMTP Settings</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('manageWebsiteCourse') }}">
+                            <span class="pl-2 text-nowrap">Manage Web Course</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="menu nav-item group">
