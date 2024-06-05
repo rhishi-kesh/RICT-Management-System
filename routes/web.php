@@ -28,7 +28,7 @@ use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\MentorDashboardController;
 use App\Http\Controllers\Dashboard\StudentDashboardController;
 use App\Http\Controllers\department\DepartmentController;
-
+use App\Http\Controllers\course\CourseFuntionController;
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
 Route::post('/student-post', [StudentController::class, 'StudentPost'])->name('StudentPost');
@@ -100,8 +100,14 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/students', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/student-edit/{slug}', [AdmissionController::class, 'studentsEdit'])->name('studentsEdit');
 
-    //Add Course
+    //Add Course & Course Funtion
     Route::get('/courses', [CourseController::class, 'course'])->name('course');
+    Route::get('/department', [DepartmentController::class, 'department'])->name('department');
+    Route::get('/edit-courses/{id}', [CourseFuntionController::class, 'editCourse'])->name('editCourse');
+    Route::get('/course-learnings/{id}', [CourseFuntionController::class, 'courseLearnings'])->name('courseLearnings');
+    Route::get('course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
+    Route::get('benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
+
 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
