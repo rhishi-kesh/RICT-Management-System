@@ -17,15 +17,6 @@ class EditCourse extends Component
     public $name, $courseFee, $description, $duration, $lecture, $mentor_id, $department_id, $project, $image, $video, $is_active, $is_footer, $best_selling, $date, $oldimage,$update_id, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
-
-    public function render()
-    {
-        $departments = Department::get();
-        $courses = Course::paginate(10);
-
-        return view('livewire.course.edit-course', compact('departments', 'courses'));
-    }
-
     public function mount($id)
     {
         $data = Course::where('id', $id)->first();
@@ -39,6 +30,13 @@ class EditCourse extends Component
         $this->department_id = $data->department_id;
         $this->video = $data->video;
         $this->oldimage = $data->thumbnail;
+    }
+    public function render()
+    {
+        $departments = Department::get();
+        $courses = Course::paginate(10);
+
+        return view('livewire.course.edit-course', compact('departments', 'courses'));
     }
     public function update()
     {
