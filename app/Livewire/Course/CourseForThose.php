@@ -65,8 +65,8 @@ class CourseForThose extends Component
     public function update()
     {
         $validated = $this->validate([
-            'learnings' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'learnings' => 'nullable',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);

@@ -108,6 +108,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/course-learnings/{id}', [CourseFuntionController::class, 'courseLearnings'])->name('courseLearnings');
     Route::get('course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
     Route::get('benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
+    Route::get('add-Creative-Project/{id}', [CourseFuntionController::class, 'addCreativeProject'])->name('addCreativeProject');
+    Route::get('course-Module/{id}', [CourseFuntionController::class, 'courseModule'])->name('courseModule');
+    Route::get('course-faq/{id}', [CourseFuntionController::class, 'courseFAQ'])->name('courseFAQ');
 
 
     //Payrole
@@ -201,6 +204,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
     Route::get('/certificate-view', [CertificateController::class, 'generatePDF'])->name('generatePDF');
     Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('Certificate');
+    
     //Attendance system
     Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('myAttendance');
 

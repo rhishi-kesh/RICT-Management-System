@@ -20,9 +20,22 @@ class CourseFuntionController extends Controller
     {
         return view('application.course.courseForThose', compact('id'));
     }
-    public function benefitCourse()
+    public function benefitCourse($id)
     {
-        return view();
+        return view('application.course.benefitOfCourse', compact('id'));
     }
+    public function addCreativeProject($id)
+    {
+        return view('application.course.creativeProject', compact('id'));
+    }
+    public function courseModule($id)
+    {
+        return view('application.course.courseModule', compact('id'));
+    }
+    public function courseFAQ($id)
+    {
+        return view('application.course.courseFaq', compact('id'));
+    }
+
 
 }

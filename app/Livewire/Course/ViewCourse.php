@@ -46,9 +46,6 @@ class ViewCourse extends Component
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'video'     => 'nullable',
             'department_id' => 'required',
-            'is_active'    => 'nullable',
-            'is_footer'    => 'nullable',
-            'best_selling' => 'nullable',
         ]);
 
         $fileName = "";
@@ -68,9 +65,6 @@ class ViewCourse extends Component
             'thumbnail' => $fileName,
             'video' => $this->video,
             'department_id' => $this->department_id,
-            'is_active' => $this->is_active,
-            'is_footer' => $this->is_footer,
-            'best_selling' => $this->best_selling,
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
@@ -96,49 +90,7 @@ class ViewCourse extends Component
         $this->video = $data->video;
         $this->oldimage = $data->thumbnail;
     }
-    public function update()
-    {
-        $validated = $this->validate([
-            'name'  => 'required',
-            'courseFee'   => 'required|numeric',
-            'description' => 'nullable',
-            'duration'  => 'required',
-            'lecture'   => 'nullable',
-            'project'   => 'nullable',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-            'video'     => 'nullable',
-            'department_id' => 'required'
-        ]);
-        $fileName = "";
-        $image_path = public_path('storage\\' . $this->oldimage);
-        if (!empty($this->image)) {
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
-            $fileName = $this->image->store('courses', 'public');
-        } else {
-            $fileName = $this->oldimage;
-        }
-        $done = Course::where('id', $this->update_id)->update([
-            'name' => $this->name,
-            'fee' => $this->courseFee,
-            'description' => $this->description,
-            'duration' => $this->duration,
-            'lecture' => $this->lecture,
-            'project' => $this->project,
-            'thumbnail' => $fileName,
-            'video' => $this->video,
-            'department_id' => $this->department_id
-        ]);
-        if ($done) {
-            $this->update_id = '';
-            $this->reset();
-            $this->dispatch('swal', [
-                'title' => 'Data Update Successfull',
-                'type' => "success",
-            ]);
-        }
-    }
+    
     public function deleteAlert($id)
     {
         $this->delete_id = $id;
