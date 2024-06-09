@@ -100,6 +100,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
     Route::get('/students', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/student-edit/{slug}', [AdmissionController::class, 'studentsEdit'])->name('studentsEdit');
+    Route::get('/student-download', [AdmissionController::class, 'studentDownload'])->name('studentDownload');
 
     //Add Course & Course Funtion
     Route::get('/courses', [CourseController::class, 'course'])->name('course');

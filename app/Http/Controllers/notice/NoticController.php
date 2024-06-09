@@ -30,7 +30,7 @@ class NoticController extends Controller
         ->latest()
         ->get();
 
-        $studentWithoutBatch = Student::where('batch_id', null)->select('id','name','profile')
+        $studentWithoutBatch = Student::where('batch_id', 0)->select('id','name','profile')
         ->latest()
         ->get();
 
@@ -125,7 +125,7 @@ class NoticController extends Controller
     }
 
     public function noticeStudentWithoutBatch() {
-        $students = Student::where('batch_id', null)->select('id','name')
+        $students = Student::where('batch_id', 0)->select('id','name')
         ->latest()
         ->get();
         return view('application.notice.noticeStudentWithoutBatch', compact('students'));

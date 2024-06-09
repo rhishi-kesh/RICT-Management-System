@@ -15,7 +15,7 @@
             </div>
             <div class="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] sm:flex-1 sm:ml-0 lg:space-x-2" >
                 <div class="sm:mr-auto" x-data="{ search: false }" @click.outside="search = false">
-                    <form class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" :class="{'!block' : search}" >
+                    {{-- <form class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" :class="{'!block' : search}" >
                         <div class="relative">
                             <input
                                 type="text"
@@ -60,7 +60,7 @@
                             <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
                             <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         </svg>
-                    </button>
+                    </button> --}}
                 </div>
                 <div>
                     <a
