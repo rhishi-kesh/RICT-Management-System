@@ -36,4 +36,9 @@ class MentorDashboardController extends Controller
                     ->count();
         return view('application/mentorIndex', compact('totalBatch', 'runningBatch', 'totalStudent', 'totalRunningStudent', 'mentorNotice'));
     }
+
+    public function myStudentMentor() {
+
+        return view('application.admission.myStudentMentor');
+    }
 }

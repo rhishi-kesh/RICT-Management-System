@@ -223,6 +223,12 @@ Route::group(['prefix' => 'mentor', 'middleware' => ['mentor']], function () {
     //Student Logout
     Route::get('/logout', [MentorAuthController::class, 'mentorLogout'])->name('mentorLogout');
 
+    //Batch
+    Route::get('/my-batchs', [BatchController::class, 'myBatchMentor'])->name('myBatchMentor');
+
+    //Student
+    Route::get('/my-student', [MentorDashboardController::class, 'myStudentMentor'])->name('myStudentMentor');
+
     //Notice
     Route::get('/m/my-notice', [NoticController::class, 'myMNotice'])->name('myMNotice');
     Route::get('/m/single/notice/{id}', [NoticController::class, 'MsingleNotice'])->name('MsingleNotice');
