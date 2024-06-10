@@ -9,19 +9,24 @@
                 -webkit-appearance: none;
                 user-select: none;
             }
+            .ck-editor__editable_inline {
+                min-height: 140px;
+            }
+            .bg-light.active {
+                background: #5D87FF !important;
+            }
         </style>
     @endpush
 
     {{-- Insert Button --}}
     <div class="flex justify-start items-center mt-4 mb-4">
-        <button @click="toggle; $wire.call('showModal')"
-            class="bg-blue-500 font-bold btn text-white border-0 flex items-center justify-between">
+        <button class="bg-blue-500 font-bold btn text-white border-0 flex items-center justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Add Moudule
+            <a href="{{ route('addCourseModule', $course_id) }}"> Add Moudule </a>
         </button>
         <button type="submit"
             class="bg-black font-bold btn text-white border-0 flex items-center justify-between ml-7 p-2 w-20 text-center"><a
@@ -57,9 +62,7 @@
                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
 
                                 {{-- Edit Button --}}
-                                <button type="button" x-tooltip="Edit"
-                                    @click="open = true; $wire.call('ShowUpdateModel','{{ $data->id }}')">
-
+                                <button type="button" x-tooltip="Edit" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -68,6 +71,7 @@
                                         <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                                         <path d="M13.5 6.5l4 4" />
                                     </svg>
+                                    <a href="{{ route('courseModuleEdit') }}"></a>
                                 </button>
 
                                 {{-- Delete Button --}}
@@ -94,7 +98,7 @@
                                     <img src="{{ asset('empty.png') }}" alt=""
                                         class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
                                 </div>
-                            </td>
+                                </td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -102,65 +106,11 @@
             <div class="livewire-pagination mt-5">{{ $CourseModule->links() }}</div>
         </div>
     </div>
-
-    {{-- Update & Instert Form --}}
-    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
-        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
-            <div x-show="open" x-transition x-transition.duration.400
-                class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
-                <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    @if (!empty($update_id))
-                        <h5 class="font-bold text-lg">Update Benefit</h5>
-                    @else
-                        <h5 class="font-bold text-lg">Add Benefit</h5>
-                    @endif
-                </div>
-                <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
-                    <form method="post"
-                        @if (!empty($update_id)) wire:submit="update"
-                        @else
-                            wire:submit="insert" @endif
-                        enctype="multipart/form-data">
-                        <div class="mb-1">
-                            <label for="class_no" class="my-label">Class No:</label>
-                            <input type="text" wire:model="class_no" placeholder="Class No :" id="class_no"
-                                class="my-input focus:outline-none focus:shadow-outline">
-                            @if ($errors->has('class_no'))
-                                <div class="text-red-500">{{ $errors->first('class_no') }}</div>
-                            @endif
-                        </div>
-                        <div class="mb-1">
-                            <div wire:ignore="">
-                                <label for="class_topics" class="my-label"> Class Topics: </label>
-                                <textarea wire:model="class_topics"
-                                    class="my-input focus:outline-none focus:shadow-outline appearance-none @error('class_topics') is-invalid @enderror"
-                                    name="class_topics" id="class_topics" placeholder="class_topics" cols="5" rows="1">
-                                </textarea>
-                            </div>
-                            @if ($errors->has('class_topics'))
-                                <div class="text-red-500">{{ $errors->first('class_topics') }}</div>
-                            @endif
-                        </div>
-
-                        <div class="flex justify-end items-center mt-8">
-                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4"
-                                wire:loading.remove>Save</button>
-                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4"
-                                wire:loading>Loading</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
             flatpickr("#date");
         </script>
-    @endpush
-    @section('jss')
         <script>
             ClassicEditor
                 .create(document.querySelector('#class_topics'))
@@ -168,5 +118,6 @@
                     console.error(error);
                 });
         </script>
-    @endsection
+    @endpush
+
 </div>

@@ -12,7 +12,7 @@ class CourseModule extends Component
 {
     use WithPagination;
     use WithFileUploads;
-    public $class_no, $class_topics, $delete_id, $update_id, $oldimage, $course_id;
+    public $class_no, $class_topics, $delete_id, $update_id, $course_id;
 
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
@@ -31,7 +31,7 @@ class CourseModule extends Component
     {
         $validated = $this->validate([
             'class_no' => 'required',
-            'class_topics' => 'nullable',
+            'class_topics' => 'required',
         ]);
         $done = CourseModules::insert([
             'course_id' => $this->course_id,
@@ -46,6 +46,7 @@ class CourseModule extends Component
                 'type' => "success",
             ]);
         }
+      
     }
     public function ShowUpdateModel($id)
     {
@@ -58,9 +59,11 @@ class CourseModule extends Component
     {
         $validated = $this->validate([
             'class_no' => 'nullable',
+            'class_topics' => 'nullable',
         ]);
         $done = CourseModules::where('id', $this->update_id)->update([
             'class_no' => $this->class_no,
+            'class_topics' => $this->class_topics,
             'updated_at' => Carbon::now()
         ]);
         if ($done) {
@@ -91,7 +94,8 @@ class CourseModule extends Component
     }
     public function showModal()
     {
-        $this->reset('class_no');
+        // $this->reset('class_no');
+        // $this->reset('class_topics');
     }
 
 

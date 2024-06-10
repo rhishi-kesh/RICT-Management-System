@@ -124,7 +124,7 @@
                         enctype="multipart/form-data">
                         <div class="mb-1">
                             <label for="question" class="my-label">Question</label>
-                            <textarea wire:model="question" placeholder="question" class="my-input focus:outline-none focus:shadow-outline appearance-none" name="question" id="question" cols="5" rows="1">
+                            <textarea wire:model="question" placeholder="Question" class="my-input focus:outline-none focus:shadow-outline appearance-none" name="question" id="question" cols="5" rows="1">
                             </textarea>
                             @if ($errors->has('question'))
                                 <div class="text-red-500">{{ $errors->first('question') }}</div>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="mb-1">
                             <label for="answer" class="my-label">Answer</label>
-                            <textarea wire:model="answer" placeholder="answer" class="my-input focus:outline-none focus:shadow-outline appearance-none" name="answer" id="description" cols="5" rows="1">
+                            <textarea wire:model="answer" placeholder="Answer" class="my-input focus:outline-none focus:shadow-outline appearance-none" name="answer" id="description" cols="5" rows="1">
                             </textarea>
                             @if ($errors->has('answer'))
                                 <div class="text-red-500">{{ $errors->first('answer') }}</div>

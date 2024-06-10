@@ -63,6 +63,7 @@
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('frontend/js/main.js') }}"></script>
         <script src="{{ asset('frontend/js/cuntom.js') }}"></script>
+        <script src="{{ asset('frontend/js/ckeditor.js') }}"></script>
         @stack('js')
     </body>
 </html>

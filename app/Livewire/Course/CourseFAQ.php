@@ -37,7 +37,8 @@ class CourseFAQ extends Component
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('question');
+            $this->reset('answer');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",

@@ -46,7 +46,8 @@ class BenefitOfCourse extends Component
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('learnings');
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
