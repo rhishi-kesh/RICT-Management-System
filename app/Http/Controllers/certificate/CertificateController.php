@@ -14,7 +14,6 @@ class CertificateController extends Controller
     public function generatePDF()
     {
         $student = Student::where('id', Auth::Guard('student')->user()->id)->first();
-
         $qrcode = QrCode::format('svg')->size(100)->errorCorrection('H')->generate("http://test.interiorbangladesh.com/certificate/$student->id");
 
         return view('application.certificate.certificate', compact('qrcode', 'student'));

@@ -160,7 +160,7 @@
                 </div>
                 <div class="reason font-paragraph middle pb-5">
                     <p id="peragraph" class="details">
-                        This certificate is awarded to <span class="bold">{{ $student->name }}</span> <span> @if ($student->gender == 'male') son @else daughter @endif </span> of <span class="bold">{{ $student->fName }}</span>, who has successfully completed our <span class="bold">Course Duration</span> <span class="bold"> {{ $student->course->name }} </span> course from  <span class="bold"> COURSE Start </span> to <span class="bold">COURSE End.</span>
+                        This certificate is awarded to <span class="bold">{{ $student->name }}</span> <span> @if ($student->gender == 'male') son @else daughter @endif </span> of <span class="bold">{{ $student->fName }}</span>, who has successfully completed our <span class="bold">Course Duration</span> <span class="bold"> {{ $student->course->name ?? '-' }} </span> course from  <span class="bold"> COURSE Start </span> to <span class="bold">COURSE End.</span>
                     </p>
                     <p id="peragraph" class="grade" style="margin-top: 30px;"> <span> @if ($student->gender == 'male') His @else Her @endif </span> Grade was <span class="bold">A+</span> at under the Rayhan's ICT Limited. </p>
                     <p id="peragraph" class="signature font-paragraph">

@@ -51,6 +51,7 @@ class Registation extends Component
         $data = [
             'name'=> $this->name,
             'email'=> $this->email,
+            'password'=> $this->password,
         ];
 
         //SMS Message

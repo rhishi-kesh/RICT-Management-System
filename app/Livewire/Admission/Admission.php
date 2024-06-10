@@ -116,6 +116,8 @@ class Admission extends Component
         $data = [
             'name'=> $this->name,
             'email'=> $this->email,
+            'user_id'=> $user_id,
+            'password'=> $password,
         ];
 
         //SMS Message

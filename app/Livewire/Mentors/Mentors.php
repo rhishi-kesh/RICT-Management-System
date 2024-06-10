@@ -55,6 +55,7 @@ class Mentors extends Component
         $data = [
             'name'=> $this->name,
             'email'=> $this->email,
+            'password'=> $password,
         ];
 
         //SMS Message
