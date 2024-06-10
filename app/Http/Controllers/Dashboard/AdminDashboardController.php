@@ -7,6 +7,7 @@ use App\Models\AdmissionBooth;
 use App\Models\Batch;
 use App\Models\Course;
 use App\Models\Mentor;
+use App\Models\SalesTarget;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\Visitors;
@@ -170,6 +171,17 @@ class AdminDashboardController extends Controller
             return $group->count();
         });
 
-        return view('application/index', compact('totalStudentCount', 'lastMonthStudentAdmission', 'thisMonthStudentAdmission', 'totalVisitorCount', 'lastMonthVisitorAdmission', 'thisMonthVisitorAdmission', 'totalBatch', 'totalRunningBatch', 'totalDueStudent', 'totalDueStudentSum', 'totalMentor', 'totalUsers', 'totalCourse', 'totalAdmissionBooth', 'totalSale', 'todayVisitorCount', 'todayStudentCount', 'todayStudentSaleSum', 'daylyAdmissionData', 'daylyVisitorData', 'monthlyAdmissionsOnDefferentCourse', 'monthlyVisitorOnDifferentCourse', 'monthlyAdmissionCounts', 'monthlyVisitorCounts', 'yearlyAdmissionsOnDefferentCourse', 'yearlyVisitorsOnDefferentCourse', 'YearlyStudentStatus'));
+        $saleTargetMonth = SalesTarget::whereYear('date', date('Y'))
+                                        ->whereMonth('date', date('m'))
+                                        ->first();
+
+        $MonthlySale = Student::whereBetween('created_at',
+                                        [
+                                            Carbon::now()->startOfMonth(),
+                                            Carbon::now()->endOfMonth()
+                                        ])->sum('pay');
+        $saleTargetData = ['date' => date("F-Y", strtotime($saleTargetMonth->date ?? date('F-Y') )), 'target' => $saleTargetMonth->target ?? '0', 'complete' => $MonthlySale];
+
+        return view('application/index', compact('totalStudentCount', 'lastMonthStudentAdmission', 'thisMonthStudentAdmission', 'totalVisitorCount', 'lastMonthVisitorAdmission', 'thisMonthVisitorAdmission', 'totalBatch', 'totalRunningBatch', 'totalDueStudent', 'totalDueStudentSum', 'totalMentor', 'totalUsers', 'totalCourse', 'totalAdmissionBooth', 'totalSale', 'todayVisitorCount', 'todayStudentCount', 'todayStudentSaleSum', 'daylyAdmissionData', 'daylyVisitorData', 'monthlyAdmissionsOnDefferentCourse', 'monthlyVisitorOnDifferentCourse', 'monthlyAdmissionCounts', 'monthlyVisitorCounts', 'yearlyAdmissionsOnDefferentCourse', 'yearlyVisitorsOnDefferentCourse', 'YearlyStudentStatus', 'saleTargetData'));
     }
 }

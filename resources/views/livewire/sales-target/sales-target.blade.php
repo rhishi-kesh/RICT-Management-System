@@ -2,7 +2,7 @@
 
     @push('css')
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/style.css">
+        <link rel="stylesheet" href="{{ asset('frontend/css/monthSelect-flatpickr.css') }}">
         <style>
             input[type="date"]::-webkit-inner-spin-button,
             input[type="date"]::-webkit-calendar-picker-indicator {

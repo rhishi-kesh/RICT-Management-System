@@ -1050,14 +1050,14 @@
                         name: 'Complete',
                         data: [
                         {
-                            x: 'March',
-                            y: 50000,
+                            x: '{{ $saleTargetData['date'] }}',
+                            y: {{ $saleTargetData['complete'] }},
                             goals: [
                             {
                                 name: 'Target',
-                                value: 200000,
+                                value: {{ $saleTargetData['target'] }},
                                 strokeHeight: 5,
-                                strokeColor: 'lime'
+                                strokeColor: '#3B82F6'
                             }
                             ]
                         }
@@ -1076,7 +1076,7 @@
                         columnWidth: '10%'
                     }
                     },
-                    colors: ['#098'],
+                    colors: ['#FF0000'],
                     dataLabels: {
                         enabled: false
                     },
@@ -1085,7 +1085,7 @@
                         showForSingleSeries: true,
                         customLegendItems: ['Complete', 'Target'],
                         markers: {
-                            fillColors: ['#098', 'lime']
+                            fillColors: ['red', '#3B82F6']
                         }
                     }
                 };
