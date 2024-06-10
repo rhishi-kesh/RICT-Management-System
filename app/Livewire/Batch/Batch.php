@@ -23,11 +23,11 @@ class Batch extends Component
     ];
 
     public function mount() {
-        $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id','id')->get();
+        $this->studentWithoutBatch = Student::where('batch_id', 0)->select('name','student_id','id')->get();
         $this->mentors = Mentor::get();
     }
     public function render() {
-        $batch = Batchs::select('id', 'name')
+        $batch = Batchs::select('id', 'name', 'status')
                 ->withCount('students')
                 ->latest()
                 ->paginate(20);
@@ -105,6 +105,21 @@ class Batch extends Component
             ]);
         }
     }
+    public function status($id) {
+        $batch = Batchs::findOrFail($id);
+
+        if($batch->status == 'running'){
+            $batch->update([
+                'status' => 'complete',
+                'updated_at' => Carbon::now()
+            ]);
+        }else{
+            $batch->update([
+                'status' => 'running',
+                'updated_at' => Carbon::now()
+            ]);
+        }
+    }
     public function showModal() {
         $this->reset();
         $this->isModal = true;
@@ -147,7 +162,7 @@ class Batch extends Component
         }
     }
     public function refresh() {
-        $this->studentWithoutBatch = Student::where('batch_id', null)->select('name','student_id', 'id')->get();
+        $this->studentWithoutBatch = Student::where('batch_id', 0)->select('name','student_id', 'id')->get();
     }
     public function removeStudentAlert($id) {
         $this->removeBatch_id = $id;
@@ -155,7 +170,7 @@ class Batch extends Component
     }
     public function removeStudent() {
         $done = Student::where('id',$this->removeBatch_id)->update([
-            'batch_id' => null,
+            'batch_id' => 0,
             'updated_at' => Carbon::now(),
         ]);
         if($done){

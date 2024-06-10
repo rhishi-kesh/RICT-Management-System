@@ -19,7 +19,7 @@ class Department extends Component
 
     public function render()
     {
-        $department = ModelsDepartment::paginate(7);
+        $department = ModelsDepartment::paginate(15);
         return view('livewire.department.department', compact('department'));
     }
 
@@ -32,14 +32,14 @@ class Department extends Component
          }else{
              $slug = Str::slug($this->name);
          }
- 
+
         $validated = $this->validate([
             'name' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
         if ($this->image) {
-            $fileName = $this->image->store('departments', 'public');
+            $fileName = $this->image->store('department', 'public');
         } else {
             $fileName = null;
         }
@@ -79,7 +79,7 @@ class Department extends Component
             if (File::exists($image_path)) {
                 File::delete($image_path);
             }
-            $fileName = $this->image->store('departments', 'public');
+            $fileName = $this->image->store('department', 'public');
         } else {
             $fileName = $this->oldimage;
         }

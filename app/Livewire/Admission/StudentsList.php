@@ -93,6 +93,3 @@ class StudentsList extends Component
         }
     }
 }
-
-
-

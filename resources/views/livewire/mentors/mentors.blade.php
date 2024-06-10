@@ -29,90 +29,92 @@
         <hr>
         <div>
             {{-- Show Data --}}
-            <table class="w-full">
-                <thead>
-                    <tr>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">SL</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Email</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Number</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Date Of Birth</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Photo</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($mentors as $key => $data)
+            <div class="overflow-auto">
+                <table class="w-full">
+                    <thead>
                         <tr>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $mentors->firstItem() + $key }}
-                            </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->name }}
-                            </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->email }}
-                            </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ $data->mobile }}
-                            </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                {{ date("d-M-Y", strtotime($data->dateofbirth ?? '-')) }}
-                            </td>
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
-                                @if (empty($data->image))
-                                    <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($data->name), 0, 1) }}
-                                    </div>
-                                @else
-                                    <div class="text-center">
-                                        <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                            src="{{ asset('storage/' . $data->image) }}" alt="img" width="150"
-                                            height="100" />
-                                    </div>
-                                @endif
-                            </td>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">SL</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Email</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Number</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Date Of Birth</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Photo</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($mentors as $key => $data)
+                            <tr>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    {{ $mentors->firstItem() + $key }}
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    {{ $data->name }}
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    {{ $data->email }}
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    {{ $data->mobile }}
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                    {{ date("d-M-Y", strtotime($data->dateofbirth ?? '-')) }}
+                                </td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center h-14 w-14">
+                                    @if (empty($data->image))
+                                        <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($data->name), 0, 1) }}
+                                        </div>
+                                    @else
+                                        <div class="text-center">
+                                            <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-blue dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
+                                                src="{{ asset('storage/' . $data->image) }}" alt="img" width="150"
+                                                height="100" />
+                                        </div>
+                                    @endif
+                                </td>
 
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
 
-                                {{-- Edit Button --}}
-                                <button type="button" x-tooltip="Edit" @click="open = true; $wire.call('ShowUpdateModel','{{ $data->id }}')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500">
-                                        <path class="text-green-500" stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                        <path d="M13.5 6.5l4 4" />
-                                    </svg>
-                                </button>
+                                    {{-- Edit Button --}}
+                                    <button type="button" x-tooltip="Edit" @click="open = true; $wire.call('ShowUpdateModel','{{ $data->id }}')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-pencil text-green-500">
+                                            <path class="text-green-500" stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                            <path d="M13.5 6.5l4 4" />
+                                        </svg>
+                                    </button>
 
-                                {{-- Delete Button --}}
-                                <button wire:click="deleteAlert({{ $data->id }})" type="button" x-tooltip="Delete">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash text-red-500">
-                                        <path class="text-red-500" stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 7l16 0" />
-                                        <path class="text-red-500" d="M10 11l0 6" />
-                                        <path class="text-red-500" d="M14 11l0 6" />
-                                        <path class="text-red-500" d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                        <path class="text-red-500" d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                    </svg>
-                                </button>
+                                    {{-- Delete Button --}}
+                                    <button wire:click="deleteAlert({{ $data->id }})" type="button" x-tooltip="Delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-trash text-red-500">
+                                            <path class="text-red-500" stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 7l16 0" />
+                                            <path class="text-red-500" d="M10 11l0 6" />
+                                            <path class="text-red-500" d="M14 11l0 6" />
+                                            <path class="text-red-500" d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                            <path class="text-red-500" d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td colspan="20">
+                                <div class="flex justify-center items-center">
+                                    <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                </div>
                             </td>
                         </tr>
-                    @empty
-                    <tr>
-                        <td colspan="20">
-                            <div class="flex justify-center items-center">
-                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
-                            </div>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
             <div class="livewire-pagination mt-5">{{ $mentors->links() }}</div>
         </div>
     </div>

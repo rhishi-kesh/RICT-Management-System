@@ -25,7 +25,7 @@ class AttendanceReport extends Component
         $student = Student::query()
                 ->select('id', 'name', 'student_id', 'batch_id')
                 ->where('batch_id', $this->batchId)
-                ->whereNot('batch_id', null)
+                ->whereNot('batch_id', 0)
                 ->latest()
                 ->get();
         return view('livewire.attendance.attendance-report', compact('batch', 'student'));

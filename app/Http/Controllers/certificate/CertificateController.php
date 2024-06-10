@@ -14,10 +14,9 @@ class CertificateController extends Controller
     public function generatePDF()
     {
         $student = Student::where('id', Auth::Guard('student')->user()->id)->first();
+        $qrcode = QrCode::format('svg')->size(100)->errorCorrection('H')->generate("http://test.interiorbangladesh.com/certificate/$student->id");
 
-        $qrcode = QrCode::format('svg')->size(100)->errorCorrection('H')->generate(route('generatePDF', $student->id));
-    
-        return view('certificate/certificate', compact('qrcode', 'student'));
+        return view('application.certificate.certificate', compact('qrcode', 'student'));
     }
 
     // Download
@@ -26,7 +25,7 @@ class CertificateController extends Controller
         $student = Student::where('id', Auth::Guard('student')->user()->id)->first();
 
         $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(route('generatePDF', $student->id)));
-    
+
         $data = [
             'title' => 'Welcome to Online Web Tutor',
             'qrcode' => $qrcode

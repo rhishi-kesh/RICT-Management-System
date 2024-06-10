@@ -1,4 +1,4 @@
-@extends('layout/mentorIndex')
+@extends('layout/studentIndex')
 @section('content')
 <div>
     <ul class="flex space-x-2 rtl:space-x-reverse">

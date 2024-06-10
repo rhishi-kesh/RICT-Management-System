@@ -3,10 +3,11 @@
 namespace App\Exports;
 
 use App\Models\Attendance;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class AttendanceExport implements FromView
+class AttendanceExport implements FromView, ShouldQueue
 {
     private $date;
     private $batchId;

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Homework;
 
+use App\Jobs\SendHomeworkSubmitMail;
 use App\Mail\submitHomeworkMail;
 use App\Models\Homework;
 use App\Models\HomeworkSubmit;
@@ -32,6 +33,9 @@ class StudentHomeworkView extends Component
 
     public function changeStatus($id)
     {
+        $this->validate([
+            'status' => 'required',
+        ]);
         $data = HomeworkSubmit::where('homework_id', $id)->first();
         $this->url = $data->url ?? '';
         $this->description = $data->description ?? '';
@@ -87,8 +91,8 @@ class StudentHomeworkView extends Component
                 'email'=> auth()->guard('student')->user()->email,
             ];
 
-            // //Mail Send
-            Mail::to($mentor->email)->queue(new submitHomeworkMail($data));
+            //Mail Send
+            dispatch(new SendHomeworkSubmitMail($data, $mentor->email));
 
 
             DB::commit();

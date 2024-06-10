@@ -22,6 +22,7 @@ class Message extends Component
         $allSmsMessages = $allSmsMessages->where('ticket_id', $this->id)->sortBy('created_at');
 
         $ticket = Ticket::where('id', $this->id)->first();
+        // $this->authorize('view');
         return view('livewire.message.message', compact('allSmsMessages', 'ticket'));
     }
 

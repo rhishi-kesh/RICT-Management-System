@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mentor_id')->nullable();
             $table->string('name');
+            $table->string('status')->default('running')->comment('running', 'complete');
             $table->timestamps();
         });
     }

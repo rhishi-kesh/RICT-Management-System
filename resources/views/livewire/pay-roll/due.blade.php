@@ -53,7 +53,7 @@
 
                                 {{-- Edit Button --}}
                                 <div class="flex justify-center">
-                                    <button type="button" x-tooltip="Add Payment" class="bg-blue-500 btn text-white border-0 flex items-center justify-between" @click="open = true; $wire.call('ShowUpdateModel','{{ $item->id }}')">
+                                    <button type="button" x-tooltip="Add Payment" class="bg-blue-500 btn text-white border-0 flex items-center justify-between text-nowrap" @click="open = true; $wire.call('ShowUpdateModel','{{ $item->id }}')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>

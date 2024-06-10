@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendForgotPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,11 +83,18 @@ class AdminController extends Controller
 
     public function verify($id) {
 
-        if(Session::has('emailVerfy')){
+        if (Session::has('emailVerfy')) {
             $user = User::where('id', $id)->first();
-            $this->sendOtp($user);
-            return view('auth.forgotPassword.admin.verification', compact('user'));
-        } else{
+            $otpData = PasswordReset::where('email', $user->email)->first();
+            $currentTime = time();
+            $time = $otpData->created_at;
+            if ($currentTime >= $time && $time >= $currentTime - (70 + 5)) {
+                // return response()->json(['success' => false, 'msg' => 'Please try after some time']);
+            } else {
+                $this->sendOtp($user);
+            }
+            return view('auth.forgotPassword.student.verification', compact('user'));
+        } else {
             return redirect()->route('notFound');
         }
     }
@@ -133,9 +141,7 @@ class AdminController extends Controller
         $data['title'] = 'Password Reset';
         $data['body'] = 'Your OTP is:- '.$otp;
 
-        Mail::send('mail.forgetPasswordMail', ['data' => $data], function($message) use ($data) { $message->to($data['email'])->subject($data['title']);
-
-        });
+        dispatch(new SendForgotPassword($data))->onQueue('high');
     }
 
     public function resendOtp(Request $request) {

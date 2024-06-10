@@ -3,10 +3,11 @@
 namespace App\Exports;
 
 use App\Models\Attendance;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class SingleAttendanceExport implements FromView
+class SingleAttendanceExport implements FromView, ShouldQueue
 {
 
     private $studentId;
