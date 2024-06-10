@@ -56,7 +56,6 @@
                                         src="{{ asset('storage/' . $data->thumbnail) }}" alt="img" width="120"
                                         height="100" />
                                 </td>
-
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     <div x-data="dropdown" @click.outside="open = false" class="">
                                         <a class="inline-block cursor-pointer" @click="toggle">
@@ -66,7 +65,8 @@
                                                     stroke-width="1.5"></circle>
                                                 <circle opacity="0.5" cx="12" cy="12" r="2"
                                                     stroke="currentColor" stroke-width="1.5"></circle>
-                                                <circle cx="19" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
+                                                <circle cx="19" cy="12" r="2" stroke="currentColor"
+                                                    stroke-width="1.5"></circle>
                                             </svg>
                                         </a>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="absolute right-14 z-30 bg-white dark:bg-[#1B2E4B] text-black dark:text-[#e5e7eb] rounded text-left p-5 pl-3">
@@ -150,9 +150,9 @@
                 class=" panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-[800px] my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     @if (!empty($update_id))
-                        <h5 class="font-bold text-lg">Update</h5>
+                        <h5 class="font-bold text-lg">Update Course</h5>
                     @else
-                        <h5 class="font-bold text-lg">Add Member</h5>
+                        <h5 class="font-bold text-lg">Add Course</h5>
                     @endif
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
@@ -178,17 +178,8 @@
                                 @endif
                             </div>
                             <div class="mb-1">
-                                <label for="description" class="my-label">description</label>
-                                <input type="text" wire:model="description" placeholder="description"
-                                    id="description"
-                                    class="my-input focus:outline-none focus:shadow-outline appearance-none">
-                                @if ($errors->has('description'))
-                                    <div class="text-red-500">{{ $errors->first('description') }}</div>
-                                @endif
-                            </div>
-                            <div class="mb-1">
                                 <div wire:ignore>
-                                    <label for="duration" class="my-label"> Duration </label>
+                                    <label for="duration" class="my-label"> Duration (Month)</label>
                                     <input type="number" wire:model="duration" placeholder="Course duration"
                                         id="duration" class="my-input focus:outline-none focus:shadow-outline">
                                 </div>
@@ -215,7 +206,7 @@
                             <div class="mb-1">
                                 <label for="department_id" class="my-label">Department Name</label>
                                 <select name="department_id" wire:model.live.debounce.1000ms="department_id"
-                                    id="department_id" class="my-input focus:outline-none focus:shadow-outline">
+                                    id="department_id" class="my-input focus:outline-none focus:shadow-outline  bg-white">
                                     <option value="department_id"> Select Course </option>
                                     @foreach ($departments as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -234,10 +225,16 @@
                                 @endif
                             </div>
                             <div class="mb-1">
-                                <label class="col-form-label pt-0" for="image">Thumbnail</label>
-                                <input wire:model="image"
-                                    class="block form-control @error('image') is-invalid @enderror" id="image"
-                                    type="file">
+                                <label for="description" class="my-label">description</label>
+                                <textarea wire:model="description" placeholder="description" class="my-input focus:outline-none focus:shadow-outline appearance-none" name="description" id="description" cols="5" rows="1">
+                                </textarea>
+                                @if ($errors->has('description'))
+                                    <div class="text-red-500">{{ $errors->first('description') }}</div>
+                                @endif
+                            </div>
+                            <div class="mb-1">
+                                <label class=" col-form-label pt-0" for="image">Thumbnail</label>
+                                <input wire:model="image" class="bg-white p-2 w-full block form-control @error('image') is-invalid @enderror" id="image" type="file">
                                 <div wire:loading="" wire:target="image" class="text-green-500">
                                     Uploading Image...
                                 </div>

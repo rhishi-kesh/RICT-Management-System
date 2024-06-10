@@ -43,13 +43,13 @@ class EditCourse extends Component
         $validated = $this->validate([
             'name'  => 'required',
             'courseFee'   => 'required|numeric',
-            'description' => 'nullable',
+            'description' => 'required',
             'duration'  => 'required',
-            'lecture'   => 'nullable',
-            'project'   => 'nullable',
+            'lecture'   => 'required',
+            'project'   => 'required',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'video'     => 'nullable',
-            'department_id' => 'nullable'
+            'department_id' => 'required'
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);

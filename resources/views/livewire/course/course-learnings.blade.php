@@ -113,9 +113,9 @@
                     class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                     <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                         @if (!empty($update_id))
-                            <h5 class="font-bold text-lg">Update</h5>
+                            <h5 class="font-bold text-lg">Update Learning</h5>
                         @else
-                            <h5 class="font-bold text-lg">Add Course</h5>
+                            <h5 class="font-bold text-lg">Add Learning</h5>
                         @endif
                     </div>
                     <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
@@ -135,7 +135,7 @@
                             <div class="mb-1">
                                 <label class="col-form-label pt-0" for="image">Image</label>
                                 <input wire:model="image"
-                                    class="block form-control @error('image') is-invalid @enderror" id="image"
+                                    class="bg-white p-2 w-full block form-control @error('image') is-invalid @enderror" id="image"
                                     type="file">
                                 <div wire:loading="" wire:target="image" class="text-green-500">
                                     Uploading Image...

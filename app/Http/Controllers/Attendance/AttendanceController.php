@@ -42,7 +42,7 @@ class AttendanceController extends Controller
         $students = Student::where('batch_id', $id)->select('id','name')
         ->latest()
         ->get();
-
+        
         return view('application.attendance.takeAttendance', compact('students', 'id'));
     }
 

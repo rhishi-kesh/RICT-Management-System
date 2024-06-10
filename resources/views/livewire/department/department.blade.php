@@ -112,7 +112,7 @@
                         </div>
                         <div class="mb-1">
                             <label class="col-form-label pt-0" for="image">Image</label>
-                            <input wire:model="image" class="block form-control @error('image') is-invalid @enderror"
+                            <input wire:model="image" class="bg-white p-2 w-full block form-control @error('image') is-invalid @enderror"
                                 id="image" type="file">
                             <div wire:loading="" wire:target="image" class="text-green-500">
                                 Uploading Image...

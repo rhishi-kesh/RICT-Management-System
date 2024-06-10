@@ -108,9 +108,16 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/department', [DepartmentController::class, 'department'])->name('department');
     Route::get('/edit-courses/{id}', [CourseFuntionController::class, 'editCourse'])->name('editCourse');
     Route::get('/course-learnings/{id}', [CourseFuntionController::class, 'courseLearnings'])->name('courseLearnings');
-    Route::get('/course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
-    Route::get('/benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
+    Route::get('course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
+    Route::get('benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
+    Route::get('add-Creative-Project/{id}', [CourseFuntionController::class, 'addCreativeProject'])->name('addCreativeProject');
+    Route::get('course-Module/{id}', [CourseFuntionController::class, 'courseModule'])->name('courseModule');
+    Route::get('course-Module-add/{id}', [CourseFuntionController::class, 'addCourseModule'])->name('addCourseModule');
+    Route::post('course-Module-add-post', [CourseFuntionController::class, 'courseModuleAddPost'])->name('courseModuleAddPost');
+    Route::get('course-Module-edit', [CourseFuntionController::class, 'courseModuleEdit'])->name('courseModuleEdit');
+    Route::get('course-faq/{id}', [CourseFuntionController::class, 'courseFAQ'])->name('courseFAQ');
     Route::get('/manage-website-course', [CourseController::class, 'manageWebsiteCourse'])->name('manageWebsiteCourse');
+
 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
@@ -207,6 +214,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     //Certificate
     Route::get('/certificate-view', [CertificateController::class, 'generatePDF'])->name('generatePDF');
+    Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('Certificate');
     Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('downloadCertificate');
 
     //Attendance system

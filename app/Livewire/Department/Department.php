@@ -69,9 +69,9 @@ class Department extends Component
     public function update()
     {
         $validated = $this->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'image' => 'required',
+            'name' => 'nullable',
+            'slug' => 'nullable',
+            'image' => 'nullable',
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);
@@ -89,6 +89,7 @@ class Department extends Component
             'image' => $fileName
         ]);
         if ($done) {
+            return redirect('department');
             $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',

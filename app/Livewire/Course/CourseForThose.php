@@ -46,7 +46,8 @@ class CourseForThose extends Component
             'created_at' => Carbon::now(),
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('learnings');
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -65,8 +66,8 @@ class CourseForThose extends Component
     public function update()
     {
         $validated = $this->validate([
-            'learnings' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'learnings' => 'nullable',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
         $fileName = "";
         $image_path = public_path('storage\\' . $this->oldimage);
