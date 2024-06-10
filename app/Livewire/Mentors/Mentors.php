@@ -134,7 +134,7 @@ class Mentors extends Component
             $this->update_id = '';
             $this->reset();
             $this->dispatch('swal', [
-                'title' => 'Data Insert Successfull',
+                'title' => 'Data Deleted Successfull',
                 'type' => "success",
             ]);
         }

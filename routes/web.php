@@ -29,6 +29,7 @@ use App\Http\Controllers\Dashboard\MentorDashboardController;
 use App\Http\Controllers\Dashboard\StudentDashboardController;
 use App\Http\Controllers\department\DepartmentController;
 use App\Http\Controllers\course\CourseFuntionController;
+use App\Http\Controllers\SalesTargetController;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
@@ -179,6 +180,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     //Ticket
     Route::get('/tickets', [TicketController::class, 'adminTicketindex'])->name('adminTicketindex');
     Route::get('/tickets/{id}/show', [TicketController::class, 'adminTicketshow'])->name('adminTicketshow');
+
+    //SMTP Settings
+    Route::get('/sales-target', [SalesTargetController::class, 'salesTarget'])->name('salesTarget');
 });
 
 //Student Middlewere
