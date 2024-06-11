@@ -19,4 +19,11 @@ class Batch extends Model
     {
         return $this->hasMany(Mentor::class,'id','mentor_id');
     }
+
+    protected $fillable = [
+        'mentor_id',
+        'name',
+        'status',
+        'updated_at'
+    ];
 }

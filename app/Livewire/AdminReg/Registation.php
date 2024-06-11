@@ -2,6 +2,7 @@
 
 namespace App\Livewire\AdminReg;
 
+use App\Jobs\SendUserMail;
 use App\Mail\UserMail;
 use App\Models\User;
 use Carbon\Carbon;
@@ -50,14 +51,15 @@ class Registation extends Component
         $data = [
             'name'=> $this->name,
             'email'=> $this->email,
+            'password'=> $this->password,
         ];
 
         //SMS Message
         $message = 'Rhishi Testing SMS';
 
         if($done){
-            // $this->sendSMS($this->mobile, $message);
-            // Mail::to($this->email)->queue(new UserMail($data));
+            dispatch(new SendUserMail($data, $message, $this->mobile));
+
             $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',

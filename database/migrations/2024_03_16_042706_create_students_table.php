@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('student_id', '20');
             $table->foreignId('is_fromSite')->nullable()->default('0');
-            $table->foreignId('batch_id')->nullable();
+            $table->foreignId('batch_id')->nullable()->default('0');
             $table->string('name');
             $table->string('profile')->nullable();
-            $table->string('gender')->nullable()->default('male');
+            $table->string('gender')->nullable();
             $table->string('slug');
             $table->string('fName');
             $table->string('dateofbirth');

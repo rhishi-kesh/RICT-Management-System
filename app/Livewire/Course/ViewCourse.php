@@ -16,13 +16,13 @@ class ViewCourse extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $name, $courseFee, $description, $duration, $lecture, $mentor_id, $department_id, $project, $image, $video, $is_active, $is_footer, $best_selling, $date, $oldimage,$update_id, $delete_id;
+    public $name, $courseFee, $description, $duration, $lecture, $mentor_id, $department_id, $project, $image, $video, $oldimage, $update_id, $delete_id;
     protected $listeners = ['deleteConfirm' => 'deleteStudent'];
 
     public function render()
     {
         $departments = Department::get();
-        $courses = Course::paginate(10);
+        $courses = Course::paginate(15);
 
         return view('livewire.course.view-course', compact('courses', 'departments'));
     }
@@ -42,7 +42,7 @@ class ViewCourse extends Component
             'description' => 'required',
             'duration'  => 'required',
             'lecture'   => 'required',
-            'project'   => 'required',
+            'project'   => 'nullable',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'video'     => 'nullable',
             'department_id' => 'required',
@@ -75,6 +75,7 @@ class ViewCourse extends Component
             ]);
         }
     }
+  
     public function ShowUpdateModel($id)
     {
         $this->reset();
@@ -112,9 +113,5 @@ class ViewCourse extends Component
                 'type' => "success",
             ]);
         }
-    }
-    public function showModal()
-    {
-        $this->reset();
     }
 }

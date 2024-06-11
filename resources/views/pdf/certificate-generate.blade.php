@@ -1,5 +1,3 @@
-
-
 <html>
 <head>
     <style>
@@ -45,7 +43,7 @@
 
         .person {
             border-bottom: 2px solid black;
-            font-size: 50px;
+            font-size: 40px;
             font-style: italic;
             margin: 20px auto;
             width: 400px;
@@ -137,7 +135,7 @@
             <div class="reason font-paragraph">
                 <p id="peragraph" class="details" style="margin-top: 30px;">
                     This certificate is awarded to <span class="bold">{{ $studentData->name }}</span> <span> @if( $studentData->gender == 'male') son @else daughter @endif</span> of
-                    <span class="bold">{{ $studentData->fName }}</span>, who has successfully completed our <span class="bold">Course Duration</span> <span class="bold"> {{ $studentData->course->name }} </span> course from <span class="bold">COURSE Start</span> to <span class="bold">COURSE End.</span>
+                    <span class="bold">{{ $studentData->fName }}</span>, who has successfully completed our <span class="bold">Course Duration</span> <span class="bold"> {{ $studentData->course->name ?? '-' }} </span> course from <span class="bold">COURSE Start</span> to <span class="bold">COURSE End.</span>
                 </p>
                 <p id="peragraph" class="grade" style="margin-top: 30px;">
                     <span> @if( $studentData->gender == 'male') His @else Her @endif</span> Grade was <span class="bold">A+</span> at under the Rayhan's ICT Limited.

@@ -40,7 +40,7 @@ class AllNotice extends Component
 
         $students = Notice::query()
         ->whereHas('student', function ($query) {
-            $query->where('batch_id','=', null);
+            $query->where('batch_id','=', 0);
         })
         ->with('student:id,name,profile,student_id')
         ->where('person', 's')

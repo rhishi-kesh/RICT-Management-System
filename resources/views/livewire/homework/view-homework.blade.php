@@ -128,9 +128,9 @@
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
-                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
+                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
-                                                    <span>{{ Str::limit($item->title, 35, '...') }}</span>
+                                                    <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
                                                     <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
@@ -206,9 +206,9 @@
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
-                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
+                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
-                                                    <span>{{ Str::limit($item->title, 35, '...') }}</span>
+                                                    <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
                                                     <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
@@ -284,9 +284,9 @@
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
-                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
+                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
-                                                    <span>{{ Str::limit($item->title, 35, '...') }}</span>
+                                                    <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
                                                     <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
@@ -362,9 +362,9 @@
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
-                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
+                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
-                                                    <span>{{ Str::limit($item->title, 35, '...') }}</span>
+                                                    <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
                                                     <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
@@ -440,9 +440,9 @@
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
-                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
+                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
-                                                    <span>{{ Str::limit($item->title, 35, '...') }}</span>
+                                                    <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
                                                     <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
@@ -518,9 +518,9 @@
                                             @endif
                                         </td>
                                         <td class="p-5 pl-0">
-                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">
+                                            <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
-                                                    <span>{{ Str::limit($item->title, 35, '...') }}</span>
+                                                    <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
                                                     <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                                 <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>

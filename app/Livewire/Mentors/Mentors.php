@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Mentors;
 
+use App\Jobs\SendMentorMail;
 use Livewire\Component;
 use App\Models\Mentor;
 use Carbon\Carbon;
@@ -49,7 +50,20 @@ class Mentors extends Component
             'password' => $password_hash,
             'created_at' => Carbon::now(),
         ]);
+
+        //Mail Data
+        $data = [
+            'name'=> $this->name,
+            'email'=> $this->email,
+            'password'=> $password,
+        ];
+
+        //SMS Message
+        $message = 'Rhishi Testing SMS';
+
         if ($done) {
+
+            dispatch(new SendMentorMail($data, $message, $this->mobile));
             $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
@@ -121,7 +135,7 @@ class Mentors extends Component
             $this->update_id = '';
             $this->reset();
             $this->dispatch('swal', [
-                'title' => 'Data Insert Successfull',
+                'title' => 'Data Deleted Successfull',
                 'type' => "success",
             ]);
         }

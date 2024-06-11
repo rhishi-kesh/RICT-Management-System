@@ -27,10 +27,9 @@ use App\Http\Controllers\certificate\CertificateController;
 use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\MentorDashboardController;
 use App\Http\Controllers\Dashboard\StudentDashboardController;
-use App\Http\Controllers\PDF\PDFController;
-use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\course\CourseFuntionController;
 use App\Http\Controllers\department\DepartmentController;
+use App\Http\Controllers\course\CourseFuntionController;
+use App\Http\Controllers\SalesTargetController;
 
 //Student Auth
 Route::get('/', [StudentController::class, 'studentLogin'])->name('studentLogin');
@@ -88,6 +87,8 @@ Route::get('/attendance/download/single/{batch_id}/{student_id}', [AttendanceCon
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+
+    //Department
     Route::get('/department', [DepartmentController::class, 'department'])->name('department');
 
     //Admin Auth
@@ -100,6 +101,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
     Route::get('/students', [AdmissionController::class, 'studentsList'])->name('studentsList');
     Route::get('/student-edit/{slug}', [AdmissionController::class, 'studentsEdit'])->name('studentsEdit');
+    Route::get('/student-download', [AdmissionController::class, 'studentDownload'])->name('studentDownload');
 
     //Add Course & Course Funtion
     Route::get('/courses', [CourseController::class, 'course'])->name('course');
@@ -114,6 +116,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::post('course-Module-add-post', [CourseFuntionController::class, 'courseModuleAddPost'])->name('courseModuleAddPost');
     Route::get('course-Module-edit', [CourseFuntionController::class, 'courseModuleEdit'])->name('courseModuleEdit');
     Route::get('course-faq/{id}', [CourseFuntionController::class, 'courseFAQ'])->name('courseFAQ');
+    Route::get('/manage-website-course', [CourseController::class, 'manageWebsiteCourse'])->name('manageWebsiteCourse');
+
 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
@@ -183,6 +187,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     //Ticket
     Route::get('/tickets', [TicketController::class, 'adminTicketindex'])->name('adminTicketindex');
     Route::get('/tickets/{id}/show', [TicketController::class, 'adminTicketshow'])->name('adminTicketshow');
+
+    //SMTP Settings
+    Route::get('/sales-target', [SalesTargetController::class, 'salesTarget'])->name('salesTarget');
 });
 
 //Student Middlewere
@@ -204,9 +211,12 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     //Profile $ Certificate
     Route::get('/profile', [ProfileController::class, 'studentProfile'])->name('studentProfile');
+
+    //Certificate
     Route::get('/certificate-view', [CertificateController::class, 'generatePDF'])->name('generatePDF');
     Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('Certificate');
-    
+    Route::get('/certificate', [CertificateController::class, 'downloadCertificate'])->name('downloadCertificate');
+
     //Attendance system
     Route::get('/my-attendance', [AttendanceController::class, 'myAttendance'])->name('myAttendance');
 
@@ -224,6 +234,12 @@ Route::group(['prefix' => 'mentor', 'middleware' => ['mentor']], function () {
 
     //Student Logout
     Route::get('/logout', [MentorAuthController::class, 'mentorLogout'])->name('mentorLogout');
+
+    //Batch
+    Route::get('/my-batchs', [BatchController::class, 'myBatchMentor'])->name('myBatchMentor');
+
+    //Student
+    Route::get('/my-student', [MentorDashboardController::class, 'myStudentMentor'])->name('myStudentMentor');
 
     //Notice
     Route::get('/m/my-notice', [NoticController::class, 'myMNotice'])->name('myMNotice');

@@ -2,14 +2,13 @@
 
 namespace App\Livewire\Admission;
 
-use App\Mail\AdmissionMail;
+use App\Jobs\SendAdmissionMail;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\PaymentMode;
 use Livewire\Component;
 use App\Utils;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -117,14 +116,15 @@ class Admission extends Component
         $data = [
             'name'=> $this->name,
             'email'=> $this->email,
+            'user_id'=> $user_id,
+            'password'=> $password,
         ];
 
         //SMS Message
         $message = 'Rhishi Testing SMS';
 
         if($done){
-            $this->sendSMS($this->mobileNumber, $message);
-            Mail::to($this->email)->queue(new AdmissionMail($data));
+            dispatch(new SendAdmissionMail($data, $message, $this->mobileNumber));
             $this->reset();
             $this->mount();
             $this->dispatch('swal', [
