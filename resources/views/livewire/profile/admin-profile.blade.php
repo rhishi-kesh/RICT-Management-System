@@ -1,4 +1,17 @@
 <div class="pt-5">
+
+    @push('css')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <style>
+            input[type="date"]::-webkit-inner-spin-button,
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+                -webkit-appearance: none;
+                user-select: none;
+            }
+        </style>
+    @endpush
+
     <div class="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3 xl:grid-cols-4">
         <div class="bg-white rounded dark:bg-[#0E1726] p-5">
             <form wire:submit="updateImage" enctype="multipart/form-data">
@@ -41,8 +54,12 @@
                 </div>
 
                 <div class="flex justify-center items-center">
-                    <button type="submit" class="inline-flex items-center uppercase btn bg-blue-500 border-none text-white cursor-pointer mt-2 ml-3" wire:loading.remove wire:target="updateImage">Update Image</button>
-                    <button type="button" disabled class="inline-flex items-center uppercase btn bg-blue-500 border-none text-white cursor-pointer mt-2 ml-3" wire:loading wire:target="updateImage">Loading</button>
+                    <button type="submit"
+                        class="inline-flex items-center uppercase btn bg-blue-500 border-none text-white cursor-pointer mt-2 ml-3"
+                        wire:loading.remove wire:target="updateImage">Update Image</button>
+                    <button type="button" disabled
+                        class="inline-flex items-center uppercase btn bg-blue-500 border-none text-white cursor-pointer mt-2 ml-3"
+                        wire:loading wire:target="updateImage">Loading</button>
                 </div>
             </form>
         </div>
@@ -57,21 +74,47 @@
                             <input type="hidden" wire:model='id' name="id">
                             <div>
                                 <label for="Name" class="my-label">Name</label>
-                                <input type="text" wire:model="name" name="name" placeholder="Name" id="Name" class="my-input focus:outline-none ">
+                                <input type="text" wire:model="name" name="name" placeholder="Name" id="Name"
+                                    class="my-input focus:outline-none ">
                                 @if ($errors->has('name'))
                                     <div class="text-red-500">{{ $errors->first('name') }}</div>
                                 @endif
                             </div>
                             <div>
                                 <label for="Name" class="my-label">Email</label>
-                                <input type="text" wire:model="email" name="email" placeholder="Name" id="email" class="my-input focus:outline-none ">
+                                <input type="text" wire:model="email" name="email" placeholder="Name"
+                                    id="email" class="my-input focus:outline-none ">
                                 @if ($errors->has('email'))
                                     <div class="text-red-500">{{ $errors->first('email') }}</div>
                                 @endif
                             </div>
+                            <div>
+                                <label for="Name" class="my-label">Mobile</label>
+                                <input type="number" wire:model="mobile" name="mobile" placeholder="Mobile"
+                                    id="mobile" class="my-input focus:outline-none ">
+                                @if ($errors->has('mobile'))
+                                    <div class="text-red-500">{{ $errors->first('mobile') }}</div>
+                                @endif
+                            </div>
+                            <div x-data
+                            x-init="
+                              flatpickr($refs.dateInput, {
+                                altInput: true,
+                                dateFormat: 'Y-m-d',
+                                defaultDate: ['{{ $date }}']
+                              })
+                            ">
+                                <div wire:ignore>
+                                    <label for="date" class="my-label">Date Of Birth</label>
+                                    <input x-ref="dateInput" type="date" wire:model="date" placeholder="Date Of Birth" id="date" name="date" class="my-input focus:outline-none focus:shadow-outline"
+                                        id="date">
+                                </div>
+                                @if ($errors->has('date'))
+                                    <div class="text-red-500">{{ $errors->first('date') }}</div>
+                                @endif
+                            </div>
                             <div class="mt-3">
-                                <button type="submit"
-                                    class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
+                                <button type="submit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
                                     Update
                                 </button>
                             </div>
@@ -101,8 +144,7 @@
                             <div class="mb-1">
                                 <label for="Email" class="my-label">New Password</label>
                                 <input type="password" wire:model="password" name="password"
-                                    placeholder="Enter new password" type="password" id="password"
-                                    name="password"
+                                    placeholder="Enter new password" type="password" id="password" name="password"
                                     class=" form-control my-input focus:outline-none focus:shadow-outline">
                                 @if ($errors->has('password'))
                                     <div class="text-red-500">{{ $errors->first('password') }}</div>
@@ -131,4 +173,7 @@
             </div>
         </div>
     </div>
+    @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    @endpush
 </div>

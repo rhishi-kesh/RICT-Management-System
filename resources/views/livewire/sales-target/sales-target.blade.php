@@ -59,8 +59,8 @@
                                     <div class="relative">
                                         <span class="inline-block mr-1">{{ date("F-Y", strtotime($data->date ?? '-')) }}</span>
                                         @if (date('Y-m') == date('Y-m', strtotime($data->date)))
-                                            <span class="animate-ping absolute inline-flex h-[20px] w-[20px] rounded-full bg-sky-400 opacity-75 ml-[-2px] mt-[-2px]"></span>
-                                            <span class="relative inline-block rounded-full h-3 w-3 bg-sky-500"></span>
+                                            <span class="animate-ping absolute inline-flex h-[20px] w-[20px] rounded-full bg-sky-400 opacity-75 ml-[-3px] mt-[-3px]"></span>
+                                            <span class="relative inline-block rounded-full h-3 w-3 bg-blue-500"></span>
                                         @endif
                                     </div>
                                 </td>
