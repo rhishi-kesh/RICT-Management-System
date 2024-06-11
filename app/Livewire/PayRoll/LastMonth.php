@@ -27,6 +27,7 @@ class LastMonth extends Component
                     ->startOfMonth()
                     ->subMonth()
                     ->toDateString())
+                    ->latest()
                     ->paginate(15);
         return view('livewire.pay-roll.last-month', compact('students'));
     }

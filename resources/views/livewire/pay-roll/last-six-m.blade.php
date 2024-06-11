@@ -91,7 +91,7 @@
                             @endif
                         </div>
                         <div class="mb-1">
-                            <label for="Name" class="my-label">Payment</label>
+                            <label for="Name" class="my-label">Old Payment</label>
                             <input type="text" wire:model="pay" placeholder="total payment" id="pay" class="my-input focus:outline-none focus:shadow-outline" readonly>
                             @if ($errors->has('pay'))
                                 <div class="text-red-500">{{ $errors->first('pay') }}</div>
@@ -105,7 +105,7 @@
                             @endif
                         </div>
                         <div class="mb-1">
-                            <label for="payment" class="my-label">Payment</label>
+                            <label for="payment" class="my-label">New Payment</label>
                             <input type="text" wire:model.live.debounce.1000ms="payment" placeholder="Payment" id="payment" class="my-input focus:outline-none focus:shadow-outline">
                             @if ($errors->has('payment'))
                                 <div class="text-red-500">{{ $errors->first('payment') }}</div>

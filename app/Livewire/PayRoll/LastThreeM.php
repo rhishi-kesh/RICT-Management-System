@@ -27,6 +27,7 @@ class LastThreeM extends Component
                     ->startOfMonth()
                     ->subMonth(3)
                     ->toDateString())
+                    ->latest()
                     ->paginate(15);
         return view('livewire.pay-roll.last-three-m', compact('students'));
     }

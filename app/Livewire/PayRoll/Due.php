@@ -22,6 +22,7 @@ class Due extends Component
         $students = Student::with('course:id,name')
         ->search($this->search)
         ->where('due', '>', 0)
+        ->latest()
         ->paginate(15);
         return view('livewire.pay-roll.due', compact('students'));
     }

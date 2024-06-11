@@ -23,7 +23,7 @@ class LastSixM extends Component
     {
         $students = Student::with('course:id,name')->where('due', '>', 0)->where(
             'created_at', '>=', Carbon::now()->startOfMonth()->subMonth(6)->toDateString()
-        )->paginate(15);
+        )->latest()->paginate(15);
         return view('livewire.pay-roll.last-six-m', compact('students'));
     }
     public function ShowUpdateModel($id){
