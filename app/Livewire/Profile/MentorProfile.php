@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\File;
 class MentorProfile extends Component
 {
     use WithFileUploads;
-    public $name, $email, $id, $password_confirmation, $password, $current_password, $photo, $oldImage;
+    public $name, $email, $mobile, $date, $id, $password_confirmation, $password, $current_password, $photo, $oldImage;
 
     public function mount() {
         $this->name = auth()->Guard('mentor')->user()->name;
         $this->email = auth()->Guard('mentor')->user()->email;
+        $this->mobile = auth()->Guard('mentor')->user()->mobile;
+        $this->date = date('m-d-Y', strtotime(auth()->Guard('mentor')->user()->dateofbirth));
         $this->id = auth()->Guard('mentor')->user()->id;
     }
     public function render()
@@ -29,10 +31,14 @@ class MentorProfile extends Component
         $validated = $this->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'date' => 'required',
         ]);
         $done = Mentor::findOrFail($this->id)->update([
             'name' => $this->name,
             'email' => $this->email,
+            'mobile' => $this->mobile,
+            'dateofbirth' => $this->date,
             'updated_at' => Carbon::now(),
         ]);
         if($done){

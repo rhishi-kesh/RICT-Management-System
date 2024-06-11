@@ -90,7 +90,6 @@
                                 </button>
                             </td>
                         </tr>
-
                     @empty
                         <tr>
                             <td colspan="20">
@@ -119,5 +118,4 @@
                 });
         </script>
     @endpush
-
 </div>

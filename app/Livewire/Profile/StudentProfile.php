@@ -13,24 +13,29 @@ use Illuminate\Support\Facades\File;
 class StudentProfile extends Component
 {
     use WithFileUploads;
-    public $mobile, $email, $id, $password_confirmation, $password, $current_password, $photo, $oldImage , $student;
+    public $mobile, $name, $email, $date, $id, $password_confirmation, $password, $current_password, $photo, $oldImage , $student;
 
-    public function mount() {
-        $this->mobile = Auth::Guard('student')->user()->mobile;
-        $this->email = Auth::Guard('student')->user()->email;
-        $this->id = Auth::Guard('student')->user()->id;
-    }
     public function render() {
+        $this->name = Auth::Guard('student')->user()->name;
+        $this->email = Auth::Guard('student')->user()->email;
+        $this->mobile = auth()->Guard('student')->user()->mobile;
+        $this->date = date('m-d-Y', strtotime(auth()->Guard('student')->user()->dateofbirth));
+        $this->id = Auth::Guard('student')->user()->id;
+        
         return view('livewire.profile.student-profile');
     }
     public function profileUpdate() {
         $validated = $this->validate([
-            'mobile' => 'required',
+            'name' => 'required',
             'email' => 'required|email',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'date' => 'required',
         ]);
         $done = Student::findOrFail(Auth::Guard('student')->user()->id)->update([
-            'mobile' => $this->mobile,
+            'name' => $this->name,
             'email' => $this->email,
+            'mobile' => $this->mobile,
+            'dateofbirth' => $this->date,
             'updated_at' => Carbon::now(),
         ]);
         if($done){

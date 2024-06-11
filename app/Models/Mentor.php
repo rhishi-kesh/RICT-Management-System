@@ -21,5 +21,6 @@ class Mentor extends Authenticatable
         'name',
         'email',
         'mobile',
+        'dateofbirth',
     ];
 }
