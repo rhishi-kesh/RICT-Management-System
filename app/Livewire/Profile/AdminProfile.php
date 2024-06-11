@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\File;
 class AdminProfile extends Component
 {
     use WithFileUploads;
-    public $name, $email, $id, $password_confirmation, $password, $current_password, $photo, $oldImage;
+    public $name, $email, $date, $mobile, $id, $password_confirmation, $password, $current_password, $photo, $oldImage;
 
     public function mount() {
         $this->name = auth()->user()->name;
         $this->email = auth()->user()->email;
+        $this->mobile = auth()->user()->mobile;
+        $this->date = date('m-d-Y', strtotime(auth()->user()->dateofbirth));
         $this->id = auth()->user()->id;
     }
     public function render() {
@@ -28,10 +30,14 @@ class AdminProfile extends Component
         $validated = $this->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'mobile' => 'required|regex:/^(?:\+?88)?01[35-9]\d{8}$/',
+            'date' => 'required',
         ]);
         $done = User::findOrFail($this->id)->update([
             'name' => $this->name,
             'email' => $this->email,
+            'mobile' => $this->mobile,
+            'dateofbirth' => $this->date,
             'updated_at' => Carbon::now(),
         ]);
         if($done){
