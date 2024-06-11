@@ -26,7 +26,7 @@ class CourseLearnings extends Component
 
     public function render()
     {
-        $courseLearning = CourseLearning::paginate(15);
+        $courseLearning = CourseLearning::where('course_id', $this->course_id)->latest()->paginate(15);
         return view('livewire.course.course-learnings', compact('courseLearning'));
     }
 
@@ -59,7 +59,8 @@ class CourseLearnings extends Component
     }
     public function ShowUpdateModel($id)
     {
-        $this->reset();
+        $this->reset('learnings');
+        $this->reset('image');
         $data = CourseLearning::findOrFail($id);
         $this->update_id = $data->id;
         $this->learnings = $data->content;
@@ -87,7 +88,8 @@ class CourseLearnings extends Component
             'updated_at' => Carbon::now()
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('learnings');
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -110,7 +112,8 @@ class CourseLearnings extends Component
         $done->delete();
         if ($done) {
             $this->update_id = '';
-            $this->reset();
+            $this->reset('learnings');
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -123,6 +126,4 @@ class CourseLearnings extends Component
         $this->reset('image');
         $this->reset('learnings');
     }
-
-
 }

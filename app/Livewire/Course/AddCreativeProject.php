@@ -24,7 +24,7 @@ class AddCreativeProject extends Component
     }
     public function render()
     {
-        $creativeProjects = CreativeProject::paginate(15);
+        $creativeProjects = CreativeProject::where('course_id', $this->course_id)->latest()->paginate(15);
         return view('livewire.course.add-creative-project' , compact('creativeProjects'));
     }
     public function insert()
@@ -78,7 +78,7 @@ class AddCreativeProject extends Component
             'updated_at' => Carbon::now()
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -101,7 +101,7 @@ class AddCreativeProject extends Component
         $done->delete();
         if ($done) {
             $this->update_id = '';
-            $this->reset();
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",

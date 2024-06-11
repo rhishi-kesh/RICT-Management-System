@@ -22,7 +22,7 @@ class ViewCourse extends Component
     public function render()
     {
         $departments = Department::get();
-        $courses = Course::paginate(15);
+        $courses = Course::latest()->paginate(15);
 
         return view('livewire.course.view-course', compact('courses', 'departments'));
     }
@@ -75,23 +75,7 @@ class ViewCourse extends Component
             ]);
         }
     }
-  
-    public function ShowUpdateModel($id)
-    {
-        $this->reset();
-        $data = Course::findOrFail($id);
-        $this->update_id = $data->id;
-        $this->name = $data->name;
-        $this->courseFee = $data->fee;
-        $this->description = $data->description;
-        $this->duration = $data->duration;
-        $this->lecture = $data->lecture;
-        $this->project = $data->project;
-        $this->department_id = $data->department_id;
-        $this->video = $data->video;
-        $this->oldimage = $data->thumbnail;
-    }
-    
+
     public function deleteAlert($id)
     {
         $this->delete_id = $id;
@@ -100,7 +84,7 @@ class ViewCourse extends Component
     public function deleteStudent()
     {
         $done = Course::findOrFail($this->delete_id);
-        $this->oldimage = $done->image;
+        $this->oldimage = $done->thumbnail;
         $image_path = public_path('storage\\'.$this->oldimage);
         if(File::exists($image_path)){
             File::delete($image_path);

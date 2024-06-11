@@ -24,7 +24,7 @@ class BenefitOfCourse extends Component
     }
     public function render()
     {
-        $courseBenefit = BenefitsOfCourse::paginate(15);
+        $courseBenefit = BenefitsOfCourse::where('course_id', $this->course_id)->latest()->paginate(15);
         return view('livewire.course.benefit-of-course', compact('courseBenefit'));
     }
     public function insert()
@@ -56,7 +56,8 @@ class BenefitOfCourse extends Component
     }
     public function ShowUpdateModel($id)
     {
-        $this->reset();
+        $this->reset('learnings');
+        $this->reset('image');
         $data = BenefitsOfCourse::findOrFail($id);
         $this->update_id = $data->id;
         $this->learnings = $data->content;
@@ -84,7 +85,8 @@ class BenefitOfCourse extends Component
             'updated_at' => Carbon::now()
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('learnings');
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -107,7 +109,8 @@ class BenefitOfCourse extends Component
         $done->delete();
         if ($done) {
             $this->update_id = '';
-            $this->reset();
+            $this->reset('learnings');
+            $this->reset('image');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",
@@ -119,5 +122,4 @@ class BenefitOfCourse extends Component
         $this->reset('image');
         $this->reset('learnings');
     }
-
 }

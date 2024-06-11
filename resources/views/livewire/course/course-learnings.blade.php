@@ -24,7 +24,7 @@
                 </svg>
                 Add Learnings
             </button>
-            <button type="submit"  class="bg-black font-bold btn text-white border-0 flex items-center justify-between ml-7 p-2 w-20 text-center" ><a href="{{ route('course') }}" class="ml-4">Back</a></button>
+            <a href="{{ route('course') }}" class="bg-black font-bold btn text-white border-0 inline-block ml-4 p-2 w-20 text-center">Back</a>
         </div>
 
         <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
@@ -120,9 +120,11 @@
                     </div>
                     <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
                         <form method="post"
-                            @if (!empty($update_id)) wire:submit="update"
+                            @if (!empty($update_id))
+                                wire:submit="update"
                             @else
-                                wire:submit="insert" @endif
+                                wire:submit="insert"
+                            @endif
                             enctype="multipart/form-data">
                             <div class="mb-1">
                                 <label for="learnings" class="my-label">Learnings</label>
@@ -134,9 +136,7 @@
                             </div>
                             <div class="mb-1">
                                 <label class="col-form-label pt-0" for="image">Image</label>
-                                <input wire:model="image"
-                                    class="bg-white p-2 w-full block form-control @error('image') is-invalid @enderror" id="image"
-                                    type="file">
+                                <input wire:model="image" class="bg-white p-2 w-full block form-control @error('image') is-invalid @enderror" id="image" type="file">
                                 <div wire:loading="" wire:target="image" class="text-green-500">
                                     Uploading Image...
                                 </div>

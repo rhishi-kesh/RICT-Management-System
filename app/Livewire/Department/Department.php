@@ -89,7 +89,6 @@ class Department extends Component
             'image' => $fileName
         ]);
         if ($done) {
-            return redirect('department');
             $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',

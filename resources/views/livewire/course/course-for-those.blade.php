@@ -24,7 +24,7 @@
             </svg>
             Add Course For Those
         </button>
-        <button type="submit"  class="bg-black font-bold btn text-white border-0 flex items-center justify-between ml-7 p-2 w-20 text-center" ><a href="{{ route('course') }}" class="ml-4">Back</a></button>
+        <a href="{{ route('course') }}" class="bg-black font-bold btn text-white border-0 inline-block ml-4 p-2 w-20 text-center">Back</a>
     </div>
 
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
@@ -36,7 +36,7 @@
                 <thead>
                     <tr>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">SL</th>
-                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Learnings</th>
+                        <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Those</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Image</th>
                         <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Action</th>
                     </tr>

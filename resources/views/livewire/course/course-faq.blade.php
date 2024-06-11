@@ -24,7 +24,7 @@
             </svg>
             Add FAQ
         </button>
-        <button type="submit"  class="bg-black font-bold btn text-white border-0 flex items-center justify-between ml-7 p-2 w-20 text-center" ><a href="{{ route('course') }}" class="ml-4">Back</a></button>
+        <a href="{{ route('course') }}" class="bg-black font-bold btn text-white border-0 inline-block ml-4 p-2 w-20 text-center" >Back</a>
     </div>
 
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">

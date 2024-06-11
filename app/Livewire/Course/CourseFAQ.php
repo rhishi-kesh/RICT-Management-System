@@ -8,7 +8,7 @@ use App\Models\Course_FAQ;
 use Livewire\WithPagination;
 
 class CourseFAQ extends Component
-{   
+{
     use WithPagination;
     public $question, $answer, $delete_id, $update_id, $oldimage, $course_id;
 
@@ -21,7 +21,7 @@ class CourseFAQ extends Component
     }
     public function render()
     {
-        $courseFaq = Course_FAQ::paginate(15);
+        $courseFaq = Course_FAQ::where('course_id', $this->course_id)->latest()->paginate(15);
         return view('livewire.course.course-faq', compact('courseFaq'));
     }
     public function insert()

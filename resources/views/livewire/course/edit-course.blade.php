@@ -96,12 +96,12 @@
                     <div class="text-red-500">{{ $errors->first('image') }}</div>
                 @endif
             </div>
-            
+
         </div>
         <div class="flex justify-end items-center mt-4">
             <a href="{{ route('course') }}"  class="flex justify-center bg-gray-900 text-white text-bold btn ml-4">
-                <span class="ml-2">Back</span>
-                </a>
+                <span class="">Back</span>
+            </a>
             <button type="submit" class="bg-gray-900 text-white text-bold btn ml-4" wire:loading.remove>Save</button>
             <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
         </div>

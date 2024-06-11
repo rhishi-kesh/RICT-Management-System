@@ -108,13 +108,15 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
     Route::get('/department', [DepartmentController::class, 'department'])->name('department');
     Route::get('/edit-courses/{id}', [CourseFuntionController::class, 'editCourse'])->name('editCourse');
     Route::get('/course-learnings/{id}', [CourseFuntionController::class, 'courseLearnings'])->name('courseLearnings');
-    Route::get('course-For-Those/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
-    Route::get('benefit-Of-Course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
-    Route::get('add-Creative-Project/{id}', [CourseFuntionController::class, 'addCreativeProject'])->name('addCreativeProject');
-    Route::get('course-Module/{id}', [CourseFuntionController::class, 'courseModule'])->name('courseModule');
-    Route::get('course-Module-add/{id}', [CourseFuntionController::class, 'addCourseModule'])->name('addCourseModule');
-    Route::post('course-Module-add-post', [CourseFuntionController::class, 'courseModuleAddPost'])->name('courseModuleAddPost');
-    Route::get('course-Module-edit', [CourseFuntionController::class, 'courseModuleEdit'])->name('courseModuleEdit');
+    Route::get('course-for-chose/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');
+    Route::get('benefit-Of-course/{id}', [CourseFuntionController::class, 'benefitCourse'])->name('benefitCourse');
+    Route::get('add-creative-project/{id}', [CourseFuntionController::class, 'addCreativeProject'])->name('addCreativeProject');
+    Route::get('course-module/{id}', [CourseFuntionController::class, 'courseModule'])->name('courseModule');
+    Route::get('course-module-add/{id}', [CourseFuntionController::class, 'addCourseModule'])->name('addCourseModule');
+    Route::post('course-module-add-post/{id}', [CourseFuntionController::class, 'courseModuleAddPost'])->name('courseModuleAddPost');
+    Route::get('course-module-edit/{id}', [CourseFuntionController::class, 'courseModuleEdit'])->name('courseModuleEdit');
+    Route::post('course-module-edit-post/{id}', [CourseFuntionController::class, 'courseModuleEditPost'])->name('courseModuleEditPost');
+    Route::get('course-module-delete/{id}', [CourseFuntionController::class, 'courseModuleDelete'])->name('courseModuleDelete');
     Route::get('course-faq/{id}', [CourseFuntionController::class, 'courseFAQ'])->name('courseFAQ');
     Route::get('/manage-website-course', [CourseController::class, 'manageWebsiteCourse'])->name('manageWebsiteCourse');
 

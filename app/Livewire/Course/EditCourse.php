@@ -73,12 +73,11 @@ class EditCourse extends Component
             'department_id' => $this->department_id
         ]);
         if ($done) {
-            $this->update_id = '';
-            $this->reset();
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
             ]);
+            return redirect()->route('course');
         }
     }
 
