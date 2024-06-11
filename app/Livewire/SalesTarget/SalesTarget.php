@@ -51,7 +51,7 @@ class SalesTarget extends Component
         $data = ModelsSalesTarget::findOrFail($id);
         $this->update_id = $data->id;
         $this->target = $data->target;
-        // $this->date = date("Y-m-d", strtotime($data->date));
+        $this->date = date("Y-m-d", strtotime($data->date));
     }
 
     public function update()

@@ -137,10 +137,17 @@
                                 <div class="text-red-500">{{ $errors->first('target') }}</div>
                             @endif
                         </div>
-                        <div class="mb-1">
+                        <div class="mb-1"x-data
+                        x-init="
+                          flatpickr($refs.dateInput, {
+                            static: true,
+                            altInput: true,
+                            plugins: [new monthSelectPlugin({shorthand: false, dateFormat: 'Y-m-d', defaultDate: ['{{ $date }}']})]
+                          })
+                        ">
                             <div wire:ignore>
                                 <label for="date" class="my-label">Select Month</label>
-                                <input type="date" wire:model="date" placeholder="Select Month" id="date" name="date" class="my-input w-full focus:outline-none focus:shadow-outline" id="date">
+                                <input x-ref="dateInput" type="date" wire:model="date" placeholder="Select Month" id="date" name="date" class="my-input w-full focus:outline-none focus:shadow-outline" id="date">
                             </div>
                             @if ($errors->has('date'))
                                 <div class="text-red-500">{{ $errors->first('date') }}</div>
@@ -159,12 +166,5 @@
     @push('js')
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('frontend/js/flatpickr-monthSelect.js') }}"></script>
-    <script>
-        flatpickr("#date",{
-            static: true,
-            altInput: true,
-            plugins: [new monthSelectPlugin({shorthand: false, dateFormat: "Y-m-d", altFormat: "M Y"})]
-        });
-    </script>
     @endpush
 </div>
