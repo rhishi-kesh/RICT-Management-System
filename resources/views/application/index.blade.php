@@ -523,7 +523,7 @@
                         },
                     },
                     series: [{
-                        name: 'Admission',
+                        name: 'Visitor',
                         data: @json($daylyVisitorData)
                     }],
                     title: {
@@ -798,7 +798,7 @@
                         },
                     },
                     series: [{
-                        name: 'Admission',
+                        name: 'Visitor',
                         data: @json($monthlyVisitorCounts)
                     }],
                     title: {

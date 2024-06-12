@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
-    
+
     const TABLE = 'departments';
     protected $table = self::TABLE;
 
@@ -16,5 +16,10 @@ class Department extends Model
         'name',
         'slug',
     ];
+
+    public function course()
+    {
+        return $this->hasMany(Course::class);
+    }
 
 }

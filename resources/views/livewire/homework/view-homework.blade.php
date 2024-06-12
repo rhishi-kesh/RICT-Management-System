@@ -112,12 +112,12 @@
                         </div>
                     </div>
                     <div class="h-px w-full border-b border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
-                    <div x-show="activeTab == 'inbox'" class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                        <table class="table-hover w-full">
+                    <div x-show="activeTab == 'inbox'" class="table-responsive min-h-screen grow overflow-y-auto sm:min-h-[300px]">
+                        <table class="table-hover w-full @if(empty($allHomework)) h-full @endif">
                             <tbody>
                                 @forelse ($allHomework as $item)
                                     <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                        <td class="p-5">
+                                        <td class="px-5 py-2 w-[70px]">
                                             @if (empty($item->student->profile))
                                                 <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                                 </div>
@@ -127,7 +127,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="p-5 pl-0">
+                                        <td class="px-5 py-2 pl-0">
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
                                                     <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -137,15 +137,15 @@
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div>
                                                 <button type="button" class="whitespace-nowrap px-2 py-[.150rem] rounded-full capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">{{ $item->status }}</button>
                                             </div>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div class="flex w-max items-center justify-between">
                                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                                     <button type="button" @click="toggle">
@@ -179,7 +179,7 @@
                                     <tr>
                                         <td colspan="20">
                                             <div class="flex justify-center items-center">
-                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
                                         </td>
                                     </tr>
@@ -190,12 +190,12 @@
                             {{ $allHomework->links() }}
                         </div>
                     </div>
-                    <div x-show="activeTab == 'done'" class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                        <table class="table-hover w-full">
+                    <div x-show="activeTab == 'done'" class="table-responsive min-h-screen grow overflow-y-auto sm:min-h-[300px]">
+                        <table class="table-hover w-full @if(empty($doneHomework)) h-full @endif">
                             <tbody>
                                 @forelse ($doneHomework as $item)
                                     <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                        <td class="p-5">
+                                        <td class="px-5 py-2 w-[70px]">
                                             @if (empty($item->student->profile))
                                                 <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                                 </div>
@@ -205,7 +205,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="p-5 pl-0">
+                                        <td class="px-5 py-2 pl-0">
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
                                                     <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -215,15 +215,15 @@
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div>
                                                 <button type="button" class="whitespace-nowrap px-2 py-[.150rem] rounded-full capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">{{ $item->status }}</button>
                                             </div>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div class="flex w-max items-center justify-between">
                                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                                     <button type="button" @click="toggle">
@@ -257,7 +257,7 @@
                                     <tr>
                                         <td colspan="20">
                                             <div class="flex justify-center items-center">
-                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
                                         </td>
                                     </tr>
@@ -268,12 +268,12 @@
                             {{ $doneHomework->links() }}
                         </div>
                     </div>
-                    <div x-show="activeTab == 'pending'" class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                        <table class="table-hover w-full">
+                    <div x-show="activeTab == 'pending'" class="table-responsive min-h-screen grow overflow-y-auto sm:min-h-[300px]">
+                        <table class="table-hover w-full @if(empty($pendingHomework)) h-full @endif">
                             <tbody>
                                 @forelse ($pendingHomework as $item)
                                     <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                        <td class="p-5">
+                                        <td class="px-5 py-2 w-[70px]">
                                             @if (empty($item->student->profile))
                                                 <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                                 </div>
@@ -283,7 +283,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="p-5 pl-0">
+                                        <td class="px-5 py-2 pl-0">
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
                                                     <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -293,15 +293,15 @@
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div>
                                                 <button type="button" class="whitespace-nowrap px-2 py-[.150rem] rounded-full capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">{{ $item->status }}</button>
                                             </div>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div class="flex w-max items-center justify-between">
                                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                                     <button type="button" @click="toggle">
@@ -335,7 +335,7 @@
                                     <tr>
                                         <td colspan="20">
                                             <div class="flex justify-center items-center">
-                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
                                         </td>
                                     </tr>
@@ -346,12 +346,12 @@
                             {{ $pendingHomework->links() }}
                         </div>
                     </div>
-                    <div x-show="activeTab == 'underProcessing'" class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                        <table class="table-hover w-full">
+                    <div x-show="activeTab == 'underProcessing'" class="table-responsive min-h-screen grow overflow-y-auto sm:min-h-[300px]">
+                        <table class="table-hover w-full @if(empty($underProcessingHomework)) h-full @endif">
                             <tbody>
                                 @forelse ($underProcessingHomework as $item)
                                     <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                        <td class="p-5">
+                                        <td class="px-5 py-2 w-[70px]">
                                             @if (empty($item->student->profile))
                                                 <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                                 </div>
@@ -361,7 +361,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="p-5 pl-0">
+                                        <td class="px-5 py-2 pl-0">
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
                                                     <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -371,15 +371,15 @@
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div>
                                                 <button type="button" class="whitespace-nowrap px-2 py-[.150rem] rounded-full capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">{{ $item->status }}</button>
                                             </div>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div class="flex w-max items-center justify-between">
                                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                                     <button type="button" @click="toggle">
@@ -413,7 +413,7 @@
                                     <tr>
                                         <td colspan="20">
                                             <div class="flex justify-center items-center">
-                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
                                         </td>
                                     </tr>
@@ -424,12 +424,12 @@
                             {{ $underProcessingHomework->links() }}
                         </div>
                     </div>
-                    <div x-show="activeTab == 'inReview'" class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                        <table class="table-hover w-full">
+                    <div x-show="activeTab == 'inReview'" class="table-responsive min-h-screen grow overflow-y-auto sm:min-h-[300px]">
+                        <table class="table-hover w-full @if(empty($inReviewHomework)) h-full @endif">
                             <tbody>
                                 @forelse ($inReviewHomework as $item)
                                     <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                        <td class="p-5">
+                                        <td class="px-5 py-2 w-[70px]">
                                             @if (empty($item->student->profile))
                                                 <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                                 </div>
@@ -439,7 +439,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="p-5 pl-0">
+                                        <td class="px-5 py-2 pl-0">
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
                                                     <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -449,15 +449,15 @@
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div>
                                                 <button type="button" class="whitespace-nowrap px-2 py-[.150rem] rounded-full capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">{{ $item->status }}</button>
                                             </div>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div class="flex w-max items-center justify-between">
                                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                                     <button type="button" @click="toggle">
@@ -491,7 +491,7 @@
                                     <tr>
                                         <td colspan="20">
                                             <div class="flex justify-center items-center">
-                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
                                         </td>
                                     </tr>
@@ -502,12 +502,12 @@
                             {{ $inReviewHomework->links() }}
                         </div>
                     </div>
-                    <div x-show="activeTab == 'rejected'" class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                        <table class="table-hover w-full">
+                    <div x-show="activeTab == 'rejected'" class="table-responsive min-h-screen grow overflow-y-auto sm:min-h-[300px]">
+                        <table class="table-hover w-full @if(empty($rejectHomework)) h-full @endif">
                             <tbody>
                                 @forelse ($rejectHomework as $item)
                                     <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                        <td class="p-5">
+                                        <td class="px-5 py-2 w-[70px]">
                                             @if (empty($item->student->profile))
                                                 <div class="profile w-9 h-9 text-xs">{{ mb_substr(strtoupper($item->student->name), 0, 1) }}
                                                 </div>
@@ -517,7 +517,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="p-5 pl-0">
+                                        <td class="px-5 py-2 pl-0">
                                             <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                                 <span>
                                                     <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -527,15 +527,15 @@
                                             </p>
                                             <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div>
                                                 <button type="button" class="whitespace-nowrap px-2 py-[.150rem] rounded-full capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">{{ $item->status }}</button>
                                             </div>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                         </td>
-                                        <td class="p-5">
+                                        <td class="px-5 py-2">
                                             <div class="flex w-max items-center justify-between">
                                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                                     <button type="button" @click="toggle">
@@ -569,7 +569,7 @@
                                     <tr>
                                         <td colspan="20">
                                             <div class="flex justify-center items-center">
-                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                                <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                             </div>
                                         </td>
                                     </tr>

@@ -105,7 +105,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Add Course & Course Funtion
     Route::get('/courses', [CourseController::class, 'course'])->name('course');
-    Route::get('/department', [DepartmentController::class, 'department'])->name('department');
     Route::get('/edit-courses/{id}', [CourseFuntionController::class, 'editCourse'])->name('editCourse');
     Route::get('/course-learnings/{id}', [CourseFuntionController::class, 'courseLearnings'])->name('courseLearnings');
     Route::get('course-for-chose/{id}', [CourseFuntionController::class, 'courseForThose'])->name('courseForThose');

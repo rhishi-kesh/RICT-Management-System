@@ -1,6 +1,6 @@
 @extends('layout/mentorIndex')
 @section('content')
-<div class="mx-auto my-10">
+<div class="w-full px-5 mx-auto my-10">
     @push('css')
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
@@ -12,25 +12,25 @@
             }
         </style>
     @endpush
-    @if (Session::has('success'))
-        <div class="flex items-center p-4 mb-4 text-sm text-green-900 rounded-lg bg-green-300 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-            </svg>
-            <span class="sr-only">Info</span>
-            <div>
-                {{ Session::get('success') }}
+    <div class="md:w-[40rem] w-full mx-auto bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
+        @if (Session::has('success'))
+            <div class="flex items-center p-4 mb-4 text-sm text-green-900 rounded-lg bg-green-300 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    {{ Session::get('success') }}
+                </div>
             </div>
-          </div>
-    @endif
-    @if (Session::has('error'))
-        <div class="alert bg-danger text-white alert-dismissible border-0 fade show" role="alert">
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
-                aria-label="Close"></button>
-            {{ Session::get('error') }}
-        </div>
-    @endif
-    <div class="md:w-[40rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
+        @endif
+        @if (Session::has('error'))
+            <div class="alert bg-danger text-white alert-dismissible border-0 fade show" role="alert">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+                {{ Session::get('error') }}
+            </div>
+        @endif
         <form action="{{ route('homeworkAssignPost') }}" method="POST">
             @csrf
             <div class="my-3 mb-4">

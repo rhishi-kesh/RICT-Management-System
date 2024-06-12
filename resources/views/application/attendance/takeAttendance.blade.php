@@ -1,6 +1,6 @@
 @extends('layout/mentorIndex')
 @section('content')
-    <div class="mx-auto my-10">
+    <div class="p-5 w-full my-10">
         @push('css')
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
@@ -12,7 +12,7 @@
             }
         </style>
         @endpush
-        <div class="md:w-[40rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
+        <div class="md:w-[40rem] w-full mx-auto bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
             <form action="{{ route('attendanceBatchPost', $id) }}" method="POST">
                 @csrf
                 <div>

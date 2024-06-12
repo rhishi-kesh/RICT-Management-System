@@ -32,7 +32,7 @@ class SendAdmissionMail implements ShouldQueue
     */
     public function handle(): void
     {
-        // $this->sendSMS($this->number, $this->message);
+        $this->sendSMS($this->number, $this->message);
         Mail::to($this->data['email'])->send(new AdmissionMail($this->data));
     }
 }

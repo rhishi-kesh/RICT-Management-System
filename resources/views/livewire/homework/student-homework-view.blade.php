@@ -1,12 +1,12 @@
 <div class="animate__animated p-6" :class="[$store.app.animation]">
     <div x-data="todolist">
         <div class="relative flex h-full gap-5 sm:h-[calc(100vh_-_150px)] bg-white dark:bg-[#0F172A]">
-            <div class="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                <table class="table-hover w-full">
+            <div class="table-responsive grow overflow-y-auto min-h-screen">
+                <table class="table-hover w-full @if(empty($homeworks)) h-full @endif">
                     <tbody>
                         @forelse ($homeworks as $item)
                             <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
-                                <td class="p-5 pr-2">
+                                <td class="px-5 py-2 w-[80px]">
                                     @if (empty($item->student->profile))
                                         <div class="profile w-9 h-9 text-xs">
                                             {{ mb_substr(strtoupper($item->student->name), 0, 1) }}
@@ -17,7 +17,7 @@
                                         </div>
                                     @endif
                                 </td>
-                                <td class="p-5 pl-0">
+                                <td class="px-5 py-2 pl-0">
                                     <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
                                         <span>
                                             <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
@@ -27,7 +27,7 @@
                                     </p>
                                     <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                 </td>
-                                <td class="p-5 text-center">
+                                <td class="px-5 py-2 text-center">
                                     <div class="flex gap-3 items-center">
                                         <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                             {{ $item->status }}
@@ -47,10 +47,10 @@
                                         <button class="bg-blue-500 text-nowrap text-[12px] text-white border-blue-500 btn px-2 py-[.140rem]" wire:click="changeStatus({{ $item->id }})" @if($item->status == 'inReview') disabled @else '' @endif>@if($item->status == 'inReview') In Review @else Done @endif</button>
                                     </div>
                                 </td>
-                                <td class="p-5">
+                                <td class="px-5 py-2">
                                     <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                 </td>
-                                <td class="p-5">
+                                <td class="px-5 py-2">
                                     @if($item->status == 'reject' || $item->status == 'done' || $item->status == 'inReview')
                                         <button x-tooltip="Show Homework" @click="viewHomework = true; $wire.call('viewHomeWork','{{ $item->id }}')">
                                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-viewport-wide"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12h-7l3 -3m0 6l-3 -3" /><path d="M14 12h7l-3 -3m0 6l3 -3" /><path d="M3 6v-3h18v3" /><path d="M3 18v3h18v-3" /></svg>
@@ -62,7 +62,7 @@
                             <tr>
                                 <td colspan="20">
                                     <div class="flex justify-center items-center">
-                                        <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] opacity-40 dark:opacity-15 mt-10 select-none">
+                                        <img src="{{ asset('empty.png') }}" alt="" class="w-[200px] md:w-[300px] opacity-40 dark:opacity-15 mt-10 select-none">
                                     </div>
                                 </td>
                             </tr>
