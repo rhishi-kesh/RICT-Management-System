@@ -47,7 +47,7 @@
                         Varify Email
                     </button>
                 </form>
-                <a href="{{ route('mentorLogin') }}" class="mt-1 inline-block hover:underline text-blue-500">Sign in</a>
+                <a href="{{ route('mentorLogin') }}" class="mt-2 inline-block hover:underline text-black text-xl">Sign in</a>
             </div>
         </div>
     </div>
