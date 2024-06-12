@@ -15,7 +15,6 @@ class Ticket extends Component
     public $subject;
     public function render()
     {
-
         $tickets = ModelTicket::where('user_id', auth()->guard('student')->user()->id)->paginate(20);
         return view('livewire.ticket.ticket', compact('tickets'));
     }
@@ -55,7 +54,7 @@ class Ticket extends Component
                 'type' => "success",
             ]);
 
-            return redirect()->route('ticketshow', $done);
+            return redirect()->route('ticketshow', $done->ticket_id);
         }
     }
 }

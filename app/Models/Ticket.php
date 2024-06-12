@@ -17,6 +17,7 @@ class Ticket extends Model
     {
         return $this->belongsTo(Student::class, 'user_id', 'id');
     }
+
     public function admin()
     {
         return $this->belongsTo(User::class);

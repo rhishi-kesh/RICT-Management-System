@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ticket_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_id')->constrained();
+            $table->foreignId('ticket_id');
             $table->foreignId('user_id')->nullable();
             $table->foreignId('student_id')->nullable();
             $table->text('content');

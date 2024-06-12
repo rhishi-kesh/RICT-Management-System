@@ -13,11 +13,11 @@
                     </thead>
                     <tbody>
                         @forelse ($tickets as $key => $ticket)
-                            <tr class="cursor-pointer dark:hover:bg-slate-800 hover:bg-slate-50 transition-transform duration-300" x-on:click="window.location.href = '{{ route('adminTicketshow', $ticket->id) }}'">
+                            <tr class="cursor-pointer dark:hover:bg-slate-800 hover:bg-slate-50 transition-transform duration-300" x-on:click="window.location.href = '{{ route('adminTicketshow', $ticket->ticket_id) }}'">
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $tickets->firstItem() + $key }}</td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">#{{ $ticket->ticket_id }}</td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">{{ $ticket->subject }}</td>
-                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center @if($ticket->status == 'open') text-green-500 @else text-slate-500 dark:text-slate-200 @endif">{{ $ticket->status }}</td>
+                                <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center @if($ticket->status == 'open') text-green-500 @else text-slate-500 dark:text-slate-200 @endif">{{ ucfirst($ticket->status) }}</td>
                             </tr>
                         @empty
                             <tr>

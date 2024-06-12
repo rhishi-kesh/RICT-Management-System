@@ -20,8 +20,8 @@ class AdminMessage extends Component
         $allSmsMessages = $userSmsMessages->merge($studentSmsMessages);
 
         $allSmsMessages = $allSmsMessages->where('ticket_id', $this->id)->sortBy('created_at');
-
-        $ticket = Ticket::where('id', $this->id)->first();
+        // dd($allSmsMessages);
+        $ticket = Ticket::where('ticket_id', $this->id)->first();
         return view('livewire.message.admin-message', compact('allSmsMessages', 'ticket'));
     }
     public function sendMessage() {
