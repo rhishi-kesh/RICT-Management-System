@@ -1,7 +1,7 @@
 <div class="pt-4">
     <form wire:submit="update" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4"
         method="post">
-        <h3 class="mb-2 font-bold text-3xl dark:text-white">Course Edit</h3>
+        <h3 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Course Edit</h3>
         <hr class="mb-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
 
@@ -77,8 +77,8 @@
                 @endif
             </div>
             <div class="mb-1">
-                <label class="col-form-label pt-0" for="image">Thumbnail</label>
-                <input wire:model="image" class="my-input focus:outline-none focus:shadow-outline appearance-none block form-control @error('image') is-invalid @enderror" id="image"
+                <label class="my-label pt-0" for="image">Thumbnail</label>
+                <input wire:model="image" class="my-input focus:outline-none focus:shadow-outline appearance-none bg-white @error('image') is-invalid @enderror" id="image"
                     type="file">
                 <div wire:loading="" wire:target="image" class="text-green-500">
                     Uploading Image...
@@ -99,11 +99,11 @@
 
         </div>
         <div class="flex justify-end items-center mt-4">
-            <a href="{{ route('course') }}"  class="flex justify-center bg-gray-900 text-white text-bold btn ml-4">
+            <a href="{{ route('course') }}"  class="btn-back btn ml-4">
                 <span class="">Back</span>
             </a>
-            <button type="submit" class="bg-gray-900 text-white text-bold btn ml-4" wire:loading.remove>Save</button>
-            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
+            <button type="submit" class="btn-submit btn ml-4" wire:loading.remove>Save</button>
+            <button type="button" disabled class="btn-submit btn ml-4" wire:loading>Loading</button>
         </div>
     </form>
 </div>

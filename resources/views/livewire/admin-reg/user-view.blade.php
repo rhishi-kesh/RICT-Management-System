@@ -1,6 +1,6 @@
 <div class="pt-5">
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Users</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Users</h2>
         <hr>
         <div class="w-full">
             <div class="overflow-auto">
@@ -39,7 +39,7 @@
                                         @endforeach
                                     @endif
                                 </td>
-                                <td class="p-3 flex mb-2 text-center">
+                                <td class="p-3 mb-2 flex justify-center">
 
                                     {{-- Edit Button --}}
                                     <a href="{{ route('userEdit', $data->id) }}" type="button" x-tooltip="Edit">

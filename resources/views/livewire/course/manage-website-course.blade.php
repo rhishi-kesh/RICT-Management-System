@@ -1,5 +1,5 @@
 <div class="bg-white dark:bg-slate-900 shadow-md rounded px-8 md:px-8 pt-6 pb-8 mb-4 w-full">
-    <h2 class="mb-2 font-bold text-3xl dark:text-white">Courses</h2>
+    <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Courses</h2>
     <hr>
     <div>
         {{-- Show Data --}}

@@ -7,7 +7,7 @@
         </style>
     @endpush
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Visitor List</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Visitor List</h2>
         <hr>
         <div class="block md:flex item-center justify-between d px-0 md-px-6 pb-2 pt-2">
             <div class="flex item-center justify-center md:justify-start py-2">
@@ -122,7 +122,7 @@
                                     <label class="w-12 h-6 relative">
                                         <button wire:click="callcount({{ $data->id }})" for="text"
                                             type="button"
-                                            class="text-white bg-gray-800 rounded-full text-sm px-3 py-1 me-2 mb-2"><span
+                                            class="text-white bg-blue-500 rounded-full text-sm px-3 py-1 me-2 mb-2"><span
                                                 class="h-14 py-1 me-2 mb-2 mr-3"> + </span> <span>
                                                 {{ $data->call_count ?? '0' }}</span>
                                         </button>
@@ -130,8 +130,16 @@
                                 </div>
                             </td>
 
-                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                <ul>
+                            <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center" x-data="callingDate">
+                                <div class="flex gap-3 justify-center">
+                                    <button @click="showCallDate = 1" type="button" class="whitespace-nowrap px-3 py-2 capitalize text-black dark:text-white border text-xs">
+                                        Details
+                                    </button>
+                                    <button @click="showCallDate = 0" x-show="showCallDate == 1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" height="24" width="24"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l6 0"></path></svg>
+                                    </button>
+                                </div>
+                                <ul x-show="showCallDate == 1" x-transition.duration.500ms class="mt-2">
                                     @php $arrayCallingDate = explode(",",$data->calling_date) @endphp
                                     @foreach ($arrayCallingDate as $item)
                                         <li>{{ $item }}</li>
@@ -189,6 +197,13 @@
 
     @push('js')
         <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('callingDate', () => ({
+                    showCallDate: 0,
+                }));
+            })
+        </script>
+        <script>
             function onWheel(event) {
                 const delta = Math.sign(event.deltaY || event.wheelDelta);
                 const scrollContainer = event.currentTarget;
@@ -211,7 +226,7 @@
                         icon: eventData.type,
                         title: eventData.title,
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1500,
                     });
                 } else {
                     console.error('Invalid event data format:', eventData);

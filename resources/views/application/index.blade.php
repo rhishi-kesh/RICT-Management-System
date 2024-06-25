@@ -3,30 +3,30 @@
     <div class="p-5" x-data="Dashboard">
         <div class="mb-6 text-black">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-5">
-                <div class="border-t-4 border-t-blue-500  col-span-1 md:col-span-2 overflow-hidden relative rounded p-5 shadow bg-gradient-to-r bg-[#fff]">
+                <div class="border-t-4 border-t-blue-500  col-span-1 md:col-span-2 overflow-hidden relative rounded p-5 bg-gradient-to-r bg-white shadow-lg">
                     <div class="flex justify-start gap-3 items-center">
                         <img class="h-14 w-14 rounded-full object-cover block" src="{{ empty(auth()->user()->profile) ? url('profile.jpeg') : asset('storage/' . auth()->user()->profile) }}" alt="">
-                        <div class="text-xl font-semibold mr-1">Welcome back {{ auth()->user()->name }}!</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Welcome back {{ auth()->user()->name }}!</div>
                     </div>
                     <div class="mt-5 flex justify-start gap-2">
                         <div>
-                            <div class="text-3xl font-bold mr-3">&#2547; {{ $todayStudentSaleSum }}</div>
-                            Today's Sales
+                            <div class="text-3xl font-bold mr-3 text-orange-500">&#2547; {{ $todayStudentSaleSum }}</div>
+                            <span class="text-blue-500">Today's Sales</span>
                         </div>
                     </div>
-                    <img src="{{ asset('frontend/images/auth/welcome.svg') }}" alt="" class="s absolute bottom-[-30px] right-5 hidden md:block">
+                    <img src="{{ asset('frontend/images/auth/welcome.svg') }}" alt="" class="absolute bottom-[-30px] right-5 hidden md:block pointer-events-none select-none">
                 </div>
-                <div class="bg-white p-4 text-left flex items-center border-t-4 border-t-blue-500 relative">
+                <div class="bg-white p-4 text-left flex items-center border-t-4 border-t-blue-500 relative shadow-lg">
                     <div class="">
-                        <h2 class="text-xl font-semibold">Today Admission</h2>
-                        <h2 class="text-3xl font-bold mr-3 mt-3">{{ $todayStudentCount }}</h2>
+                        <h2 class="text-xl font-semibold text-blue-500">Today Admission</h2>
+                        <h2 class="text-3xl font-bold mr-3 mt-3 text-orange-500">{{ $todayStudentCount }}</h2>
                     </div>
                     <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus w-20 md:w-32 h-20 md:h-32 absolute right-4 bottom-2 opacity-20"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
                 </div>
-                <div class="bg-white p-4 text-left flex items-center border-t-4 border-t-blue-500 relative">
+                <div class="bg-white p-4 text-left flex items-center border-t-4 border-t-blue-500 relative shadow-lg">
                     <div class="">
-                        <h2 class="text-xl font-semibold">Today Visitor</h2>
-                        <h2 class="text-3xl font-bold mr-3 mt-3">{{ $todayVisitorCount }}</h2>
+                        <h2 class="text-xl font-semibold text-blue-500">Today Visitor</h2>
+                        <h2 class="text-3xl font-bold mr-3 mt-3 text-orange-500">{{ $todayVisitorCount }}</h2>
                     </div>
                     <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus w-20 md:w-32 h-20 md:h-32 absolute right-4 bottom-2 opacity-20"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
                 </div>
@@ -34,19 +34,19 @@
 
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-10">
                 <!-- Student -->
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Students</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Students</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalStudentCount }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalStudentCount }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Last Month: {{ $lastMonthStudentAdmission }}
+                            <span class="text-blue-500">Last Month:</span> <span class="text-orange-500">{{ $lastMonthStudentAdmission }}</span>
                         </div>
                         <div>
-                            This Month: {{ $thisMonthStudentAdmission }}
+                            <span class="text-blue-500">This Month:</span> <span class="text-orange-500">{{ $thisMonthStudentAdmission }}</span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -59,19 +59,19 @@
                 </div>
 
                 {{-- Visitor --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Visitors</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Visitors</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalVisitorCount }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalVisitorCount }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Last Month: {{ $lastMonthVisitorAdmission }}
+                            <span class="text-blue-500">Last Month:</span> <span class="text-orange-500">{{ $lastMonthVisitorAdmission }}</span>
                         </div>
                         <div>
-                            This Month: {{ $thisMonthVisitorAdmission }}
+                            <span class="text-blue-500">This Month:</span> <span class="text-orange-500">{{ $thisMonthVisitorAdmission }}</span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -89,16 +89,16 @@
                 </div>
 
                 {{-- Batch --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Batch</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Batch</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalBatch }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalBatch }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Running Batch: {{ $totalRunningBatch }}
+                            <span class="text-blue-500">Running Batch:</span> <span class="text-orange-500">{{ $totalRunningBatch }}</span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -112,16 +112,16 @@
                 </div>
 
                 {{-- Total Due --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Due</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Due</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">&#2547; {{ $totalDueStudentSum }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">&#2547; {{ $totalDueStudentSum }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Student With Due: {{ $totalDueStudent }}
+                            <span class="text-blue-500">Student With Due:</span> <span class="text-orange-500">{{ $totalDueStudent }}</span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -138,12 +138,12 @@
 
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 xl:grid-cols-5 mt-8">
                 {{-- Mentors --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white  shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Mentors</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Mentors</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalMentor }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalMentor }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-school w-12 h-12 absolute right-4 top-2 opacity-20"
@@ -155,12 +155,12 @@
                 </div>
 
                 {{-- Users --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white  shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Users</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Users</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalUsers }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalUsers }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -172,12 +172,12 @@
                 </div>
 
                 {{-- Course --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white  shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Course</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Course</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalCourse }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalCourse }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-school w-12 h-12 absolute right-4 top-2 opacity-20"
@@ -193,12 +193,12 @@
                 </div>
 
                 {{-- Admission Booth --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white  shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Admission Booth</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Admission Booth</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalAdmissionBooth }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalAdmissionBooth }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-school w-12 h-12 absolute right-4 top-2 opacity-20"
@@ -213,12 +213,12 @@
                 </div>
 
                 {{-- Total Sale --}}
-                <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
+                <div class="relative rounded p-5 border-l-4 border-l-blue-500 bg-gradient-to-r bg-white  shadow-lg">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Sale</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Sale</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">&#2547; {{ $totalSale }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">&#2547; {{ $totalSale }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -274,7 +274,7 @@
                     {{-- Admission --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
-                            <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Total Admission
                             </h6>
                         </div>
@@ -286,7 +286,7 @@
                     {{-- Visitor --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
-                            <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Total Visitor
                             </h6>
                         </div>
@@ -301,8 +301,7 @@
                     {{-- admissionOnCourse --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="flex flex-col justify-center items-center h-[300px]">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Admissions On Different Course
                             </h6>
                             <div id="monthlyAdmissionOnCourse"></div>
@@ -312,8 +311,7 @@
                     {{-- admissionOnCourse --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="flex flex-col justify-center items-center h-[300px]">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Visitor On Different Course
                             </h6>
                             <div id="monthlyVisitorOnDifferentCourse"></div>
@@ -323,8 +321,7 @@
                     {{-- admissionOnCourse --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="flex flex-col justify-center items-center h-[300px]">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Sales Target On This Month
                             </h6>
                             <div id="target"></div>
@@ -340,8 +337,7 @@
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div
                             class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Total Admission
                             </h6>
                         </div>
@@ -354,8 +350,7 @@
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div
                             class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Total Visitor
                             </h6>
                         </div>
@@ -369,40 +364,17 @@
                     {{-- StudentCondation --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="flex flex-col justify-center items-center h-[300px]">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Student Status
                             </h6>
                             <div id="YearlyStudentStatus"></div>
-
-                            {{-- <div class="flex justify-center sm:justify-end items-center gap-x-4 mt-3 sm:mt-6">
-                                <div class="inline-flex items-center">
-                                    <span class="size-2.5 inline-block bg-green-500 rounded-sm me-2"></span>
-                                    <span class="text-[13px] text-gray-600">
-                                        Complete
-                                    </span>
-                                </div>
-                                <div class="inline-flex items-center">
-                                    <span class="size-2.5 inline-block bg-red-500 rounded-sm me-2"></span>
-                                    <span class="text-[13px] text-gray-600">
-                                        Cancel
-                                    </span>
-                                </div>
-                                <div class="inline-flex items-center">
-                                    <span class="size-2.5 inline-block bg-gray-300 rounded-sm me-2"></span>
-                                    <span class="text-[13px] text-gray-600">
-                                        Running
-                                    </span>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
 
                     {{-- admissionOnCourse --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="flex flex-col justify-center items-center h-[300px]">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Admissions On Different Course
                             </h6>
                             <div id="yearlyAdmissionsOnDefferentCourse"></div>
@@ -412,8 +384,7 @@
                     {{-- admissionOnCourse --}}
                     <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                         <div class="flex flex-col justify-center items-center h-[300px]">
-                            <h6
-                                class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                            <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                                 Visitor On Different Course
                             </h6>
                             <div id="yearlyVisitorsOnDefferentCourse"></div>
@@ -446,7 +417,7 @@
                     },
                     series: [{
                         name: 'Admission',
-                        data: @json($daylyAdmissionData)
+                        data: Object.values(@json($daylyAdmissionData))
                     }],
                     title: {
                         show: "",
@@ -454,7 +425,7 @@
                     dataLabels: {
                         enabled: false,
                     },
-                    colors: ["#020617"],
+                    colors: ["#2B337D"],
                     stroke: {
                         lineCap: "round",
                         curve: "smooth",
@@ -471,18 +442,18 @@
                         },
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
                             },
                         },
-                        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+                        categories: Object.keys(@json($daylyAdmissionData))
                     },
                     yaxis: {
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
@@ -507,7 +478,7 @@
                         opacity: 0.8,
                     },
                     tooltip: {
-                        theme: "dark",
+                        theme: "light",
                     },
                 };
                 const daylyadmission = new ApexCharts(document.querySelector("#daylyAdmission"), daylyadmissionOptions);
@@ -524,7 +495,7 @@
                     },
                     series: [{
                         name: 'Visitor',
-                        data: @json($daylyVisitorData)
+                        data: Object.values(@json($daylyVisitorData)),
                     }],
                     title: {
                         show: "",
@@ -532,7 +503,7 @@
                     dataLabels: {
                         enabled: false,
                     },
-                    colors: ["#020617"],
+                    colors: ["#2B337D"],
                     stroke: {
                         lineCap: "round",
                         curve: "smooth",
@@ -549,18 +520,18 @@
                         },
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
                             },
                         },
-                        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+                        categories: Object.keys(@json($daylyVisitorData)),
                     },
                     yaxis: {
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
@@ -585,7 +556,7 @@
                         opacity: 0.8,
                     },
                     tooltip: {
-                        theme: "dark",
+                        theme: "light",
                     },
                 };
                 const daylyVisitor = new ApexCharts(document.querySelector("#daylyVisitor"), daylyVisitorOptions);
@@ -637,7 +608,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }
@@ -697,7 +668,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box  p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }
@@ -729,7 +700,7 @@
                     dataLabels: {
                         enabled: false,
                     },
-                    colors: ["#020617"],
+                    colors: ["#2B337D"],
                     stroke: {
                         lineCap: "round",
                         curve: "smooth",
@@ -746,7 +717,7 @@
                         },
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
@@ -757,7 +728,7 @@
                     yaxis: {
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
@@ -782,7 +753,7 @@
                         opacity: 0.8,
                     },
                     tooltip: {
-                        theme: "dark",
+                        theme: "light",
                     },
                 }
                 const monthlyAdmissionCounts = new ApexCharts(document.querySelector("#monthlyAdmissionCounts"), monthlyAdmissionCountsOptions);
@@ -807,7 +778,7 @@
                     dataLabels: {
                         enabled: false,
                     },
-                    colors: ["#020617"],
+                    colors: ["#2B337D"],
                     stroke: {
                         lineCap: "round",
                         curve: "smooth",
@@ -824,7 +795,7 @@
                         },
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
@@ -835,7 +806,7 @@
                     yaxis: {
                         labels: {
                             style: {
-                                colors: "#616161",
+                                colors: "#2B337D",
                                 fontSize: "12px",
                                 fontFamily: "inherit",
                                 fontWeight: 400,
@@ -860,7 +831,7 @@
                         opacity: 0.8,
                     },
                     tooltip: {
-                        theme: "dark",
+                        theme: "light",
                     },
                 }
                 const monthlyVisitorCounts = new ApexCharts(document.querySelector("#monthlyVisitorCounts"), monthlyVisitorCountsOptions);
@@ -912,7 +883,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box  p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }
@@ -971,7 +942,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box  p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }
@@ -1031,7 +1002,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box  p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }
@@ -1057,7 +1028,7 @@
                                 name: 'Target',
                                 value: {{ $saleTargetData['target'] }},
                                 strokeHeight: 5,
-                                strokeColor: '#3B82F6'
+                                strokeColor: '#DD5B1D'
                             }
                             ]
                         }
@@ -1076,7 +1047,7 @@
                         columnWidth: '10%'
                     }
                     },
-                    colors: ['#FF0000'],
+                    colors: ['#2B337D'],
                     dataLabels: {
                         enabled: false
                     },
@@ -1085,7 +1056,7 @@
                         showForSingleSeries: true,
                         customLegendItems: ['Complete', 'Target'],
                         markers: {
-                            fillColors: ['red', '#3B82F6']
+                            fillColors: ['#2B337D', '#DD5B1D']
                         }
                     }
                 };

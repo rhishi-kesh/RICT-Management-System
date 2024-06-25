@@ -5,8 +5,8 @@
         <form method="POST" action="{{ route('permissionOnRolePost') }}" id="form" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
             @csrf
             <input type="hidden" value="{{ $role->id }}" name="id">
-            <h4 class="text-2xl text-center mb-2">Role: {{$role->name}}</h4>
-            <p class="text-xl mb-2">Permissions</p>
+            <h4 class="text-3xl font-bold text-center mb-2 text-blue-500">Role: {{$role->name}}</h4>
+            <p class="text-xl mb-2 text-blue-500 font-bold">Permissions</p>
             <div class="w-full overflow-auto">
                 <table class="w-full border-collapse border border-slate-500">
                     <tr>
@@ -53,8 +53,8 @@
                 </table>
             </div>
             <div class="flex justify-start items-center mt-8">
-                <button type="submit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer mr-4">Save</button>
-                <a href="{{ route('role') }}" type="button" class="shadow btn bg-gray-900 dark:bg-white border-none text-white dark:text-black uppercase">back</a>
+                <button type="submit" class="uppercase btn btn-submit cursor-pointer mr-4">Save</button>
+                <a href="{{ route('role') }}" type="button" class="btn btn-back uppercase">back</a>
             </div>
         </form>
     </div>

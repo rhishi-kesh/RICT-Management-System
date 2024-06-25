@@ -47,7 +47,8 @@ class CourseFAQ extends Component
     }
     public function ShowUpdateModel($id)
     {
-        $this->reset();
+        $this->reset('question');
+        $this->reset('answer');
         $data = Course_FAQ::findOrFail($id);
         $this->update_id = $data->id;
         $this->question = $data->question;
@@ -65,7 +66,8 @@ class CourseFAQ extends Component
             'updated_at' => Carbon::now()
         ]);
         if ($done) {
-            $this->reset();
+            $this->reset('question');
+            $this->reset('answer');
             $this->dispatch('swal', [
                 'title' => 'Data Update Successfull',
                 'type' => "success",
@@ -83,7 +85,8 @@ class CourseFAQ extends Component
         $done->delete();
         if ($done) {
             $this->update_id = '';
-            $this->reset();
+            $this->reset('question');
+            $this->reset('answer');
             $this->dispatch('swal', [
                 'title' => 'Data Insert Successfull',
                 'type' => "success",

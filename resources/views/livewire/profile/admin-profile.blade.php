@@ -1,21 +1,8 @@
 <div class="pt-5">
-
-    @push('css')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <style>
-            input[type="date"]::-webkit-inner-spin-button,
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-                user-select: none;
-            }
-        </style>
-    @endpush
-
     <div class="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3 xl:grid-cols-4">
         <div class="bg-white rounded dark:bg-[#0E1726] p-5">
             <form wire:submit="updateImage" enctype="multipart/form-data">
-                <div x-data="{ photoName: null, photoPreview: '{{ empty(Auth::user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::user()->profile) }}' }" class="col-span-6 ml-2 mt-9 sm:col-span-4 md:mr-3">
+                <div x-data="{ photoName: null, photoPreview: '{{ empty(Auth::user()->profile) ? url('profile.jpeg') : asset('storage/' . Auth::user()->profile) }}' }" class="col-span-6 ml-2 mt-9 sm:col-span-4 md:mr-3 text-center">
                     <!-- Photo File Input -->
                     <input type="file" class="hidden" wire:model="photo" x-ref="photo"
                         x-on:change=" photoName = $refs.photo.files[0].name;
@@ -23,7 +10,7 @@
                     reader.onload = (e) => {
                     photoPreview = e.target.result};
                     reader.readAsDataURL($refs.photo.files[0]);">
-                    <label class="mb-4 font-bold text-3xl dark:text-white text-center" for="photo">
+                    <label class="mb-4 font-bold text-3xl dark:text-white text-center text-blue-500" for="photo">
                         Profile Photo <span class="text-red-600"> </span>
                     </label>
                     <div class="text-center">
@@ -55,10 +42,10 @@
 
                 <div class="flex justify-center items-center">
                     <button type="submit"
-                        class="inline-flex items-center uppercase btn bg-blue-500 border-none text-white cursor-pointer mt-2 ml-3"
+                        class="btn btn-submit mt-2 uppercase cursor-pointer"
                         wire:loading.remove wire:target="updateImage">Update Image</button>
                     <button type="button" disabled
-                        class="inline-flex items-center uppercase btn bg-blue-500 border-none text-white cursor-pointer mt-2 ml-3"
+                        class="btn btn-submit mt-2 uppercase cursor-pointer"
                         wire:loading wire:target="updateImage">Loading</button>
                 </div>
             </form>
@@ -66,7 +53,7 @@
         <div class="lg:col-span-2 xl:col-span-3 ng-tns-c265-3">
             <div class="bg-white rounded dark:bg-[#0E1726] p-5">
                 <div class="mb-5 ng-tns-c265-3">
-                    <h5 class="mb-2 font-bold text-3xl dark:text-white">Update Information </h5>
+                    <h5 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Update Information </h5>
                 </div>
                 <div class="mb-5 ng-tns-c265-3">
                     <form wire:submit="profileUpdate" enctype="multipart/form-data">
@@ -113,8 +100,8 @@
                                     <div class="text-red-500">{{ $errors->first('date') }}</div>
                                 @endif
                             </div>
-                            <div class="mt-3">
-                                <button type="submit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-submit uppercase cursor-pointer">
                                     Update
                                 </button>
                             </div>
@@ -124,7 +111,7 @@
             </div>
             <div class="bg-white rounded dark:bg-[#0E1726] p-5 mt-6">
                 <div class="mb-5 ng-tns-c265-3">
-                    <h5 class="mb-2 font-bold text-3xl dark:text-white">Change Password</h5>
+                    <h5 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Change Password</h5>
                 </div>
                 <div class="mb-5 ng-tns-c265-3">
                     <form wire:submit="passwordSubmit" enctype="multipart/form-data">
@@ -164,7 +151,7 @@
                         </div>
                         <div class="mt-3">
                             <button type="submit"
-                                class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
+                                class="btn btn-submit uppercase cursor-pointer">
                                 Update
                             </button>
                         </div>
@@ -173,7 +160,4 @@
             </div>
         </div>
     </div>
-    @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    @endpush
 </div>

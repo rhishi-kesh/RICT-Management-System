@@ -2,25 +2,6 @@
 @section('content')
 <div class="animate__animated p-6 bg-gray-200 dark:bg-gray-950" :class="[$store.app.animation]">
     <div class="pt-5" x-data="modal">
-
-        @push('css')
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-            <style>
-                input[type="date"]::-webkit-inner-spin-button,
-                input[type="date"]::-webkit-calendar-picker-indicator {
-                    display: none;
-                    -webkit-appearance: none;
-                    user-select: none;
-                }
-                .ck-editor__editable_inline {
-                    min-height: 140px;
-                }
-                .bg-light.active {
-                    background: #5D87FF !important;
-                }
-            </style>
-        @endpush
-
         {{-- Insert Button --}}
         <div class="flex justify-start items-center mt-4 mb-4">
             <a href="{{ route('addCourseModule', $id) }}" class="bg-blue-500 font-bold btn text-white border-0 flex items-center justify-between">
@@ -31,7 +12,7 @@
                 </svg>
                 Add Moudule
             </a>
-            <a href="{{ route('course') }}" class="bg-black font-bold btn text-white border-0 inline-block ml-4 p-2 w-20 text-center">Back</a>
+            <a href="{{ route('course') }}" class="btn btn-back ml-4">Back</a>
         </div>
 
         <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
@@ -57,7 +38,7 @@
                     </div>
                 </div>
             @endif
-            <h2 class="mb-2 font-bold text-3xl dark:text-white">Course Moudule</h2>
+            <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Course Moudule</h2>
             <hr>
             <div>
                 {{-- Show Data --}}

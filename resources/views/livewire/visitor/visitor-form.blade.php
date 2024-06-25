@@ -1,6 +1,6 @@
 <div class="pt-5">
     <form wire:submit="submit" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Visitor Form</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Visitor Form</h2>
         <hr>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
             <div class="mb-1">
@@ -132,9 +132,9 @@
             </div>
         </div>
         <div class="flex justify-start items-center mt-4">
-            <button type="submit" class="bg-gray-900 text-white btn mr-4" wire:loading.remove>Save</button>
-            <button type="button" disabled class="bg-gray-900 text-white btn mr-4" wire:loading>Loading</button>
-            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800 text-black dark:text-white">Reset</button>
+            <button type="submit" class="btn-submit btn mr-4" wire:loading.remove>Save</button>
+            <button type="button" disabled class="btn-submit btn mr-4" wire:loading>Loading</button>
+            <button type="reset" class="btn btn-reset">Reset</button>
         </div>
     </form>
 </div>

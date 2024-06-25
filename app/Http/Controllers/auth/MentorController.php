@@ -86,7 +86,7 @@ class MentorController extends Controller
             } else {
                 $this->sendOtp($user);
             }
-            return view('auth.forgotPassword.student.verification', compact('user'));
+            return view('auth.forgotPassword.mentor.verification', compact('user'));
         } else {
             return redirect()->route('notFound');
         }

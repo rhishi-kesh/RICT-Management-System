@@ -1,17 +1,4 @@
 <div class="pt-5" x-data="modal">
-
-    @push('css')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <style>
-            input[type="date"]::-webkit-inner-spin-button,
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-                user-select: none;
-            }
-        </style>
-    @endpush
-
     {{-- Insert Button --}}
     <div class="mb-3">
         <button @click="toggle; $wire.call('showModal')" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
@@ -25,7 +12,7 @@
     </div>
 
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Mentors</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Mentors</h2>
         <hr>
         <div>
             {{-- Show Data --}}
@@ -125,9 +112,9 @@
             <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     @if (!empty($update_id))
-                        <h5 class="font-bold text-lg">Update</h5>
+                        <h5 class="font-bold text-lg text-blue-500">Update</h5>
                     @else
-                        <h5 class="font-bold text-lg">Add Course</h5>
+                        <h5 class="font-bold text-lg text-blue-500">Add Course</h5>
                     @endif
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
@@ -173,8 +160,8 @@
                             @endif
                         </div>
                         <div class="mb-1">
-                            <label class="col-form-label pt-0" for="image">Image</label>
-                            <input wire:model="image" class="block form-control @error('image') is-invalid @enderror" id="image" type="file">
+                            <label class="my-label pt-0" for="image">Image</label>
+                            <input wire:model="image" class="my-input focus:outline-none focus:shadow-outline bg-white @error('image') is-invalid @enderror" id="image" type="file">
                             <div wire:loading="" wire:target="image" class="text-green-500">
                                 Uploading Image...
                             </div>
@@ -192,9 +179,9 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
-                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
+                            <button type="reset" class="btn btn-reset">Reset</button>
+                            <button type="submit" class="btn-submit btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="btn-submit btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>
@@ -202,7 +189,6 @@
         </div>
     </div>
     @push('js')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#date");
     </script>

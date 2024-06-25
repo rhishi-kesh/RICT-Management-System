@@ -20,6 +20,7 @@
             </div>
         @endif
         <div class="md:w-[40rem] w-full mx-auto my-10 bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
+            <h2 class="mb-2 font-bold text-xl dark:text-white text-blue-500">Send Notice To Mentors</h2>
             <form action="{{ route('noticeMentorPost') }}" method="POST" id="form">
                 @csrf
                 <div>
@@ -29,7 +30,7 @@
 
                     <div class="flex justify-start items-center mt-5">
                         <button type="submit" id="submit" class="bg-blue-500 text-white border-blue-500 btn mr-4">Send</button>
-                        <a href="{{ route('notice') }}" class="bg-slate-600 text-white border-slate-600 btn mr-4">Back</a>
+                        <a href="{{ route('notice') }}" class="btn-back btn mr-4">Back</a>
                     </div>
                 </div>
                 <div class="w-full max-h-[250px] overflow-auto mt-5">

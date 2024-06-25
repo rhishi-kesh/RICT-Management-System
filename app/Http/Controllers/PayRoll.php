@@ -10,16 +10,4 @@ class PayRoll extends Controller
     {
         return view('application.payRoll.due');
     }
-    public function lastMonth()
-    {
-        return view('application.payRoll.lastMonth');
-    }
-    public function lastThreeM()
-    {
-        return view('application.payRoll.lastThreeM');
-    }
-    public function lastSixM()
-    {
-        return view('application.payRoll.lastSixM');
-    }
 }

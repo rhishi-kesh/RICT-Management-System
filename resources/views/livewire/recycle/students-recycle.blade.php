@@ -1,6 +1,6 @@
 <div class="pt-5">
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Recently Deleted Students</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Recently Deleted Students</h2>
         <hr>
         <div class="w-full">
             {{-- Show Data --}}
@@ -42,13 +42,11 @@
                                     {{ $data->course->name ?? '-' }}</td>
                                 <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                     {{-- Edit Button --}}
-                                    <button wire:click="restoreStudent({{ $data->id }})"
-                                        class="bg-green-500 btn text-white border-0">
+                                    <button wire:click="restoreStudent({{ $data->id }})" class="btn btn-submit">
                                         Restore
                                     </button>
                                     {{-- Edit Button --}}
-                                    <button wire:click="deleteStudentAlert({{ $data->id }})"
-                                        class="bg-red-500 btn text-white border-0 mt-2 mt-md-0">
+                                    <button wire:click="deleteStudentAlert({{ $data->id }})" class="btn btn-back">
                                         Delete Permanent
                                     </button>
                                 </td>

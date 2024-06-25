@@ -4,11 +4,12 @@
     <div class="pt-5" x-data="modal">
         <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
             <div class="w-full mb-10">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
+                <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Notice</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
                     <a href="{{ route('noticeMentor') }}">
                         <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
-                                <h6 class="text-[#0e1726] dark:text-white text-xl">Mentors</h6>
+                                <h6 class="dark:text-white text-xl text-blue-500">Mentors</h6>
                             </div>
                             <div class="flex items-center justify-end -space-x-1 rtl:space-x-reverse mb-5 select-none">
                                 @foreach ($mentors as $data2)
@@ -25,7 +26,7 @@
                     <a href="{{ route('noticeSystemUser') }}">
                         <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
-                                <h6 class="text-[#0e1726] dark:text-white text-xl">System Users</h6>
+                                <h6 class="dark:text-white text-xl text-blue-500">System Users</h6>
                             </div>
                             <div class="flex items-center justify-end -space-x-1 rtl:space-x-reverse mb-5 select-none">
                                 @foreach ($users as $data2)
@@ -43,7 +44,7 @@
                     <a href="{{ route('noticeStudentWithoutBatch') }}">
                         <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
-                                <h6 class="text-[#0e1726] dark:text-white text-xl">Student Without Batch</h6>
+                                <h6 class="dark:text-white text-xl text-blue-500">Student Without Batch</h6>
                             </div>
                             <div class="flex items-center justify-end -space-x-1 rtl:space-x-reverse mb-5 select-none">
                                 @foreach ($studentWithoutBatch as $data2)
@@ -61,7 +62,7 @@
                     <a href="{{ route('noticeAdmissionBooth') }}">
                         <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
                             <div class="flex justify-between mb-5 gap-2">
-                                <h6 class="text-[#0e1726] dark:text-white text-xl">Admission Booth</h6>
+                                <h6 class="dark:text-white text-xl text-blue-500">Admission Booth</h6>
                             </div>
                             <div class="flex items-center justify-end -space-x-1 rtl:space-x-reverse mb-5 select-none">
                                 @foreach ($admissionBooth as $data2)
@@ -73,14 +74,14 @@
                     </a>
                 </div>
             </div>
-            <h2 class="mb-2 font-bold text-3xl dark:text-white">Batchs</h2>
+            <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Batchs</h2>
             <div class="w-full">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                     @forelse ($batch as $key => $data)
                         <a href="{{ route('noticeBatch', $data->id) }}">
                             <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0">
                                 <div class="flex justify-between mb-5 gap-2">
-                                    <h6 class="text-[#0e1726] dark:text-white text-xl">{{ $data->name }}</h6>
+                                    <h6 class="text-blue-500 dark:text-white text-xl">{{ $data->name }}</h6>
                                 </div>
                                 <div class="flex items-center justify-end -space-x-1 rtl:space-x-reverse mb-5 select-none">
                                     @foreach ($data->students as $data2)

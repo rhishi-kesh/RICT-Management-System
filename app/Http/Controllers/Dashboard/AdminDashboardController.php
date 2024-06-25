@@ -95,7 +95,7 @@ class AdminDashboardController extends Controller
         for ($day = 1; $day <= $daysInMonth; $day++) {
             $startOfDay = Carbon::now()->startOfMonth()->addDays($day - 1);
             $startOfNextDay = Carbon::now()->startOfMonth()->addDays($day);
-            $daylyAdmissionData[] = $admissions->where('created_at', '>=', $startOfDay)
+            $daylyAdmissionData[$day] = $admissions->where('created_at', '>=', $startOfDay)
                                 ->where('created_at', '<', $startOfNextDay)
                                 ->count();
         }
@@ -116,7 +116,7 @@ class AdminDashboardController extends Controller
         for ($day = 1; $day <= $daysInMonth; $day++) {
             $startOfDay = Carbon::now()->startOfMonth()->addDays($day - 1);
             $startOfNextDay = Carbon::now()->startOfMonth()->addDays($day);
-            $daylyVisitorData[] = $Visitors->where('created_at', '>=', $startOfDay)
+            $daylyVisitorData[$day] = $Visitors->where('created_at', '>=', $startOfDay)
                                 ->where('created_at', '<', $startOfNextDay)
                                 ->count();
         }

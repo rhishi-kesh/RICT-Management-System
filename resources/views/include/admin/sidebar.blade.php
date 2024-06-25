@@ -59,7 +59,7 @@
                     </li>
                     <li>
                         <a href="{{ route('studentDownload') }}">
-                            <span class="pl-2">Download Student<span>
+                            <span class="pl-2">Student Report<span>
                         </a>
                     </li>
                 </ul>
@@ -134,42 +134,13 @@
                     </div>
                 </a>
             </li>
-            <li class="menu nav-item group">
-                <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'payroll' }" @click="activeDropdown === 'payroll' ? activeDropdown = null : activeDropdown = 'payroll'">
+            <li class="nav-item">
+                <a href="{{ route('due') }}" class="group sidebargroup">
                     <div class="flex items-center">
                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-currency-taka"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16.5 15.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 7a2 2 0 1 1 4 0v9a3 3 0 0 0 6 0v-.5" /><path d="M8 11h6" /></svg>
                         <span class="text-black pl-3 dark:text-[#506690] dark:group-hover:text-white-dark">Pay Roll</span>
                     </div>
-                    <div :class="{ '!rotate-90': activeDropdown === 'payroll' }">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </button>
-                <ul x-cloak x-show="activeDropdown === 'payroll'" x-collapse class="sub-menu text-gray-500">
-                    <li>
-                        <a href="{{ route('due') }}">
-                            <span class="pl-2">Due</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('lastMonth') }}">
-                            <span class="pl-2">Last 1 month due</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('lastThreeM') }}" >
-                            <span class="pl-2">Last 3 month due</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('lastSixM') }}" >
-                            <span class="pl-2">Last 6 month due</span>
-                        </a>
-                    </li>
-                </ul>
+                </a>
             </li>
             <li class="menu nav-item group">
                 <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'notice' }"

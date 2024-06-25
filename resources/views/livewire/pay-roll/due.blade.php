@@ -1,7 +1,7 @@
 <div class="pt-5" x-data="modal">
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-8 mb-4 w-full">
         <div class="flex justify-between mb-4">
-            <h2 class="mb-2 font-bold text-3xl dark:text-white">Due List</h2>
+            <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Due List</h2>
         </div>
         <div class="mb-4 overflow-auto">
             <table class="w-full">
@@ -113,8 +113,8 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
-                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
+                            <button type="submit" class="btn-submit btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="btn-submit btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>

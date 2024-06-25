@@ -93,7 +93,7 @@ class AdminController extends Controller
             } else {
                 $this->sendOtp($user);
             }
-            return view('auth.forgotPassword.student.verification', compact('user'));
+            return view('auth.forgotPassword.admin.verification', compact('user'));
         } else {
             return redirect()->route('notFound');
         }

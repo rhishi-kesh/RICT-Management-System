@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
-            <h2 class="mb-2 font-bold text-3xl dark:text-white">Attendance</h2>
+            <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Attendance of <span class="text-orange-500">{{ $batchName->name }}</span> batch</h2>
             @if (Session::has('success'))
                 <div class="flex items-center p-4 mb-4 text-sm text-green-900 rounded-lg bg-green-300 dark:bg-gray-800 dark:text-green-400" role="alert" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 4000)">
                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

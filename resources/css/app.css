@@ -3,109 +3,79 @@
 @tailwind utilities;
 
 @layer components {
-    .my-input{
+    /* Input and Label Styles */
+    .my-input {
         @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight dark:text-white dark:bg-slate-800 dark:border-gray-500 dark:focus:border-blue-500 focus:border-blue-500;
     }
-    .my-label{
-        @apply block text-gray-700 dark:text-white text-sm font-bold mb-2
+    .my-label {
+        @apply block dark:text-white text-sm font-semibold mb-2 text-blue-500 capitalize;
     }
-    .my-color-blue {
-        color: #2B337C;
+
+    /* Buttons */
+    .btn {
+        @apply rounded border py-2 px-5 text-sm font-semibold transition-colors duration-300 border-none;
     }
-    .my-bg-blue {
-        background-color: #2B337C;
+
+    .btn-submit {
+        @apply text-white bg-blue-500;
     }
-    .my-color-orange {
-        color: #DA5E20;
+
+    .btn-reset {
+        @apply text-white bg-red-500;
     }
-    .text-white-dark {
-        --tw-text-opacity: 1;
-        color: rgb(136 142 168/var(--tw-text-opacity));
+
+    .btn-back {
+        @apply text-white bg-orange-500;
     }
-    .login-form-input, .login-form-multiselect, .login-form-select, .login-form-textarea {
-        width: 100%;
-        border-radius: .375rem;
-        border-width: 1px;
-        --tw-border-opacity: 1;
-        border-color: rgb(224 230 237/var(--tw-border-opacity));
-        --tw-bg-opacity: 1;
-        background-color: rgb(255 255 255/var(--tw-bg-opacity));
-        padding: .5rem 1rem;
-        font-size: .875rem;
-        line-height: 1.25rem;
-        font-weight: 600;
-        --tw-text-opacity: 1;
-        color: rgb(14 23 38/var(--tw-text-opacity));
-        outline: 2px solid #0000 !important;
-        outline-offset: 2px !important;
+
+    /* Profile Picture */
+    .profile {
+        @apply w-10 h-10 rounded-full flex justify-center items-center bg-blue-500 text-white text-base;
     }
-    label {
-        margin-bottom: .375rem;
-        display: block;
-        font-weight: 600;
-    }
-    .btn{
-        border-radius: .375rem;
-        border-width: 1px;
-        padding: .5rem 1.25rem;
-        font-size: .875rem;
-        line-height: 1.25rem;
-        font-weight: 600;
-        transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
-        transition-timing-function: cubic-bezier(.4,0,.2,1);
-        transition-duration: .3s;
-    }
-    .btn-gradient {
-        background-image: linear-gradient(to right,var(--tw-gradient-stops));
-        --tw-gradient-from: #E16127 var(--tw-gradient-from-position);
-        --tw-gradient-to: #ef126200 var(--tw-gradient-to-position);
-        --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to);
-        --tw-gradient-to: #2B337C var(--tw-gradient-to-position);
-        --tw-text-opacity: 1;
-        color: rgb(255 255 255/var(--tw-text-opacity));
-    }
-    .nav-item:hover svg path{
-        --tw-text-opacity: 1;
-        color: rgb(59 130 246 / var(--tw-text-opacity));
-    }
-    .profile{
-        @apply w-10 h-10 rounded-full flex justify-center items-center my-bg-blue text-white text-base;
-    }
-    .checkbox{
+
+    /* Checkbox */
+    .checkbox {
         @apply absolute w-full h-full opacity-0 z-10 cursor-pointer;
     }
-    .checkboxSpan{
-        @apply border-2 border-[#ebedf2] block h-full rounded-full before:absolute before:left-1 before:bg-[#ebedf2] before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:border-blue-500 peer-checked:before:bg-blue-500 before:transition-all before:duration-300;
+    .checkboxSpan {
+        @apply border-2 border-gray-200 block h-full rounded-full before:absolute before:left-1 before:bg-gray-200 before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:border-blue-500 peer-checked:before:bg-blue-500 before:transition-all before:duration-300;
     }
-    .is-invalid{
-        @apply border-red-500;
+
+    .nav-item:hover svg path{
+        --tw-text-opacity: 1;
+        color: rgb(43 51 125 / var(--tw-text-opacity));
     }
-}
-@variants hover, focus, active{
-    .submit-btn {
-        --tw-gradient-from: #2B337C var(--tw-gradient-from-position);
-        --tw-gradient-to: #4361ee00 var(--tw-gradient-to-position);
-        --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to);
-        --tw-gradient-to: #E16127 var(--tw-gradient-to-position);
-        box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+
+    /* Login Form Elements */
+    .login-form-input,
+    .login-form-multiselect,
+    .login-form-select,
+    .login-form-textarea {
+        @apply w-full rounded border border-gray-200 bg-white py-2 px-4 text-sm font-semibold text-gray-900 outline-none;
     }
-}
-@layer base {
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      appearance: none;
+    .btn-gradient {
+        @apply text-white bg-orange-500;
+    }
+    th {
+        @apply text-blue-500 capitalize;
     }
 }
 
 @layer utilities {
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
+    /* Custom Text Colors */
+    .text-white-dark {
+        --tw-text-opacity: 1;
+        color: rgb(136 142 168 / var(--tw-text-opacity));
     }
-   /* Hide scrollbar for IE, Edge and Firefox */
-    .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-  }
+    /* Invalid Input State */
+    .is-invalid {
+        border: 1px solid #EF4444;
+    }
+}
+
+@variants hover, focus, active {
+    /* Login Form Elements */
+    .submit-btn {
+        @apply shadow bg-blue-500;
+    }
 }

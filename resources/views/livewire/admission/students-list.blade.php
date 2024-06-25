@@ -1,6 +1,6 @@
 <div class="pt-5">
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-6 pt-6 pb-5 mb-4 w-full" x-data="student">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Students</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Students</h2>
         <hr>
         <div class="block md:flex item-center justify-between d px-0 md-px-6 pb-2 pt-2">
             <div class="flex item-center justify-center md:justify-start py-2">
@@ -69,7 +69,7 @@
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Qualification</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Profession</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Course Name</th>
-                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Discount</th>
+                            <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Scholarship</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Total Amount</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Total Pay</th>
                             <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center text-nowrap">Total Due</th>

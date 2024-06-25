@@ -11,7 +11,7 @@
         </button>
     </div>
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Role</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Role</h2>
         <hr>
         <div>
             {{-- Show Data --}}
@@ -45,7 +45,7 @@
 
 
                                     {{-- Add or Edit Role Permission Button --}}
-                                    <a href="{{ route('roleHavePermission', $data->id) }}" type="button" x-tooltip="Role Permissions" class="uppercase btn bg-cyan-500 border-none text-white cursor-pointer px-2 py-1 rounded-none">
+                                    <a href="{{ route('roleHavePermission', $data->id) }}" type="button" x-tooltip="Role Permissions" class="uppercase btn bg-orange-500 border-none text-white cursor-pointer px-2 py-1 rounded-none">
                                         <small>Role Permissions</small>
                                     </a>
                                 </td>
@@ -73,9 +73,9 @@
             <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     @if(!empty($update_id))
-                        <h5 class="font-bold text-lg">Update</h5>
+                        <h5 class="font-bold text-lg text-blue-500">Update</h5>
                     @else
-                        <h5 class="font-bold text-lg">Add Role</h5>
+                        <h5 class="font-bold text-lg text-blue-500">Add Role</h5>
                     @endif
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
@@ -95,9 +95,9 @@
                             @endif
                         </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
-                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
+                            <button type="reset" class="btn btn-reset">Reset</button>
+                            <button type="submit" class="btn-submit btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="btn-submit btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>

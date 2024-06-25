@@ -14,6 +14,15 @@
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/animate.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/sweetalert2.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/css/flatpickr.min.css') }}">
+        <style>
+            input[type="date"]::-webkit-inner-spin-button,
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+                -webkit-appearance: none;
+                user-select: none;
+            }
+        </style>
         @vite('resources/css/app.css')
         @livewireStyles
         @stack('css')
@@ -63,9 +72,10 @@
         <script defer src="{{ asset('frontend/js/tippy-bundle.umd.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/sweetalert.min.js') }}"></script>
         <script defer src="{{ asset('frontend/js/apexcharts.js') }}"></script>
+        <script src="{{ asset('frontend/js/ckeditor.js') }}"></script>
+        <script src="{{ asset('frontend/js/flatpickr.js') }}"></script>
         <script src="{{ asset('frontend/js/main.js') }}"></script>
         <script src="{{ asset('frontend/js/cuntom.js') }}"></script>
-        <script src="{{ asset('frontend/js/ckeditor.js') }}"></script>
         @stack('js')
     </body>
 </html>

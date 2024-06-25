@@ -12,7 +12,7 @@
         </button>
     </div>
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-8 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Courses</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Courses</h2>
         <hr>
         <div>
             {{-- Show Data --}}
@@ -71,53 +71,53 @@
                                         </a>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="absolute right-14 z-30 bg-white dark:bg-[#1B2E4B] text-black dark:text-[#e5e7eb] rounded text-left p-5 pl-3">
                                             <li class="p-2">
-                                                <a class=" dropdown-item d-flex align-items-center gap-3" href="{{ route('editCourse', $data->id) }}" data-bs-toggle="modal">
+                                                <a class=" dropdown-item d-flex align-items-center gap-3 block" href="{{ route('editCourse', $data->id) }}" data-bs-toggle="modal">
                                                     <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                                                     Edit
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
-                                                <a wire:click="deleteAlert({{ $data->id }})" class="dropdown-item d-flex align-items-center gap-3" >
+                                                <a wire:click="deleteAlert({{ $data->id }})" class="dropdown-item d-flex align-items-center gap-3 block" >
                                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                                    Delete
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
-                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3" href="{{ route('courseLearnings', $data->id)}}">
+                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3 block" href="{{ route('courseLearnings', $data->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-drops inline-block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.637 7.416a7.907 7.907 0 0 1 1.76 8.666a8 8 0 0 1 -7.397 4.918a8 8 0 0 1 -7.396 -4.918a7.907 7.907 0 0 1 1.759 -8.666l5.637 -5.416l5.637 5.416z" /><path d="M14.466 10.923a3.595 3.595 0 0 1 .77 3.877a3.5 3.5 0 0 1 -3.236 2.2a3.5 3.5 0 0 1 -3.236 -2.2a3.595 3.595 0 0 1 .77 -3.877l2.466 -2.423l2.466 2.423z" /></svg>
                                                     Add Learning Form Course
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
-                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3" href="{{ route('courseForThose', $data->id) }}">
+                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3 block" href="{{ route('courseForThose', $data->id) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate inline-block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" /><path d="M11.683 12.317l5.759 -5.759" /><path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0" /></svg>
                                                     Add Course For Those
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
                                                 {{-- {{ route('benefitsOfCourse') }} --}}
-                                                <a class="whitespace-nowrap  dropdown-item d-flex align-items-center gap-3" href="{{ route('benefitCourse', $data->id) }}">
+                                                <a class="whitespace-nowrap  dropdown-item d-flex align-items-center gap-3 block" href="{{ route('benefitCourse', $data->id) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mood-puzzled inline-block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.986 3.51a9 9 0 1 0 1.514 16.284c2.489 -1.437 4.181 -3.978 4.5 -6.794" /><path d="M10 10h.01" /><path d="M14 8h.01" /><path d="M12 15c1 -1.333 2 -2 3 -2" /><path d="M20 9v.01" /><path d="M20 6a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
                                                     Add Benefits of the Course
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
                                                 {{-- {{ route('creativeProject') }} --}}
-                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3" href="{{ route('addCreativeProject', $data->id) }}">
+                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3 block" href="{{ route('addCreativeProject', $data->id) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-radioactive inline-block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13.5 14.6l3 5.19a9 9 0 0 0 4.5 -7.79h-6a3 3 0 0 1 -1.5 2.6" /><path d="M13.5 9.4l3 -5.19a9 9 0 0 0 -9 0l3 5.19a3 3 0 0 1 3 0" /><path d="M10.5 14.6l-3 5.19a9 9 0 0 1 -4.5 -7.79h6a3 3 0 0 0 1.5 2.6" /></svg>
                                                     Add Creative Projects
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
                                                 {{-- {{ route('courseModule')}} --}}
-                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3" href="{{ route('courseModule', $data->id) }}">
+                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3 block" href="{{ route('courseModule', $data->id) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-carousel-vertical inline-block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 8v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1z" /><path d="M7 22v-1a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1v1" /><path d="M17 2v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1" /></svg>
                                                     Add Course Module
                                                 </a>
                                             </li>
                                             <li class="p-2 cursor-pointer">
                                                 {{-- {{ route('courseFAQ') }} --}}
-                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3" href="{{ route('courseFAQ', $data->id) }}">
+                                                <a class="whitespace-nowrap dropdown-item d-flex align-items-center gap-3 block" href="{{ route('courseFAQ', $data->id) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help-hexagon inline-block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" /><path d="M12 16v.01" /><path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
                                                     Add Course Faq
                                                 </a>
@@ -150,9 +150,9 @@
                 class=" panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-[800px] my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
                     @if (!empty($update_id))
-                        <h5 class="font-bold text-lg">Update Course</h5>
+                        <h5 class="font-bold text-lg text-blue-500">Update Course</h5>
                     @else
-                        <h5 class="font-bold text-lg">Add Course</h5>
+                        <h5 class="font-bold text-lg text-blue-500">Add Course</h5>
                     @endif
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
@@ -225,7 +225,7 @@
                                 @endif
                             </div>
                             <div class="mb-1">
-                                <label for="description" class="my-label">description</label>
+                                <label for="description" class="my-label">Description</label>
                                 <textarea wire:model="description" placeholder="description" class="my-input focus:outline-none focus:shadow-outline appearance-none" name="description" id="description" cols="5" rows="1">
                                 </textarea>
                                 @if ($errors->has('description'))
@@ -233,8 +233,8 @@
                                 @endif
                             </div>
                             <div class="mb-1">
-                                <label class=" col-form-label pt-0" for="image">Thumbnail</label>
-                                <input wire:model="image" class="bg-white p-2 w-full block form-control @error('image') is-invalid @enderror" id="image" type="file">
+                                <label class="my-label pt-0" for="image">Thumbnail</label>
+                                <input wire:model="image" class="my-input focus:outline-none focus:shadow-outline appearance-none bg-white" id="image" type="file">
                                 <div wire:loading="" wire:target="image" class="text-green-500">
                                     Uploading Image...
                                 </div>
@@ -255,11 +255,9 @@
                             </div>
                         </div>
                         <div class="flex justify-end items-center mt-4">
-                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4"
-                                wire:loading.remove>Save</button>
-                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4"
-                                wire:loading>Loading</button>
+                            <button type="reset" class="btn btn-reset">Reset</button>
+                            <button type="submit" class="btn-submit btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="btn-submit btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>

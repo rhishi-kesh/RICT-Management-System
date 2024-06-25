@@ -53,7 +53,7 @@ class AddCreativeProject extends Component
     }
     public function ShowUpdateModel($id)
     {
-        $this->reset();
+        $this->reset('image');
         $data = CreativeProject::findOrFail($id);
         $this->update_id = $data->id;
         $this->oldimage = $data->image;

@@ -4,8 +4,14 @@
             <div class="table-responsive grow overflow-y-auto min-h-screen">
                 <table class="table-hover w-full @if(empty($homeworks)) h-full @endif">
                     <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="text-center pt-4 font-bold my-color-blue">Status</td>
+                            <td class="text-center pt-4 font-bold my-color-blue">Dateline</td>
+                        </tr>
                         @forelse ($homeworks as $item)
-                            <tr class="group hover:bg-[#F9FAFB] dark:hover:bg-[#121E31] border-b border-b-[#121E31]">
+                            <tr class="group hover:bg-[#EBEBEB] dark:hover:bg-[#121E31] border-b dark:border-b-[#181F32] border-b-[#EBEBEB]">
                                 <td class="px-5 py-2 w-[80px]">
                                     @if (empty($item->student->profile))
                                         <div class="profile w-9 h-9 text-xs">
@@ -18,17 +24,17 @@
                                     @endif
                                 </td>
                                 <td class="px-5 py-2 pl-0">
-                                    <p class="whitespace-nowrap text-base font-semibold group-hover:text-blue-500 line-clamp-1 min-w-[50px] cursor-pointer">
+                                    <p class="whitespace-nowrap text-base font-semibold line-clamp-1 min-w-[50px] cursor-pointer">
                                         <span>
-                                            <span @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
-                                            <span class="ml-2 inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
+                                            <span class="group-hover:text-blue-500" @click="viewModal = true; $wire.call('viewData','{{ $item->id }}')">{{ Str::limit($item->title, 35, '...') }}</span>
+                                            <span class="ml-2 select-none inline-block whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:bg-blue-500 hover:text-white text-xs border border-blue-500">{{ $item->created_at->diffForHumans() }}</span>
                                         </span>
                                         <button type="button" class="ml-2 whitespace-nowrap px-2 py-[.120rem] rounded-full capitalize hover:text-white text-xs border @if($item->priority == 'urgent') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->priority == 'high') border-yellow-500 text-yellow-500 hover:bg-yellow-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif">{{ $item->priority }}</button>
                                     </p>
                                     <p class="line-clamp-1 min-w-[300px]">{!! Str::limit($item->text, 85, '...') !!}</p>
                                 </td>
                                 <td class="px-5 py-2 text-center">
-                                    <div class="flex gap-3 items-center">
+                                    <div class="flex gap-3 items-center justify-center">
                                         <button @click="editStatus = {{ $item->id }}" type="button" class="whitespace-nowrap px-3 py-2 capitalize hover:text-white border @if($item->status == 'reject') border-red-500 text-red-500 hover:bg-red-500 @elseif($item->status == 'done') border-green-500 text-green-500 hover:bg-green-500 @else border-blue-500 text-blue-500 hover:bg-blue-500 @endif text-xs">
                                             {{ $item->status }}
                                             <svg :class="editStatus == {{ $item->id }} ? 'rotate-180' : 'rotate-0'" class="w-5 h-5 inline-block transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
@@ -47,13 +53,14 @@
                                         <button class="bg-blue-500 text-nowrap text-[12px] text-white border-blue-500 btn px-2 py-[.140rem]" wire:click="changeStatus({{ $item->id }})" @if($item->status == 'inReview') disabled @else '' @endif>@if($item->status == 'inReview') In Review @else Done @endif</button>
                                     </div>
                                 </td>
-                                <td class="px-5 py-2">
-                                    <p class="whitespace-nowrap font-medium text-white-dark">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
+                                <td class="px-5 py-2 text-center">
+                                    <p class="whitespace-nowrap font-medium animate-pulse my-color-orange">{{ date("d-M-Y (g:i A)", strtotime($item->dueDate)) }}</p>
                                 </td>
                                 <td class="px-5 py-2">
                                     @if($item->status == 'reject' || $item->status == 'done' || $item->status == 'inReview')
-                                        <button x-tooltip="Show Homework" @click="viewHomework = true; $wire.call('viewHomeWork','{{ $item->id }}')">
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-viewport-wide"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12h-7l3 -3m0 6l-3 -3" /><path d="M14 12h7l-3 -3m0 6l3 -3" /><path d="M3 6v-3h18v3" /><path d="M3 18v3h18v-3" /></svg>
+                                        <button x-tooltip="Show Homework" class="bg-blue-500 btn text-white border-0 flex items-center justify-between" @click="viewHomework = true; $wire.call('viewHomeWork','{{ $item->id }}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"  height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22L8 18H16L12 22ZM12 2L16 6H8L12 2ZM12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14ZM2 12L6 8V16L2 12ZM22 12L18 16V8L22 12Z"></path></svg>
+                                            <span class="ml-2 text-nowrap">My Submit</span>
                                         </button>
                                     @endif
                                 </td>
@@ -97,7 +104,7 @@
                         <h5 class="font-bold text-lg">{{ $singleHomework->homework->title ?? 'Loading...' }}</h5>
                     </div>
                     <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
-                        <a href="{{ $singleHomework->url ?? 'Loading...' }}" class="text-blue-500 inline-block mb-4" target="_blank"><b>Url:</b> {{ $singleHomework->url ?? 'Loading...' }}</a>
+                        <a href="{{ $singleHomework->url ?? 'Loading...' }}" class="inline-block mb-4" target="_blank"><b>Url:</b> <span class="text-blue-500">{{ $singleHomework->url ?? 'Loading...' }}</span></a>
                         <p><b>Description:</b> {{ $singleHomework->description ?? 'Loading...'}}</p>
                         @if(!empty($singleHomework->feedback))
                             <p class="mt-4"><b>Feedback:</b> {{ $singleHomework->feedback ?? ''}}</p>

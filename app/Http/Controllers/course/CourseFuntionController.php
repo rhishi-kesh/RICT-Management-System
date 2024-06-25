@@ -44,7 +44,7 @@ class CourseFuntionController extends Controller
 
     public function addCourseModule($id)
     {
-        return view('course.courseModule-add', compact('id'));
+        return view('application.course.courseModule-add', compact('id'));
     }
 
     public function courseModuleAddPost(Request $request, $id)
@@ -67,7 +67,7 @@ class CourseFuntionController extends Controller
     public function courseModuleEdit($id)
     {
         $CourseModule = CourseModule::findOrFail($id);
-        return view('course.courseModule-edit', compact('CourseModule', 'id'));
+        return view('application.course.courseModule-edit', compact('CourseModule', 'id'));
     }
 
     public function courseModuleEditPost(Request $request, $id)

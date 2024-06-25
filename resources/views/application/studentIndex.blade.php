@@ -5,19 +5,19 @@
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-5">
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">My Due</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">My Due</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $studentDue->due ?? 0 }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $studentDue->due ?? 0 }}</div>
                     </div>
                     <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-school w-20 h-20 absolute right-4 top-2 opacity-20"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 8l.553 -.276a1 1 0 0 1 1.447 .894v6.382a2 2 0 0 0 2 2h.5a2.5 2.5 0 0 0 2.5 -2.5v-.5h-1" /><path d="M8 11h7" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /></svg>
                 </div>
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">My Notice</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">My Notice</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $studentNotice ?? 0 }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $studentNotice ?? 0 }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -29,28 +29,28 @@
                 </div>
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">My Homework</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">My Homework</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $studentHomework }}</div>
+                        <div class="text-3xl font-bold mr-3 text-blue-500">{{ $studentHomework }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Complete: {{ $studentHomeworkComplete }}
+                            <span class="text-blue-500">Complete:</span> <span class="text-orange-500">{{ $studentHomeworkComplete }}</span>
                         </div>
                     </div>
                     <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-school w-20 h-20 absolute right-4 top-2 opacity-20"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 18v-6a6 6 0 0 1 6 -6h2a6 6 0 0 1 6 6v6a3 3 0 0 1 -3 3h-8a3 3 0 0 1 -3 -3z" /><path d="M10 6v-1a2 2 0 1 1 4 0v1" /><path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" /><path d="M11 10h2" /></svg>
                 </div>
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">My Attendance</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">My Attendance</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ count($attendance) }}</div>
+                        <div class="text-3xl font-bold mr-3 text-blue-500">{{ count($attendance) }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Absent: {{ $attendanceAbsent }}
+                            <span class="text-blue-500">Absent:</span> <span class="text-orange-500">{{ $attendanceAbsent }}</span>
                         </div>
                     </div>
                     <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-school w-20 h-20 absolute right-4 top-2 opacity-20"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 21h-6a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4.5" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M19 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M22 22a2 2 0 0 0 -2 -2h-2a2 2 0 0 0 -2 2" /></svg>
@@ -62,7 +62,7 @@
             {{-- admissionOnCourse --}}
             <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="flex flex-col justify-center items-center h-[300px]">
-                    <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                    <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                         My Homework Report
                     </h6>
                     <div id="homeworkReport"></div>
@@ -72,7 +72,7 @@
             {{-- admissionOnCourse --}}
             <div class="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                 <div class="flex flex-col justify-center items-center h-[300px]">
-                    <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+                    <h6 class="block text-xl font-bold leading-relaxed tracking-normal text-blue-gray-900 antialiased text-blue-500">
                         My Attendance Report
                     </h6>
                     <div id="attendanceReport"></div>
@@ -128,7 +128,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }
@@ -188,7 +188,7 @@
                     tooltip: {
                         enabled: true,
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                            return '<div class="arrow_box">' +
+                            return '<div class="arrow_box p-1">' +
                                 '<span>' + w.globals.labels[seriesIndex] + ': ' + series[seriesIndex] + '</span>' +
                                 '</div>';
                         }

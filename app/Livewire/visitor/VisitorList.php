@@ -30,7 +30,7 @@ class VisitorList extends Component
         $visitor = Visitors::where('id', $this->visitor_id)->first();
         $callDate = $visitor->calling_date;
         $callDataArray = explode(",",$callDate);
-        array_push($callDataArray,Carbon::now()->toDateString());
+        array_push($callDataArray,Carbon::now());
         $callDataArray = implode(',', $callDataArray);
         $newCall = $visitor->call_count += 1;
         $done = Visitors::where('id', $this->visitor_id)->update([

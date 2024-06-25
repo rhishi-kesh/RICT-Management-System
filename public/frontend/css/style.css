@@ -113,14 +113,14 @@
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246/var(--tw-bg-opacity));
     --tw-text-opacity: 1;
-    color: rgb(67 97 238/var(--tw-text-opacity))
+    color: rgb(43 51 125/var(--tw-text-opacity))
 }
 
 .sidebar ul.sub-menu li a:hover:before,
 .sidebar ul.sub-menu li button:hover:before {
     content: var(--tw-content) !important;
     --tw-bg-opacity: 1 !important;
-    background-color: rgb(67 97 238/var(--tw-bg-opacity)) !important
+    background-color: rgb(43 51 125/var(--tw-bg-opacity)) !important
 }
 
 :is([dir=ltr] .sidebar ul.sub-menu li a):before,
@@ -147,20 +147,20 @@
     --tw-bg-opacity: 1;
     background-color: rgb(17 24 39/var(--tw-bg-opacity));
     --tw-text-opacity: 1;
-    color: rgb(67 97 238/var(--tw-text-opacity))
+    color: rgb(43 51 125/var(--tw-text-opacity))
 }
 
 .sidebar ul.sub-menu li a.active,
 .sidebar ul.sub-menu li button.active {
     --tw-text-opacity: 1;
-    color: rgb(67 97 238/var(--tw-text-opacity))
+    color: rgb(43 51 125/var(--tw-text-opacity))
 }
 
 .sidebar ul.sub-menu li a.active:before,
 .sidebar ul.sub-menu li button.active:before {
     content: var(--tw-content);
     --tw-bg-opacity: 1;
-    background-color: rgb(67 97 238/var(--tw-bg-opacity))
+    background-color: rgb(43 51 125/var(--tw-bg-opacity))
 }
 
 .sidebar .nav-item a div:first-child svg,
@@ -329,7 +329,7 @@
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246/var(--tw-bg-opacity));
     --tw-text-opacity: 1;
-    color: rgb(67 97 238/var(--tw-text-opacity))
+    color: rgb(43 51 125/var(--tw-text-opacity))
 }
 
 :is(.dark .horizontal-menu ul.sub-menu a:hover) {
@@ -340,7 +340,7 @@
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246/var(--tw-bg-opacity));
     --tw-text-opacity: 1;
-    color: rgb(67 97 238/var(--tw-text-opacity))
+    color: rgb(43 51 125/var(--tw-text-opacity))
 }
 
 :is(.dark .horizontal-menu ul.sub-menu a.active) {
@@ -617,9 +617,13 @@
 .dropdown ul li>button:hover {
     background-color: #4361ee1a;
     --tw-text-opacity: 1;
-    color: rgb(67 97 238/var(--tw-text-opacity))
+    color: rgb(43 51 125/var(--tw-text-opacity))
 }
 
 .dropdown ul li>button {
     width: 100%
+}
+
+.swal2-confirm{
+    background-color: #2B337D !important;
 }

@@ -209,7 +209,8 @@ class NoticController extends Controller
         $students = Student::where('batch_id', $id)->select('id','name')
         ->latest()
         ->get();
-        return view('application.notice.noticeBatch', compact('students'));
+        $batch = Batch::where('id', $id)->select('id', 'name')->first();
+        return view('application.notice.noticeBatch', compact('students', 'batch'));
     }
 
     public function noticeBatchPost(Request $request){

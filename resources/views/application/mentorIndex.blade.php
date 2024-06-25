@@ -9,16 +9,16 @@
                         <img class="h-14 w-14 rounded-full object-cover block"
                             src="{{ empty(auth()->guard('mentor')->user()->profile) ? url('profile.jpeg') : asset('storage/' . auth()->guard('mentor')->user()->profile) }}"
                             alt="">
-                        <div class="text-xl font-semibold mr-1">Welcome back {{ auth()->guard('mentor')->user()->name }}!
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Welcome back {{ auth()->guard('mentor')->user()->name }}!
                         </div>
                     </div>
                 </div>
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">My Notice</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">My Notice</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $mentorNotice ?? 0 }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $mentorNotice ?? 0 }}</div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -30,14 +30,14 @@
                 </div>
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Batch</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Batch</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalBatch ?? 0 }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalBatch ?? 0 }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Running Batch: {{ $runningBatch }}
+                            <span class="text-blue-500">Running Batch:</span> <span class="text-orange-500">{{ $runningBatch }}</span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -51,14 +51,14 @@
                 </div>
                 <div class="relative rounded p-5 border-l-4 border-l-blue-500 shadow bg-gradient-to-r bg-white">
                     <div class="flex justify-between">
-                        <div class="text-xl font-semibold mr-1">Total Students</div>
+                        <div class="text-xl font-semibold mr-1 text-blue-500">Total Students</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3">{{ $totalStudent }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $totalStudent }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
-                            Running Student: {{ $totalRunningStudent }}
+                            <span class="text-blue-500">Running Student:</span> <span class="text-orange-500">{{ $totalRunningStudent }}</span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"

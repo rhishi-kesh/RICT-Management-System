@@ -2,7 +2,7 @@
 @section('content')
     <div class="animate__animated p-6 bg-gray-200 dark:bg-gray-950" :class="[$store.app.animation]">
         <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
-            <h2 class="mb-2 font-bold text-3xl dark:text-white">My Batchs</h2>
+            <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">My Batchs</h2>
             <div>
                 {{-- Show Data --}}
                 <div class="overflow-auto">

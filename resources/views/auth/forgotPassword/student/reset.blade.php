@@ -11,12 +11,12 @@
     <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('frontend/css/style.css') }}" />
     @vite('resources/css/app.css')
 </head>
-<body class="font-nunito bg-[#F85606] w-screen h-screen flex items-center justify-center">
+<body class="font-nunito bg-adminlogin bg-no-repeat bg-cover bg-center w-screen h-screen flex items-center justify-center">
     <div class="px-2 sm:px-16 w-full flex items-center justify-center">
         <div class="relative w-full md:w-2/4 rounded-md p-2 bg-gray-200 px-2 md:px-6 py-10">
             <div class="px-4 md:px-10">
                 <div class="mb-6">
-                    <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl my-color-blue">Reset password</h1>
+                    <h1 class="text-3xl font-extrabold uppercase !leading-snug md:text-4xl text-blue-500">Reset password</h1>
                 </div>
                 @error('email')
                     <div class="p-2 rounded bg-red-500 text-white">{{ $message }}</div>
@@ -27,9 +27,9 @@
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <label for="Password">Password</label>
                         <div class="relative text-white-dark">
-                            <input id="Password" type="password" placeholder="Enter Password" class="login-form-input ps-10 placeholder:text-white-dark focus:border-blue-700" name="password" />
+                            <input id="Password" type="password" placeholder="Enter Password" class="login-form-input ps-10 placeholder:text-white-dark focus:border-orange-500" name="password" />
                             <span class="absolute start-4 top-1/2 -translate-y-1/2">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="text-blue-500">
                                     <path opacity="0.5" d="M1.5 12C1.5 9.87868 1.5 8.81802 2.15901 8.15901C2.81802 7.5 3.87868 7.5 6 7.5H12C14.1213 7.5 15.182 7.5 15.841 8.15901C16.5 8.81802 16.5 9.87868 16.5 12C16.5 14.1213 16.5 15.182 15.841 15.841C15.182 16.5 14.1213 16.5 12 16.5H6C3.87868 16.5 2.81802 16.5 2.15901 15.841C1.5 15.182 1.5 14.1213 1.5 12Z" fill="currentColor" />
                                     <path d="M6 12.75C6.41421 12.75 6.75 12.4142 6.75 12C6.75 11.5858 6.41421 11.25 6 11.25C5.58579 11.25 5.25 11.5858 5.25 12C5.25 12.4142 5.58579 12.75 6 12.75Z" fill="currentColor" />
                                     <path d="M9 12.75C9.41421 12.75 9.75 12.4142 9.75 12C9.75 11.5858 9.41421 11.25 9 11.25C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75Z" fill="currentColor" />
@@ -45,9 +45,9 @@
                     <div>
                         <label for="password_confirmation">Confirm Password</label>
                         <div class="relative text-white-dark">
-                            <input id="password_confirmation" type="password" placeholder="Enter confirm password" class="login-form-input ps-10 placeholder:text-white-dark  focus:border-blue-700" name="password_confirmation" />
+                            <input id="password_confirmation" type="password" placeholder="Enter confirm password" class="login-form-input ps-10 placeholder:text-white-dark  focus:border-orange-500" name="password_confirmation" />
                             <span class="absolute start-4 top-1/2 -translate-y-1/2">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="text-blue-500">
                                     <path opacity="0.5" d="M1.5 12C1.5 9.87868 1.5 8.81802 2.15901 8.15901C2.81802 7.5 3.87868 7.5 6 7.5H12C14.1213 7.5 15.182 7.5 15.841 8.15901C16.5 8.81802 16.5 9.87868 16.5 12C16.5 14.1213 16.5 15.182 15.841 15.841C15.182 16.5 14.1213 16.5 12 16.5H6C3.87868 16.5 2.81802 16.5 2.15901 15.841C1.5 15.182 1.5 14.1213 1.5 12Z" fill="currentColor" />
                                     <path d="M6 12.75C6.41421 12.75 6.75 12.4142 6.75 12C6.75 11.5858 6.41421 11.25 6 11.25C5.58579 11.25 5.25 11.5858 5.25 12C5.25 12.4142 5.58579 12.75 6 12.75Z" fill="currentColor" />
                                     <path d="M9 12.75C9.41421 12.75 9.75 12.4142 9.75 12C9.75 11.5858 9.41421 11.25 9 11.25C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75Z" fill="currentColor" />

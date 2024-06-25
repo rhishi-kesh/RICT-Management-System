@@ -34,16 +34,18 @@ class AttendanceController extends Controller
                     ->select('date')
                     ->groupBy('date')
                     ->paginate(36);
+        $batchName = Batch::where('id', $id)->first('name');
 
-        return view('application.attendance.attendanceBatch', compact('attendance', 'id'));
+        return view('application.attendance.attendanceBatch', compact('attendance', 'id', 'batchName'));
     }
 
     public function attendanceTake($id) {
         $students = Student::where('batch_id', $id)->select('id','name')
         ->latest()
         ->get();
-        
-        return view('application.attendance.takeAttendance', compact('students', 'id'));
+        $batchName = Batch::where('id', $id)->first('name');
+
+        return view('application.attendance.takeAttendance', compact('students', 'id', 'batchName'));
     }
 
     public function attendanceBatchPost(Request $request, $id) {
@@ -77,7 +79,9 @@ class AttendanceController extends Controller
         ->where('date', $date)
         ->where('batch_id', $id)
         ->get();
-        return view('application.attendance.updateAttendance', compact('attendance', 'date', 'id'));
+        $batchName = Batch::where('id', $id)->first('name');
+
+        return view('application.attendance.updateAttendance', compact('attendance', 'date', 'id', 'batchName'));
     }
 
     public function attendanceUpdate(Request $request, $date, $id) {
@@ -105,7 +109,9 @@ class AttendanceController extends Controller
         ->where('date', $date)
         ->where('batch_id', $id)
         ->get();
-        return view('application.attendance.attendanceView', compact('attendance'));
+        $batchName = Batch::where('id', $id)->first('name');
+
+        return view('application.attendance.attendanceView', compact('attendance', 'batchName'));
     }
 
     public function adminAttendance() {
@@ -125,8 +131,9 @@ class AttendanceController extends Controller
                     ->select('date')
                     ->groupBy('date')
                     ->paginate(36);
+        $batchName = Batch::where('id', $id)->first('name');
 
-        return view('application.attendance.adminAttendanceBatch', compact('attendance', 'id'));
+        return view('application.attendance.adminAttendanceBatch', compact('attendance', 'id', 'batchName'));
     }
 
     public function adminAttendanceView($date, $id) {
@@ -135,7 +142,9 @@ class AttendanceController extends Controller
                     ->where('date', $date)
                     ->where('batch_id', $id)
                     ->get();
-        return view('application.attendance.adminAttendanceView', compact('attendance'));
+        $batchName = Batch::where('id', $id)->first('name');
+
+        return view('application.attendance.adminAttendanceView', compact('attendance', 'batchName'));
     }
 
     public function attendancereport() {

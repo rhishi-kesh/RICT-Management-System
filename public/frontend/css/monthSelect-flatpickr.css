@@ -83,10 +83,10 @@
 .flatpickr-monthSelect-month.selected,
 .flatpickr-monthSelect-month.startRange,
 .flatpickr-monthSelect-month.endRange {
-  background-color: #569ff7;
+  background-color: #2B337D;
   box-shadow: none;
   color: #fff;
-  border-color: #569ff7;
+  border-color: #2B337D;
 }
 
 .flatpickr-monthSelect-month.startRange {

@@ -1,7 +1,6 @@
 <div class="pt-5">
     @push('css')
         <link rel="stylesheet" href="{{ asset('frontend/css/nice-select2.css') }}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
             .nice-select{
                 width: 99%;
@@ -22,16 +21,10 @@
             .nice-select .list {
                 max-height: 125px;
             }
-            input[type="date"]::-webkit-inner-spin-button,
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-                user-select: none;
-            }
         </style>
     @endpush
     <form wire:submit="update" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Add User</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Edit User</h2>
         <hr>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
             <div class="mb-1">
@@ -79,12 +72,11 @@
             </div>
         </div>
         <div class="mt-4">
-            <input type="submit" value="Admit" class="uppercase btn bg-blue-500 border-none text-white cursor-pointer">
+            <input type="submit" value="Update" class="uppercase btn-submit btn cursor-pointer">
         </div>
     </form>
     @push('js')
     <script src="{{ asset('frontend/js/nice-select2.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function(e) {
             // seachable

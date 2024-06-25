@@ -1,6 +1,6 @@
 <div class="pt-5">
     <form wire:submit="genarate" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Generate Attendance Report</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Generate Attendance Report</h2>
         <hr>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
             <div class="mb-1">

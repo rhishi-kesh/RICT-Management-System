@@ -122,9 +122,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //Payrole
     Route::get('/due', [PayRoll::class, 'due'])->name('due');
-    Route::get('/last-month-due', [PayRoll::class, 'lastMonth'])->name('lastMonth');
-    Route::get('/last-three-month-due', [PayRoll::class, 'lastThreeM'])->name('lastThreeM');
-    Route::get('/last-six-month-due', [PayRoll::class, 'lastSixM'])->name('lastSixM');
 
     //Mentor
     Route::get('/mentors', [MentorsController::class, 'mentors'])->name('mentors');

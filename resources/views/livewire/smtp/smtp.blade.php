@@ -1,6 +1,6 @@
 <div class="pt-5">
     <form wire:submit="update" class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">SMTP Settings</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">SMTP Settings</h2>
         <hr>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
             <div class="mb-1">
@@ -61,8 +61,8 @@
             </div>
         </div>
         <div class="flex justify-start items-center mt-5">
-            <button type="submit" class="bg-blue-500 text-white border-blue-500 btn mr-4" wire:loading.remove>Update</button>
-            <button type="button" disabled class="bg-blue-500 text-white border-blue-500 btn mr-4" wire:loading>Loading...</button>
+            <button type="submit" class="btn-submit btn mr-4" wire:loading.remove>Update</button>
+            <button type="button" disabled class="btn-submit btn mr-4" wire:loading>Loading...</button>
         </div>
     </form>
 </div>

@@ -1,18 +1,8 @@
 @extends('layout/mentorIndex')
 @section('content')
     <div class="p-5 w-full my-10">
-        @push('css')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <style>
-            input[type="date"]::-webkit-inner-spin-button,
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-                user-select: none;
-            }
-        </style>
-        @endpush
         <div class="md:w-[40rem] w-full mx-auto bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
+            <h2 class="mb-3 font-bold text-xl dark:text-white text-blue-500">Take attendance of <span class="text-orange-500">{{ $batchName->name }}</span> batch</h2>
             <form action="{{ route('attendanceBatchPost', $id) }}" method="POST">
                 @csrf
                 <div>
@@ -58,13 +48,12 @@
                     </table>
                 </div>
                 <div class="flex justify-start items-center mt-5">
-                    <button type="submit" class="bg-blue-500 text-white border-blue-500 btn mr-4">Submit</button>
-                    <a href="{{ route('attendanceBatch', $id) }}" class="bg-slate-600 text-white border-slate-600 btn mr-4">Back</a>
+                    <button type="submit" class="btn-submit btn mr-4">Submit</button>
+                    <a href="{{ route('attendanceBatch', $id) }}" class="btn-back btn mr-4">Back</a>
                 </div>
             </form>
         </div>
         @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
             flatpickr("#date");
         </script>

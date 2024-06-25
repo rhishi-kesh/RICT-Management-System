@@ -34,7 +34,7 @@
     </div>
 
     <div class="bg-white dark:bg-slate-900 shadow-md rounded px-4 md:px-8 pt-6 pb-8 mb-4 w-full">
-        <h2 class="mb-2 font-bold text-3xl dark:text-white">Batchs</h2>
+        <h2 class="mb-2 font-bold text-3xl dark:text-white text-blue-500">Batchs</h2>
         <div class="w-full">
             {{-- Show Data --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
@@ -60,12 +60,12 @@
                                     </div>
                                 @else
                                     <div>
-                                        <button wire:click="asignMentor({{ $data->id }})">
+                                        <button wire:click="asignMentor({{ $data->id }})" x-tooltip="Assign Mentor">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 dark:hover:text-white hover:text-[#595d66] transition delay-150 hover:rotate-[359deg]" fill="currentColor"><path d="M8 4C8 5.10457 7.10457 6 6 6 4.89543 6 4 5.10457 4 4 4 2.89543 4.89543 2 6 2 7.10457 2 8 2.89543 8 4ZM5 16V22H3V10C3 8.34315 4.34315 7 6 7 6.82059 7 7.56423 7.32946 8.10585 7.86333L10.4803 10.1057 12.7931 7.79289 14.2073 9.20711 10.5201 12.8943 9 11.4587V22H7V16H5ZM6 9C5.44772 9 5 9.44772 5 10V14H7V10C7 9.44772 6.55228 9 6 9ZM19 5H10V3H20C20.5523 3 21 3.44772 21 4V15C21 15.5523 20.5523 16 20 16H16.5758L19.3993 22H17.1889L14.3654 16H10V14H19V5Z"></path></svg>
                                         </button>
                                     </div>
                                     <div>
-                                        <button type="button" wire:click="singleBatch({{ $data->id }})">
+                                        <button type="button" wire:click="singleBatch({{ $data->id }})" x-tooltip="Add Students">
                                             <svg  xmlns="http://www.w3.org/2000/svg"  class="w-6 h-6 dark:hover:text-white hover:text-[#595d66] transition delay-150 hover:rotate-[359deg] mt-[2px]" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
                                         </button>
                                     </div>
