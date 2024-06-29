@@ -62,6 +62,7 @@
                         </svg>
                     </button> --}}
                 </div>
+                <livewire:components.mentor-notification />
                 <div>
                     <a
                         href="javascript:;"

@@ -22,6 +22,9 @@
                 -webkit-appearance: none;
                 user-select: none;
             }
+            .swal2-title{
+                line-height: 40px;
+            }
         </style>
         @vite('resources/css/app.css')
         @livewireStyles

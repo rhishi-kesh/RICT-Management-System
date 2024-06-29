@@ -24,7 +24,8 @@ class HomeworkController extends Controller
 
     public function homeworkAssign($id) {
         $students = Student::where('batch_id', $id)->get();
-        return view('application.homework.assignHomework', compact('students'));
+        $batchName = Batch::where('id', $id)->first('name');
+        return view('application.homework.assignHomework', compact('students', 'batchName'));
     }
 
     public function homeworkAssignPost(Request $request) {

@@ -31,6 +31,7 @@
                             @if ($errors->has('photo'))
                                 <div class="text-red-500">{{ $errors->first('photo') }}</div>
                             @endif
+                            <div wire:loading wire:target="photo" class="text-green-500">Uploading...</div>
                         </div>
                         <button type="button"
                             class="inline-flex items-center px-4 py-2 bg-white border whitespace-nowrap border-gray-300 rounded-md duration-150 mt-2 ml-3 uppercase"

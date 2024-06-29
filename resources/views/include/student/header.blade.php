@@ -137,6 +137,7 @@
                         </svg>
                     </a>
                 </div>
+                <livewire:components.student-notification />
                 <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                     <a href="javascript:;" class="group relative" @click="toggle()">
                         <span >

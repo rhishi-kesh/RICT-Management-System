@@ -19,6 +19,7 @@
                                 <th class="border border-slate-600 px-5 py-2 text-center">Name</th>
                                 <th class="border border-slate-600 px-5 py-2 text-center">Present</th>
                                 <th class="border border-slate-600 px-5 py-2 text-center">absent</th>
+                                <th class="border border-slate-600 px-5 py-2 text-center">Late</th>
                             </tr>
                         </thead>
                         @php $i = 1; @endphp
@@ -41,6 +42,12 @@
                                     <label for="absent{{ $item->id }}" class="px-5 py-2 cursor-pointer mb-0">
                                         <input type="radio" name="attendance{{ $item->students->id }}" id="absent{{ $item->id }}" value="absent" {{ $item->attendance === 'absent' ? 'checked' : '' }}>
                                         Absent
+                                    </label>
+                                </td>
+                                <td class="border border-slate-600 text-center select-none">
+                                    <label for="late{{ $item->id }}" class="px-5 py-2 cursor-pointer mb-0">
+                                        <input type="radio" name="attendance{{ $item->students->id }}" id="late{{ $item->id }}" value="late" {{ $item->attendance === 'late' ? 'checked' : '' }}>
+                                        Late
                                     </label>
                                 </td>
                             </tr>

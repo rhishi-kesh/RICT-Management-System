@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mentor_id')->nullable();
+            $table->foreignId('course_id');
             $table->string('name');
             $table->string('status')->default('running')->comment('running', 'complete');
             $table->timestamps();

@@ -69,8 +69,9 @@
                         </span>
                     </a>
                 </div>
+                    <livewire:components.admin-notification />
                 <div>
-                    <a href="javascript:;" x-cloak x-show="$store.app.theme === 'light'" class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="$store.app.toggleTheme('dark')" >
+                    <a href="javascript:;" x-cloak x-show="$store.app.theme === 'light'" class="relative block rounded-full bg-white p-2 hover:bg-gray-200 hover:text-blue-500 dark:bg-gray-900 dark:hover:text-white dark:hover:bg-dark/60" @click="$store.app.toggleTheme('dark')" >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" />
                             <path d="M12 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />

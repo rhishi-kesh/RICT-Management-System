@@ -26,7 +26,7 @@
                                         {{ $data->students->name }}({{ $data->students->student_id }})
                                     </td>
                                     <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                        <span class="@if($data->attendance == 'present') text-green-500 @else text-red-500 @endif">{{ ucfirst($data->attendance) }}</span>
+                                        <span class="@if($data->attendance == 'present') text-green-500 @elseif($data->attendance == 'late') text-yellow-500 @else text-red-500 @endif">{{ ucfirst($data->attendance) }}</span>
                                     </td>
                                 </tr>
                                 @empty

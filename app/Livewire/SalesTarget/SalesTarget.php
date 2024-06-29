@@ -27,7 +27,7 @@ class SalesTarget extends Component
     {
         $validated = $this->validate([
             'target' => 'required|numeric',
-            'date' => 'required',
+            'date' => 'required|unique:sales_targets',
         ]);
 
         $done = ModelsSalesTarget::insert([

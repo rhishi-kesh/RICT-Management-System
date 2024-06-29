@@ -23,7 +23,7 @@
 
     {{-- Insert Button --}}
     <div class="mb-3">
-        <button @click="toggle" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
+        <button @click="isModal = true; $wire.call('showModal')" class="bg-blue-500 btn text-white border-0 flex items-center justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -39,45 +39,16 @@
             {{-- Show Data --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                 @forelse ($batch as $key => $data)
-                    <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 pb-0 pr-2">
-                        <div class="flex justify-between mb-5 gap-2">
-                            @if($showUpdateInput === $key)
-                                <div class="w-full">
-                                    <input type="text" wire:model="name" placeholder="Name" id="Name" class="my-input focus:outline-none focus:shadow-outline">
-                                    @if ($errors->has('name'))
-                                        <div class="text-red-500">{{ $errors->first('name') }}</div>
-                                    @endif
-                                </div>
-                            @else
-                                <h6 class="text-[#0e1726] dark:text-white text-xl">{{ $data->name }}</h6>
-                            @endif
-                            <div class="flex justify-end items-center gap-2">
-                                @if($showUpdateInput === $key)
-                                    <div>
-                                        <button wire:click="removeUpdate" class="mt-2">
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l6 0" /></svg>
-                                        </button>
-                                    </div>
-                                @else
-                                    <div>
-                                        <button wire:click="asignMentor({{ $data->id }})" x-tooltip="Assign Mentor">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 dark:hover:text-white hover:text-[#595d66] transition delay-150 hover:rotate-[359deg]" fill="currentColor"><path d="M8 4C8 5.10457 7.10457 6 6 6 4.89543 6 4 5.10457 4 4 4 2.89543 4.89543 2 6 2 7.10457 2 8 2.89543 8 4ZM5 16V22H3V10C3 8.34315 4.34315 7 6 7 6.82059 7 7.56423 7.32946 8.10585 7.86333L10.4803 10.1057 12.7931 7.79289 14.2073 9.20711 10.5201 12.8943 9 11.4587V22H7V16H5ZM6 9C5.44772 9 5 9.44772 5 10V14H7V10C7 9.44772 6.55228 9 6 9ZM19 5H10V3H20C20.5523 3 21 3.44772 21 4V15C21 15.5523 20.5523 16 20 16H16.5758L19.3993 22H17.1889L14.3654 16H10V14H19V5Z"></path></svg>
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button type="button" wire:click="singleBatch({{ $data->id }})" x-tooltip="Add Students">
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  class="w-6 h-6 dark:hover:text-white hover:text-[#595d66] transition delay-150 hover:rotate-[359deg] mt-[2px]" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
-                                        </button>
-                                    </div>
-                                @endif
-                                <div x-data="dropdown" @click.outside="open = false" class="dropdown">
-                                    @if($showUpdateInput === $key)
-                                        <button type="button" wire:click="updateBatch" class="bg-gray-900 text-white btn ltr:ml-4 rtl:mr-4">Save</button>
-                                    @else
+                    <div class="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none rounded-md">
+                        <div class="card">
+                            <div class="bg-blue-500 h-[100px] w-full rounded-t-md p-5">
+                                <div class="flex justify-between">
+                                    <h6 class="text-white text-2xl">{{ $data->name }}</h6>
+                                    <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                         <button type="button" class="text-primary" @click="toggle">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                class="h-5 w-5 rotate-90 opacity-70 hover:opacity-100">
+                                                class="h-5 w-5 rotate-90 text-white">
                                                 <circle cx="5" cy="12" r="2" stroke="currentColor"
                                                     stroke-width="1.5"></circle>
                                                 <circle opacity="0.5" cx="12" cy="12" r="2" stroke="currentColor"
@@ -86,15 +57,15 @@
                                                     stroke-width="1.5"></circle>
                                             </svg>
                                         </button>
-                                        <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="text-sm font-medium">
-                                            <li>
-                                                <button class="w-full" wire:click="status({{ $data->id }})">
+                                        <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="text-sm font-medium absolute right-0 !pt-0">
+                                            <li class="bg-orange-500 text-white">
+                                                <button class="w-full hover:!text-white" wire:click="status({{ $data->id }})">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="h-4 w-4 shrink-0 mr-1"><path d="M5.46257 4.43262C7.21556 2.91688 9.5007 2 12 2C17.5228 2 22 6.47715 22 12C22 14.1361 21.3302 16.1158 20.1892 17.7406L17 12H20C20 7.58172 16.4183 4 12 4C9.84982 4 7.89777 4.84827 6.46023 6.22842L5.46257 4.43262ZM18.5374 19.5674C16.7844 21.0831 14.4993 22 12 22C6.47715 22 2 17.5228 2 12C2 9.86386 2.66979 7.88416 3.8108 6.25944L7 12H4C4 16.4183 7.58172 20 12 20C14.1502 20 16.1022 19.1517 17.5398 17.7716L18.5374 19.5674Z"></path></svg>
                                                     {{ ucfirst($data->status) }}
                                                 </button>
                                             </li>
                                             <li>
-                                                <button class="w-full" wire:click="editBatch({{ $key }}, {{ $data->id }})">
+                                                <button class="w-full" @click="isModal = true; $wire.call('editBatch','{{ $data->id }}')">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         class="h-4 w-4 shrink-0 mr-2">
@@ -118,20 +89,62 @@
                                                 </button>
                                             </li>
                                         </ul>
+                                    </div>
+                                </div>
+                                <p class="text-white mt-4">
+                                    <b>Mentor: </b>
+                                    @if (count($data->mentors) > 0)
+                                        @foreach ($data->mentors as $item)
+                                            {{ $item->name ?? '-' }}
+                                        @endforeach
+                                    @else
+                                        Not Assigned
                                     @endif
+                                </p>
+                            </div>
+                            <div class="h-[120px] flex flex-col justify-between border-b">
+                                <div class="mentor-image flex justify-end pr-5 md:pr-10">
+                                    @if (count($data->mentors) > 0)
+                                        @foreach ($data->mentors as $item)
+                                            @if (empty($item->image))
+                                                <div class="w-[100px] h-[100px] rounded-full -mt-14 bg-orange-500 text-white flex justify-center items-center text-5xl">
+                                                    {{ mb_substr(strtoupper($item->name), 0, 1) }}
+                                                </div>
+                                            @else
+                                                <img class="w-[100px] h-[100px] rounded-full -mt-14 bg-white" src="{{ asset('storage/' . $item->image) }}" alt="img" width="150" height="100" />
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <img src="{{ asset('profile.jpeg') }}" alt="" class="w-[100px] h-[100px] rounded-full -mt-14">
+                                    @endif
+
+                                </div>
+                                <div class="flex items-center justify-end -space-x-1 p-3 select-none">
+                                    @foreach ($data->students as $data2)
+                                        @if (empty($data2->profile))
+                                            <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data2->name), 0, 1) }}</div>
+                                        @else
+                                            <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
+                                                src="{{ asset('storage/' . $data2->profile) }}" alt="image" />
+                                        @endif
+                                    @endforeach
+                                    <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ $data->students_count }})Total</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex items-center justify-end -space-x-1  rtl:space-x-reverse mb-5 select-none">
-                            @foreach ($data->students as $data2)
-                                @if (empty($data2->profile))
-                                    <div class="profile w-7 h-7 text-xs">{{ mb_substr(strtoupper($data2->name), 0, 1) }}</div>
-                                @else
-                                    <img class="w-7 h-7 rounded-full overflow-hidden object-cover ring-2 ring-white dark:ring-[#515365] shadow-[0_0_15px_1px_rgba(113,106,202,0.30)] dark:shadow-none"
-                                        src="{{ asset('storage/' . $data2->profile) }}" alt="image" />
-                                @endif
-                            @endforeach
-                            <span class="bg-white rounded-full px-2 py-1 text-primary text-xs shadow-[0_0_20px_0_#d0d0d0] dark:shadow-none dark:bg-[#0e1726] dark:text-white">({{ $data->students_count }})Total</span>
+                            <div class="py-2 px-4">
+                                <div class="flex justify-start gap-3">
+                                    <div>
+                                        <button type="button" wire:click="singleBatch({{ $data->id }})" x-tooltip="Add Students">
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  class="w-[30px] h-[30px] dark:hover:text-white hover:text-[#595d66] transition delay-150 hover:rotate-[359deg] mt-[2px]" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button wire:click="asignMentor({{ $data->id }})" x-tooltip="Assign Mentor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[30px] h-[30px] mt-[2px] dark:hover:text-white hover:text-[#595d66] transition delay-150 hover:rotate-[359deg]" fill="currentColor"><path d="M8 4C8 5.10457 7.10457 6 6 6 4.89543 6 4 5.10457 4 4 4 2.89543 4.89543 2 6 2 7.10457 2 8 2.89543 8 4ZM5 16V22H3V10C3 8.34315 4.34315 7 6 7 6.82059 7 7.56423 7.32946 8.10585 7.86333L10.4803 10.1057 12.7931 7.79289 14.2073 9.20711 10.5201 12.8943 9 11.4587V22H7V16H5ZM6 9C5.44772 9 5 9.44772 5 10V14H7V10C7 9.44772 6.55228 9 6 9ZM19 5H10V3H20C20.5523 3 21 3.44772 21 4V15C21 15.5523 20.5523 16 20 16H16.5758L19.3993 22H17.1889L14.3654 16H10V14H19V5Z"></path></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -148,14 +161,28 @@
     </div>
 
     {{-- Instert Form --}}
-    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
-        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
-            <div x-show="open" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
+    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="isModal && '!block'">
+        <div class="flex items-center justify-center min-h-screen px-4" @click.self="isModal = false">
+            <div x-show="isModal" x-transition x-transition.duration.400 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    <h5 class="font-bold text-lg">Add Batch</h5>
+                    @if (!empty($update_id))
+                        <h5 class="font-bold text-lg text-blue-500">Update</h5>
+                    @else
+                        <h5 class="font-bold text-lg text-blue-500">Add Batch</h5>
+                    @endif
+                    <button @click="isModal = false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x text-blue-500"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M18 6l-12 12"></path><path d="M6 6l12 12"></path></svg>
+                    </button>
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
-                    <form method="post" wire:submit="insert">
+                    <form
+                        method="post"
+                        @if (!empty($update_id))
+                            wire:submit="updateBatch"
+                        @else
+                            wire:submit="insert"
+                        @endif
+                    >
                         <div class="mb-1">
                             <label for="Name" class="my-label">Name</label>
                             <input type="text" wire:model="name" placeholder="Name" id="Name"
@@ -164,10 +191,22 @@
                                 <div class="text-red-500">{{ $errors->first('name') }}</div>
                             @endif
                         </div>
+                        <div class="mb-1">
+                            <label for="courseId" class="my-label">Course Name</label>
+                            <select name="courseId" wire:model="courseId" id="courseId" class="my-input focus:outline-none focus:shadow-outline bg-white">
+                                <option value="">Select Course</option>
+                                @foreach ($course as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('courseId'))
+                                <div class="text-red-500">{{ $errors->first('courseId') }}</div>
+                            @endif
+                        </div>
                         <div class="flex justify-end items-center mt-8">
-                            <button type="reset" class="shadow btn bg-gray-50 dark:bg-gray-800">Reset</button>
-                            <button type="submit" class="bg-gray-900 text-white btn ml-4" wire:loading.remove>Save</button>
-                            <button type="button" disabled class="bg-gray-900 text-white btn ml-4" wire:loading>Loading</button>
+                            <button type="reset" class="btn btn-reset">Reset</button>
+                            <button type="submit" class="btn-submit btn ml-4" wire:loading.remove>Save</button>
+                            <button type="button" disabled class="btn-submit btn ml-4" wire:loading>Loading</button>
                         </div>
                     </form>
                 </div>
@@ -180,14 +219,16 @@
         <div class="flex items-center justify-center min-h-screen px-4">
             <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg w-full md:max-w-4xl my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    <h5 class="font-bold text-lg">{{ $singlebatch->name ?? '-' }}</h5>
+                    <h5 class="font-bold text-lg text-blue-500">{{ $singlebatch->name ?? '-' }}</h5>
                     <div class="flex justify-end items-center">
-                        <button wire:click="removebatch()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Back</button>
+                        <button wire:click="removebatch()" type="button" class="text-blue-500">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                        </button>
                     </div>
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
                     <div x-data="{ show: false }">
-                        <button class="bg-green-500 btn text-white border-0 ms-3 mb-5" @click="show = !show" x-show="!show">
+                        <button class="btn btn-submit ms-3 mb-5" @click="show = !show" x-show="!show">
                             Add Student
                         </button>
                         <div class="w-full flex justify-start gap-5 mb-5" x-show="show">
@@ -202,7 +243,7 @@
                                 @endif
                             </div>
                             <div class="w-1/6 flex justify-start items-end">
-                                <button wire:click="addStudent({{ $singlebatch->id ?? '' }})" class="bg-green-500 btn text-white border-0 mb-[0.15rem]">
+                                <button wire:click="addStudent({{ $singlebatch->id ?? '' }})" class="btn btn-submit">
                                     Add
                                 </button>
                             </div>
@@ -248,7 +289,7 @@
                                         <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                             {{-- Edit Button --}}
                                             <button wire:click="removeStudentAlert({{ $data->id }})"
-                                                class="bg-red-500 btn text-white border-0">
+                                                class="btn btn-reset">
                                                 Remove
                                             </button>
                                         </td>
@@ -275,14 +316,16 @@
         <div class="flex items-center justify-center min-h-screen px-4">
             <div x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg w-full md:max-w-4xl my-8">
                 <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
-                    <h5 class="font-bold text-lg">{{ $batchMentor->name ?? '-' }}</h5>
+                    <h5 class="font-bold text-lg text-blue-500">{{ $batchMentor->name ?? '-' }}</h5>
                     <div class="flex justify-end items-center">
-                        <button wire:click="removeMentorMOdal()" type="button" class="shadow btn bg-gray-50 dark:bg-gray-800">Back</button>
+                        <button wire:click="removeMentorMOdal()" type="button" class="text-blue-500">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                        </button>
                     </div>
                 </div>
                 <div class="p-5 bg-gray-200 dark:bg-gray-800 text-left">
                     <div x-data="{ show: false }">
-                        <button class="bg-green-500 btn text-white border-0 ms-3 mb-5" @click="show = !show" x-show="!show">
+                        <button class="btn btn-submit ms-3 mb-5" @click="show = !show" x-show="!show">
                             Add Mentor
                         </button>
                         <div class="w-full flex justify-start gap-5 mb-5" x-show="show">
@@ -298,7 +341,7 @@
                                 @endif
                             </div>
                             <div class="w-1/6 flex justify-start items-end">
-                                <button wire:click="addMentor({{ $batchMentor->id ?? '' }})" class="bg-green-500 btn text-white border-0 mb-[0.15rem]">
+                                <button wire:click="addMentor({{ $batchMentor->id ?? '' }})" class="btn btn-submit">
                                     Add
                                 </button>
                             </div>
@@ -335,7 +378,7 @@
                                                 {{ $item->name ?? '-' }}
                                             </td>
                                             <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                                <button class="bg-red-500 btn text-white border-0" wire:click="removeMentorAlert({{ $batchMentor->id }})">
+                                                <button class="btn btn-reset" wire:click="removeMentorAlert({{ $batchMentor->id }})">
                                                     Remove
                                                 </button>
                                             </td>
@@ -507,6 +550,20 @@
                     }
                 });
             });
+        </script>
+
+        {{-- Modal Show/Hide --}}
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('modal', () => ({
+                    isModal: false,
+                    init() {
+                        this.$wire.on('swal', () => {
+                            this.isModal = false;
+                        });
+                    }
+                }));
+            })
         </script>
     @endpush
 </div>

@@ -11,7 +11,13 @@ class BatchController extends Controller
         return view('application.batch.batch');
     }
     public function myBatchMentor(){
-        $batch = Batch::where('mentor_id', auth()->guard('mentor')->user()->id)->latest()->paginate();
+        $batch = Batch::query()
+                ->with(['attendance', 'course:id,name', 'course.courseModule'])
+                ->where('mentor_id', auth()->guard('mentor')->user()->id)
+                ->latest()
+                ->paginate();
+
+        // dd($batch->attendance);
         return view('application.batch.myBatchMentor', compact('batch'));
     }
 }

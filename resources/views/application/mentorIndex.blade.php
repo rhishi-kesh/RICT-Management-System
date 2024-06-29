@@ -3,13 +3,12 @@
     <div class="p-5" x-data="Dashboard">
         <div class="mb-6 text-black">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-5">
-                <div
-                    class="border-l-4 border-l-blue-500 col-span-1 md:col-span-1 overflow-hidden relative rounded p-5 shadow bg-gradient-to-r bg-[#fff] flex">
-                    <div class="flex justify-center gap-3 items-center">
-                        <img class="h-14 w-14 rounded-full object-cover block"
-                            src="{{ empty(auth()->guard('mentor')->user()->profile) ? url('profile.jpeg') : asset('storage/' . auth()->guard('mentor')->user()->profile) }}"
+                <div class="border-l-4 border-l-blue-500 col-span-1 md:col-span-1 overflow-hidden relative rounded p-5 shadow bg-gradient-to-r bg-[#fff] flex">
+                    <div class="block md:flex justify-center gap-3 items-center">
+                        <img class="h-14 w-14 rounded-full object-cover block" src="{{ empty(auth()->guard('mentor')->user()->profile) ? url('profile.jpeg') : asset('storage/' . auth()->guard('mentor')->user()->profile) }}"
                             alt="">
-                        <div class="text-xl font-semibold mr-1 text-blue-500">Welcome back {{ auth()->guard('mentor')->user()->name }}!
+                        <div class="text-xl font-semibold mr-0 md:mr-1 mt-2 md:mt-0 text-blue-500">
+                            Welcome back {{ auth()->guard('mentor')->user()->name }}!
                         </div>
                     </div>
                 </div>

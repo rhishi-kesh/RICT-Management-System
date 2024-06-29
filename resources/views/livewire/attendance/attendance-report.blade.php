@@ -59,7 +59,7 @@
                                         {{ date('M d, Y', strtotime($item->date)) }}
                                     </td>
                                     <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-                                        <span class="@if($item->attendance == 'present') text-green-500 @else text-red-500 @endif">{{ ucfirst($item->attendance) }}</span>
+                                        <span class="@if($item->attendance == 'present') text-green-500 @elseif($item->attendance == 'late') text-yellow-500 @else text-red-500 @endif">{{ ucfirst($item->attendance) }}</span>
                                     </td>
                                 </tr>
                             @empty

@@ -1,17 +1,6 @@
 @extends('layout/mentorIndex')
 @section('content')
 <div class="w-full px-5 mx-auto my-10">
-    @push('css')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <style>
-            input[type="date"]::-webkit-inner-spin-button,
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-                user-select: none;
-            }
-        </style>
-    @endpush
     <div class="md:w-[40rem] w-full mx-auto bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
         @if (Session::has('success'))
             <div class="flex items-center p-4 mb-4 text-sm text-green-900 rounded-lg bg-green-300 dark:bg-gray-800 dark:text-green-400" role="alert">
@@ -31,6 +20,7 @@
                 {{ Session::get('error') }}
             </div>
         @endif
+        <h2 class="mb-2 font-bold text-xl dark:text-white text-blue-500">Homework assign to <span class="text-orange-500">{{ $batchName->name }}</span> students</h2>
         <form action="{{ route('homeworkAssignPost') }}" method="POST">
             @csrf
             <div class="my-3 mb-4">
@@ -65,8 +55,8 @@
                     <div class="p-3 bg-red-500 text-white my-1">{{ $message }}</div>
                 @enderror
                 <div class="flex justify-start items-center mt-5">
-                    <button type="submit" class="bg-blue-500 text-white border-blue-500 btn mr-4">Send</button>
-                    <a href="{{ route('homework') }}" class="bg-slate-600 text-white border-slate-600 btn mr-4">Back</a>
+                    <button type="submit" class="btn btn-submit mr-4">Send</button>
+                    <a href="{{ route('homework') }}" class="btn btn-back mr-4">Back</a>
                 </div>
             </div>
             <div class="w-full max-h-[250px] overflow-auto mt-5">
@@ -97,8 +87,6 @@
         </form>
     </div>
     @push('js')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
     <script>
         flatpickr("#date", {
             minDate: "today",

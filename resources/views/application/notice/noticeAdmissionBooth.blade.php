@@ -20,7 +20,7 @@
             </div>
         @endif
         <div class="md:w-[40rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-slate-900 dark:bg-slate-900 dark:shadow-none p-3">
-            <h2 class="mb-2 font-bold text-xl dark:text-white text-blue-500">Send Notice To Admission Booth</h2>
+            <h2 class="mb-2 font-bold text-xl dark:text-white text-blue-500">Send Notice To <span class="text-orange-500">Admission Booth</span></h2>
             <form action="{{ route('noticeAdmissionBoothPost') }}" method="POST" class="mt-2">
                 @csrf
                 <div>

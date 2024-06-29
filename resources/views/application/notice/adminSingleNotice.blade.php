@@ -7,7 +7,7 @@
                 <div>
                     {!! $singlenotice->notice !!}
                 </div>
-                <div class="my-2 text-green-500">
+                <div class="my-2 text-orange-500">
                     {{ $singlenotice->created_at->diffForHumans() }}
                 </div>
                 <div>

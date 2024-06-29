@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
 
 class StudentHomeworkView extends Component
 {
-    public $singleData, $status, $url, $description, $homeworkId, $inReviewStatus, $singleHomework;
+    public $singleData, $status, $url, $updateId, $description, $homeworkId, $inReviewStatus, $singleHomework;
 
     public function render()
     {
@@ -36,24 +36,60 @@ class StudentHomeworkView extends Component
         $this->validate([
             'status' => 'required',
         ]);
-        $data = HomeworkSubmit::where('homework_id', $id)->first();
+
+        $data = HomeworkSubmit::where('homework_id', $id)->first(['id', 'url', 'description']);
         $this->url = $data->url ?? '';
         $this->description = $data->description ?? '';
-        if ($this->status == 'inReview') {
-            $this->homeworkId = $id;
-            $this->inReviewStatus = $this->status;
-            $this->dispatch('showForm');
-        } else {
-            $done = Homework::where('id', $id)->update([
-                'status' => $this->status,
-                'updated_at' => Carbon::now()
+
+        $homework = Homework::where('id', $id)->first(['id', 'status']);
+        if($homework->status == 'inReview' || $homework->status == 'done') {
+            $this->dispatch('swal', [
+                'title' => 'You Already Submit This Homework',
+                'type' => "error",
             ]);
-            if ($done) {
-                $this->dispatch('swal', [
-                    'title' => 'Status Updated Successfull',
-                    'type' => "success",
+        } else {
+            if ($this->status == 'inReview') {
+                $this->homeworkId = $id;
+                $this->inReviewStatus = $this->status;
+                $this->dispatch('showForm');
+            } else {
+                $done = Homework::where('id', $id)->update([
+                    'status' => $this->status,
+                    'updated_at' => Carbon::now()
                 ]);
+                if ($done) {
+                    $this->dispatch('swal', [
+                        'title' => 'Status Updated Successfull',
+                        'type' => "success",
+                    ]);
+                }
             }
+        }
+    }
+
+    public function editHomework($id) {
+        $homework = HomeworkSubmit::where('homework_id', $id)->first();
+        $this->updateId = $homework->id;
+        $this->url = $homework->url;
+        $this->description = $homework->description;
+    }
+
+    public function updateHomework() {
+        $validated = $this->validate([
+            'url' => 'required|url',
+            'description' => 'required',
+        ]);
+        $done = HomeworkSubmit::where('homework_id', $this->updateId)->update([
+            'url' => $this->url,
+            'description' => $this->description,
+            'updated_at' => Carbon::now()
+        ]);
+        if($done){
+            $this->reset();
+            $this->dispatch('swal', [
+                'title' => 'Homework Update Successfull',
+                'type' => "success",
+            ]);
         }
     }
 

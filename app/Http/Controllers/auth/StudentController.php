@@ -5,6 +5,8 @@ namespace App\Http\Controllers\auth;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendForgotPassword;
 use App\Jobs\SendNoticeMail;
+use App\Models\Attendance;
+use App\Models\Homework;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
@@ -12,6 +14,7 @@ use App\Models\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudentController extends Controller
 {
@@ -176,5 +179,40 @@ class StudentController extends Controller
         if ($done) {
             return redirect()->route('studentLogin')->with('passwordChanged', 'Your password has been changed. Enter your student id and password to login.');
         }
+    }
+    public function genereateReporate($student_id) {
+        $student = Student::where('student_id', $student_id)->first();
+
+
+        return view('application.admission.studentReport', compact('student'));
+    }
+
+    public function studentReportDownload($id) {
+
+        $student = Student::where('id', $id)->first();
+
+        $attendance = Attendance::query()
+                    ->where('student_id', $id)
+                    ->get();
+
+        $attendanceReport = $attendance->groupBy('attendance')->map(function ($group) {
+            return $group->count();
+        });
+
+        $homeworkReport = Homework::query()
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->where('student_id', $id)
+                    ->groupBy('status')
+                    ->pluck('count', 'status');
+
+        // return view('pdf.studentReport', compact('student', 'attendanceReport', 'homeworkReport'));
+
+        $pdf = PDF::loadView('pdf.studentReport', [
+            'student' => $student,
+            'attendanceReport' => $attendanceReport,
+            'homeworkReport' => $homeworkReport
+        ])->setPaper('a4', 'portrait');
+        return $pdf->stream();
+
     }
 }

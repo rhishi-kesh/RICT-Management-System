@@ -11,6 +11,8 @@
                             <tr>
                                 <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">SL</th>
                                 <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Name</th>
+                                <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Course</th>
+                                <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center" width="200px">Module Progress</th>
                                 <th class="p-3 bg-gray-100 dark:bg-gray-800 text-center">Status</th>
                             </tr>
                         </thead>
@@ -22,6 +24,21 @@
                                     </td>
                                     <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
                                         {{ $data->name }}
+                                    </td>
+                                    <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                        {{ $data->course->name ?? '-' }}
+                                    </td>
+                                    <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
+                                        @php
+                                            $classTaken = count($data->attendance);
+                                            $totalClass = count($data->course->courseModule);
+                                            $completedClsss = ($classTaken * 100) / $totalClass;
+                                        @endphp
+                                        <div class="w-full h-[20px] bg-gray-200 rounded-full dark:bg-gray-700 relative">
+                                            <div class="{{ $completedClsss == 0 ? '' : 'bg-blue-500' }} rounded-full h-full text-xs font-medium {{ $completedClsss < 50 ? 'text-blue-500' : 'text-white' }} text-center p-0.5 leading-none rounded-full" style="width: {{ $completedClsss < 100 ? $completedClsss . '%' : '100%' }}">
+                                                <span class="absolute left-0 top-0 w-full h-full flex justify-center items-center">{{ $completedClsss }}%</span>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="p-3 border-b border-[#ebedf2] dark:border-[#191e3a] text-center @if($data->status == 'complete') text-green-500 @endif">
                                         {{ ucfirst($data->status) }}

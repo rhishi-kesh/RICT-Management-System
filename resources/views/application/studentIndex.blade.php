@@ -32,7 +32,7 @@
                         <div class="text-xl font-semibold mr-1 text-blue-500">My Homework</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3 text-blue-500">{{ $studentHomework }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ $studentHomework }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>
@@ -46,7 +46,7 @@
                         <div class="text-xl font-semibold mr-1 text-blue-500">My Attendance</div>
                     </div>
                     <div class="mt-5 flex items-center">
-                        <div class="text-3xl font-bold mr-3 text-blue-500">{{ count($attendance) }}</div>
+                        <div class="text-3xl font-bold mr-3 text-orange-500">{{ count($attendance) }}</div>
                     </div>
                     <div class="mt-5 flex items-center justify-between font-semibold">
                         <div>

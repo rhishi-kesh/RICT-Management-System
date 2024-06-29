@@ -12,7 +12,7 @@
     </head>
     <body class="font-nunito bg-adminlogin bg-no-repeat bg-cover bg-center w-screen h-screen flex items-center justify-center">
         <div class="w-full">
-            <h2 class="text-center mb-5 text-white text-4xl lg:text-7xl">Wellcome Mentor</h2>
+            <h2 class="text-center mb-5 text-white text-4xl lg:text-7xl">Welcome Mentor</h2>
             <div class="px-2 sm:px-16 w-full flex items-center justify-center">
                 <div class="relative w-full md:w-2/4 rounded-md p-2 bg-gray-200 px-2 md:px-6 py-10">
                     <div class="px-4 md:px-10">

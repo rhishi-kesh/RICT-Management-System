@@ -19,7 +19,7 @@
                     {!! Str::limit($item->notice, 150, '...') !!}
                 </div>
             </div>
-            <div class="@if($item->is_seen == 1) text-green-500 @endif">
+            <div class="@if($item->is_seen == 1) text-orange-500 @endif">
                 {{ $item->created_at->diffForHumans() }}
             </div>
         </a>

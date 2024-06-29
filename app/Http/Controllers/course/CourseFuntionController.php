@@ -38,7 +38,7 @@ class CourseFuntionController extends Controller
 
     public function courseModule($id)
     {
-        $CourseModule = CourseModule::latest()->paginate(15);
+        $CourseModule = CourseModule::where('course_id', $id)->latest()->paginate(15);
         return view('application.course.courseModule', compact('CourseModule', 'id'));
     }
 

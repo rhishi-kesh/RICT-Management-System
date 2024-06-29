@@ -82,6 +82,7 @@ Route::get('/not-found', [ErrorRedirectController::class, 'notFound'])->name('no
 //Download
 Route::get('/attendance/download/{date}/{id}', [AttendanceController::class, 'attendanceDownload'])->name('attendanceDownload');
 Route::get('/attendance/download/single/{batch_id}/{student_id}', [AttendanceController::class, 'attendancSingleeDownload'])->name('attendancSingleeDownload');
+Route::get('/student-report-download/{id}', [StudentController::class, 'studentReportDownload'])->name('studentReportDownload');
 
 //admin Middlewere
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
@@ -188,6 +189,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
 
     //SMTP Settings
     Route::get('/sales-target', [SalesTargetController::class, 'salesTarget'])->name('salesTarget');
+
+    //Student-Report
+    Route::get('/genereate-student-report/{batch_id}', [StudentController::class, 'genereateReporate'])->name('genereateReporate');
 });
 
 //Student Middlewere
@@ -261,4 +265,7 @@ Route::group(['prefix' => 'mentor', 'middleware' => ['mentor']], function () {
     Route::get('/attendance/edit/{date}/{id}', [AttendanceController::class, 'attendanceEdit'])->name('attendanceEdit');
     Route::post('/attendance/update/{date}/{id}', [AttendanceController::class, 'attendanceUpdate'])->name('attendanceUpdate');
     Route::get('/attendance/view/{date}/{id}', [AttendanceController::class, 'attendanceView'])->name('attendanceView');
+
+    //Student-Report
+    Route::get('/genereate-student-report/{id}', [MentorsController::class, 'MentorgenereateReporate'])->name('MentorgenereateReporate');
 });
