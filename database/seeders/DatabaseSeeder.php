@@ -14,5 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(SystemInformation::class);
         $this->call(SmtpSettingsSeeder::class);
+        $this->call(AdminSeeder::class);
+        $this->call(MentorSeeder::class);
+        $this->call(StudentSeeder::class);
+        $this->call(DepartmentSeeder::class);
+        $this->call(CourseSeeder::class);
+        $this->call(PaymentType::class);
+        $this->call(CouncilingPerson::class);
     }
 }

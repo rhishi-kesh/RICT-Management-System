@@ -15,17 +15,15 @@ class SmtpSettingsSeeder extends Seeder
     public function run(): void
     {
         DB::table('smtps')->insert([
-            [
-                'driver' => 'smtp',
-                'host' => 'smtp.gmail.com',
-                'port' => 587,
-                'username' => 'user1@mailtrap.io',
-                'password' => 'hpvwkqawpockijse',
-                'encryption' => 'tls',
-                'from_address' => 'noreply@example1.com',
-                'from_name' => 'Rayhans ICT',
-                'created_at' => now(),
-            ]
+            'driver' => 'smtp',
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'username' => 'user1@mailtrap.io',
+            'password' => 'hpvwkqawpockijse',
+            'encryption' => 'tls',
+            'from_address' => 'noreply@example1.com',
+            'from_name' => 'Rayhans ICT',
+            'created_at' => now(),
         ]);
     }
 }
